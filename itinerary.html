@@ -15,9 +15,7 @@
     content="#1f4e79"
 >
 
-<title>
-    Japan Winter 2027 詳細行程
-</title>
+<title>Japan Winter 2027 詳細行程</title>
 
 
 <style>
@@ -57,9 +55,7 @@ header {
 
     color: white;
     text-align: center;
-
-    padding:
-        24px 15px;
+    padding: 22px 15px;
 }
 
 header h1 {
@@ -68,7 +64,7 @@ header h1 {
 }
 
 header p {
-    margin: 8px 0 0;
+    margin: 7px 0 0;
     opacity: .9;
 }
 
@@ -79,7 +75,7 @@ header p {
 
 .page-switch {
     background: white;
-    padding: 9px;
+    padding: 8px;
     text-align: center;
 
     box-shadow:
@@ -99,11 +95,9 @@ header p {
     text-decoration: none;
 
     background: #eaf2f8;
-
     color: #1f4e79;
 
     font-weight: 600;
-
     font-size: 14px;
 }
 
@@ -119,13 +113,11 @@ header p {
 
 .day-nav {
     position: sticky;
-
     top: 0;
-
     z-index: 1000;
 
     background:
-        rgba(255,255,255,.96);
+        rgba(255,255,255,.97);
 
     border-bottom:
         1px solid #d7e0e7;
@@ -137,27 +129,26 @@ header p {
 
 .day-nav-inner {
     max-width: 1200px;
-
     margin: auto;
 
+    padding: 8px 9px;
+
     display: flex;
-
-    gap: 7px;
-
-    padding: 8px 10px;
+    gap: 6px;
 
     overflow-x: auto;
-
     white-space: nowrap;
 }
 
+.nav-btn,
 .day-nav a {
-    display: inline-block;
+    flex: 0 0 auto;
+
+    border: 0;
 
     text-decoration: none;
 
     background: #eef4f8;
-
     color: #1f4e79;
 
     padding: 7px 11px;
@@ -165,12 +156,27 @@ header p {
     border-radius: 16px;
 
     font-size: 12px;
-
     font-weight: 700;
+
+    cursor: pointer;
 }
 
-.day-nav a:hover {
-    background: #dcebf5;
+.nav-btn.dark {
+    background: #1f4e79;
+    color: white;
+}
+
+.day-nav a.today {
+    background: #dff1e3;
+    color: #28633b;
+
+    box-shadow:
+        inset 0 0 0 1px #a8d1b3;
+}
+
+.nav-btn.disabled {
+    opacity: .45;
+    cursor: default;
 }
 
 
@@ -181,7 +187,7 @@ header p {
 .container {
     max-width: 1150px;
     margin: auto;
-    padding: 18px;
+    padding: 17px;
 }
 
 
@@ -194,9 +200,9 @@ header p {
 
     border-radius: 14px;
 
-    padding: 20px;
+    padding: 18px;
 
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 
     box-shadow:
         0 2px 8px
@@ -204,8 +210,12 @@ header p {
 }
 
 .intro h2 {
-    margin-top: 0;
+    margin: 0 0 8px;
     color: #1f4e79;
+}
+
+.intro p {
+    line-height: 1.6;
 }
 
 .intro-grid {
@@ -216,7 +226,7 @@ header p {
 
     gap: 9px;
 
-    margin-top: 15px;
+    margin-top: 14px;
 }
 
 .intro-item {
@@ -233,26 +243,36 @@ header p {
 
 
 /* =====================================================
-   DAY
+   DAY GROUP
 ===================================================== */
 
-.day {
+details.day {
     background: white;
 
     border-radius: 14px;
 
-    margin-bottom: 18px;
-
-    box-shadow:
-        0 2px 9px
-        rgba(0,0,0,.07);
+    margin-bottom: 14px;
 
     overflow: hidden;
 
-    scroll-margin-top: 60px;
+    box-shadow:
+        0 2px 8px
+        rgba(0,0,0,.07);
+
+    scroll-margin-top: 65px;
 }
 
-.day-header {
+details.day > summary {
+    list-style: none;
+
+    cursor: pointer;
+
+    padding: 16px 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
     background:
         linear-gradient(
             135deg,
@@ -260,10 +280,16 @@ header p {
             #ffffff
         );
 
-    padding: 18px 20px;
+    user-select: none;
+}
 
-    border-bottom:
-        1px solid #e0e7ed;
+details.day > summary::-webkit-details-marker {
+    display: none;
+}
+
+.day-summary-main {
+    flex: 1;
+    min-width: 0;
 }
 
 .day-number {
@@ -271,40 +297,60 @@ header p {
 
     font-weight: 800;
 
-    font-size: 13px;
+    font-size: 12px;
 }
 
-.day-header h2 {
-    margin: 4px 0 0;
-    font-size: 23px;
+.day-title {
+    margin-top: 3px;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
 }
 
 .day-date {
-    margin-top: 5px;
+    margin-top: 4px;
 
-    color: #566673;
-
-    font-size: 14px;
-
-    font-weight: 600;
-}
-
-.day-route {
-    margin-top: 9px;
-
-    padding: 9px 11px;
-
-    background: #eaf3f9;
-
-    border-radius: 8px;
-
-    color: #1f4e79;
+    color: #526572;
 
     font-size: 13px;
 
-    font-weight: 600;
+    font-weight: 700;
+}
 
-    line-height: 1.5;
+.day-route {
+    margin-top: 6px;
+
+    color: #677681;
+
+    font-size: 12px;
+
+    line-height: 1.45;
+}
+
+details.day > summary::after {
+    content: "＋";
+
+    color: #1f4e79;
+
+    font-size: 25px;
+
+    font-weight: 700;
+}
+
+details.day[open] > summary::after {
+    content: "−";
+}
+
+details.day[open] > summary {
+    border-bottom:
+        1px solid #e0e7ed;
+}
+
+.day-inner {
+    padding-bottom: 2px;
 }
 
 
@@ -314,7 +360,7 @@ header p {
 
 .photo-section {
     padding:
-        15px 18px 0;
+        16px 18px 0;
 }
 
 .hero-photo {
@@ -335,13 +381,8 @@ header p {
         rgba(0,0,0,.10);
 }
 
-.hero-photo a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.hero-photo img {
+.hero-photo img,
+.photo-card img {
     width: 100%;
     height: 100%;
 
@@ -349,11 +390,14 @@ header p {
 
     display: block;
 
+    cursor: zoom-in;
+
     transition:
-        transform .25s ease;
+        transform .22s ease;
 }
 
-.hero-photo:hover img {
+.hero-photo:hover img,
+.photo-card:hover img {
     transform: scale(1.015);
 }
 
@@ -365,8 +409,7 @@ header p {
     bottom: 0;
 
     padding:
-        25px 14px
-        11px;
+        28px 14px 10px;
 
     color: white;
 
@@ -377,7 +420,7 @@ header p {
     background:
         linear-gradient(
             transparent,
-            rgba(0,0,0,.74)
+            rgba(0,0,0,.76)
         );
 
     pointer-events: none;
@@ -389,14 +432,9 @@ header p {
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    gap: 12px;
+    gap: 11px;
 
-    margin-top: 12px;
-}
-
-.photo-gallery.three {
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+    margin-top: 11px;
 }
 
 .photo-card {
@@ -408,57 +446,26 @@ header p {
 
     background: #dce6ed;
 
-    aspect-ratio: 16 / 10;
-}
-
-.photo-card a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.photo-card img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    display: block;
-
-    transition:
-        transform .25s ease;
-}
-
-.photo-card:hover img {
-    transform: scale(1.025);
+    aspect-ratio: 16 / 9;
 }
 
 .photo-card .photo-caption {
     font-size: 12px;
+
     padding:
-        22px 10px
-        8px;
+        25px 10px 8px;
 }
 
 
 /* =====================================================
-   IMAGE PLACEHOLDER
+   PHOTO PLACEHOLDER
 ===================================================== */
 
-.hero-placeholder {
-    margin:
-        15px 18px 0;
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
 
-    min-height: 115px;
-
-    border-radius: 11px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #dfeaf2,
-            #edf3f7
-        );
+    min-height: 120px;
 
     display: flex;
 
@@ -466,13 +473,22 @@ header p {
 
     justify-content: center;
 
+    padding: 16px;
+
     text-align: center;
 
-    color: #75838d;
+    color: #7b8993;
 
-    font-size: 13px;
+    font-size: 12px;
 
-    padding: 20px;
+    line-height: 1.5;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e2ebf1,
+            #f1f5f8
+        );
 }
 
 
@@ -518,7 +534,7 @@ header p {
 
     position: relative;
 
-    padding-bottom: 17px;
+    padding-bottom: 16px;
 }
 
 .time {
@@ -673,11 +689,11 @@ header p {
 
 
 /* =====================================================
-   BUTTONS
+   BUTTON
 ===================================================== */
 
 .day-buttons {
-    margin-top: 15px;
+    margin-top: 14px;
 
     display: flex;
 
@@ -706,34 +722,134 @@ header p {
 
 
 /* =====================================================
-   PHOTO CREDITS
+   PHOTO MODAL
 ===================================================== */
 
-.credits {
-    background: white;
+.photo-modal {
+    position: fixed;
 
-    border-radius: 14px;
+    inset: 0;
 
-    padding: 18px;
+    z-index: 5000;
 
-    margin-top: 18px;
+    display: none;
 
-    box-shadow:
-        0 2px 8px
-        rgba(0,0,0,.06);
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0,0,0,.91);
 }
 
-.credits h3 {
-    margin-top: 0;
+.photo-modal.show {
+    display: flex;
+}
+
+.photo-modal-inner {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.photo-modal img {
+    max-width: 96vw;
+    max-height: 87vh;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 4px 25px
+        rgba(0,0,0,.5);
+}
+
+.modal-caption {
+    margin-top: 10px;
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+.modal-close {
+    position: fixed;
+
+    top: 13px;
+    right: 17px;
+
+    width: 42px;
+    height: 42px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.16);
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    z-index: 5001;
+}
+
+
+/* =====================================================
+   CREDITS
+===================================================== */
+
+details.credits {
+    background: white;
+
+    border-radius: 12px;
+
+    margin-top: 15px;
+
+    box-shadow:
+        0 2px 7px
+        rgba(0,0,0,.06);
+
+    overflow: hidden;
+}
+
+details.credits summary {
+    cursor: pointer;
+
+    padding: 14px 16px;
 
     color: #1f4e79;
 
-    font-size: 16px;
+    font-weight: 700;
 }
 
-.credits p {
+.credits-body {
+    border-top:
+        1px solid #e5eaee;
+
+    padding: 13px 16px;
+}
+
+.credits-body p {
     margin:
-        7px 0;
+        6px 0;
 
     color: #63727e;
 
@@ -742,7 +858,7 @@ header p {
     line-height: 1.5;
 }
 
-.credits a {
+.credits-body a {
     color: #1f4e79;
 }
 
@@ -759,7 +875,7 @@ footer {
     font-size: 12px;
 
     padding:
-        15px 10px
+        17px 10px
         35px;
 }
 
@@ -782,16 +898,12 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .day-header {
-        padding: 15px;
+    details.day > summary {
+        padding: 14px;
     }
 
-    .day-header h2 {
-        font-size: 20px;
-    }
-
-    .day-content {
-        padding: 12px;
+    .day-title {
+        font-size: 18px;
     }
 
     .photo-section {
@@ -803,18 +915,28 @@ footer {
         aspect-ratio: 16 / 10;
     }
 
-    .photo-gallery,
-    .photo-gallery.three {
-        grid-template-columns: 1fr;
+    .photo-gallery {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 7px;
     }
 
     .photo-card {
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 4 / 3;
     }
 
-    .hero-placeholder {
-        margin:
-            12px 12px 0;
+    .photo-card .photo-caption {
+        font-size: 10px;
+    }
+
+    .photo-placeholder {
+        min-height: 100px;
+        font-size: 10px;
+    }
+
+    .day-content {
+        padding: 12px;
     }
 
     .timeline::before {
@@ -886,15 +1008,59 @@ footer {
 
     <div class="day-nav-inner">
 
-        <a href="#d1">D1 松本</a>
-        <a href="#d2">D2 輕井澤</a>
-        <a href="#d3">D3 小布施</a>
-        <a href="#d4">D4 地獄谷</a>
-        <a href="#d5">D5 白馬</a>
-        <a href="#d6">D6 高山</a>
-        <a href="#d7">D7 天氣日</a>
-        <a href="#d8">D8 天氣日</a>
-        <a href="#d9">D9 返港</a>
+        <button
+            class="nav-btn dark"
+            id="todayBtn">
+            今日行程
+        </button>
+
+        <button
+            class="nav-btn dark"
+            id="collapseAll">
+            全部收起
+        </button>
+
+        <button
+            class="nav-btn dark"
+            id="expandAll">
+            全部展開
+        </button>
+
+        <a href="#d1" data-day="d1">
+            D1 松本
+        </a>
+
+        <a href="#d2" data-day="d2">
+            D2 輕井澤
+        </a>
+
+        <a href="#d3" data-day="d3">
+            D3 小布施
+        </a>
+
+        <a href="#d4" data-day="d4">
+            D4 地獄谷
+        </a>
+
+        <a href="#d5" data-day="d5">
+            D5 白馬
+        </a>
+
+        <a href="#d6" data-day="d6">
+            D6 高山
+        </a>
+
+        <a href="#d7" data-day="d7">
+            D7 白川鄉
+        </a>
+
+        <a href="#d8" data-day="d8">
+            D8 松本
+        </a>
+
+        <a href="#d9" data-day="d9">
+            D9 返港
+        </a>
 
     </div>
 
@@ -904,10 +1070,6 @@ footer {
 
 <main class="container">
 
-
-<!-- =====================================================
-     INTRO
-====================================================== -->
 
 <section class="intro">
 
@@ -926,12 +1088,12 @@ footer {
 
         <div class="intro-item">
 
-            <strong>🚗 行程風格</strong>
+            <strong>🚗 行程原則</strong>
 
             <br>
 
             冬季道路安全優先，
-            不為 Bonus 景點硬趕夜路。
+            唔為 Bonus 景點硬趕夜路。
 
         </div>
 
@@ -950,12 +1112,12 @@ footer {
 
         <div class="intro-item">
 
-            <strong>📹 即時資料</strong>
+            <strong>📹 Live Cam</strong>
 
             <br>
 
-            每日出發前可切去 Live Cam Page
-            睇天氣及道路。
+            每日出發前可以直接切去
+            Live Cam Dashboard。
 
         </div>
 
@@ -969,75 +1131,82 @@ footer {
      D1
 ====================================================== -->
 
-<section
+<details
     class="day"
     id="d1">
 
-    <div class="day-header">
+<summary>
+
+    <div class="day-summary-main">
 
         <div class="day-number">
             DAY 1
         </div>
 
-        <h2>
+        <div class="day-title">
             香港 → 名古屋 → 松本
-        </h2>
+        </div>
 
         <div class="day-date">
             9 Jan 2027・星期六
         </div>
 
         <div class="day-route">
-            香港機場 T2
-            → 中部國際機場
-            → 名古屋
-            → JR 特急信濃
-            → 松本
+            香港機場 T2 → 中部國際機場 → 名古屋
+            → JR 特急信濃 → 松本
+        </div>
+
+    </div>
+
+</summary>
+
+
+<div class="day-inner">
+
+
+<div class="photo-section">
+
+    <div class="hero-photo">
+
+        <img
+            class="zoomable"
+            src="assets/images/d1-matsumoto-castle.jpg"
+            alt="松本城冬季 Projection Mapping"
+            data-caption="🏯 松本城冬季 Projection Mapping"
+            loading="lazy">
+
+        <div class="photo-caption">
+            🏯 松本城冬季 Projection Mapping
         </div>
 
     </div>
 
 
-    <div class="photo-section">
+    <div class="photo-gallery">
 
-        <div class="hero-photo">
+        <div class="photo-card">
 
-            <a
-                href="assets/images/d1-matsumoto-castle.jpg"
-                target="_blank">
-
-                <img
-                    src="assets/images/d1-matsumoto-castle.jpg"
-                    alt="松本城冬季夜間光影"
-                    loading="lazy">
-
-            </a>
+            <img
+                class="zoomable"
+                src="assets/images/d1-shinano.jpg"
+                alt="JR 特急信濃"
+                data-caption="🚆 JR 特急信濃"
+                loading="lazy">
 
             <div class="photo-caption">
-                🏯 松本城冬季 Projection Mapping
+                🚆 JR 特急信濃
             </div>
 
         </div>
 
 
-        <div class="photo-gallery">
+        <div class="photo-card">
 
-            <div class="photo-card">
+            <div class="photo-placeholder">
 
-                <a
-                    href="assets/images/d1-shinano.jpg"
-                    target="_blank">
-
-                    <img
-                        src="assets/images/d1-shinano.jpg"
-                        alt="JR 特急信濃"
-                        loading="lazy">
-
-                </a>
-
-                <div class="photo-caption">
-                    🚆 JR 特急信濃
-                </div>
+                📷 D1 第三張相
+                <br>
+                稍後加入
 
             </div>
 
@@ -1045,302 +1214,282 @@ footer {
 
     </div>
 
+</div>
 
-    <div class="day-content">
 
-        <div class="timeline">
 
-            <div class="timeline-item">
+<div class="day-content">
 
-                <div class="time">
-                    06:45
-                </div>
+<div class="timeline">
 
-                <div class="timeline-card">
 
-                    <span class="event-type">
-                        ✈️ 到達機場
-                    </span>
+<div class="timeline-item">
 
-                    <h3>
-                        香港國際機場 T2
-                    </h3>
+    <div class="time">06:45</div>
 
-                    <p>
-                        由香港機場 Check-in 開始計。
-                        UO680 規劃 10:00 起飛，
-                        建議約 06:45 到 T2，
-                        預留寄行李、保安及早餐時間。
-                    </p>
+    <div class="timeline-card">
 
-                </div>
+        <span class="event-type">
+            ✈️ 到達機場
+        </span>
 
-            </div>
+        <h3>
+            香港國際機場 T2
+        </h3>
 
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    07:00
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🧳 CHECK-IN
-                    </span>
-
-                    <h3>
-                        HK Express Bag Drop
-                    </h3>
-
-                    <p>
-                        辦理 UO680 及寄行李。
-                        最遲截行李時間出發前再按 HK Express
-                        最新資料確認。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    07:30
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🍳 早餐／候機
-                    </span>
-
-                    <h3>
-                        香港國際機場
-                    </h3>
-
-                    <p>
-                        完成保安及出境後食早餐，
-                        約 09:20 開始向登機閘口移動。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    10:00
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        ✈️ 航班
-                    </span>
-
-                    <h3>
-                        UO680 香港 → 名古屋
-                    </h3>
-
-                    <p>
-                        規劃時間 10:00 → 14:30。
-                        2027 最終航班時間出發前再核對。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    14:30
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🛂 入境
-                    </span>
-
-                    <h3>
-                        中部國際機場 T2
-                    </h3>
-
-                    <p>
-                        主行程保守預 75 分鐘處理入境及行李。
-                        如果實際 30–45 分鐘已出禁區，
-                        只會令名古屋轉車時間更鬆。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    15:45
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚆 名鐵
-                    </span>
-
-                    <h3>
-                        中部機場 → 名古屋
-                    </h3>
-
-                    <p>
-                        由 T2 前往 Access Plaza／名鐵站，
-                        再乘 μSKY。
-                        班次以 2026 年 12 月公布嘅
-                        2027 正式時間為準。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    16:35
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚶 轉車
-                    </span>
-
-                    <h3>
-                        名鐵名古屋 → JR 名古屋
-                    </h3>
-
-                    <p>
-                        預約 1 小時 Buffer。
-                        入境快的話可食少量食物、
-                        買 JR 車票或休息。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    17:40
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚆 JR
-                    </span>
-
-                    <h3>
-                        特急信濃・名古屋 → 松本
-                    </h3>
-
-                    <p>
-                        現行參考約 17:40 → 19:46。
-                        冬季大雪有機會慢車或延誤。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    19:50
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🏨 CHECK-IN
-                    </span>
-
-                    <h3>
-                        TABINO HOTEL lit 松本
-                    </h3>
-
-                    <p>
-                        已訂豪華雙人房、非吸煙。
-                        D1 酒店不包早餐。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    20:20
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        ⭐ BONUS
-                    </span>
-
-                    <h3>
-                        松本城 Projection Mapping
-                    </h3>
-
-                    <p>
-                        如果準時抵達而且有精神，
-                        可睇約 30–45 分鐘夜間光影。
-                        活動係投射喺黑色國寶天守、
-                        石垣及城牆，
-                        夜晚不能入天守內部。
-                    </p>
-
-                    <span class="price">
-                        免費
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="day-buttons">
-
-            <a
-                class="button"
-                href="index.html#d1">
-
-                📹 睇 D1 Live Cam
-
-            </a>
-
-        </div>
+        <p>
+            UO680 規劃 10:00 起飛。
+            建議約 06:45 到 T2，
+            預留寄行李、保安及早餐時間。
+        </p>
 
     </div>
 
-</section>
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">07:00</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🧳 CHECK-IN
+        </span>
+
+        <h3>
+            HK Express Bag Drop
+        </h3>
+
+        <p>
+            辦理 UO680 及寄行李。
+            最遲截行李時間出發前再確認。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">07:30</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🍳 早餐／候機
+        </span>
+
+        <h3>
+            香港國際機場
+        </h3>
+
+        <p>
+            完成保安及出境後食早餐，
+            約 09:20 開始向登機閘口移動。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">10:00</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            ✈️ 航班
+        </span>
+
+        <h3>
+            UO680 香港 → 名古屋
+        </h3>
+
+        <p>
+            規劃時間 10:00 → 14:30。
+            最終航班時間出發前再核對。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">14:30</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🛂 入境
+        </span>
+
+        <h3>
+            中部國際機場 T2
+        </h3>
+
+        <p>
+            主行程保守預 75 分鐘處理入境及行李。
+            如果實際 30–45 分鐘已出禁區，
+            只會令名古屋轉車時間更鬆。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">15:45</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚆 名鐵
+        </span>
+
+        <h3>
+            中部機場 → 名古屋
+        </h3>
+
+        <p>
+            T2 前往 Access Plaza／名鐵站，
+            再乘 μSKY。
+            2027 正式班次出發前再確認。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">16:35</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚶 轉車
+        </span>
+
+        <h3>
+            名鐵名古屋 → JR 名古屋
+        </h3>
+
+        <p>
+            預約 1 小時 Buffer。
+            如果入境快，可買 JR 車票、
+            食少量食物或休息。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">17:40</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚆 JR
+        </span>
+
+        <h3>
+            特急信濃・名古屋 → 松本
+        </h3>
+
+        <p>
+            現行參考約 17:40 → 19:46。
+            冬季大雪有機會慢車或延誤。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">19:50</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🏨 CHECK-IN
+        </span>
+
+        <h3>
+            TABINO HOTEL lit 松本
+        </h3>
+
+        <p>
+            已訂豪華雙人房、非吸煙。
+            D1 酒店不包早餐。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">20:20</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            ⭐ BONUS
+        </span>
+
+        <h3>
+            松本城 Projection Mapping
+        </h3>
+
+        <p>
+            如果準時抵達而且有精神，
+            可睇約 30–45 分鐘夜間光影。
+            夜晚只睇外觀，不能進入天守。
+        </p>
+
+        <span class="price">
+            免費
+        </span>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<div class="day-buttons">
+
+    <a
+        class="button"
+        href="index.html#d1">
+        📹 睇 D1 Live Cam
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</details>
 
 
 
@@ -1348,515 +1497,482 @@ footer {
      D2
 ====================================================== -->
 
-<section
+<details
     class="day"
     id="d2">
 
-    <div class="day-header">
+<summary>
+
+    <div class="day-summary-main">
 
         <div class="day-number">
             DAY 2
         </div>
 
-        <h2>
+        <div class="day-title">
             松本 → 白絲瀑布 → 鬼押出園 → 輕井澤 → 千曲
-        </h2>
+        </div>
 
         <div class="day-date">
             10 Jan 2027・星期日
         </div>
 
         <div class="day-route">
-            松本城外圍
-            → Times 取車
-            → 白絲瀑布
-            → 鬼押出園
-            → 輕井澤 Outlet
-            → 千曲
+            松本城外圍 → Times 取車 → 白絲瀑布
+            → 鬼押出園 → 輕井澤 Outlet → 千曲
+        </div>
+
+    </div>
+
+</summary>
+
+
+<div class="day-inner">
+
+
+<div class="photo-section">
+
+    <div class="hero-photo">
+
+        <img
+            class="zoomable"
+            src="assets/images/d2-shiraito.jpg"
+            alt="白絲瀑布"
+            data-caption="💧 白絲瀑布"
+            loading="lazy">
+
+        <div class="photo-caption">
+            💧 白絲瀑布
         </div>
 
     </div>
 
 
-    <div class="photo-section">
+    <div class="photo-gallery">
 
-        <div class="hero-photo">
+        <div class="photo-card">
 
-            <a
-                href="assets/images/d2-shiraito.jpg"
-                target="_blank">
-
-                <img
-                    src="assets/images/d2-shiraito.jpg"
-                    alt="輕井澤白絲瀑布"
-                    loading="lazy">
-
-            </a>
+            <img
+                class="zoomable"
+                src="assets/images/d2-onioshidashi.jpg"
+                alt="鬼押出園"
+                data-caption="🌋 鬼押出園・淺間山"
+                loading="lazy">
 
             <div class="photo-caption">
-                💧 白絲瀑布
+                🌋 鬼押出園・淺間山
             </div>
 
         </div>
 
 
-        <div class="photo-gallery">
+        <div class="photo-card">
 
-            <div class="photo-card">
+            <img
+                class="zoomable"
+                src="assets/images/d2-karuizawa-outlet.jpg"
+                alt="輕井澤王子購物廣場"
+                data-caption="🛍️ 輕井澤王子購物廣場"
+                loading="lazy">
 
-                <a
-                    href="assets/images/d2-onioshidashi.jpg"
-                    target="_blank">
-
-                    <img
-                        src="assets/images/d2-onioshidashi.jpg"
-                        alt="冬季鬼押出園及淺間山"
-                        loading="lazy">
-
-                </a>
-
-                <div class="photo-caption">
-                    🌋 鬼押出園・淺間山冬景
-                </div>
-
-            </div>
-
-
-            <div class="photo-card">
-
-                <a
-                    href="assets/images/d2-karuizawa-outlet.jpg"
-                    target="_blank">
-
-                    <img
-                        src="assets/images/d2-karuizawa-outlet.jpg"
-                        alt="輕井澤王子購物廣場"
-                        loading="lazy">
-
-                </a>
-
-                <div class="photo-caption">
-                    🛍️ 輕井澤王子購物廣場
-                </div>
-
+            <div class="photo-caption">
+                🛍️ 輕井澤王子購物廣場
             </div>
 
         </div>
 
     </div>
 
+</div>
 
-    <div class="day-content">
 
-        <div class="special-box weather">
 
-            🌨️ <strong>冬季重點：</strong>
+<div class="day-content">
 
-            白絲 Highland Way 屬山岳道路。
-            如果封閉、嚴重結冰或山區天氣唔理想，
-            唔硬闖，
-            直接啟動下面 Outlet＋上田城 Backup。
 
-        </div>
+<div class="special-box weather">
 
+    🌨️ <strong>冬季重點：</strong>
 
-        <div class="timeline">
+    白絲 Highland Way 屬山岳道路。
+    如果封閉、嚴重結冰或山區天氣唔理想，
+    唔硬闖，改行 Outlet＋上田城 Backup。
 
-            <div class="timeline-item">
+</div>
 
-                <div class="time">
-                    08:00
-                </div>
 
-                <div class="timeline-card">
 
-                    <span class="event-type">
-                        🍳 早餐
-                    </span>
+<div class="timeline">
 
-                    <h3>
-                        松本站一帶
-                    </h3>
 
-                    <p>
-                        酒店不包早餐。
-                        早餐後 Check-out，
-                        行李可暫放酒店。
-                    </p>
+<div class="timeline-item">
 
-                </div>
+    <div class="time">08:00</div>
 
-            </div>
+    <div class="timeline-card">
 
+        <span class="event-type">
+            🍳 早餐
+        </span>
 
-            <div class="timeline-item">
+        <h3>
+            松本站一帶
+        </h3>
 
-                <div class="time">
-                    09:10
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🏯 景點
-                    </span>
-
-                    <h3>
-                        松本城外圍
-                    </h3>
-
-                    <p>
-                        松本城係日本現存 12 座天守之一，
-                        主要天守建於 16 世紀末。
-                        外圍已可影到黑色天守、
-                        護城河同水面倒影。
-                        今日時間緊，以外圍 25–30 分鐘為主。
-                    </p>
-
-                    <span class="price">
-                        外圍免費
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    09:40
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚗 租車
-                    </span>
-
-                    <h3>
-                        TABINO → Times 松本站前
-                    </h3>
-
-                    <p>
-                        回酒店拎行李，
-                        到 Times 完成文件及驗車。
-                        10:00 取 4WD＋雪軚。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    10:00
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚗 約 1小時55分
-                    </span>
-
-                    <h3>
-                        松本 → 白絲瀑布
-                    </h3>
-
-                    <p>
-                        冬季預留更多時間。
-                        導航目的地以輕井澤白絲瀑布為準。
-                        山岳道路遇雪必須減速。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    11:55
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🏔️ 景點
-                    </span>
-
-                    <h3>
-                        白絲瀑布
-                    </h3>
-
-                    <p>
-                        約高 3 米、闊 70 米，
-                        地下水由岩壁形成大量幼細水簾。
-                        冬季積雪、冰柱同森林雪景係最大特色。
-                        停車後步行約 200 米即可到達。
-                    </p>
-
-                    <span class="price">
-                        瀑布免費・道路約 ¥500/車
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    12:35
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚗 約 15分鐘
-                    </span>
-
-                    <h3>
-                        白絲瀑布 → 鬼押出園
-                    </h3>
-
-                    <p>
-                        冬季視道路狀況慢行。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    12:50
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🌋 景點
-                    </span>
-
-                    <h3>
-                        鬼押出園
-                    </h3>
-
-                    <p>
-                        1783 年淺間山大噴發留下嘅大型熔岩地貌。
-                        黑色奇岩加冬季白雪形成強烈黑白對比。
-                        約 45–60 分鐘可睇主要熔岩景觀、
-                        淺間山及觀音堂。
-                    </p>
-
-                    <span class="price">
-                        成人約 ¥700
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    13:40
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🍜 午餐
-                    </span>
-
-                    <h3>
-                        鬼押出園／附近
-                    </h3>
-
-                    <p>
-                        簡單午餐，
-                        避免再壓縮 Outlet 時間。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    14:10
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚗 約 50分鐘
-                    </span>
-
-                    <h3>
-                        鬼押出園 → 輕井澤
-                    </h3>
-
-                    <p>
-                        雪天再預鬆。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    15:00
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🛍️ SHOPPING
-                    </span>
-
-                    <h3>
-                        輕井澤王子購物廣場
-                    </h3>
-
-                    <p>
-                        今次約 90 分鐘精華式 Shopping。
-                        建議預先列出最想買品牌，
-                        優先處理運動、戶外、服飾及生活用品。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    16:30
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚗 約 1小時20分
-                    </span>
-
-                    <h3>
-                        輕井澤 → 千曲
-                    </h3>
-
-                    <p>
-                        直接去戶倉上山田溫泉，
-                        唔再繞上田。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    17:50
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🏨 CHECK-IN
-                    </span>
-
-                    <h3>
-                        Club Wyndham 千曲館
-                    </h3>
-
-                    <p>
-                        已訂一泊二食。
-                        若旅館要求較早晚餐，
-                        優先縮短 Outlet，
-                        唔縮冬季道路安全時間。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    18:30
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🍽️ 晚餐
-                    </span>
-
-                    <h3>
-                        千曲館
-                    </h3>
-
-                    <p>
-                        住宿包晚餐，
-                        飯後可再浸溫泉。
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="scenario-title">
-            🔄 Backup：山路狀況唔理想
-        </div>
-
-
-        <div class="special-box backup">
-
-            松本 → 輕井澤 Outlet
-            → 上田城跡／真田神社
-            → 千曲。
-
-            白絲 Highland Way／鬼押一帶
-            封閉或嚴重結冰先啟動。
-
-        </div>
-
-
-        <div class="day-buttons">
-
-            <a
-                class="button"
-                href="index.html#d2">
-
-                📹 睇 D2 Live Cam
-
-            </a>
-
-        </div>
+        <p>
+            酒店不包早餐。
+            早餐後 Check-out，
+            行李可暫放酒店。
+        </p>
 
     </div>
 
-</section>
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">09:10</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🏯 景點
+        </span>
+
+        <h3>
+            松本城外圍
+        </h3>
+
+        <p>
+            松本城係日本現存 12 座天守之一。
+            今日以外圍 25–30 分鐘為主，
+            已可以影到黑色天守、
+            護城河同水面倒影。
+        </p>
+
+        <span class="price">
+            外圍免費
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">09:40</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚗 租車
+        </span>
+
+        <h3>
+            TABINO → Times 松本站前
+        </h3>
+
+        <p>
+            回酒店拎行李，
+            到 Times 完成文件及驗車。
+            10:00 取 4WD＋雪軚。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">10:00</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚗 約 1小時55分
+        </span>
+
+        <h3>
+            松本 → 白絲瀑布
+        </h3>
+
+        <p>
+            山岳道路，
+            冬季要預留更多時間。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">11:55</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            💧 景點
+        </span>
+
+        <h3>
+            白絲瀑布
+        </h3>
+
+        <p>
+            高約 3 米、闊約 70 米，
+            地下水由岩壁形成大量幼細水簾。
+            冬季積雪同冰柱係最大特色。
+            停車後約步行 200 米。
+        </p>
+
+        <span class="price">
+            瀑布免費・道路約 ¥500/車
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">12:35</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚗 約 15分鐘
+        </span>
+
+        <h3>
+            白絲瀑布 → 鬼押出園
+        </h3>
+
+        <p>
+            冬季視道路狀況慢行。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">12:50</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🌋 景點
+        </span>
+
+        <h3>
+            鬼押出園
+        </h3>
+
+        <p>
+            1783 年淺間山大噴發留下嘅大型熔岩地貌。
+            冬季黑色熔岩配白雪最有特色。
+            約 45–60 分鐘。
+        </p>
+
+        <span class="price">
+            成人約 ¥700
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">13:40</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🍜 午餐
+        </span>
+
+        <h3>
+            鬼押出園／附近
+        </h3>
+
+        <p>
+            簡單午餐，
+            避免壓縮 Outlet 時間。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">14:10</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚗 約 50分鐘
+        </span>
+
+        <h3>
+            鬼押出園 → 輕井澤
+        </h3>
+
+        <p>
+            雪天再預鬆。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">15:00</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🛍️ SHOPPING
+        </span>
+
+        <h3>
+            輕井澤王子購物廣場
+        </h3>
+
+        <p>
+            約 90 分鐘精華 Shopping。
+            優先處理最想買嘅品牌。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">16:30</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚗 約 1小時20分
+        </span>
+
+        <h3>
+            輕井澤 → 千曲
+        </h3>
+
+        <p>
+            直接去戶倉上山田溫泉，
+            唔再繞上田。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">17:50</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🏨 CHECK-IN
+        </span>
+
+        <h3>
+            Club Wyndham 千曲館
+        </h3>
+
+        <p>
+            已訂一泊二食。
+            如果晚餐時間有要求，
+            優先縮短 Outlet，
+            唔縮冬季道路 Buffer。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">18:30</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🍽️ 晚餐
+        </span>
+
+        <h3>
+            千曲館
+        </h3>
+
+        <p>
+            住宿包晚餐。
+            飯後可浸溫泉。
+        </p>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<div class="scenario-title">
+    🔄 Backup：山路狀況唔理想
+</div>
+
+
+<div class="special-box backup">
+
+    松本 → 輕井澤 Outlet
+    → 上田城跡／真田神社 → 千曲。
+
+    <br><br>
+
+    只係白絲 Highland Way／鬼押一帶
+    封閉或嚴重結冰先啟動。
+
+</div>
+
+
+<div class="day-buttons">
+
+    <a
+        class="button"
+        href="index.html#d2">
+        📹 睇 D2 Live Cam
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</details>
 
 
 
@@ -1864,75 +1980,82 @@ footer {
      D3
 ====================================================== -->
 
-<section
+<details
     class="day"
     id="d3">
 
-    <div class="day-header">
+<summary>
+
+    <div class="day-summary-main">
 
         <div class="day-number">
             DAY 3
         </div>
 
-        <h2>
+        <div class="day-title">
             千曲 → 小布施 → JA Oranche → 澀溫泉
-        </h2>
+        </div>
 
         <div class="day-date">
             11 Jan 2027・星期一・成人の日
         </div>
 
         <div class="day-route">
-            千曲
-            → 小布施舊街／栗之小徑
-            → JA 農產直賣
-            → 澀溫泉
-            → 九湯巡禮
+            千曲 → 小布施舊街／栗之小徑
+            → JA 農產直賣 → 澀溫泉 → 九湯巡禮
+        </div>
+
+    </div>
+
+</summary>
+
+
+<div class="day-inner">
+
+
+<div class="photo-section">
+
+    <div class="hero-photo">
+
+        <img
+            class="zoomable"
+            src="assets/images/d3-obuse.jpg"
+            alt="小布施栗之小徑"
+            data-caption="🌰 小布施・栗之小徑"
+            loading="lazy">
+
+        <div class="photo-caption">
+            🌰 小布施・栗之小徑
         </div>
 
     </div>
 
 
-    <div class="photo-section">
+    <div class="photo-gallery">
 
-        <div class="hero-photo">
+        <div class="photo-card">
 
-            <a
-                href="assets/images/d3-obuse.jpg"
-                target="_blank">
-
-                <img
-                    src="assets/images/d3-obuse.jpg"
-                    alt="小布施栗之小徑"
-                    loading="lazy">
-
-            </a>
+            <img
+                class="zoomable"
+                src="assets/images/d3-shibu-onsen.jpg"
+                alt="澀溫泉夜景"
+                data-caption="♨️ 澀溫泉夜景"
+                loading="lazy">
 
             <div class="photo-caption">
-                🌰 小布施・栗之小徑
+                ♨️ 澀溫泉夜景
             </div>
 
         </div>
 
 
-        <div class="photo-gallery">
+        <div class="photo-card">
 
-            <div class="photo-card">
+            <div class="photo-placeholder">
 
-                <a
-                    href="assets/images/d3-shibu-onsen.jpg"
-                    target="_blank">
-
-                    <img
-                        src="assets/images/d3-shibu-onsen.jpg"
-                        alt="澀溫泉夜景"
-                        loading="lazy">
-
-                </a>
-
-                <div class="photo-caption">
-                    ♨️ 澀溫泉夜景
-                </div>
+                📷 D3 第三張相
+                <br>
+                稍後加入
 
             </div>
 
@@ -1940,367 +2063,343 @@ footer {
 
     </div>
 
+</div>
 
-    <div class="day-content">
 
-        <div class="timeline">
 
-            <div class="timeline-item">
+<div class="day-content">
 
-                <div class="time">
-                    08:00
-                </div>
 
-                <div class="timeline-card">
+<div class="timeline">
 
-                    <span class="event-type">
-                        🍳 早餐
-                    </span>
 
-                    <h3>
-                        千曲館
-                    </h3>
+<div class="timeline-item">
 
-                    <p>
-                        旅館早餐。
-                    </p>
+    <div class="time">08:00</div>
 
-                </div>
+    <div class="timeline-card">
 
-            </div>
+        <span class="event-type">
+            🍳 早餐
+        </span>
 
+        <h3>
+            千曲館
+        </h3>
 
-            <div class="timeline-item">
-
-                <div class="time">
-                    09:15
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚗 約 45分鐘
-                    </span>
-
-                    <h3>
-                        千曲 → 小布施
-                    </h3>
-
-                    <p>
-                        今日係成人の日，
-                        刻意唔安排 Snow Monkey。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    10:00
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🌰 散步／小食
-                    </span>
-
-                    <h3>
-                        小布施舊街＋栗之小徑
-                    </h3>
-
-                    <p>
-                        小布施係長野著名栗子產地。
-                        中心區有町屋、庭園、栗菓子老店及細巷。
-                        栗之小徑用栗木鋪路，
-                        今次主力街景、栗子甜品、
-                        栗おこわ及手信。
-                    </p>
-
-                    <span class="price">
-                        免費
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    11:15
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🎨 OPTIONAL
-                    </span>
-
-                    <h3>
-                        北齋館
-                    </h3>
-
-                    <p>
-                        只係有興趣先入，
-                        約 30–45 分鐘。
-                        今次唔會為美術館犧牲小布施街景時間。
-                    </p>
-
-                    <span class="price">
-                        成人約 ¥1,200
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    12:00
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🍜 午餐
-                    </span>
-
-                    <h3>
-                        小布施
-                    </h3>
-
-                    <p>
-                        可選蕎麥麵／栗おこわ。
-                        晚餐旅館已包。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    12:45
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚗
-                    </span>
-
-                    <h3>
-                        小布施 → JA Oranche
-                    </h3>
-
-                    <p>
-                        約 20 分鐘。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    13:05
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🥬 SHOPPING
-                    </span>
-
-                    <h3>
-                        JA 中野市農產物產館 Oranche
-                    </h3>
-
-                    <p>
-                        地元 JA 農產直賣所。
-                        有蔬菜、菇菌、蘋果及加工品。
-                        重點係本地日常農產品，
-                        唔係純旅客手信店。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    13:40
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🚗 約 40分鐘
-                    </span>
-
-                    <h3>
-                        JA Oranche → 澀溫泉
-                    </h3>
-
-                    <p>
-                        入溫泉街前按旅館指示泊車，
-                        唔好跟導航亂入窄巷。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    14:20
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        ♨️ 散步
-                    </span>
-
-                    <h3>
-                        澀溫泉街
-                    </h3>
-
-                    <p>
-                        先認路、影相，
-                        15:00 再入住。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    15:00
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🏨 CHECK-IN／溫泉
-                    </span>
-
-                    <h3>
-                        一乃湯果亭＋九湯巡禮
-                    </h3>
-
-                    <p>
-                        住區內旅館可以借專用鎖匙
-                        進入九個共同浴場。
-                        穿浴衣沿石板街巡湯、蓋印係核心體驗。
-                        唔需要勉強一次浸晒九個。
-                    </p>
-
-                    <span class="price">
-                        九湯巡禮住客免費
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    18:00
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🍽️ 晚餐
-                    </span>
-
-                    <h3>
-                        一乃湯果亭
-                    </h3>
-
-                    <p>
-                        住宿包晚餐。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">
-                    20:00
-                </div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">
-                        🌙 夜行／溫泉
-                    </span>
-
-                    <h3>
-                        澀溫泉街
-                    </h3>
-
-                    <p>
-                        飯後再浸外湯，
-                        浴衣散步及睇夜景。
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="special-box backup">
-
-            🔄 <strong>Backup：</strong>
-            岩松院。
-            如果小布施主線比預期快，
-            可加約 30–35 分鐘。
-
-        </div>
-
-
-        <div class="day-buttons">
-
-            <a
-                class="button"
-                href="index.html#d3">
-
-                📹 睇 D3 Live Cam
-
-            </a>
-
-        </div>
+        <p>
+            旅館早餐。
+        </p>
 
     </div>
 
-</section>
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">09:15</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚗 約 45分鐘
+        </span>
+
+        <h3>
+            千曲 → 小布施
+        </h3>
+
+        <p>
+            今日係成人の日，
+            刻意唔安排 Snow Monkey。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">10:00</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🌰 散步／小食
+        </span>
+
+        <h3>
+            小布施舊街＋栗之小徑
+        </h3>
+
+        <p>
+            小布施係長野著名栗子產地。
+            今次主力街景、栗子甜品、
+            栗おこわ及手信。
+        </p>
+
+        <span class="price">
+            免費
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">11:15</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🎨 OPTIONAL
+        </span>
+
+        <h3>
+            北齋館
+        </h3>
+
+        <p>
+            只係有興趣先入，
+            約 30–45 分鐘。
+        </p>
+
+        <span class="price">
+            成人約 ¥1,200
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">12:00</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🍜 午餐
+        </span>
+
+        <h3>
+            小布施
+        </h3>
+
+        <p>
+            可選蕎麥麵／栗おこわ。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">12:45</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚗 約 20分鐘
+        </span>
+
+        <h3>
+            小布施 → JA Oranche
+        </h3>
+
+        <p>
+            往信州中野方向。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">13:05</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🥬 SHOPPING
+        </span>
+
+        <h3>
+            JA 中野市農產物產館 Oranche
+        </h3>
+
+        <p>
+            地元 JA 農產直賣所。
+            有蔬菜、菇菌、蘋果及加工品。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">13:40</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🚗 約 40分鐘
+        </span>
+
+        <h3>
+            JA Oranche → 澀溫泉
+        </h3>
+
+        <p>
+            入溫泉街前按旅館指示泊車，
+            唔好跟導航亂入窄巷。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">14:20</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            ♨️ 散步
+        </span>
+
+        <h3>
+            澀溫泉街
+        </h3>
+
+        <p>
+            先認路、影相，
+            15:00 再入住。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">15:00</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🏨 CHECK-IN／溫泉
+        </span>
+
+        <h3>
+            一乃湯果亭＋九湯巡禮
+        </h3>
+
+        <p>
+            住區內旅館可以借專用鎖匙
+            進入九個共同浴場。
+            穿浴衣沿石板街巡湯係核心體驗。
+        </p>
+
+        <span class="price">
+            住客免費
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">18:00</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🍽️ 晚餐
+        </span>
+
+        <h3>
+            一乃湯果亭
+        </h3>
+
+        <p>
+            住宿包晚餐。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="timeline-item">
+
+    <div class="time">20:00</div>
+
+    <div class="timeline-card">
+
+        <span class="event-type">
+            🌙 夜行／溫泉
+        </span>
+
+        <h3>
+            澀溫泉街
+        </h3>
+
+        <p>
+            飯後再浸外湯，
+            浴衣散步及睇夜景。
+        </p>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<div class="special-box backup">
+
+    🔄 <strong>Backup：</strong>
+    岩松院。
+
+    如果小布施主線比預期快，
+    可加約 30–35 分鐘。
+
+</div>
+
+
+<div class="day-buttons">
+
+    <a
+        class="button"
+        href="index.html#d3">
+        📹 睇 D3 Live Cam
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</details>
 
 
 
@@ -2308,303 +2407,225 @@ footer {
      D4
 ====================================================== -->
 
-<section
+<details
     class="day"
     id="d4">
 
-    <div class="day-header">
+<summary>
+
+    <div class="day-summary-main">
 
         <div class="day-number">
             DAY 4
         </div>
 
-        <h2>
+        <div class="day-title">
             澀溫泉 → 地獄谷 → 須坂 → 長野
-        </h2>
+        </div>
 
         <div class="day-date">
             12 Jan 2027・星期二
         </div>
 
         <div class="day-route">
-            澀溫泉
-            → 上林
-            → 雪路步行
-            → 地獄谷野猿公苑
-            → AEON Mall 須坂
-            → 長野
+            澀溫泉 → 上林 → 地獄谷野猿公苑
+            → AEON Mall 須坂 → 長野
+        </div>
+
+    </div>
+
+</summary>
+
+
+<div class="day-inner">
+
+
+<div class="photo-section">
+
+    <div class="hero-photo">
+
+        <div class="photo-placeholder">
+            📷 主圖：地獄谷雪猴
         </div>
 
     </div>
 
 
-    <div class="hero-placeholder">
+    <div class="photo-gallery">
 
-        📷 下一步加入：
-        地獄谷雪猴／雪路林道／AEON 須坂
-
-    </div>
-
-
-    <div class="day-content">
-
-        <div class="special-box weather">
-
-            ❄️ 地獄谷由上林停車位
-            要行約 30–35 分鐘雪地林道。
-            結冰位置慢行，
-            防水防滑鞋比趕時間重要。
-
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 雪路林道
+            </div>
         </div>
 
-
-        <div class="timeline">
-
-            <div class="timeline-item">
-
-                <div class="time">08:00</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🍳 早餐</span>
-
-                    <h3>一乃湯果亭</h3>
-
-                    <p>住宿包早餐。</p>
-
-                </div>
-
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 AEON Mall 須坂
             </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">09:00</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🚗</span>
-
-                    <h3>澀溫泉 → 上林</h3>
-
-                    <p>
-                        退房後前往 Snow Monkey 入口一帶。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">09:40</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🥾 雪路</span>
-
-                    <h3>上林 → 地獄谷</h3>
-
-                    <p>
-                        約 30–35 分鐘林道，
-                        結冰位慢行。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">10:15</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🐒 核心景點</span>
-
-                    <h3>地獄谷野猿公苑</h3>
-
-                    <p>
-                        海拔約 850 米山谷，
-                        冬季長期積雪。
-                        日本獼猴係真正生活喺附近山林嘅野生猴群。
-                        會唔會浸溫泉視氣溫同猴群行動而定。
-                    </p>
-
-                    <span class="price">
-                        現行成人約 ¥800
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">11:30</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🥾</span>
-
-                    <h3>地獄谷 → 上林</h3>
-
-                    <p>
-                        原路返回，
-                        落斜結冰位更加要慢。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">12:05</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🚗</span>
-
-                    <h3>上林 → 須坂</h3>
-
-                    <p>約 40 分鐘。</p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">12:45</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🍜 午餐</span>
-
-                    <h3>須坂</h3>
-
-                    <p>
-                        簡單午餐，
-                        留多啲時間 Shopping。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">13:30</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🛍️ SHOPPING</span>
-
-                    <h3>AEON Mall 須坂</h3>
-
-                    <p>
-                        今程重要「當地生活 Shopping」時段。
-                        食品、生果、日用品、服裝、藥妝同補給
-                        可以一次處理。
-                        預約 3.5 小時。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">17:00</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🚗</span>
-
-                    <h3>須坂 → 長野</h3>
-
-                    <p>約 40 分鐘。</p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">17:45</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🏨 CHECK-IN</span>
-
-                    <h3>Hotel JAL City Nagano</h3>
-
-                    <p>
-                        已訂非吸煙房，
-                        翌朝包兩位早餐。
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="time">19:00</div>
-
-                <div class="timeline-card">
-
-                    <span class="event-type">🍽️ 晚餐</span>
-
-                    <h3>長野市內</h3>
-
-                    <p>
-                        飯後有精神可以去 Donki／長野站附近。
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="special-box bonus">
-
-            ⭐ <strong>早完 Bonus：</strong>
-
-            須坂藏之町。
-            Snow Monkey 比預期早完成先去，
-            約 30–45 分鐘即可。
-
-        </div>
-
-
-        <div class="day-buttons">
-
-            <a
-                class="button"
-                href="index.html#d4">
-
-                📹 睇 D4 Live Cam
-
-            </a>
-
         </div>
 
     </div>
 
-</section>
+</div>
+
+
+
+<div class="day-content">
+
+
+<div class="special-box weather">
+
+    ❄️ 地獄谷由上林停車位
+    要行約 30–35 分鐘雪地林道。
+    結冰位置慢行，
+    防水防滑鞋比趕時間重要。
+
+</div>
+
+
+<div class="timeline">
+
+<div class="timeline-item">
+    <div class="time">08:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🍳 早餐</span>
+        <h3>一乃湯果亭</h3>
+        <p>住宿包早餐。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">09:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>澀溫泉 → 上林</h3>
+        <p>退房後前往 Snow Monkey 入口。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">09:40</div>
+    <div class="timeline-card">
+        <span class="event-type">🥾 雪路</span>
+        <h3>上林 → 地獄谷</h3>
+        <p>約 30–35 分鐘林道。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">10:15</div>
+    <div class="timeline-card">
+        <span class="event-type">🐒 核心景點</span>
+        <h3>地獄谷野猿公苑</h3>
+        <p>
+            冬季長期積雪。
+            猴子係真正生活喺附近山林嘅野生日本獼猴。
+            是否浸溫泉視當日情況。
+        </p>
+        <span class="price">
+            成人現行約 ¥800
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">11:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🥾</span>
+        <h3>地獄谷 → 上林</h3>
+        <p>原路返回。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">12:05</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>上林 → 須坂</h3>
+        <p>約 40 分鐘。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">12:45</div>
+    <div class="timeline-card">
+        <span class="event-type">🍜 午餐</span>
+        <h3>須坂</h3>
+        <p>簡單午餐。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">13:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🛍️ SHOPPING</span>
+        <h3>AEON Mall 須坂</h3>
+        <p>
+            食品、生果、日用品、
+            服裝、藥妝同補給。
+            預約 3.5 小時。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">17:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>須坂 → 長野</h3>
+        <p>約 40 分鐘。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">17:45</div>
+    <div class="timeline-card">
+        <span class="event-type">🏨 CHECK-IN</span>
+        <h3>Hotel JAL City Nagano</h3>
+        <p>翌朝包兩位早餐。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">19:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🍽️ 晚餐</span>
+        <h3>長野市內</h3>
+        <p>
+            飯後有精神可去 Donki／長野站附近。
+        </p>
+    </div>
+</div>
+
+</div>
+
+
+<div class="special-box bonus">
+
+    ⭐ <strong>早完 Bonus：</strong>
+
+    須坂藏之町。
+    Snow Monkey 提早完成先去。
+
+</div>
+
+
+<div class="day-buttons">
+
+    <a
+        class="button"
+        href="index.html#d4">
+        📹 睇 D4 Live Cam
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</details>
 
 
 
@@ -2612,215 +2633,233 @@ footer {
      D5
 ====================================================== -->
 
-<section
+<details
     class="day"
     id="d5">
 
-    <div class="day-header">
+<summary>
+
+    <div class="day-summary-main">
 
         <div class="day-number">
             DAY 5
         </div>
 
-        <h2>
+        <div class="day-title">
             長野 → 白馬岩岳 → 高山
-        </h2>
+        </div>
 
         <div class="day-date">
             13 Jan 2027・星期三
         </div>
 
         <div class="day-route">
-            長野
-            → 白馬岩岳
-            → HAKUBA MOUNTAIN HARBOR
-            → WHITE PARK
-            → 高山
+            長野 → 白馬岩岳 → MOUNTAIN HARBOR
+            → WHITE PARK → 高山
+        </div>
+
+    </div>
+
+</summary>
+
+
+<div class="day-inner">
+
+
+<div class="photo-section">
+
+    <div class="hero-photo">
+
+        <div class="photo-placeholder">
+            📷 主圖：白馬岩岳
         </div>
 
     </div>
 
 
-    <div class="hero-placeholder">
+    <div class="photo-gallery">
 
-        📷 下一步加入：
-        白馬岩岳／北阿爾卑斯／WHITE PARK／高山
-
-    </div>
-
-
-    <div class="day-content">
-
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="time">07:45</div>
-                <div class="timeline-card">
-                    <span class="event-type">🍳 早餐</span>
-                    <h3>Hotel JAL City Nagano</h3>
-                    <p>已包兩位自助早餐。</p>
-                </div>
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 HAKUBA MOUNTAIN HARBOR
             </div>
-
-            <div class="timeline-item">
-                <div class="time">08:30</div>
-                <div class="timeline-card">
-                    <span class="event-type">🧳 CHECK-OUT</span>
-                    <h3>長野</h3>
-                    <p>執行李後出發。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">09:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗 約 1小時15分</span>
-                    <h3>長野 → 白馬岩岳</h3>
-                    <p>
-                        冬季預鬆，
-                        遇大雪唔趕時間。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">10:20</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚡 GONDOLA</span>
-                    <h3>白馬岩岳山麓 → 山頂</h3>
-                    <p>使用非滑雪旅客觀光票上山。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">10:35</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏔️ 核心景點</span>
-                    <h3>白馬岩岳 Mountain Resort</h3>
-                    <p>
-                        今次當純雪景景點，
-                        唔係滑雪行程。
-                        山頂可望北阿爾卑斯、
-                        玩雪及使用指定觀光設施。
-                    </p>
-                    <span class="price">
-                        觀光票參考約 ¥2,900/人
-                    </span>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">11:15</div>
-                <div class="timeline-card">
-                    <span class="event-type">📷 景點</span>
-                    <h3>HAKUBA MOUNTAIN HARBOR</h3>
-                    <p>
-                        岩岳山頂內嘅觀景露台，
-                        可正面望白馬三山及北阿爾卑斯。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">11:50</div>
-                <div class="timeline-card">
-                    <span class="event-type">❄️ 雪地活動</span>
-                    <h3>IWATAKE WHITE PARK</h3>
-                    <p>
-                        非滑雪旅客玩雪、散步及影相。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">12:20</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚡</span>
-                    <h3>山頂 → 山麓</h3>
-                    <p>落山後午餐。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">12:35</div>
-                <div class="timeline-card">
-                    <span class="event-type">🍜 午餐</span>
-                    <h3>白馬</h3>
-                    <p>食完直接向高山出發。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">13:20</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗 約 3小時10分</span>
-                    <h3>白馬 → 高山</h3>
-                    <p>
-                        冬季長途山路。
-                        唔為 Bonus 景點拖到夜晚先行山路。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">16:30</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏨 CHECK-IN</span>
-                    <h3>飛驒花里之湯 高山櫻庵</h3>
-                    <p>
-                        已訂兩晚。
-                        有天然溫泉及露天風呂。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">17:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">♨️ 休息</span>
-                    <h3>高山櫻庵</h3>
-                    <p>D5 以溫泉及休息為主。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">19:15</div>
-                <div class="timeline-card">
-                    <span class="event-type">🍽️ 晚餐</span>
-                    <h3>高山市內</h3>
-                    <p>第一晚晚餐彈性。</p>
-                </div>
-            </div>
-
         </div>
 
-
-        <div class="special-box bonus">
-
-            ⭐ <strong>非常早到 Bonus：</strong>
-
-            飛驒之里。
-            只限非常早到高山而且精神好，
-            否則直接酒店。
-
-        </div>
-
-
-        <div class="day-buttons">
-
-            <a
-                class="button"
-                href="index.html#d5">
-
-                📹 睇 D5 Live Cam
-
-            </a>
-
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 IWATAKE WHITE PARK
+            </div>
         </div>
 
     </div>
 
-</section>
+</div>
+
+
+
+<div class="day-content">
+
+
+<div class="timeline">
+
+<div class="timeline-item">
+    <div class="time">07:45</div>
+    <div class="timeline-card">
+        <span class="event-type">🍳 早餐</span>
+        <h3>Hotel JAL City Nagano</h3>
+        <p>已包兩位自助早餐。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">08:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🧳 CHECK-OUT</span>
+        <h3>長野</h3>
+        <p>執行李後出發。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">09:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗 約 1小時15分</span>
+        <h3>長野 → 白馬岩岳</h3>
+        <p>冬季預鬆，遇大雪唔趕。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">10:20</div>
+    <div class="timeline-card">
+        <span class="event-type">🚡 GONDOLA</span>
+        <h3>山麓 → 山頂</h3>
+        <p>使用非滑雪旅客觀光票。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">10:35</div>
+    <div class="timeline-card">
+        <span class="event-type">🏔️ 核心景點</span>
+        <h3>白馬岩岳 Mountain Resort</h3>
+        <p>
+            當純雪景景點，
+            唔係滑雪行程。
+        </p>
+        <span class="price">
+            參考約 ¥2,900/人
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">11:15</div>
+    <div class="timeline-card">
+        <span class="event-type">📷 景點</span>
+        <h3>HAKUBA MOUNTAIN HARBOR</h3>
+        <p>
+            正面望白馬三山及北阿爾卑斯。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">11:50</div>
+    <div class="timeline-card">
+        <span class="event-type">❄️ 雪地活動</span>
+        <h3>IWATAKE WHITE PARK</h3>
+        <p>
+            玩雪、散步及影相。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">12:20</div>
+    <div class="timeline-card">
+        <span class="event-type">🚡</span>
+        <h3>山頂 → 山麓</h3>
+        <p>落山後午餐。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">12:35</div>
+    <div class="timeline-card">
+        <span class="event-type">🍜 午餐</span>
+        <h3>白馬</h3>
+        <p>食完直接去高山。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">13:20</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗 約 3小時10分</span>
+        <h3>白馬 → 高山</h3>
+        <p>
+            冬季長途山路，
+            唔為 Bonus 拖到夜晚。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">16:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🏨 CHECK-IN</span>
+        <h3>飛驒花里之湯 高山櫻庵</h3>
+        <p>
+            已訂兩晚，
+            有天然溫泉及露天風呂。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">17:00</div>
+    <div class="timeline-card">
+        <span class="event-type">♨️ 休息</span>
+        <h3>高山櫻庵</h3>
+        <p>D5 以休息為主。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">19:15</div>
+    <div class="timeline-card">
+        <span class="event-type">🍽️ 晚餐</span>
+        <h3>高山市內</h3>
+        <p>第一晚晚餐彈性。</p>
+    </div>
+</div>
+
+</div>
+
+
+<div class="special-box bonus">
+
+    ⭐ 非常早到先考慮飛驒之里。
+
+</div>
+
+
+<div class="day-buttons">
+
+    <a
+        class="button"
+        href="index.html#d5">
+        📹 睇 D5 Live Cam
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</details>
 
 
 
@@ -2828,224 +2867,249 @@ footer {
      D6
 ====================================================== -->
 
-<section
+<details
     class="day"
     id="d6">
 
-    <div class="day-header">
+<summary>
+
+    <div class="day-summary-main">
 
         <div class="day-number">
             DAY 6
         </div>
 
-        <h2>
+        <div class="day-title">
             Weather Day 1・新穗高／高山市區
-        </h2>
+        </div>
 
         <div class="day-date">
             14 Jan 2027・星期四
         </div>
 
         <div class="day-route">
-
-            極好天：
-            高山 → 新穗高 → 高山
-
-            <br>
-
-            普通／差天：
-            高山市區 → 飛驒大鐘乳洞 → 高山
-
+            極好天：高山 → 新穗高 → 高山
+            ｜ 普通／差天：高山市區 → 飛驒大鐘乳洞
         </div>
 
     </div>
 
+</summary>
 
-    <div class="hero-placeholder">
 
-        📷 下一步加入：
-        新穗高雪山／高山古街／飛驒大鐘乳洞
+<div class="day-inner">
 
+
+<div class="photo-section">
+
+    <div class="hero-photo">
+        <div class="photo-placeholder">
+            📷 主圖：新穗高纜車雪山
+        </div>
     </div>
 
+    <div class="photo-gallery">
 
-    <div class="day-content">
-
-        <div class="special-box weather">
-
-            🌨️ <strong>07:45 天氣判斷：</strong>
-
-            睇新穗高官方運行狀況、
-            Live Camera、山頂能見度及風況。
-
-            只有「極好天＋正常運行」
-            先喺 D6 搶新穗高。
-
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 高山古街／中橋
+            </div>
         </div>
 
-
-        <div class="scenario-title">
-            🅰 Plan A｜新穗高極好天
-        </div>
-
-
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="time">08:50</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗 約 1小時20分</span>
-                    <h3>高山 → 新穗高</h3>
-                    <p>冬季山路，預鬆時間。</p>
-                </div>
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 飛驒大鐘乳洞／冰之溪谷
             </div>
-
-            <div class="timeline-item">
-                <div class="time">10:15</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚡 核心景點</span>
-                    <h3>新穗高纜車</h3>
-                    <p>
-                        兩段纜車上到海拔約 2,156 米西穗高口。
-                        第二段係雙層纜車，
-                        山頂可近距離望穗高連峰及雪山。
-                    </p>
-                    <span class="price">
-                        成人來回約 ¥3,800
-                    </span>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">12:45</div>
-                <div class="timeline-card">
-                    <span class="event-type">🍜 午餐</span>
-                    <h3>新穗高</h3>
-                    <p>簡單午餐。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">13:30</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗</span>
-                    <h3>新穗高 → 高山</h3>
-                    <p>
-                        下午返高山，
-                        保留冬季道路 Buffer。
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="scenario-title">
-            🅱 Plan B｜新穗高普通／大霧／大風
-        </div>
-
-
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="time">09:30</div>
-                <div class="timeline-card">
-                    <span class="event-type">🥬 景點</span>
-                    <h3>宮川朝市</h3>
-                    <p>
-                        可買漬物、味噌、蔬菜、
-                        小食及手工品。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">10:15</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏯 景點</span>
-                    <h3>高山陣屋</h3>
-                    <p>
-                        江戶幕府直接管治飛驒時嘅地方行政機關。
-                    </p>
-                    <span class="price">
-                        成人約 ¥500
-                    </span>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">11:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏘️ 古街／酒藏</span>
-                    <h3>三町古街＋中橋＋酒藏</h3>
-                    <p>
-                        黑木格子町家、
-                        清酒酒藏、味噌店及傳統老舖集中。
-                        司機唔飲酒。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">13:10</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗</span>
-                    <h3>高山 → 飛驒大鐘乳洞</h3>
-                    <p>約 40 分鐘。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">13:50</div>
-                <div class="timeline-card">
-                    <span class="event-type">🧊 景點</span>
-                    <h3>飛驒大鐘乳洞＋冰之溪谷</h3>
-                    <p>
-                        一月最大特色係冰之溪谷嘅大型藍白冰柱。
-                        洞內亦唔太受落雪影響。
-                    </p>
-                    <span class="price">
-                        成人約 ¥1,100
-                    </span>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">16:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">🛒 SHOPPING</span>
-                    <h3>高山地元超市</h3>
-                    <p>
-                        駿河屋／Valor 等，
-                        買飛驒牛、蔬果、牛奶及調味料。
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="special-box bonus">
-            🍖 <strong>19:15：</strong>
-            正式飛驒牛晚餐。
-        </div>
-
-
-        <div class="day-buttons">
-
-            <a
-                class="button"
-                href="index.html#d6">
-
-                📹 睇 D6 Live Cam
-
-            </a>
-
         </div>
 
     </div>
 
-</section>
+</div>
+
+
+
+<div class="day-content">
+
+
+<div class="special-box weather">
+
+    🌨️ <strong>07:45 天氣判斷：</strong>
+
+    睇新穗高官方運行狀況、
+    Live Camera、山頂能見度及風況。
+
+    只有「極好天＋正常運行」
+    先喺 D6 搶新穗高。
+
+</div>
+
+
+<div class="scenario-title">
+    🅰 Plan A｜新穗高極好天
+</div>
+
+
+<div class="timeline">
+
+<div class="timeline-item">
+    <div class="time">08:50</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗 約 1小時20分</span>
+        <h3>高山 → 新穗高</h3>
+        <p>冬季山路，預鬆時間。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">10:15</div>
+    <div class="timeline-card">
+        <span class="event-type">🚡 核心景點</span>
+        <h3>新穗高纜車</h3>
+        <p>
+            兩段纜車去到海拔約 2,156 米西穗高口。
+            第二段係雙層車廂，
+            山頂可望穗高連峰雪山。
+        </p>
+        <span class="price">
+            成人約 ¥3,800
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">12:45</div>
+    <div class="timeline-card">
+        <span class="event-type">🍜 午餐</span>
+        <h3>新穗高</h3>
+        <p>簡單午餐。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">13:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>新穗高 → 高山</h3>
+        <p>保留道路 Buffer。</p>
+    </div>
+</div>
+
+</div>
+
+
+<div class="scenario-title">
+    🅱 Plan B｜普通／大霧／大風
+</div>
+
+
+<div class="timeline">
+
+<div class="timeline-item">
+    <div class="time">09:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🥬 景點</span>
+        <h3>宮川朝市</h3>
+        <p>漬物、味噌、蔬菜、小食及手工品。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">10:15</div>
+    <div class="timeline-card">
+        <span class="event-type">🏯 景點</span>
+        <h3>高山陣屋</h3>
+        <p>
+            江戶幕府直接管治飛驒時嘅地方行政機關。
+        </p>
+        <span class="price">
+            成人約 ¥500
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">11:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🏘️ 古街／酒藏</span>
+        <h3>三町古街＋中橋＋酒藏</h3>
+        <p>
+            古町家、酒藏、味噌店及傳統老舖。
+            司機唔試酒。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">12:25</div>
+    <div class="timeline-card">
+        <span class="event-type">🍜 午餐</span>
+        <h3>高山市內</h3>
+        <p>高山拉麵／蕎麥麵。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">13:10</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>高山 → 飛驒大鐘乳洞</h3>
+        <p>約 40 分鐘。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">13:50</div>
+    <div class="timeline-card">
+        <span class="event-type">🧊 景點</span>
+        <h3>飛驒大鐘乳洞＋冰之溪谷</h3>
+        <p>
+            一月重點係大型藍白冰柱。
+            洞內亦唔太受落雪影響。
+        </p>
+        <span class="price">
+            成人約 ¥1,100
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">16:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🛒 SHOPPING</span>
+        <h3>高山地元超市</h3>
+        <p>
+            駿河屋／Valor，
+            買飛驒牛、蔬果、牛奶及調味料。
+        </p>
+    </div>
+</div>
+
+</div>
+
+
+<div class="special-box bonus">
+
+    🍖 <strong>19:15：</strong>
+    飛驒牛晚餐。
+
+</div>
+
+
+<div class="day-buttons">
+
+    <a
+        class="button"
+        href="index.html#d6">
+        📹 睇 D6 Live Cam
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</details>
 
 
 
@@ -3053,19 +3117,21 @@ footer {
      D7
 ====================================================== -->
 
-<section
+<details
     class="day"
     id="d7">
 
-    <div class="day-header">
+<summary>
+
+    <div class="day-summary-main">
 
         <div class="day-number">
             DAY 7
         </div>
 
-        <h2>
+        <div class="day-title">
             白川鄉／新穗高・按 D6 結果
-        </h2>
+        </div>
 
         <div class="day-date">
             15 Jan 2027・星期五
@@ -3073,198 +3139,209 @@ footer {
 
         <div class="day-route">
             D6 已完成新穗高 → 白川鄉
-
-            <br>
-
-            D6 未完成 → 按今日新穗高天氣再決定
+            ｜ D6 未完成 → 按今日天氣決定
         </div>
 
     </div>
 
+</summary>
 
-    <div class="hero-placeholder">
 
-        📷 下一步加入：
-        白川鄉／新穗高／飛驒古川三寺巡禮
+<div class="day-inner">
 
+
+<div class="photo-section">
+
+    <div class="hero-photo">
+        <div class="photo-placeholder">
+            📷 主圖：白川鄉雪景
+        </div>
     </div>
 
+    <div class="photo-gallery">
 
-    <div class="day-content">
-
-        <div class="special-box weather">
-
-            🌨️ 今日先根據 D6 結果判斷。
-
-            如果 D6 已經搶到新穗高，
-            D7 直接去白川鄉。
-
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 荻町展望台
+            </div>
         </div>
 
-
-        <div class="scenario-title">
-            🅰 D6 已完成新穗高 → 白川鄉
-        </div>
-
-
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="time">08:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">🍳 早餐／行李</span>
-                    <h3>高山櫻庵</h3>
-                    <p>
-                        退房後搬行李去 Residence。
-                    </p>
-                </div>
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 飛驒古川三寺巡禮
             </div>
-
-            <div class="timeline-item">
-                <div class="time">09:15</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗 約 1小時</span>
-                    <h3>高山 → 白川鄉</h3>
-                    <p>
-                        D6 已完成新穗高，
-                        今日唔再重複天氣博弈。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">10:15</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏘️ 世界遺產</span>
-                    <h3>荻町合掌村</h3>
-                    <p>
-                        一月厚雪覆蓋合掌造屋頂同農田，
-                        係全年最具代表性季節之一。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">11:20</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏠 景點</span>
-                    <h3>和田家</h3>
-                    <p>
-                        可近距離睇木樑、
-                        圍爐及合掌造屋頂結構。
-                    </p>
-                    <span class="price">
-                        成人約 ¥400
-                    </span>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">12:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">🍜 午餐</span>
-                    <h3>白川鄉</h3>
-                    <p>鄉土定食／蕎麥麵。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">13:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">📷 景點</span>
-                    <h3>荻町城跡展望台</h3>
-                    <p>
-                        可俯瞰整個合掌村。
-                        私家車唔可以駛入展望台停車場，
-                        要步行或乘接駁車。
-                    </p>
-                    <span class="price">
-                        Shuttle 約 ¥300/人/單程
-                    </span>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">14:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗</span>
-                    <h3>白川鄉 → 高山</h3>
-                    <p>約 1小時15分。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">15:30</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏨 CHECK-IN</span>
-                    <h3>Residence Hotel Takayama Station</h3>
-                    <p>D7 星期五住宿。</p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="scenario-title">
-            🅱 D6 未去新穗高＋今日好天
-        </div>
-
-
-        <div class="special-box weather">
-
-            高山 → 新穗高約 1小時20分。
-
-            <br>
-
-            10:35–13:15 新穗高纜車。
-
-            <br>
-
-            15:20 左右返高山。
-
-        </div>
-
-
-        <div class="scenario-title">
-            🅲 D6 未去＋今日新穗高差
-        </div>
-
-
-        <div class="special-box backup">
-
-            今日先完成白川鄉，
-            D8 再畀新穗高最後一次機會。
-
-        </div>
-
-
-        <div class="special-box bonus">
-
-            🕯️ <strong>1月15日限定 Bonus：</strong>
-
-            飛驒古川「三寺巡禮」。
-
-            如果下午夠早返高山而道路安全，
-            優先度相當高。
-
-        </div>
-
-
-        <div class="day-buttons">
-
-            <a
-                class="button"
-                href="index.html#d7">
-
-                📹 睇 D7 Live Cam
-
-            </a>
-
         </div>
 
     </div>
 
-</section>
+</div>
+
+
+
+<div class="day-content">
+
+
+<div class="special-box weather">
+
+    🌨️ 如果 D6 已成功完成新穗高，
+    D7 固定去白川鄉。
+
+</div>
+
+
+<div class="scenario-title">
+    🅰 D6 已完成新穗高 → 白川鄉
+</div>
+
+
+<div class="timeline">
+
+<div class="timeline-item">
+    <div class="time">08:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🍳 早餐／行李</span>
+        <h3>高山櫻庵</h3>
+        <p>退房後搬行李去 Residence。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">09:15</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>高山 → 白川鄉</h3>
+        <p>約 1 小時。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">10:15</div>
+    <div class="timeline-card">
+        <span class="event-type">🏘️ 世界遺產</span>
+        <h3>荻町合掌村</h3>
+        <p>
+            一月厚雪覆蓋合掌造屋頂及農田，
+            係最具代表性季節之一。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">11:20</div>
+    <div class="timeline-card">
+        <span class="event-type">🏠 景點</span>
+        <h3>和田家</h3>
+        <p>
+            睇木樑、圍爐及合掌造結構。
+        </p>
+        <span class="price">
+            成人約 ¥400
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">12:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🍜 午餐</span>
+        <h3>白川鄉</h3>
+        <p>鄉土定食／蕎麥麵。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">13:00</div>
+    <div class="timeline-card">
+        <span class="event-type">📷 景點</span>
+        <h3>荻町城跡展望台</h3>
+        <p>
+            可俯瞰整個合掌村。
+            私家車唔可以駛入展望台停車場。
+        </p>
+        <span class="price">
+            Shuttle 約 ¥300/人/單程
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">14:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>白川鄉 → 高山</h3>
+        <p>約 1小時15分。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">15:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🏨 CHECK-IN</span>
+        <h3>Residence Hotel Takayama Station</h3>
+        <p>D7 住宿。</p>
+    </div>
+</div>
+
+</div>
+
+
+<div class="scenario-title">
+    🅱 D6 未去新穗高＋今日好天
+</div>
+
+<div class="special-box weather">
+
+    09:15 高山出發。
+
+    <br>
+
+    約 10:35–13:15 新穗高纜車。
+
+    <br>
+
+    約 15:20 返回高山。
+
+</div>
+
+
+<div class="scenario-title">
+    🅲 新穗高天氣差但白川鄉道路安全
+</div>
+
+<div class="special-box backup">
+
+    今日先完成白川鄉，
+    D8 再畀新穗高最後一次機會。
+
+</div>
+
+
+<div class="special-box bonus">
+
+    🕯️ <strong>1月15日限定 Bonus：</strong>
+
+    飛驒古川三寺巡禮。
+
+    下午夠早返高山而道路安全先去。
+
+</div>
+
+
+<div class="day-buttons">
+
+    <a
+        class="button"
+        href="index.html#d7">
+        📹 睇 D7 Live Cam
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</details>
 
 
 
@@ -3272,249 +3349,255 @@ footer {
      D8
 ====================================================== -->
 
-<section
+<details
     class="day"
     id="d8">
 
-    <div class="day-header">
+<summary>
+
+    <div class="day-summary-main">
 
         <div class="day-number">
             DAY 8
         </div>
 
-        <h2>
+        <div class="day-title">
             完成剩餘主景點 → 松本
-        </h2>
+        </div>
 
         <div class="day-date">
             16 Jan 2027・星期六
         </div>
 
         <div class="day-route">
-
-            Scenario A：
-            高山市區＋鐘乳洞 → 松本
-
-            <br>
-
-            Scenario B：
-            白川鄉 → 松本
-
-            <br>
-
-            Scenario C：
-            新穗高 → 松本
-
+            高山市區＋鐘乳洞 / 白川鄉 / 新穗高
+            → 松本
         </div>
 
     </div>
 
+</summary>
 
-    <div class="hero-placeholder">
 
-        📷 下一步加入：
-        高山／白川鄉／新穗高／安曇野
+<div class="day-inner">
 
+
+<div class="photo-section">
+
+    <div class="hero-photo">
+        <div class="photo-placeholder">
+            📷 主圖：當日剩餘主景點
+        </div>
     </div>
 
+    <div class="photo-gallery">
 
-    <div class="day-content">
-
-        <div class="special-box weather">
-
-            🌨️ D8 無論行邊個 Scenario，
-            最終都一定返松本。
-
-            冬季道路安全同到松本嘅 Buffer
-            比額外景點重要。
-
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 新穗高／白川鄉
+            </div>
         </div>
 
-
-        <div class="scenario-title">
-            🅰 新穗高＋白川鄉已完成
-        </div>
-
-
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="time">09:30</div>
-                <div class="timeline-card">
-                    <span class="event-type">🥬 景點</span>
-                    <h3>宮川朝市</h3>
-                    <p>約 35 分鐘。</p>
-                </div>
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 大王山葵農場／松本
             </div>
-
-            <div class="timeline-item">
-                <div class="time">10:10</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏯</span>
-                    <h3>高山陣屋</h3>
-                    <p>約 40 分鐘。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">10:50</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏘️</span>
-                    <h3>三町古街＋酒藏</h3>
-                    <p>慢行、買手信，司機唔飲酒。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">12:40</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗</span>
-                    <h3>高山 → 飛驒大鐘乳洞</h3>
-                    <p>
-                        鐘乳洞位於去平湯／松本方向。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">13:20</div>
-                <div class="timeline-card">
-                    <span class="event-type">🧊</span>
-                    <h3>飛驒大鐘乳洞＋冰之溪谷</h3>
-                    <p>約 1小時20分。</p>
-                    <span class="price">
-                        成人約 ¥1,100
-                    </span>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">14:40</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗 約 2小時35分</span>
-                    <h3>飛驒大鐘乳洞 → 松本</h3>
-                    <p>
-                        經平湯／安房方向，
-                        冬季預鬆。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">17:15</div>
-                <div class="timeline-card">
-                    <span class="event-type">🏨 CHECK-IN</span>
-                    <h3>Iroha Grand Hotel Matsumoto Ekimae</h3>
-                    <p>
-                        Moderate Twin，
-                        包兩位早餐。
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="scenario-title">
-            🅱 D7 已完成新穗高 → 白川鄉
-        </div>
-
-
-        <div class="special-box backup">
-
-            09:15 高山出發
-
-            <br>
-
-            10:15–14:00 白川鄉
-
-            <br>
-
-            14:00 離開
-
-            <br>
-
-            約 17:15 到松本。
-
-        </div>
-
-
-        <div class="scenario-title">
-            🅲 D7 已完成白川鄉 → 新穗高
-        </div>
-
-
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="time">09:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗</span>
-                    <h3>高山 → 新穗高</h3>
-                    <p>
-                        正常運行＋能見度值得先出發。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">10:30</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚡</span>
-                    <h3>新穗高纜車</h3>
-                    <p>
-                        今日係最後一次機會。
-                        如果仍然大霧／停駛，
-                        唔再追。
-                    </p>
-                    <span class="price">
-                        成人約 ¥3,800
-                    </span>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">13:30</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗</span>
-                    <h3>新穗高 → 安曇野／松本</h3>
-                    <p>約 1小時45分。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">15:15</div>
-                <div class="timeline-card">
-                    <span class="event-type">⭐ BONUS</span>
-                    <h3>大王山葵農場</h3>
-                    <p>
-                        只有非常早到安曇野先加。
-                        唔可以因此延遲返松本。
-                    </p>
-                    <span class="price">
-                        免費
-                    </span>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="day-buttons">
-
-            <a
-                class="button"
-                href="index.html#d8">
-
-                📹 睇 D8 Live Cam
-
-            </a>
-
         </div>
 
     </div>
 
-</section>
+</div>
+
+
+
+<div class="day-content">
+
+
+<div class="special-box weather">
+
+    🌨️ D8 無論行邊個 Scenario，
+    最終都一定返松本。
+
+    冬季道路安全同到松本嘅 Buffer
+    比 Bonus 景點重要。
+
+</div>
+
+
+<div class="scenario-title">
+    🅰 D6 新穗高＋D7 白川鄉已完成
+</div>
+
+
+<div class="timeline">
+
+<div class="timeline-item">
+    <div class="time">09:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🥬 景點</span>
+        <h3>宮川朝市</h3>
+        <p>約 35 分鐘。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">10:10</div>
+    <div class="timeline-card">
+        <span class="event-type">🏯</span>
+        <h3>高山陣屋</h3>
+        <p>約 40 分鐘。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">10:50</div>
+    <div class="timeline-card">
+        <span class="event-type">🏘️</span>
+        <h3>三町古街＋酒藏</h3>
+        <p>慢行、買手信。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">12:40</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>高山 → 飛驒大鐘乳洞</h3>
+        <p>順住去松本方向。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">13:20</div>
+    <div class="timeline-card">
+        <span class="event-type">🧊</span>
+        <h3>飛驒大鐘乳洞＋冰之溪谷</h3>
+        <p>約 1小時20分。</p>
+        <span class="price">
+            成人約 ¥1,100
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">14:40</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗 約 2小時35分</span>
+        <h3>飛驒大鐘乳洞 → 松本</h3>
+        <p>經平湯／安房方向。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">17:15</div>
+    <div class="timeline-card">
+        <span class="event-type">🏨 CHECK-IN</span>
+        <h3>Iroha Grand Hotel Matsumoto Ekimae</h3>
+        <p>最後一晚。</p>
+    </div>
+</div>
+
+</div>
+
+
+<div class="scenario-title">
+    🅱 D7 已完成新穗高 → 白川鄉
+</div>
+
+<div class="special-box backup">
+
+    09:15 高山出發。
+
+    <br>
+
+    10:15–14:00 白川鄉。
+
+    <br>
+
+    14:00 左右離開。
+
+    <br>
+
+    約 17:15 到松本。
+
+</div>
+
+
+<div class="scenario-title">
+    🅲 D7 已完成白川鄉 → 新穗高
+</div>
+
+
+<div class="timeline">
+
+<div class="timeline-item">
+    <div class="time">09:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>高山 → 新穗高</h3>
+        <p>
+            正常運行＋能見度值得先出發。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">10:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🚡</span>
+        <h3>新穗高纜車</h3>
+        <p>
+            今日係最後機會。
+            如果仍然大霧／停駛，
+            唔再追。
+        </p>
+        <span class="price">
+            成人約 ¥3,800
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">13:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>新穗高 → 安曇野／松本</h3>
+        <p>向松本方向落山。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">15:15</div>
+    <div class="timeline-card">
+        <span class="event-type">⭐ BONUS</span>
+        <h3>大王山葵農場</h3>
+        <p>
+            非常早到安曇野先加。
+        </p>
+        <span class="price">
+            免費
+        </span>
+    </div>
+</div>
+
+</div>
+
+
+<div class="day-buttons">
+
+    <a
+        class="button"
+        href="index.html#d8">
+        📹 睇 D8 Live Cam
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</details>
 
 
 
@@ -3522,203 +3605,211 @@ footer {
      D9
 ====================================================== -->
 
-<section
+<details
     class="day"
     id="d9">
 
-    <div class="day-header">
+<summary>
+
+    <div class="day-summary-main">
 
         <div class="day-number">
             DAY 9
         </div>
 
-        <h2>
+        <div class="day-title">
             松本 → AEON → 還車 → 名古屋 → 香港
-        </h2>
+        </div>
 
         <div class="day-date">
             17 Jan 2027・星期日
         </div>
 
         <div class="day-route">
-            松本酒店
-            → AEON Mall 松本
-            → 入油
-            → Times
-            → JR 特急信濃
-            → 名古屋
-            → 中部國際機場
-            → 香港
+            AEON Mall 松本 → 入油 → Times 還車
+            → JR 特急信濃 → 名古屋 → NGO → 香港
         </div>
 
     </div>
 
+</summary>
 
-    <div class="hero-placeholder">
 
-        📷 下一步加入：
-        AEON 松本／松本站／中部國際機場
+<div class="day-inner">
 
+
+<div class="photo-section">
+
+    <div class="hero-photo">
+        <div class="photo-placeholder">
+            📷 主圖：松本／AEON
+        </div>
     </div>
 
+    <div class="photo-gallery">
 
-    <div class="day-content">
-
-        <div class="special-box weather">
-
-            ⏰ 今日重點唔係加景點。
-
-            AEON、入油、還車同 JR
-            都係 Hard Cut。
-
-            D9 唔再排松本城。
-
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 松本站／特急信濃
+            </div>
         </div>
 
-
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="time">08:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">🍳 早餐</span>
-                    <h3>Iroha Grand Hotel</h3>
-                    <p>
-                        房價包兩位早餐。
-                        食完最後整理行李。
-                    </p>
-                </div>
+        <div class="photo-card">
+            <div class="photo-placeholder">
+                📷 中部國際機場
             </div>
-
-            <div class="timeline-item">
-                <div class="time">09:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">🧳 CHECK-OUT</span>
-                    <h3>Iroha</h3>
-                    <p>行李全部放車內。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">09:15</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗</span>
-                    <h3>酒店 → AEON Mall 松本</h3>
-                    <p>約 15 分鐘。</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">09:30</div>
-                <div class="timeline-card">
-                    <span class="event-type">🛍️ SHOPPING</span>
-                    <h3>AEON Mall 松本</h3>
-                    <p>
-                        最後補貨。
-                        11:00 左右離開係 Hard Cut。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">11:00</div>
-                <div class="timeline-card">
-                    <span class="event-type">⛽</span>
-                    <h3>AEON → 油站</h3>
-                    <p>
-                        入滿油，
-                        保留單據。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">11:40</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚗 還車</span>
-                    <h3>Times 松本站前</h3>
-                    <p>
-                        目標 12:10 前完成。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">12:10</div>
-                <div class="timeline-card">
-                    <span class="event-type">🍱 午餐／便當</span>
-                    <h3>松本站</h3>
-                    <p>
-                        還車後先食午餐或買便當。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">13:56</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚆 JR</span>
-                    <h3>特急信濃・松本 → 名古屋</h3>
-                    <p>
-                        現行參考 13:56 → 16:07。
-                        2026 年 12 月再確認。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">16:49</div>
-                <div class="timeline-card">
-                    <span class="event-type">🚆 名鐵</span>
-                    <h3>名古屋 → 中部國際機場</h3>
-                    <p>
-                        現行參考 16:49 → 17:17。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">17:17</div>
-                <div class="timeline-card">
-                    <span class="event-type">✈️ CHECK-IN</span>
-                    <h3>中部國際機場 T2</h3>
-                    <p>
-                        UO685 Check-in、
-                        保安、晚餐及候機。
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">20:40</div>
-                <div class="timeline-card">
-                    <span class="event-type">✈️ UO685</span>
-                    <h3>名古屋 → 香港</h3>
-                    <p>
-                        規劃 20:40 起飛，
-                        翌日約 00:30 抵港。
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="day-buttons">
-
-            <a
-                class="button"
-                href="index.html#d9">
-
-                📹 睇 D9 Live Cam
-
-            </a>
-
         </div>
 
     </div>
 
-</section>
+</div>
+
+
+
+<div class="day-content">
+
+
+<div class="special-box weather">
+
+    ⏰ 今日唔再加景點。
+
+    AEON、入油、還車同 JR
+    全部係 Hard Cut。
+
+</div>
+
+
+<div class="timeline">
+
+<div class="timeline-item">
+    <div class="time">08:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🍳 早餐</span>
+        <h3>Iroha Grand Hotel</h3>
+        <p>包兩位早餐，最後執行李。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">09:00</div>
+    <div class="timeline-card">
+        <span class="event-type">🧳 CHECK-OUT</span>
+        <h3>Iroha</h3>
+        <p>行李全部放車內。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">09:15</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗</span>
+        <h3>酒店 → AEON Mall 松本</h3>
+        <p>約 15 分鐘。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">09:30</div>
+    <div class="timeline-card">
+        <span class="event-type">🛍️ SHOPPING</span>
+        <h3>AEON Mall 松本</h3>
+        <p>
+            最後補貨。
+            11:00 左右離開係 Hard Cut。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">11:00</div>
+    <div class="timeline-card">
+        <span class="event-type">⛽</span>
+        <h3>AEON → 油站</h3>
+        <p>入滿油、保留單據。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">11:40</div>
+    <div class="timeline-card">
+        <span class="event-type">🚗 還車</span>
+        <h3>Times 松本站前</h3>
+        <p>目標 12:10 前完成。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">12:10</div>
+    <div class="timeline-card">
+        <span class="event-type">🍱 午餐／便當</span>
+        <h3>松本站</h3>
+        <p>還車後先食午餐或買便當。</p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">13:56</div>
+    <div class="timeline-card">
+        <span class="event-type">🚆 JR</span>
+        <h3>特急信濃・松本 → 名古屋</h3>
+        <p>
+            現行參考 13:56 → 16:07。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">16:49</div>
+    <div class="timeline-card">
+        <span class="event-type">🚆 名鐵</span>
+        <h3>名古屋 → 中部國際機場</h3>
+        <p>
+            現行參考 16:49 → 17:17。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">17:17</div>
+    <div class="timeline-card">
+        <span class="event-type">✈️ CHECK-IN</span>
+        <h3>中部國際機場 T2</h3>
+        <p>
+            UO685 Check-in、保安、晚餐及候機。
+        </p>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="time">20:40</div>
+    <div class="timeline-card">
+        <span class="event-type">✈️ UO685</span>
+        <h3>名古屋 → 香港</h3>
+        <p>
+            規劃 20:40 起飛，
+            翌日約 00:30 抵港。
+        </p>
+    </div>
+</div>
+
+</div>
+
+
+<div class="day-buttons">
+
+    <a
+        class="button"
+        href="index.html#d9">
+        📹 睇 D9 Live Cam
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</details>
 
 
 
@@ -3726,90 +3817,94 @@ footer {
      PHOTO CREDITS
 ====================================================== -->
 
-<section class="credits">
+<details class="credits">
 
-    <h3>
+    <summary>
         📷 Photo Credits
-    </h3>
+    </summary>
 
-    <p>
-        松本城 Projection Mapping —
-        Hiroaki Kikuchi,
-        CC0 1.0 —
-        <a
-            href="https://commons.wikimedia.org/wiki/File:Matsumoto-castle-2026-PM.jpg"
-            target="_blank">
-            Wikimedia Commons
-        </a>
-    </p>
 
-    <p>
-        JR 特急信濃 383系 —
-        Yamaguchi Yoshiaki,
-        CC BY-SA 2.0 —
-        <a
-            href="https://commons.wikimedia.org/wiki/File:JR_Central_383_on_Shinano_limited_express_train_service_at_Nagano_Station_20090117.jpg"
-            target="_blank">
-            Wikimedia Commons
-        </a>
-    </p>
+    <div class="credits-body">
 
-    <p>
-        白絲瀑布 —
-        yuttsu,
-        Public Domain —
-        <a
-            href="https://commons.wikimedia.org/wiki/File:Shiraito_Falls,_Karuizawa_2243.jpg"
-            target="_blank">
-            Wikimedia Commons
-        </a>
-    </p>
+        <p>
+            松本城 —
+            Hiroaki Kikuchi,
+            CC0 1.0 —
+            <a
+                href="https://commons.wikimedia.org/wiki/File:Matsumoto-castle-2026-PM.jpg"
+                target="_blank">
+                Wikimedia Commons
+            </a>
+        </p>
 
-    <p>
-        鬼押出園方向淺間山冬景 —
-        Yu.nakai,
-        CC BY-SA 3.0 —
-        <a
-            href="https://commons.wikimedia.org/wiki/File:Mt.Asama_(From_onioshidashi).jpg"
-            target="_blank">
-            Wikimedia Commons
-        </a>
-    </p>
+        <p>
+            JR 特急信濃 —
+            Yamaguchi Yoshiaki,
+            CC BY-SA 2.0 —
+            <a
+                href="https://commons.wikimedia.org/wiki/File:JR_Central_383_on_Shinano_limited_express_train_service_at_Nagano_Station_20090117.jpg"
+                target="_blank">
+                Wikimedia Commons
+            </a>
+        </p>
 
-    <p>
-        輕井澤王子購物廣場 —
-        Daderot,
-        CC0 1.0 —
-        <a
-            href="https://commons.wikimedia.org/wiki/File:Karuizawa_Prince_Shopping_Plaza_-_Karuizawa,_Japan_-_DSC02056.JPG"
-            target="_blank">
-            Wikimedia Commons
-        </a>
-    </p>
+        <p>
+            白絲瀑布 —
+            Public Domain —
+            <a
+                href="https://commons.wikimedia.org/wiki/File:Shiraito_Falls,_Karuizawa_2243.jpg"
+                target="_blank">
+                Wikimedia Commons
+            </a>
+        </p>
 
-    <p>
-        小布施栗之小徑 —
-        Tawashi2006,
-        CC BY-SA 3.0 —
-        <a
-            href="https://commons.wikimedia.org/wiki/File:Chestnut_wood_block_pavement_at_Obuse_(Scenery).jpg"
-            target="_blank">
-            Wikimedia Commons
-        </a>
-    </p>
+        <p>
+            鬼押出園方向淺間山 —
+            Yu.nakai,
+            CC BY-SA 3.0 —
+            <a
+                href="https://commons.wikimedia.org/wiki/File:Mt.Asama_(From_onioshidashi).jpg"
+                target="_blank">
+                Wikimedia Commons
+            </a>
+        </p>
 
-    <p>
-        澀溫泉夜景 —
-        Totti,
-        CC BY-SA 4.0 —
-        <a
-            href="https://commons.wikimedia.org/wiki/File:Shibu_onsen_night_view.jpg"
-            target="_blank">
-            Wikimedia Commons
-        </a>
-    </p>
+        <p>
+            輕井澤王子購物廣場 —
+            Daderot,
+            CC0 —
+            <a
+                href="https://commons.wikimedia.org/wiki/File:Karuizawa_Prince_Shopping_Plaza_-_Karuizawa,_Japan_-_DSC02056.JPG"
+                target="_blank">
+                Wikimedia Commons
+            </a>
+        </p>
 
-</section>
+        <p>
+            小布施栗之小徑 —
+            Tawashi2006,
+            CC BY-SA 3.0 —
+            <a
+                href="https://commons.wikimedia.org/wiki/File:Chestnut_wood_block_pavement_at_Obuse_(Scenery).jpg"
+                target="_blank">
+                Wikimedia Commons
+            </a>
+        </p>
+
+        <p>
+            澀溫泉夜景 —
+            Totti,
+            CC BY-SA 4.0 —
+            <a
+                href="https://commons.wikimedia.org/wiki/File:Shibu_onsen_night_view.jpg"
+                target="_blank">
+                Wikimedia Commons
+            </a>
+        </p>
+
+    </div>
+
+</details>
 
 
 </main>
@@ -3826,6 +3921,494 @@ footer {
     出發前再作最終確認
 
 </footer>
+
+
+
+<!-- =====================================================
+     PHOTO MODAL
+====================================================== -->
+
+<div
+    class="photo-modal"
+    id="photoModal">
+
+    <button
+        class="modal-close"
+        id="modalClose"
+        aria-label="關閉">
+        ×
+    </button>
+
+
+    <div class="photo-modal-inner">
+
+        <img
+            id="modalImage"
+            src=""
+            alt="">
+
+        <div
+            class="modal-caption"
+            id="modalCaption">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   OPEN DAY
+===================================================== */
+
+function openDay(
+    id,
+    scroll = true
+) {
+
+    const target =
+        document.getElementById(id);
+
+    if (!target) {
+        return;
+    }
+
+    target.open = true;
+
+
+    if (scroll) {
+
+        setTimeout(
+
+            function() {
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            },
+
+            80
+
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TOP DAY BUTTONS
+===================================================== */
+
+document
+.querySelectorAll(
+    ".day-nav a[data-day]"
+)
+.forEach(
+
+    function(link) {
+
+        link.addEventListener(
+
+            "click",
+
+            function(e) {
+
+                e.preventDefault();
+
+                openDay(
+                    this.dataset.day,
+                    true
+                );
+
+            }
+
+        );
+
+    }
+
+);
+
+
+/* =====================================================
+   COLLAPSE ALL
+===================================================== */
+
+document
+.getElementById(
+    "collapseAll"
+)
+.addEventListener(
+
+    "click",
+
+    function() {
+
+        document
+        .querySelectorAll(
+            "details.day"
+        )
+        .forEach(
+
+            function(day) {
+                day.open = false;
+            }
+
+        );
+
+    }
+
+);
+
+
+/* =====================================================
+   EXPAND ALL
+===================================================== */
+
+document
+.getElementById(
+    "expandAll"
+)
+.addEventListener(
+
+    "click",
+
+    function() {
+
+        document
+        .querySelectorAll(
+            "details.day"
+        )
+        .forEach(
+
+            function(day) {
+                day.open = true;
+            }
+
+        );
+
+    }
+
+);
+
+
+/* =====================================================
+   JAPAN DATE
+===================================================== */
+
+function japanDateKey() {
+
+    const parts =
+
+        new Intl.DateTimeFormat(
+
+            "en-CA",
+
+            {
+                timeZone: "Asia/Tokyo",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit"
+            }
+
+        )
+        .formatToParts(
+            new Date()
+        );
+
+
+    const values = {};
+
+
+    parts.forEach(
+
+        function(part) {
+
+            values[
+                part.type
+            ] =
+                part.value;
+
+        }
+
+    );
+
+
+    return (
+        values.year +
+        "-" +
+        values.month +
+        "-" +
+        values.day
+    );
+
+}
+
+
+/* =====================================================
+   TODAY MODE
+===================================================== */
+
+const tripDates = {
+
+    "2027-01-09": "d1",
+    "2027-01-10": "d2",
+    "2027-01-11": "d3",
+    "2027-01-12": "d4",
+    "2027-01-13": "d5",
+    "2027-01-14": "d6",
+    "2027-01-15": "d7",
+    "2027-01-16": "d8",
+    "2027-01-17": "d9"
+
+};
+
+
+const todayId =
+    tripDates[
+        japanDateKey()
+    ] || null;
+
+
+const todayBtn =
+    document.getElementById(
+        "todayBtn"
+    );
+
+
+if (todayId) {
+
+    const todayNav =
+        document.querySelector(
+            '.day-nav a[data-day="' +
+            todayId +
+            '"]'
+        );
+
+
+    if (todayNav) {
+        todayNav.classList.add(
+            "today"
+        );
+    }
+
+
+    openDay(
+        todayId,
+        false
+    );
+
+
+    todayBtn.addEventListener(
+
+        "click",
+
+        function() {
+
+            openDay(
+                todayId,
+                true
+            );
+
+        }
+
+    );
+
+}
+
+else {
+
+    todayBtn.classList.add(
+        "disabled"
+    );
+
+
+    todayBtn.title =
+        "旅行日期為 2027年1月9日至17日";
+
+}
+
+
+/* =====================================================
+   HASH
+===================================================== */
+
+window.addEventListener(
+
+    "load",
+
+    function() {
+
+        if (location.hash) {
+
+            const id =
+                location.hash
+                .replace("#", "");
+
+
+            if (
+                document
+                .getElementById(id)
+                ?.classList
+                .contains("day")
+            ) {
+
+                openDay(
+                    id,
+                    false
+                );
+
+            }
+
+        }
+
+    }
+
+);
+
+
+/* =====================================================
+   PHOTO ZOOM
+===================================================== */
+
+const photoModal =
+    document.getElementById(
+        "photoModal"
+    );
+
+
+const modalImage =
+    document.getElementById(
+        "modalImage"
+    );
+
+
+const modalCaption =
+    document.getElementById(
+        "modalCaption"
+    );
+
+
+const modalClose =
+    document.getElementById(
+        "modalClose"
+    );
+
+
+document
+.querySelectorAll(
+    ".zoomable"
+)
+.forEach(
+
+    function(img) {
+
+        img.addEventListener(
+
+            "click",
+
+            function() {
+
+                modalImage.src =
+                    this.src;
+
+
+                modalImage.alt =
+                    this.alt;
+
+
+                modalCaption.textContent =
+                    this.dataset.caption ||
+                    this.alt;
+
+
+                photoModal.classList.add(
+                    "show"
+                );
+
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+
+        );
+
+    }
+
+);
+
+
+function closePhotoModal() {
+
+    photoModal.classList.remove(
+        "show"
+    );
+
+
+    modalImage.src = "";
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+modalClose.addEventListener(
+    "click",
+    closePhotoModal
+);
+
+
+photoModal.addEventListener(
+
+    "click",
+
+    function(e) {
+
+        if (
+            e.target ===
+            photoModal
+        ) {
+
+            closePhotoModal();
+
+        }
+
+    }
+
+);
+
+
+document.addEventListener(
+
+    "keydown",
+
+    function(e) {
+
+        if (
+            e.key === "Escape" &&
+            photoModal.classList.contains(
+                "show"
+            )
+        ) {
+
+            closePhotoModal();
+
+        }
+
+    }
+
+);
+
+</script>
 
 
 </body>
