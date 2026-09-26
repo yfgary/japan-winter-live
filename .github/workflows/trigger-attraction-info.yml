@@ -1,0 +1,27 @@
+name: Trigger Attraction Info Update
+
+on:
+  push:
+    paths:
+      - ".attraction-info-trigger"
+
+permissions:
+  contents: write
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Activate updater
+        shell: bash
+        run: |
+          echo "# activated" >> .github/workflows/add-attraction-info-hotel-status.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/trigger-attraction-info.yml .attraction-info-trigger
+          git add .github/workflows/add-attraction-info-hotel-status.yml
+          git commit -m "Trigger attraction info update"
+          git push
