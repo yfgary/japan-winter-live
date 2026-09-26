@@ -2,11 +2,23 @@
 <html lang="zh-HK">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1f4e79">
 
-<title>Japan Winter 2027 Live Dashboard</title>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#1f4e79"
+>
+
+<title>
+    Japan Winter 2027 Live Dashboard
+</title>
+
 
 <style>
 
@@ -22,6 +34,7 @@ body {
     margin: 0;
     background: #eef2f6;
     color: #222;
+
     font-family:
         Arial,
         "Microsoft JhengHei",
@@ -44,7 +57,9 @@ header {
 
     color: white;
     text-align: center;
-    padding: 20px 12px;
+
+    padding:
+        20px 12px;
 }
 
 header h1 {
@@ -59,12 +74,54 @@ header p {
 
 
 /* =========================================================
+   PAGE SWITCH
+========================================================= */
+
+.page-switch {
+    background: white;
+
+    padding: 8px;
+
+    text-align: center;
+
+    box-shadow:
+        0 2px 6px
+        rgba(0,0,0,.08);
+}
+
+.page-switch a {
+    display: inline-block;
+
+    margin: 3px;
+
+    padding:
+        8px 14px;
+
+    border-radius: 18px;
+
+    text-decoration: none;
+
+    background: #eaf2f8;
+    color: #1f4e79;
+
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.page-switch a.active {
+    background: #1f4e79;
+    color: white;
+}
+
+
+/* =========================================================
    NAV
 ========================================================= */
 
 .quick-nav {
     position: sticky;
     top: 0;
+
     z-index: 1000;
 
     background:
@@ -80,14 +137,18 @@ header p {
 
 .quick-nav-inner {
     max-width: 1250px;
+
     margin: auto;
 
-    padding: 8px 10px;
+    padding:
+        8px 10px;
 
     display: flex;
+
     gap: 7px;
 
     overflow-x: auto;
+
     white-space: nowrap;
 }
 
@@ -101,12 +162,15 @@ header p {
 
     border-radius: 18px;
 
-    padding: 7px 11px;
+    padding:
+        7px 11px;
 
     font-weight: 600;
     font-size: 13px;
 
     cursor: pointer;
+
+    flex: 0 0 auto;
 }
 
 .nav-btn:hover {
@@ -118,6 +182,14 @@ header p {
     color: white;
 }
 
+.nav-btn.today {
+    background: #dff1e3;
+    color: #28633b;
+
+    box-shadow:
+        inset 0 0 0 1px #a8d1b3;
+}
+
 
 /* =========================================================
    MAIN
@@ -125,7 +197,9 @@ header p {
 
 .container {
     max-width: 1250px;
+
     margin: auto;
+
     padding: 16px;
 }
 
@@ -139,7 +213,8 @@ header p {
 
     border-radius: 12px;
 
-    padding: 14px 16px;
+    padding:
+        14px 16px;
 
     margin-bottom: 14px;
 
@@ -164,7 +239,9 @@ header p {
 
 .today-title {
     font-size: 17px;
+
     font-weight: 700;
+
     color: #1f4e79;
 }
 
@@ -174,6 +251,8 @@ header p {
     color: #65727c;
 
     font-size: 13px;
+
+    line-height: 1.5;
 }
 
 .time-info {
@@ -193,7 +272,8 @@ header p {
 
     border-radius: 14px;
 
-    padding: 5px 9px;
+    padding:
+        5px 9px;
 
     font-size: 11px;
 }
@@ -211,7 +291,8 @@ header p {
 
     border-radius: 10px;
 
-    padding: 12px 14px;
+    padding:
+        12px 14px;
 
     margin-bottom: 15px;
 
@@ -246,7 +327,8 @@ details.region > summary {
 
     cursor: pointer;
 
-    padding: 17px 19px;
+    padding:
+        17px 19px;
 
     display: flex;
 
@@ -295,7 +377,8 @@ summary::-webkit-details-marker {
 .count {
     flex-shrink: 0;
 
-    padding: 5px 9px;
+    padding:
+        5px 9px;
 
     border-radius: 15px;
 
@@ -352,9 +435,10 @@ summary {
 
     border-radius: 8px;
 
-    padding: 12px 14px;
+    padding:
+        12px 14px;
 
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 }
 
 .route-title {
@@ -373,6 +457,43 @@ summary {
     font-weight: 600;
 
     line-height: 1.55;
+}
+
+
+/* =========================================================
+   ITINERARY LINK
+========================================================= */
+
+.itinerary-jump {
+    margin-bottom: 14px;
+}
+
+.itinerary-button {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1f4e79,
+            #3579a9
+        );
+
+    color: white;
+
+    padding:
+        9px 13px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 2px 5px
+        rgba(0,0,0,.10);
 }
 
 
@@ -416,15 +537,12 @@ summary {
 
     border-radius: 17px;
 
-    padding: 7px 11px;
+    padding:
+        7px 11px;
 
     font-size: 12px;
 
     font-weight: 600;
-}
-
-.map-link:hover {
-    background: #dceee2;
 }
 
 
@@ -440,7 +558,8 @@ summary {
 
     border-radius: 10px;
 
-    padding: 13px 14px;
+    padding:
+        13px 14px;
 
     margin-bottom: 16px;
 }
@@ -459,7 +578,8 @@ summary {
 
     border-radius: 7px;
 
-    padding: 8px 10px;
+    padding:
+        8px 10px;
 
     margin-top: 6px;
 
@@ -507,8 +627,7 @@ summary {
 
     gap: 8px;
 
-    align-items:
-        flex-start;
+    align-items: flex-start;
 
     margin-bottom: 9px;
 }
@@ -554,7 +673,8 @@ summary {
 }
 
 .badge {
-    padding: 4px 7px;
+    padding:
+        4px 7px;
 
     border-radius: 12px;
 
@@ -646,7 +766,6 @@ iframe.live-video {
     z-index: 2;
 
     width: 100%;
-
     height: 100%;
 
     border: 0;
@@ -662,7 +781,6 @@ img.live-img {
     display: none;
 
     width: 100%;
-
     height: 100%;
 
     object-fit: contain;
@@ -697,7 +815,8 @@ img.live-img {
 
     border-radius: 7px;
 
-    padding: 7px 10px;
+    padding:
+        7px 10px;
 
     background: #1f4e79;
 
@@ -762,7 +881,8 @@ img.live-img {
 
     border-radius: 17px;
 
-    padding: 7px 11px;
+    padding:
+        7px 11px;
 
     font-size: 12px;
 
@@ -828,7 +948,9 @@ footer {
 }
 
 </style>
+
 </head>
+
 
 
 <body>
@@ -837,14 +959,30 @@ footer {
 <header>
 
 <h1>
-❄️ Japan Winter 2027
+    ❄️ Japan Winter 2027
 </h1>
 
 <p>
-Live Camera & Winter Road Dashboard
+    Live Camera & Winter Road Dashboard
 </p>
 
 </header>
+
+
+
+<div class="page-switch">
+
+    <a
+        href="index.html"
+        class="active">
+        📹 Live Cam
+    </a>
+
+    <a href="itinerary.html">
+        🗓️ 詳細行程
+    </a>
+
+</div>
 
 
 
@@ -928,7 +1066,9 @@ Live Camera & Winter Road Dashboard
 
 <div class="notice">
 
-📅 2027 年 1 月 9 日至 1 月 17 日・9 日 8 夜<br>
+📅 2027 年 1 月 9 日至 1 月 17 日・9 日 8 夜
+
+<br>
 
 ⭐ 必睇：直接影響今日景點／道路決定　
 👀 參考：附近天氣／雪況　
@@ -949,7 +1089,9 @@ Live Camera & Winter Road Dashboard
 <footer>
 
 Japan Winter Trip 2027
+
 <br>
+
 時間顯示以日本時間（JST）為準
 
 </footer>
@@ -962,7 +1104,6 @@ Japan Winter Trip 2027
 /* =========================================================
    HELPERS
 ========================================================= */
-
 
 const YT = (
     name,
@@ -1015,7 +1156,6 @@ const PLACE = (
 /* =========================================================
    DATA
 ========================================================= */
-
 
 const sections = [
 
@@ -1148,7 +1288,7 @@ const sections = [
         YT(
             "松本城及北阿爾卑斯",
             "3pfpRzVgtoE",
-            "景點：朝早松本城外圍。離開松本前查看市區天氣及積雪。",
+            "朝早松本城外圍。離開松本前查看市區天氣及積雪。",
             "ref"
         ),
 
@@ -1183,14 +1323,14 @@ const sections = [
         YT(
             "王子通",
             "8VbOUB-dplM",
-            "景點：輕井澤王子購物廣場附近。查看 Outlet 周邊道路及天氣。",
+            "輕井澤王子購物廣場附近。查看 Outlet 周邊道路及天氣。",
             "must"
         ),
 
         YT(
             "輕井澤站北口",
             "1adPpHlPg5M",
-            "景點：輕井澤王子購物廣場附近。查看市中心天氣及積雪。",
+            "輕井澤王子購物廣場附近。查看市中心天氣及積雪。",
             "ref"
         ),
 
@@ -1414,7 +1554,7 @@ const sections = [
         YT(
             "地獄谷野猿公苑巴士候車室",
             "zbQvhlnQC9U",
-            "景點：地獄谷野猿公苑。由澀溫泉出發前查看上林／野猿公苑入口一帶積雪及天氣。",
+            "由澀溫泉出發前查看上林／野猿公苑入口一帶積雪及天氣。",
             "must"
         ),
 
@@ -1500,21 +1640,21 @@ const sections = [
         YT(
             "白馬岩岳",
             "e3EliJKC6z8",
-            "景點：白馬岩岳。今日最重要 Camera，用嚟判斷山頂能見度及 HAKUBA MOUNTAIN HARBOR 景觀。",
+            "今日最重要 Camera，用嚟判斷山頂能見度及 HAKUBA MOUNTAIN HARBOR 景觀。",
             "must"
         ),
 
         YT(
             "白馬八方尾根阿爾卑斯四人吊椅",
             "21HCv58C99o",
-            "長野 → 白馬岩岳：高海拔天氣參考，判斷白馬山區雲量及能見度。",
+            "高海拔天氣參考，判斷白馬山區雲量及能見度。",
             "ref"
         ),
 
         YT(
             "白馬八方尾根兔平",
             "9ej1bDX8Kd8",
-            "長野 → 白馬岩岳：中高海拔雪況及能見度參考。",
+            "中高海拔雪況及能見度參考。",
             "ref"
         ),
 
@@ -1665,7 +1805,7 @@ const sections = [
 
             "② 山頂清晰、北阿爾卑斯能見度高，而且纜車正常運行 → 今日即去新穗高。",
 
-            "③ 大霧、低雲、強風或停駛 → 唔浪費今日，改行高山市區＋飛驒大鐘乳洞。",
+            "③ 大霧、低雲、強風或停駛 → 改行高山市區＋飛驒大鐘乳洞。",
 
             "④ D6 成功完成新穗高 → D7 直接去白川鄉。"
 
@@ -1692,7 +1832,7 @@ const sections = [
         YT(
             "新穗高纜車・西穗高口",
             "jXrh_mQxwl8",
-            "朝早第一個必睇：判斷今日係咪值得由高山即刻去新穗高。重點睇山頂雲量及能見度。",
+            "朝早第一個必睇：判斷今日係咪值得由高山即刻去新穗高。",
             "must"
         ),
 
@@ -1731,21 +1871,21 @@ const sections = [
         YT(
             "高山中橋",
             "rRJo8uVlAGo",
-            "Plan B 景點：宮川朝市、三町古街、中橋一帶市區天氣。",
+            "Plan B：宮川朝市、三町古街、中橋一帶市區天氣。",
             "must"
         ),
 
         YT(
             "高山陣屋前",
             "fbY0VRfHsS8",
-            "Plan B 景點：高山陣屋。查看市中心積雪、天氣及人流。",
+            "Plan B：查看高山陣屋附近積雪、天氣及人流。",
             "must"
         ),
 
         IMG(
             "國道158號・丹生川町茶屋野（往高山）",
             "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0061.jpg",
-            "飛驒大鐘乳洞 → 高山：完成大鐘乳洞後返回市區嘅道路雪況。",
+            "飛驒大鐘乳洞 → 高山：返回市區道路雪況。",
             "https://douro.pref.gifu.lg.jp/",
             "must"
         )
@@ -1902,7 +2042,7 @@ const sections = [
         IMG(
             "國道156號・椿原（往莊川）",
             "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0011.jpg",
-            "景點：白川鄉。查看白川村周邊即時雪況。",
+            "白川村周邊即時雪況。",
             "https://douro.pref.gifu.lg.jp/",
             "ref"
         )
@@ -2180,7 +2320,6 @@ const sections = [
    PRIORITY
 ========================================================= */
 
-
 function priorityInfo(
     priority
 ) {
@@ -2221,7 +2360,6 @@ function priorityInfo(
    VIDEO
 ========================================================= */
 
-
 function youtubeEmbed(
     id
 ) {
@@ -2242,7 +2380,6 @@ function youtubeEmbed(
 /* =========================================================
    CACHE
 ========================================================= */
-
 
 function cacheBust(
     url
@@ -2266,7 +2403,6 @@ function cacheBust(
    MAP
 ========================================================= */
 
-
 function mapsUrl(
     query
 ) {
@@ -2282,7 +2418,6 @@ function mapsUrl(
 /* =========================================================
    CAMERA RENDER
 ========================================================= */
-
 
 function renderCam(
     cam
@@ -2381,96 +2516,90 @@ function renderCam(
     }
 
 
-    if (
-        cam.type === "image"
-    ) {
+    return `
 
-        return `
+    <div class="cam-card">
 
-        <div class="cam-card">
+        <div class="cam-top">
 
-            <div class="cam-top">
+            <div class="cam-text">
 
-                <div class="cam-text">
+                <h3>
+                    ${cam.name}
+                </h3>
 
-                    <h3>
-                        ${cam.name}
-                    </h3>
-
-                    <p>
-                        ${cam.desc}
-                    </p>
-
-                </div>
-
-
-                <div class="badges">
-
-                    <span
-                        class="
-                            badge
-                            ${priority.cls}
-                        ">
-                        ${priority.text}
-                    </span>
-
-                    <span
-                        class="
-                            badge
-                            badge-road
-                        ">
-                        道路鏡頭
-                    </span>
-
-                </div>
+                <p>
+                    ${cam.desc}
+                </p>
 
             </div>
 
 
-            <div class="media-box">
+            <div class="badges">
 
-                <div class="media-status">
-                    展開後載入最新道路圖片…
-                </div>
+                <span
+                    class="
+                        badge
+                        ${priority.cls}
+                    ">
+                    ${priority.text}
+                </span>
 
-
-                <img
-                    class="live-img"
-                    data-src="${cam.url}"
-                    alt="${cam.name}"
-                >
-
-            </div>
-
-
-            <div class="actions">
-
-                ${
-                    cam.source
-                    ?
-                    `
-                    <a
-                        class="
-                            button
-                            secondary
-                        "
-                        href="${cam.source}"
-                        target="_blank"
-                        rel="noopener">
-                        🛣️ 官方來源
-                    </a>
-                    `
-                    :
-                    ""
-                }
+                <span
+                    class="
+                        badge
+                        badge-road
+                    ">
+                    道路鏡頭
+                </span>
 
             </div>
 
         </div>
 
-        `;
 
-    }
+        <div class="media-box">
+
+            <div class="media-status">
+                展開後載入最新道路圖片…
+            </div>
+
+
+            <img
+                class="live-img"
+                data-src="${cam.url}"
+                alt="${cam.name}"
+            >
+
+        </div>
+
+
+        <div class="actions">
+
+            ${
+                cam.source
+                ?
+                `
+                <a
+                    class="
+                        button
+                        secondary
+                    "
+                    href="${cam.source}"
+                    target="_blank"
+                    rel="noopener">
+                    🛣️ 官方來源
+                </a>
+                `
+                :
+                ""
+            }
+
+        </div>
+
+    </div>
+
+    `;
 
 }
 
@@ -2478,7 +2607,6 @@ function renderCam(
 /* =========================================================
    SECTION
 ========================================================= */
-
 
 function renderSection(
     section
@@ -2533,6 +2661,20 @@ function renderSection(
                 <div class="route-text">
                     ${section.route}
                 </div>
+
+            </div>
+
+
+
+            <div class="itinerary-jump">
+
+                <a
+                    class="itinerary-button"
+                    href="itinerary.html#${section.id}">
+
+                    🗓️ 睇 ${section.id.toUpperCase()} 詳細行程
+
+                </a>
 
             </div>
 
@@ -2745,15 +2887,12 @@ function renderSection(
    RENDER
 ========================================================= */
 
-
 document
 .getElementById("app")
 .innerHTML =
 
     sections
-
     .map(renderSection)
-
     .join("");
 
 
@@ -2761,7 +2900,6 @@ document
 /* =========================================================
    NAV
 ========================================================= */
-
 
 const quickNav =
     document.getElementById(
@@ -2772,7 +2910,6 @@ const quickNav =
 sections.forEach(
 
     section => {
-
 
         const a =
             document.createElement(
@@ -2789,6 +2926,10 @@ sections.forEach(
             section.id;
 
 
+        a.dataset.day =
+            section.id;
+
+
         a.textContent =
             section.nav;
 
@@ -2798,7 +2939,6 @@ sections.forEach(
             "click",
 
             function(e) {
-
 
                 e.preventDefault();
 
@@ -2826,11 +2966,9 @@ sections.forEach(
    LOAD MEDIA
 ========================================================= */
 
-
 function loadSection(
     details
 ) {
-
 
     details
 
@@ -2842,13 +2980,11 @@ function loadSection(
 
         frame => {
 
-
             if (
                 !frame.hasAttribute(
                     "src"
                 )
             ) {
-
 
                 frame.src =
                     frame.dataset.src;
@@ -2859,7 +2995,6 @@ function loadSection(
                     "load",
 
                     () => {
-
 
                         frame
 
@@ -2886,7 +3021,6 @@ function loadSection(
     );
 
 
-
     details
 
     .querySelectorAll(
@@ -2904,11 +3038,9 @@ function loadSection(
    STOP VIDEO
 ========================================================= */
 
-
 function stopSection(
     details
 ) {
-
 
     details
 
@@ -2919,7 +3051,6 @@ function stopSection(
     .forEach(
 
         frame => {
-
 
             frame.removeAttribute(
                 "src"
@@ -2947,7 +3078,6 @@ function stopSection(
    ROAD IMAGE
 ========================================================= */
 
-
 let lastRoadRefresh =
     null;
 
@@ -2955,7 +3085,6 @@ let lastRoadRefresh =
 function loadImage(
     img
 ) {
-
 
     const box =
         img.closest(
@@ -2977,7 +3106,6 @@ function loadImage(
     img.onload =
         function() {
 
-
             box.classList.add(
                 "loaded"
             );
@@ -2991,7 +3119,6 @@ function loadImage(
 
     img.onerror =
         function() {
-
 
             box.classList.remove(
                 "loaded"
@@ -3016,11 +3143,9 @@ function loadImage(
    TIME
 ========================================================= */
 
-
 function japanTime(
     date = new Date()
 ) {
-
 
     return new Intl.DateTimeFormat(
 
@@ -3060,7 +3185,6 @@ function japanTime(
 
 
 function japanDateKey() {
-
 
     const parts =
 
@@ -3117,7 +3241,6 @@ function japanDateKey() {
 }
 
 
-
 document
 .getElementById(
     "pageOpened"
@@ -3130,7 +3253,6 @@ document
 
 
 function updateRoadTime() {
-
 
     lastRoadRefresh =
         new Date();
@@ -3154,12 +3276,10 @@ function updateRoadTime() {
    OPEN SECTION
 ========================================================= */
 
-
 function openSection(
     id,
     scroll = false
 ) {
-
 
     const target =
         document.getElementById(
@@ -3186,7 +3306,6 @@ function openSection(
     if (
         scroll
     ) {
-
 
         setTimeout(
 
@@ -3215,7 +3334,6 @@ function openSection(
    TOGGLE
 ========================================================= */
 
-
 document
 
 .querySelectorAll(
@@ -3226,13 +3344,11 @@ document
 
     details => {
 
-
         details.addEventListener(
 
             "toggle",
 
             function() {
-
 
                 if (
                     this.open
@@ -3265,13 +3381,11 @@ document
    TODAY MODE
 ========================================================= */
 
-
 let todaysSectionId =
     null;
 
 
 function initTodayMode() {
-
 
     const date =
         japanDateKey();
@@ -3308,7 +3422,6 @@ function initTodayMode() {
         section
     ) {
 
-
         todaysSectionId =
             section.id;
 
@@ -3328,6 +3441,25 @@ function initTodayMode() {
             "inline-block";
 
 
+        const nav =
+            document.querySelector(
+                '.quick-nav a[data-day="' +
+                section.id +
+                '"]'
+            );
+
+
+        if (
+            nav
+        ) {
+
+            nav.classList.add(
+                "today"
+            );
+
+        }
+
+
         openSection(
             section.id,
             false
@@ -3336,7 +3468,6 @@ function initTodayMode() {
     }
 
     else {
-
 
         title.textContent =
             "🇯🇵 現時並非旅程日期";
@@ -3358,7 +3489,6 @@ function initTodayMode() {
    TODAY BUTTON
 ========================================================= */
 
-
 document
 
 .getElementById(
@@ -3370,7 +3500,6 @@ document
     "click",
 
     function() {
-
 
         if (
             todaysSectionId
@@ -3401,7 +3530,6 @@ document
 
     function() {
 
-
         if (
             todaysSectionId
         ) {
@@ -3422,7 +3550,6 @@ document
    CLOSE ALL
 ========================================================= */
 
-
 document
 
 .getElementById(
@@ -3434,7 +3561,6 @@ document
     "click",
 
     function() {
-
 
         document
 
@@ -3462,9 +3588,7 @@ document
    ROAD REFRESH
 ========================================================= */
 
-
 function refreshOpenRoads() {
-
 
     const images =
 
@@ -3514,7 +3638,6 @@ document
    AUTO REFRESH
 ========================================================= */
 
-
 setInterval(
 
     refreshOpenRoads,
@@ -3528,13 +3651,11 @@ setInterval(
    LOAD
 ========================================================= */
 
-
 window.addEventListener(
 
     "load",
 
     function() {
-
 
         initTodayMode();
 
@@ -3542,7 +3663,6 @@ window.addEventListener(
         if (
             location.hash
         ) {
-
 
             const hashId =
                 location.hash
@@ -3560,7 +3680,6 @@ window.addEventListener(
                 )
             ) {
 
-
                 openSection(
                     hashId,
                     false
@@ -3577,4 +3696,5 @@ window.addEventListener(
 </script>
 
 </body>
+
 </html>
