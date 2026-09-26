@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v3";
+const CACHE_NAME = "japan-winter-2027-v4";
 
 const CORE_FILES = [
     "./",
@@ -6,6 +6,8 @@ const CORE_FILES = [
     "./itinerary.html",
     "./trip-info.html",
     "./manifest.webmanifest",
+    "./assets/attraction-info.css",
+    "./assets/attraction-info.js",
 
     "./assets/images/d1-matsumoto-castle.jpg",
     "./assets/images/d1-shinano.jpg",
