@@ -1183,6 +1183,94 @@ footer {
 
 }
 
+
+/* ===== TRIP V2 COMMON ===== */
+.tripv2-status {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    z-index: 4500;
+    padding: 7px 11px;
+    border-radius: 18px;
+    font-size: 11px;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(0,0,0,.16);
+    background: #e7f4e9;
+    color: #2f6d41;
+    border: 1px solid #bfdac6;
+}
+.tripv2-status.offline {
+    background: #fff1d8;
+    color: #795700;
+    border-color: #ebcf92;
+}
+.tripv2-update {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    z-index: 4600;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    max-width: calc(100vw - 30px);
+    background: #1f4e79;
+    color: #fff;
+    padding: 9px 12px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.22);
+    font-size: 12px;
+    font-weight: 700;
+}
+.tripv2-update.show { display: flex; }
+.tripv2-update button {
+    border: 0;
+    border-radius: 7px;
+    background: #fff;
+    color: #1f4e79;
+    padding: 6px 9px;
+    font-weight: 800;
+    cursor: pointer;
+}
+@media (max-width: 720px) {
+    .tripv2-status { right: 8px; bottom: 8px; }
+    .tripv2-update { bottom: 52px; }
+}
+/* ===== /TRIP V2 COMMON ===== */
+
+
+/* ===== TRIP V2 D6-D8 SELECTOR ===== */
+.tripv2-weather-select {
+    background:#fff;
+    border-radius:14px;
+    padding:16px;
+    margin-bottom:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.07);
+    border-left:5px solid #e0ac35;
+}
+.tripv2-weather-select h2 { margin:0 0 6px; color:#1f4e79; font-size:19px; }
+.tripv2-weather-select p { margin:5px 0 10px; color:#5e6d78; font-size:13px; line-height:1.55; }
+.tripv2-choice-row { display:flex; flex-wrap:wrap; gap:7px; }
+.tripv2-choice {
+    border:1px solid #cddce7; background:#eef4f8; color:#1f4e79;
+    border-radius:8px; padding:9px 12px; font-weight:800; cursor:pointer;
+}
+.tripv2-choice.active { background:#1f4e79; color:#fff; border-color:#1f4e79; }
+.tripv2-choice.reset { background:#f2f2f2; color:#666; border-color:#ddd; }
+.tripv2-selected-plan {
+    margin:14px 18px 18px; padding:14px; border-radius:11px;
+    background:#f6f9fb; border:1px solid #dfe8ee;
+}
+.tripv2-selected-plan h3 { margin:0 0 8px; color:#1f4e79; font-size:17px; }
+.tripv2-selected-plan .route { font-size:13px; color:#586976; margin-bottom:10px; line-height:1.55; }
+.tripv2-plan-list { display:grid; gap:7px; }
+.tripv2-plan-item { background:#fff; border-radius:8px; padding:9px 10px; font-size:12px; line-height:1.5; border:1px solid #e3e9ed; }
+.tripv2-plan-item strong { color:#1f4e79; }
+.tripv2-plan-map { display:inline-block; margin-top:5px; text-decoration:none; font-weight:800; color:#28633b; }
+.tripv2-hidden-original { display:none !important; }
+@media(max-width:720px){ .tripv2-selected-plan{margin:12px;} .tripv2-choice{flex:1 1 calc(33% - 7px);} }
+/* ===== /TRIP V2 D6-D8 SELECTOR ===== */
+
 </style>
 
 </head>
@@ -5295,6 +5383,143 @@ if (
 
 </script>
 
+
+
+<script id="tripv2-common-script">
+(function(){
+    if (window.__tripV2CommonLoaded) return;
+    window.__tripV2CommonLoaded = true;
+
+    function ensureNetworkStatus(){
+        let el = document.getElementById('tripv2NetworkStatus');
+        if (!el) {
+  el = document.createElement('div');
+  el.id = 'tripv2NetworkStatus';
+  el.className = 'tripv2-status';
+  document.body.appendChild(el);
+        }
+        function refresh(){
+  const online = navigator.onLine;
+  el.textContent = online ? '🟢 Online' : '🟠 Offline';
+  el.classList.toggle('offline', !online);
+  el.title = online ? 'Live Cam / Google Maps 可正常使用' : 'Offline：行程可睇，但 Live Cam / Google Maps 需要網絡';
+        }
+        window.addEventListener('online', refresh);
+        window.addEventListener('offline', refresh);
+        refresh();
+    }
+
+    function ensureUpdatePrompt(){
+        if (!('serviceWorker' in navigator)) return;
+
+        let box = document.getElementById('tripv2UpdatePrompt');
+        if (!box) {
+  box = document.createElement('div');
+  box.id = 'tripv2UpdatePrompt';
+  box.className = 'tripv2-update';
+  box.innerHTML = '<span id="tripv2UpdateText">🔄 有新版網站</span><button type="button" id="tripv2ReloadBtn">重新載入</button>';
+  document.body.appendChild(box);
+  document.getElementById('tripv2ReloadBtn').addEventListener('click', function(){ location.reload(); });
+        }
+
+        function show(text){
+  const t = document.getElementById('tripv2UpdateText');
+  if (t) t.textContent = text;
+  box.classList.add('show');
+        }
+
+        navigator.serviceWorker.getRegistration().then(function(reg){
+  if (!reg) return;
+  if (reg.waiting) show('🔄 有新版網站');
+  reg.addEventListener('updatefound', function(){
+      const worker = reg.installing;
+      if (!worker) return;
+      worker.addEventListener('statechange', function(){
+          if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+              show('🔄 有新版網站');
+          }
+      });
+  });
+  reg.update().catch(function(){});
+        }).catch(function(){});
+
+        navigator.serviceWorker.addEventListener('controllerchange', function(){
+  show('✅ 新版已準備好');
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+        ensureNetworkStatus();
+        ensureUpdatePrompt();
+    });
+})();
+</script>
+
+
+<script id="tripv2-itinerary-script">
+(function(){
+    const KEY='japanWinter2027_shinhotakaDay';
+    function mapUrl(q){ return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(q)+'&travelmode=driving'; }
+
+    const plans={
+        d6:{
+  sh:{title:'D6｜新穗高纜車',route:'高山 → 新穗高 → 高山',items:[['08:50','高山 → 新穗高','新穂高温泉駐車場'],['10:15','新穗高纜車','新穂高温泉駐車場'],['12:45','新穗高午餐','新穂高温泉駐車場'],['13:30','返回高山','Takayama Ouan'],['19:15','飛驒牛晚餐','Takayama Station']]},
+  tak:{title:'D6｜高山市區＋飛驒大鐘乳洞',route:'宮川朝市 → 高山陣屋／三町 → 飛驒大鐘乳洞 → 高山',items:[['09:30','宮川朝市','宮川朝市 高山'],['10:15','高山陣屋','中橋駐車場 高山'],['11:00','三町古街＋酒藏','中橋駐車場 高山'],['12:25','高山市內午餐','Sanmachi Historic District Takayama'],['13:50','飛驒大鐘乳洞＋冰之溪谷','Hida Great Limestone Cave'],['16:00','高山地元超市','Surugaya Takayama'],['19:15','飛驒牛晚餐','Takayama Station']]}
+        },
+        d7:{
+  sh:{title:'D7｜新穗高纜車',route:'高山 → 新穗高 → 高山',items:[['08:00','早餐／退房／行李轉 Residence','Residence Hotel Takayama Station'],['09:15','高山 → 新穗高','新穂高温泉駐車場'],['10:35','新穗高纜車','新穂高温泉駐車場'],['13:15','離開新穗高','新穂高温泉駐車場'],['15:20','返回高山／Residence','Residence Hotel Takayama Station']]},
+  shir:{title:'D7｜白川鄉',route:'高山 → 白川鄉 → 高山',items:[['08:00','早餐／退房／行李轉 Residence','Residence Hotel Takayama Station'],['09:15','高山 → 白川鄉','せせらぎ公園駐車場 白川郷'],['10:15','荻町合掌村','せせらぎ公園駐車場 白川郷'],['11:20','和田家','せせらぎ公園駐車場 白川郷'],['12:00','白川鄉午餐','せせらぎ公園駐車場 白川郷'],['13:00','荻町城跡展望台','せせらぎ公園駐車場 白川郷'],['14:00','白川鄉 → 高山','Residence Hotel Takayama Station'],['15:30','Residence Hotel Takayama Station','Residence Hotel Takayama Station']]}
+        },
+        d8:{
+  sh:{title:'D8｜新穗高 → 松本',route:'高山 → 新穗高 → 松本',items:[['09:00','高山 → 新穗高','新穂高温泉駐車場'],['10:30','新穗高纜車','新穂高温泉駐車場'],['13:30','新穗高 → 松本方向','Daio Wasabi Farm'],['15:15','大王山葵農場（早到先去）','Daio Wasabi Farm'],['17:15','Iroha Grand Hotel 松本','Iroha Grand Hotel Matsumoto Ekimae']]},
+  shir:{title:'D8｜白川鄉 → 松本',route:'高山 → 白川鄉 → 松本',items:[['09:15','高山 → 白川鄉','せせらぎ公園駐車場 白川郷'],['10:15','白川鄉','せせらぎ公園駐車場 白川郷'],['14:00','離開白川鄉 → 松本','Iroha Grand Hotel Matsumoto Ekimae'],['17:15','Iroha Grand Hotel 松本','Iroha Grand Hotel Matsumoto Ekimae']]},
+  tak:{title:'D8｜高山市區＋飛驒大鐘乳洞 → 松本',route:'宮川朝市 → 高山陣屋／三町 → 飛驒大鐘乳洞 → 松本',items:[['09:30','宮川朝市','宮川朝市 高山'],['10:10','高山陣屋','中橋駐車場 高山'],['10:50','三町古街＋酒藏','中橋駐車場 高山'],['13:20','飛驒大鐘乳洞＋冰之溪谷','Hida Great Limestone Cave'],['14:40','鐘乳洞 → 松本','Iroha Grand Hotel Matsumoto Ekimae'],['17:15','Iroha Grand Hotel 松本','Iroha Grand Hotel Matsumoto Ekimae']]}
+        }
+    };
+
+    function modeFor(day, sh){
+        if(day===sh) return 'sh';
+        if(day==='d6') return 'tak';
+        if(day==='d7') return 'shir';
+        if(day==='d8') return sh==='d6' ? 'tak' : 'shir';
+        return 'tak';
+    }
+
+    function selector(){
+        if(document.getElementById('tripv2WeatherSelect')) return;
+        const intro=document.querySelector('.intro'); if(!intro) return;
+        const box=document.createElement('section'); box.id='tripv2WeatherSelect'; box.className='tripv2-weather-select';
+        box.innerHTML='<h2>🌨️ D6–D8 新穗高日子</h2><p>只需要揀「邊一日去新穗高」。揀完之後 D6–D8 只會顯示實際要行嘅一條行程，唔再同時見 Plan A／B／C。</p><div class="tripv2-choice-row"><button class="tripv2-choice" data-sh="d6">🚡 D6 去新穗高</button><button class="tripv2-choice" data-sh="d7">🚡 D7 去新穗高</button><button class="tripv2-choice" data-sh="d8">🚡 D8 去新穗高</button><button class="tripv2-choice reset" data-sh="">重設</button></div>';
+        intro.insertAdjacentElement('afterend',box);
+        box.querySelectorAll('[data-sh]').forEach(btn=>btn.addEventListener('click',function(){
+  const v=this.dataset.sh; if(v) localStorage.setItem(KEY,v); else localStorage.removeItem(KEY); render();
+        }));
+    }
+
+    function renderDay(id, sh){
+        const day=document.getElementById(id); if(!day) return;
+        day.querySelectorAll('.day-highlights,.quick-decision,.day-content').forEach(el=>el.classList.add('tripv2-hidden-original'));
+        let panel=day.querySelector('.tripv2-selected-plan'); if(panel) panel.remove();
+        panel=document.createElement('div'); panel.className='tripv2-selected-plan';
+        if(!sh){
+  panel.innerHTML='<h3>🌨️ 未選新穗高日子</h3><div class="route">請喺上面揀 D6／D7／D8 邊日去新穗高；之後呢度會自動變成單一路線。</div>';
+        } else {
+  const m=modeFor(id,sh), p=plans[id][m];
+  panel.innerHTML='<h3>'+p.title+'</h3><div class="route">'+p.route+'</div><div class="tripv2-plan-list">'+p.items.map(i=>'<div class="tripv2-plan-item"><strong>'+i[0]+'</strong>　'+i[1]+'<br><a class="tripv2-plan-map" href="'+mapUrl(i[2])+'" target="_blank" rel="noopener">📍 Google Maps</a></div>').join('')+'</div>'+(id==='d7'&&m==='shir'?'<div class="tripv2-plan-item" style="margin-top:8px">⭐ 返到高山夠早＋道路安全，先考慮飛驒古川三寺巡禮 Bonus。</div>':'');
+        }
+        const photo=day.querySelector('.photo-section');
+        if(photo) photo.insertAdjacentElement('afterend',panel); else day.querySelector('.day-inner').appendChild(panel);
+    }
+
+    function render(){
+        const sh=localStorage.getItem(KEY);
+        document.querySelectorAll('.tripv2-choice').forEach(b=>b.classList.toggle('active',b.dataset.sh===sh && !!sh));
+        ['d6','d7','d8'].forEach(id=>renderDay(id,sh));
+    }
+
+    document.addEventListener('DOMContentLoaded',function(){ selector(); render(); });
+})();
+</script>
 
 </body>
 
