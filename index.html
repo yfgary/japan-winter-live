@@ -90,6 +90,40 @@
             color: #777;
             font-size: 13px;
         }
+
+        .cam-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.cam-item {
+    background: #f7f9fb;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.cam-item h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.cam-item p {
+    margin-top: 5px;
+    color: #555;
+}
+
+.cam-item .button {
+    margin-top: 10px;
+}
+
+@media (max-width: 700px) {
+    .cam-grid {
+        grid-template-columns: 1fr;
+    }
+}
+        
     </style>
 </head>
 
@@ -103,107 +137,285 @@
 <div class="container">
 
 <div class="card">
+
     <h2>🏔️ 白馬 Hakuba</h2>
 
-    <h3>白馬岩岳 Iwatake</h3>
-
     <p>
-        白馬岩岳 Live Camera
+        白馬地區即時 Live Camera
     </p>
 
-<iframe
-    class="youtube-frame"
-    src="https://www.youtube-nocookie.com/embed/e3EliJKC6z8?autoplay=1&mute=1&controls=0&rel=0"
-    title="白馬岩岳 Live Camera"
-    loading="lazy"
-    allow="autoplay; encrypted-media; picture-in-picture"
-    allowfullscreen>
-</iframe>
 
-    <br>
+    <div class="cam-grid">
 
-<a class="button"
-   href="https://www.youtube.com/watch?v=e3EliJKC6z8"
-   target="_blank">
-    🔗 全螢幕開啟岩岳 Live Cam
-</a>
+
+        <!-- 白馬岩岳 -->
+        <div class="cam-item">
+
+            <h3>白馬岩岳 Iwatake</h3>
+
+            <p>白馬岩岳 Live Camera</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/e3EliJKC6z8?autoplay=1&mute=1&controls=0&rel=0"
+                title="白馬岩岳 Live Camera"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=e3EliJKC6z8"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+
+        <!-- Hakuba47 -->
+        <div class="cam-item">
+
+            <h3>Hakuba47</h3>
+
+            <p>Winter Sports Park</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/4ppkv2HsdEY?autoplay=1&mute=1&controls=0&rel=0"
+                title="Hakuba47 Live Camera"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=4ppkv2HsdEY"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+
+        <!-- 八方尾根 Alpen Quad -->
+        <div class="cam-item">
+
+            <h3>八方尾根 Alpen Quad</h3>
+
+            <p>標高 1,678m</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/21HCv58C99o?autoplay=1&mute=1&controls=0&rel=0"
+                title="Happo Alpen Quad"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=21HCv58C99o"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+
+        <!-- 八方尾根 Usagidaira -->
+        <div class="cam-item">
+
+            <h3>八方尾根 Usagidaira</h3>
+
+            <p>うさぎ平・標高 1,391m</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/9ej1bDX8Kd8?autoplay=1&mute=1&controls=0&rel=0"
+                title="Happo Usagidaira"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=9ej1bDX8Kd8"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+
+        <!-- 八方尾根 Gondola -->
+        <div class="cam-item">
+
+            <h3>八方尾根 Gondola</h3>
+
+            <p>白樺 Gondola Station・770m</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/hMY3VnL4Pyk?autoplay=1&mute=1&controls=0&rel=0"
+                title="Happo Gondola"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=hMY3VnL4Pyk"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+
+        <!-- 八方尾根 Parking -->
+        <div class="cam-item">
+
+            <h3>八方尾根 第3停車場</h3>
+
+            <p>Car Park 3・737m</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/BHo4tHKIDow?autoplay=1&mute=1&controls=0&rel=0"
+                title="Happo Parking 3"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=BHo4tHKIDow"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+
+        <!-- 五竜 北 -->
+        <div class="cam-item">
+
+            <h3>白馬五竜 Alps 平 北側</h3>
+
+            <p>Goryu Alps Daira North</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/i37JRcBR5kc?autoplay=1&mute=1&controls=0&rel=0"
+                title="Goryu Alps North"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=i37JRcBR5kc"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+
+        <!-- 五竜 西 -->
+        <div class="cam-item">
+
+            <h3>白馬五竜 Alps 平 西側</h3>
+
+            <p>Goryu Alps Daira West</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/aoBkllBoMWQ?autoplay=1&mute=1&controls=0&rel=0"
+                title="Goryu Alps West"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=aoBkllBoMWQ"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+
+        <!-- 五竜 Escal Plaza -->
+        <div class="cam-item">
+
+            <h3>白馬五竜 Escal Plaza</h3>
+
+            <p>エスカルプラザ入口</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/qMAkzOngM04?autoplay=1&mute=1&controls=0&rel=0"
+                title="Goryu Escal Plaza"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=qMAkzOngM04"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+
+        <!-- 五竜 Parking -->
+        <div class="cam-item">
+
+            <h3>白馬五竜 第2停車場</h3>
+
+            <p>Goryu Parking Area</p>
+
+            <iframe
+                class="youtube-frame"
+                src="https://www.youtube-nocookie.com/embed/s0pQ0OG2wt0?autoplay=1&mute=1&controls=0&rel=0"
+                title="Goryu Parking"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <a class="button"
+               href="https://www.youtube.com/watch?v=s0pQ0OG2wt0"
+               target="_blank">
+                🔗 全螢幕
+            </a>
+
+        </div>
+
+
+    </div>
+
 
     <a class="button"
        href="https://www.vill.hakuba.nagano.jp/livecamera/"
-       target="_blank">
-        📹 白馬其他 Live Cam
+       target="_blank"
+       style="margin-top:20px;">
+        📹 白馬村官方 Live Camera
     </a>
-<hr style="margin: 30px 0; border: 0; border-top: 1px solid #ddd;">
-
-<h3>Hakuba47</h3>
-
-<p>
-    Hakuba47 Winter Sports Park Live Camera
-</p>
-
-<iframe
-    class="youtube-frame"
-    src="https://www.youtube-nocookie.com/embed/4ppkv2HsdEY?autoplay=1&mute=1&controls=0&rel=0"
-    title="Hakuba47 Live Camera"
-    loading="lazy"
-    allow="autoplay; encrypted-media; picture-in-picture"
-    allowfullscreen>
-</iframe>
-
-<a class="button"
-   href="https://w
-    ww.youtube.com/watch?v=4ppkv2HsdEY"
-   target="_blank">
-    🔗 全螢幕開啟 Hakuba47 Live Cam
-</a>
-    
- <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ddd;">
-
-<h3>八方尾根 Happo-One</h3>
-
-<p>
-    Alpen Quad 1,678m Live Camera
-</p>
-
-<iframe
-    class="youtube-frame"
-    src="https://www.youtube-nocookie.com/embed/21HCv58C99o?autoplay=1&mute=1&controls=0&rel=0"
-    title="Happo-One Alpen Quad Live Camera"
-    loading="lazy"
-    allow="autoplay; encrypted-media; picture-in-picture"
-    allowfullscreen>
-</iframe>
-
-<a class="button"
-   href="https://www.youtube.com/watch?v=21HCv58C99o"
-   target="_blank">
-    🔗 全螢幕開啟八方尾根 Live Cam
-</a>   
-</div>
-
-    <div class="card">
-        <h2>🏯 高山 Takayama</h2>
-        <p>Live Camera 稍後加入</p>
-        <a class="button" href="#">Live Camera</a>
-    </div>
-
-    <div class="card">
-        <h2>🚡 新穗高・奧飛驒</h2>
-        <p>Live Camera 稍後加入</p>
-        <a class="button" href="#">Live Camera</a>
-    </div>
-
-    <div class="card">
-        <h2>🏘️ 白川鄉 Shirakawa-go</h2>
-        <p>Live Camera 稍後加入</p>
-        <a class="button" href="#">Live Camera</a>
-    </div>
-
-    <div class="card">
-        <h2>🚗 道路狀況</h2>
-        <p>道路積雪及 Live Camera 稍後加入</p>
-        <a class="button" href="#">Road Cameras</a>
-    </div>
 
 </div>
 
