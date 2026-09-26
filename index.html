@@ -7,6 +7,21 @@
 
     <title>Japan Winter 2027 Live Dashboard</title>
 
+.live-frame {
+    width: 100%;
+    height: 650px;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 15px;
+    background: #eee;
+}
+
+@media (max-width: 600px) {
+    .live-frame {
+        height: 500px;
+    }
+}
+    
     <style>
         body {
             font-family: Arial, "Noto Sans TC", sans-serif;
@@ -81,14 +96,20 @@
     <h2>🏔️ 白馬 Hakuba</h2>
 
     <p>
-        白馬村官方 Live Camera，包括：
-        八方尾根、Hakuba47、白馬岩岳、野平及白馬五竜。
+        白馬村官方 Live Camera：
+        八方尾根、Hakuba47、白馬岩岳、野平、白馬五竜。
     </p>
+
+    <iframe
+        class="live-frame"
+        src="https://www.vill.hakuba.nagano.jp/livecamera/"
+        loading="lazy">
+    </iframe>
 
     <a class="button"
        href="https://www.vill.hakuba.nagano.jp/livecamera/"
        target="_blank">
-        📹 開啟白馬官方 Live Camera
+        🔗 開啟官方完整頁面
     </a>
 </div>
 
