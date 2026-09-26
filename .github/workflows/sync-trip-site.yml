@@ -1,0 +1,138 @@
+name: Sync trip site
+
+on:
+  push:
+    paths:
+      - ".github/workflows/sync-trip-site.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch trip site
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # -------------------------------------------------
+          # itinerary.html — only fix Snow Monkey map target
+          # -------------------------------------------------
+          p = Path("itinerary.html")
+          s = p.read_text(encoding="utf-8")
+
+          old_target = "Snow Monkey Park Kanbayashi Parking"
+          new_target = "地獄谷野猿公苑専用駐車場"
+
+          old_count = s.count(old_target)
+          if old_count not in (0, 4):
+              raise SystemExit(f"Unexpected itinerary old target count: {old_count}")
+
+          s = s.replace(old_target, new_target)
+          s = s.replace(
+              'data-map-label="上林 Snow Monkey 停車場"',
+              'data-map-label="地獄谷野猿公苑専用駐車場"'
+          )
+          p.write_text(s, encoding="utf-8")
+
+          # -------------------------------------------------
+          # trip-info.html — use exact Google Maps place name
+          # -------------------------------------------------
+          p = Path("trip-info.html")
+          s = p.read_text(encoding="utf-8")
+
+          s = s.replace(
+              'data-map="上林ホテル仙壽閣 長野県山ノ内町"',
+              'data-map="地獄谷野猿公苑専用駐車場"'
+          )
+          s = s.replace(
+              'data-map-label="地獄谷冬季停車場・導航 Hotel Senjukaku"',
+              'data-map-label="地獄谷野猿公苑専用駐車場"'
+          )
+          s = s.replace(
+              '導航目標：上林ホテル仙壽閣',
+              '導航目標：地獄谷野猿公苑専用駐車場'
+          )
+          s = s.replace(
+              'Hotel Senjukaku 附近就係\n上林溫泉野猿公苑專用免費停車場。',
+              'Google Maps 正式名稱：\n地獄谷野猿公苑専用駐車場。'
+          )
+          p.write_text(s, encoding="utf-8")
+
+          # -------------------------------------------------
+          # index.html — add Trip Info as third top tab
+          # -------------------------------------------------
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          if 'href="trip-info.html"' not in s:
+              anchor = '''<a href="itinerary.html">
+    🗓️ 詳細行程
+</a>
+
+</div>'''
+              replacement = '''<a href="itinerary.html">
+    🗓️ 詳細行程
+</a>
+
+<a href="trip-info.html">
+    🧳 旅程資料
+</a>
+
+</div>'''
+              if anchor not in s:
+                  raise SystemExit("Could not locate index page-switch anchor")
+              s = s.replace(anchor, replacement, 1)
+
+          p.write_text(s, encoding="utf-8")
+
+          # -------------------------------------------------
+          # sw.js — cache Trip Info and bump cache version
+          # -------------------------------------------------
+          p = Path("sw.js")
+          s = p.read_text(encoding="utf-8")
+
+          s = s.replace(
+              'const CACHE_NAME = "japan-winter-2027-v1";',
+              'const CACHE_NAME = "japan-winter-2027-v2";'
+          )
+
+          if '"./trip-info.html"' not in s:
+              anchor = '    "./itinerary.html",\n'
+              if anchor not in s:
+                  raise SystemExit("Could not locate sw.js itinerary cache entry")
+              s = s.replace(
+                  anchor,
+                  anchor + '    "./trip-info.html",\n',
+                  1
+              )
+
+          p.write_text(s, encoding="utf-8")
+
+          print("Trip site sync complete")
+          PY
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add itinerary.html trip-info.html index.html sw.js
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Sync map navigation and trip info"
+          git push
