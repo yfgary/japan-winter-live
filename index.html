@@ -3,2730 +3,1454 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="theme-color"
-        content="#1f4e79"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1f4e79">
 
     <title>Japan Winter 2027 Live Dashboard</title>
 
-
     <style>
-
         * {
             box-sizing: border-box;
         }
-
 
         html {
             scroll-behavior: smooth;
         }
 
-
         body {
-            font-family:
-                Arial,
-                "Noto Sans TC",
-                "Microsoft JhengHei",
-                sans-serif;
-
             margin: 0;
-
             background: #eef2f6;
-
             color: #222;
+            font-family: Arial, "Microsoft JhengHei", "Noto Sans TC", sans-serif;
         }
-
-
-
-        /* =====================================================
-           Header
-        ===================================================== */
 
         header {
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #163a5c,
-                    #28689d
-                );
-
+            background: linear-gradient(135deg, #163a5c, #28689d);
             color: white;
-
             text-align: center;
-
-            padding:
-                24px 15px
-                18px 15px;
+            padding: 20px 12px;
         }
-
 
         header h1 {
-
             margin: 0;
-
-            font-size: 28px;
+            font-size: 27px;
         }
-
 
         header p {
-
-            margin:
-                8px 0 0;
-
-            opacity: 0.92;
+            margin: 7px 0 0;
+            opacity: .9;
         }
-
-
-        .header-note {
-
-            margin-top: 12px;
-
-            font-size: 14px;
-
-            opacity: 0.88;
-        }
-
-
-
-        /* =====================================================
-           Sticky Navigation
-        ===================================================== */
 
         .quick-nav {
-
             position: sticky;
-
             top: 0;
-
             z-index: 1000;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.96
-                );
-
-            backdrop-filter:
-                blur(10px);
-
-            border-bottom:
-                1px solid #dce3e9;
-
-            box-shadow:
-                0 2px 7px
-                rgba(0,0,0,0.06);
+            background: rgba(255,255,255,.96);
+            border-bottom: 1px solid #d6dee5;
+            box-shadow: 0 2px 7px rgba(0,0,0,.06);
         }
-
 
         .quick-nav-inner {
-
-            max-width: 1300px;
-
+            max-width: 1250px;
             margin: auto;
-
-            padding:
-                9px 12px;
-
+            padding: 8px 10px;
             display: flex;
-
-            gap: 8px;
-
+            gap: 7px;
             overflow-x: auto;
-
             white-space: nowrap;
-
-            scrollbar-width: thin;
         }
 
-
-        .quick-nav a {
-
-            display: inline-block;
-
-            text-decoration: none;
-
+        .nav-btn {
+            border: 0;
+            background: #eaf2f8;
             color: #1f4e79;
-
-            background: #edf4fa;
-
+            text-decoration: none;
             border-radius: 18px;
-
-            padding:
-                7px 12px;
-
-            font-size: 13px;
-
+            padding: 7px 11px;
             font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
         }
 
-
-        .quick-nav a:hover {
-
-            background: #dbeaf5;
+        .nav-btn:hover {
+            background: #d5e7f3;
         }
 
-
-
-        /* =====================================================
-           Main
-        ===================================================== */
+        .nav-btn.dark {
+            background: #1f4e79;
+            color: white;
+        }
 
         .container {
-
-            max-width: 1300px;
-
+            max-width: 1250px;
             margin: auto;
-
-            padding: 18px;
+            padding: 16px;
         }
 
-
-
-        /* =====================================================
-           Trip Plan
-        ===================================================== */
-
-        .trip-plan {
-
-            background: white;
-
-            border-radius: 14px;
-
-            padding: 18px;
-
-            margin-bottom: 20px;
-
-            box-shadow:
-                0 2px 9px
-                rgba(0,0,0,0.07);
-        }
-
-
-        .trip-plan h2 {
-
-            margin-top: 0;
-        }
-
-
-        .days-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 10px;
-        }
-
-
-        .day-item {
-
-            background: #f5f8fb;
-
-            border-radius: 9px;
-
-            padding: 10px 12px;
-
+        .notice {
+            background: #fff8df;
+            border: 1px solid #f0dda1;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 15px;
             font-size: 14px;
-
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
-
-        .day-item strong {
-
-            color: #1f4e79;
-        }
-
-
-        .weather-swap {
-
-            margin-top: 12px;
-
-            background: #fff7db;
-
-            border-radius: 8px;
-
-            padding: 10px 12px;
-
-            font-size: 14px;
-        }
-
-
-
-        /* =====================================================
-           Location Section
-        ===================================================== */
-
-        .location-card {
-
+        details.region {
             background: white;
-
-            border-radius: 15px;
-
-            padding: 20px;
-
-            margin-bottom: 22px;
-
-            box-shadow:
-                0 2px 10px
-                rgba(0,0,0,0.07);
-
-            scroll-margin-top: 80px;
+            border-radius: 13px;
+            margin-bottom: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.07);
+            overflow: hidden;
+            scroll-margin-top: 65px;
         }
 
-
-        .location-title {
-
+        details.region > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 17px 19px;
             display: flex;
-
             align-items: center;
-
-            justify-content:
-                space-between;
-
-            gap: 10px;
-
-            flex-wrap: wrap;
-
-            margin-bottom: 5px;
+            gap: 12px;
+            user-select: none;
         }
 
-
-        .location-title h2 {
-
-            margin: 0;
-
-            font-size: 24px;
+        details.region > summary::-webkit-details-marker {
+            display: none;
         }
 
+        .summary-main {
+            min-width: 0;
+            flex: 1;
+        }
 
-        .day-badge {
+        .summary-title {
+            font-size: 21px;
+            font-weight: 700;
+        }
 
-            background: #e9f2f9;
+        .summary-desc {
+            margin-top: 4px;
+            color: #687580;
+            font-size: 13px;
+        }
 
+        .count {
+            flex-shrink: 0;
+            padding: 5px 9px;
+            border-radius: 15px;
+            background: #eaf2f8;
             color: #1f4e79;
+            font-size: 11px;
+            font-weight: 700;
+        }
 
-            font-size: 12px;
-
+        details.region > summary::after {
+            content: "＋";
+            color: #1f4e79;
+            font-size: 24px;
             font-weight: bold;
-
-            padding:
-                6px 10px;
-
-            border-radius: 16px;
         }
 
-
-        .location-note {
-
-            color: #666;
-
-            margin-top: 7px;
-
-            margin-bottom: 16px;
+        details.region[open] > summary::after {
+            content: "−";
         }
 
+        details.region[open] > summary {
+            border-bottom: 1px solid #e4eaef;
+        }
 
-
-        /* =====================================================
-           Camera Grid
-        ===================================================== */
+        .region-body {
+            padding: 17px;
+        }
 
         .cam-grid {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 18px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
         }
 
-
-        .cam-item {
-
-            background: #f6f8fa;
-
-            border-radius: 12px;
-
-            padding: 14px;
-
+        .cam-card {
             min-width: 0;
+            background: #f6f8fa;
+            border-radius: 11px;
+            padding: 13px;
         }
 
-
-        .cam-head {
-
+        .cam-top {
             display: flex;
-
-            justify-content:
-                space-between;
-
-            gap: 10px;
-
-            align-items:
-                flex-start;
-
+            gap: 8px;
+            align-items: flex-start;
             margin-bottom: 9px;
         }
 
+        .cam-text {
+            min-width: 0;
+            flex: 1;
+        }
 
-        .cam-item h3 {
-
+        .cam-card h3 {
             margin: 0;
-
-            font-size: 17px;
-
+            font-size: 16px;
             line-height: 1.3;
         }
 
-
-        .cam-item p {
-
-            color: #666;
-
-            margin:
-                5px 0 0;
-
-            font-size: 13px;
-
+        .cam-card p {
+            margin: 5px 0 0;
+            color: #65727c;
+            font-size: 12px;
             line-height: 1.4;
         }
 
-
-
-        /* =====================================================
-           Badges
-        ===================================================== */
-
-        .cam-badge {
-
+        .badge {
             flex-shrink: 0;
-
-            border-radius: 14px;
-
-            padding:
-                5px 8px;
-
-            font-size: 10px;
-
-            font-weight: bold;
-
-            letter-spacing: 0.3px;
+            padding: 4px 7px;
+            border-radius: 12px;
+            font-size: 9px;
+            font-weight: 700;
         }
-
 
         .badge-video {
-
-            background: #e9f3ec;
-
-            color: #21753b;
+            background: #e5f3e9;
+            color: #25713c;
         }
-
 
         .badge-road {
-
-            background: #fff1d5;
-
-            color: #865800;
+            background: #fff0d2;
+            color: #856000;
         }
 
-
-        .badge-link {
-
-            background: #e8eef8;
-
-            color: #335b92;
-        }
-
-
-
-        /* =====================================================
-           YouTube
-        ===================================================== */
-
-        .video-shell {
-
-            width: 100%;
-
-            aspect-ratio: 16 / 9;
-
-            background: #111;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
+        .media-box {
             position: relative;
-        }
-
-
-        .youtube-frame {
-
             width: 100%;
-
-            height: 100%;
-
-            border: 0;
-
-            display: block;
-
-            background: #111;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 9px;
+            background: #172029;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-
-        .video-loading {
-
+        .media-status {
             position: absolute;
-
             inset: 0;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
-            color: #bbb;
-
-            font-size: 13px;
-
-            pointer-events: none;
-
-            z-index: 0;
+            text-align: center;
+            padding: 15px;
+            color: #bbc6ce;
+            font-size: 12px;
         }
 
+        .media-box.loaded .media-status {
+            display: none;
+        }
 
-        .youtube-frame {
-
+        iframe.live-video {
             position: relative;
-
-            z-index: 1;
-        }
-
-
-
-        /* =====================================================
-           Road Camera Image
-        ===================================================== */
-
-        .road-img-wrap {
-
+            z-index: 2;
             width: 100%;
-
-            aspect-ratio: 16 / 9;
-
-            background: #111;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-        }
-
-
-        .road-img {
-
-            width: 100%;
-
             height: 100%;
+            border: 0;
+            background: #000;
+        }
 
+        img.live-img {
+            position: relative;
+            z-index: 2;
+            display: none;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
+            background: #111;
+        }
 
+        .media-box.loaded img.live-img {
             display: block;
         }
-
-
-        .img-error {
-
-            display: none;
-
-            padding: 20px;
-
-            text-align: center;
-
-            color: #ddd;
-
-            font-size: 13px;
-        }
-
-
-
-        /* =====================================================
-           Link-only Card
-        ===================================================== */
-
-        .link-hero {
-
-            min-height: 130px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #edf3f8,
-                    #dfeaf3
-                );
-
-            border-radius: 10px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            flex-direction: column;
-
-            text-align: center;
-
-            padding: 20px;
-        }
-
-
-        .link-icon {
-
-            font-size: 38px;
-
-            margin-bottom: 8px;
-        }
-
-
-        .link-text {
-
-            color: #536270;
-
-            font-size: 13px;
-        }
-
-
-
-        /* =====================================================
-           Buttons
-        ===================================================== */
 
         .actions {
-
             display: flex;
-
-            gap: 7px;
-
             flex-wrap: wrap;
-
-            margin-top: 10px;
+            gap: 6px;
+            margin-top: 9px;
         }
-
 
         .button {
-
             display: inline-block;
-
-            text-decoration: none;
-
-            background: #1f4e79;
-
-            color: white;
-
             border: 0;
-
-            border-radius: 8px;
-
-            padding:
-                8px 12px;
-
-            font-size: 13px;
-
+            border-radius: 7px;
+            padding: 7px 10px;
+            background: #1f4e79;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
             font-weight: 600;
-
             cursor: pointer;
         }
-
-
-        .button:hover {
-
-            background: #163a5c;
-        }
-
 
         .button.secondary {
-
-            background: #657787;
+            background: #647786;
         }
 
-
-        .button.secondary:hover {
-
-            background: #4c5d6b;
+        .official-links {
+            margin-top: 16px;
+            padding-top: 13px;
+            border-top: 1px solid #e2e8ed;
         }
 
+        .official-links-title {
+            margin-bottom: 8px;
+            color: #64727d;
+            font-size: 12px;
+            font-weight: 700;
+        }
 
-
-        /* =====================================================
-           Status Bar
-        ===================================================== */
-
-        .status-bar {
-
-            background: #edf4fa;
-
-            border-radius: 10px;
-
-            padding:
-                10px 12px;
-
-            margin-bottom: 18px;
-
+        .link-row {
             display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items: center;
-
-            gap: 10px;
-
             flex-wrap: wrap;
-
-            font-size: 13px;
-
-            color: #455766;
-        }
-
-
-        .toolbar {
-
-            display: flex;
-
             gap: 7px;
-
-            flex-wrap: wrap;
         }
 
-
-        .toolbar button {
-
-            border: 0;
-
-            background: #1f4e79;
-
-            color: white;
-
-            padding:
-                7px 10px;
-
-            border-radius: 7px;
-
-            cursor: pointer;
+        .small-link {
+            display: inline-block;
+            text-decoration: none;
+            background: #edf3f7;
+            color: #28577c;
+            border: 1px solid #d6e1e9;
+            border-radius: 17px;
+            padding: 7px 11px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
-
-
-        /* =====================================================
-           Footer
-        ===================================================== */
+        .small-link:hover {
+            background: #dfeaf2;
+        }
 
         footer {
-
-            color: #77838d;
-
             text-align: center;
-
-            padding:
-                10px 20px
-                35px 20px;
-
-            font-size: 13px;
+            color: #7a8791;
+            font-size: 12px;
+            padding: 15px 10px 35px;
         }
 
-
-
-        /* =====================================================
-           Back to Top
-        ===================================================== */
-
-        .top-button {
-
-            position: fixed;
-
-            right: 16px;
-
-            bottom: 16px;
-
-            width: 44px;
-
-            height: 44px;
-
-            border-radius: 50%;
-
-            border: 0;
-
-            background: #1f4e79;
-
-            color: white;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 3px 10px
-                rgba(0,0,0,0.25);
-
-            z-index: 900;
-
-            font-size: 18px;
-        }
-
-
-
-        /* =====================================================
-           Mobile
-        ===================================================== */
-
-        @media
-        (max-width: 760px) {
+        @media (max-width: 720px) {
+            .container {
+                padding: 9px;
+            }
 
             header h1 {
-
                 font-size: 22px;
             }
 
-
-            .container {
-
-                padding: 10px;
+            .cam-grid {
+                grid-template-columns: 1fr;
             }
 
-
-            .location-card {
-
+            details.region > summary {
                 padding: 14px;
             }
 
-
-            .cam-grid {
-
-                grid-template-columns: 1fr;
-
-                gap: 14px;
+            .summary-title {
+                font-size: 18px;
             }
 
-
-            .days-grid {
-
-                grid-template-columns: 1fr;
+            .summary-desc {
+                display: none;
             }
 
-
-            .location-title h2 {
-
-                font-size: 21px;
-            }
-
-
-            .cam-item {
-
+            .region-body {
                 padding: 11px;
             }
-
         }
-
-
     </style>
-
 </head>
-
-
 
 <body>
 
-
-<header id="top">
-
-    <h1>
-        ❄️ Japan Winter 2027
-    </h1>
-
-    <p>
-        Live Camera & Road Condition Dashboard
-    </p>
-
-    <div class="header-note">
-        2027/01/09 – 01/17
-        ・手機 / 電腦適用
-        ・冬季自駕專用
-    </div>
-
+<header>
+    <h1>❄️ Japan Winter 2027</h1>
+    <p>Live Camera & Winter Road Dashboard</p>
 </header>
 
-
-
 <nav class="quick-nav">
-
-    <div
-        class="quick-nav-inner"
-        id="quickNav">
+    <div class="quick-nav-inner" id="quickNav">
+        <button class="nav-btn dark" id="closeAll">全部收起</button>
+        <button class="nav-btn dark" id="refreshImages">刷新道路 Cam</button>
     </div>
-
 </nav>
-
-
 
 <div class="container">
 
-
-    <!-- =====================================================
-         Trip Summary
-    ====================================================== -->
-
-    <div class="trip-plan">
-
-        <h2>
-            🗓️ 行程快速對照
-        </h2>
-
-
-        <div class="days-grid">
-
-            <div class="day-item">
-                <strong>D1 · 1/9</strong><br>
-                中部機場 → 名古屋 → 松本
-            </div>
-
-
-            <div class="day-item">
-                <strong>D2 · 1/10</strong><br>
-                松本 → 白絲瀑布 → 鬼押出 → 輕井澤 → 上田 → 千曲
-            </div>
-
-
-            <div class="day-item">
-                <strong>D3 · 1/11</strong><br>
-                千曲 → 小布施 → 澀溫泉
-            </div>
-
-
-            <div class="day-item">
-                <strong>D4 · 1/12</strong><br>
-                Snow Monkey → 須坂 → 長野
-            </div>
-
-
-            <div class="day-item">
-                <strong>D5 · 1/13</strong><br>
-                長野 → 白馬岩岳 → 高山
-            </div>
-
-
-            <div class="day-item">
-                <strong>D6 · 1/14</strong><br>
-                高山市區 → 飛驒大鐘乳洞
-            </div>
-
-
-            <div class="day-item">
-                <strong>D7 / D8</strong><br>
-                新穗高 ↔ 白川鄉
-                （按天氣互換）
-            </div>
-
-
-            <div class="day-item">
-                <strong>D9 · 1/17</strong><br>
-                松本城 → AEON → 還車
-            </div>
-
-        </div>
-
-
-        <div class="weather-swap">
-
-            🌨️ <strong>D7 / D8：</strong>
-            新穗高天氣好、纜車正常就優先去新穗高；
-            天氣差就先去白川鄉，再翌日重試新穗高。
-
-        </div>
-
+    <div class="notice">
+        ✅ 呢個版本只將已核實嘅 Live Video / 即時道路圖片放入大格。
+        其他只可以喺官方網站睇嘅 Camera，會放成下面嘅細按鈕，
+        所以唔會再出現大量「吉位」。
+        <br>
+        📱 YouTube 只會喺你展開該地區後先 Load；收返埋會即時停止播放。
     </div>
 
-
-
-    <div class="status-bar">
-
-        <div>
-            🎥 YouTube Live Cam 會去到附近先載入，
-            避免一次過開晒所有串流。
-            道路圖片每 5 分鐘自動 Refresh。
-        </div>
-
-
-        <div class="toolbar">
-
-            <button
-                id="refreshRoads">
-                ⟳ 刷新道路圖
-            </button>
-
-
-            <button
-                onclick="location.reload()">
-                ↻ Reload Page
-            </button>
-
-        </div>
-
-    </div>
-
-
-
-    <main id="app">
-    </main>
-
+    <main id="app"></main>
 
 </div>
 
-
-
 <footer>
-
-    Japan Winter Trip 2027
-    <br>
-    Camera availability depends on each official provider.
-
+    Japan Winter Trip 2027 · Camera availability depends on provider
 </footer>
-
-
-
-<button
-    class="top-button"
-    onclick="window.scrollTo({top:0,behavior:'smooth'})"
-    title="回到頂部">
-    ↑
-</button>
-
 
 
 <script>
 
+/* =========================================================
+   Helpers
+========================================================= */
 
-/* ============================================================
-   Camera Helper Functions
-============================================================ */
-
-
-function yt(
-    title,
+const YT = (name, id, desc = "") => ({
+    type: "youtube",
+    name,
     id,
-    desc,
-    sourceUrl = ""
-) {
+    desc
+});
 
-    return {
-
-        type: "youtube",
-
-        title: title,
-
-        id: id,
-
-        desc: desc,
-
-        sourceUrl: sourceUrl
-
-    };
-
-}
-
-
-
-function channel(
-    title,
-    channelId,
-    desc,
-    sourceUrl = ""
-) {
-
-    return {
-
-        type: "channel",
-
-        title: title,
-
-        channelId: channelId,
-
-        desc: desc,
-
-        sourceUrl: sourceUrl
-
-    };
-
-}
-
-
-
-function road(
-    title,
-    imageUrl,
-    desc,
-    sourceUrl
-) {
-
-    return {
-
-        type: "image",
-
-        title: title,
-
-        imageUrl: imageUrl,
-
-        desc: desc,
-
-        sourceUrl: sourceUrl
-
-    };
-
-}
-
-
-
-function linkCam(
-    title,
+const IMG = (name, url, desc = "", source = "") => ({
+    type: "image",
+    name,
     url,
     desc,
-    icon = "🔗",
-    badge = "官方頁面"
-) {
+    source
+});
 
-    return {
-
-        type: "link",
-
-        title: title,
-
-        url: url,
-
-        desc: desc,
-
-        icon: icon,
-
-        badge: badge
-
-    };
-
-}
+const LINK = (name, url) => ({
+    name,
+    url
+});
 
 
-
-/* ============================================================
-   Camera Data
-============================================================ */
-
+/* =========================================================
+   VERIFIED CAMERA DATA
+========================================================= */
 
 const sections = [
 
-
-/* ============================================================
-   D1 / D9 - Matsumoto
-============================================================ */
+/* ---------------------------------------------------------
+   松本
+--------------------------------------------------------- */
 
 {
-
     id: "matsumoto",
-
-    nav: "D1/9 松本",
-
+    nav: "松本",
     title: "🏯 松本 Matsumoto",
-
-    day: "D1 / D9",
-
-    note:
-        "抵達松本及最後一日使用。可直接睇松本城、北阿爾卑斯及市內天氣。",
-
+    desc: "松本城、市區及北阿爾卑斯天氣",
     cams: [
 
-        yt(
+        YT(
             "松本城・北阿爾卑斯",
             "3pfpRzVgtoE",
-            "松本市役所展望 Live Camera",
+            "松本市官方 Live Camera"
+        ),
+
+        YT(
+            "美ヶ原・王ヶ頭方向",
+            "W7kZdoqGfTg",
+            "松本市官方 Live Camera"
+        )
+
+    ],
+    links: [
+
+        LINK(
+            "松本市官方 Live Camera",
             "https://www.city.matsumoto.nagano.jp/soshiki/216/52945.html"
         ),
 
-
-        linkCam(
-            "松本市官方 Live Camera",
-            "https://www.city.matsumoto.nagano.jp/soshiki/216/52945.html",
-            "包括松本城、北阿爾卑斯、美ヶ原等官方即時畫面。",
-            "🏯"
-        ),
-
-
-        linkCam(
-            "松本城官方資訊",
-            "https://www.matsumoto-castle.jp/",
-            "D9 去松本城前可順便確認開放及即時資訊。",
-            "🏯"
+        LINK(
+            "松本城官方網站",
+            "https://www.matsumoto-castle.jp/"
         )
 
     ]
-
 },
 
 
-
-/* ============================================================
-   D2 - Karuizawa / Ueda / Chikuma
-============================================================ */
+/* ---------------------------------------------------------
+   輕井澤
+--------------------------------------------------------- */
 
 {
-
     id: "karuizawa",
-
-    nav: "D2 輕井澤",
-
-    title: "🌋 輕井澤・上田・千曲",
-
-    day: "D2",
-
-    note:
-        "白絲瀑布／鬼押出一帶可先睇輕井澤及淺間山天氣，再睇上田、千曲道路。",
-
+    nav: "輕井澤",
+    title: "🌋 輕井澤 Karuizawa",
+    desc: "官方 10 個 Live Camera；對白絲瀑布、鬼押出及道路雪況都有參考價值",
     cams: [
 
-        yt(
-            "輕井澤站北口",
-            "1adPpHlPg5M",
-            "軽井沢駅北口 Live Camera",
-            "https://www.town.karuizawa.lg.jp/page/1427.html"
-        ),
-
-
-        yt(
+        YT(
             "國道18號・追分",
             "Y4KAMd2eGuU",
-            "輕井澤西面道路雪況",
+            "Oiwake / Route 18"
+        ),
+
+        YT(
+            "國道18號 Bypass・消防署附近",
+            "YiUnKdAq424",
+            "Route 18 Bypass"
+        ),
+
+        YT(
+            "子育て支援センター附近",
+            "3Q7Yos70-sQ"
+        ),
+
+        YT(
+            "役場前・湯川ふるさと公園",
+            "fic_lTH_4KY"
+        ),
+
+        YT(
+            "輕井澤中學附近",
+            "y2xaFSo83aM"
+        ),
+
+        YT(
+            "新輕井澤西交差點",
+            "GkoIAnOeazM"
+        ),
+
+        YT(
+            "Prince 通り",
+            "8VbOUB-dplM"
+        ),
+
+        YT(
+            "舊輕井澤 Rotary",
+            "iLfmRhMarWM"
+        ),
+
+        YT(
+            "雲場池",
+            "q-81YL3MAZI"
+        ),
+
+        YT(
+            "輕井澤站北口",
+            "1adPpHlPg5M"
+        )
+
+    ],
+    links: [
+
+        LINK(
+            "輕井澤町官方 Live Camera",
             "https://www.town.karuizawa.lg.jp/page/1427.html"
         ),
 
-
-        yt(
-            "上田城跡公園",
-            "E94gKZlClK4",
-            "上田市區即時天氣／景觀",
-            "https://live.ucv.co.jp/ueda1.html"
-        ),
-
-
-        linkCam(
-            "淺間山 Live Camera",
-            "https://www.town.karuizawa.lg.jp/site/bousai/1712.html",
-            "去鬼押出一帶之前可睇淺間山現場能見度。",
-            "🌋"
-        ),
-
-
-        linkCam(
-            "輕井澤官方全部 Live Cameras",
-            "https://www.town.karuizawa.lg.jp/page/1427.html",
-            "官方有多個道路、市區、雲場池、舊輕井澤等 Camera。",
-            "📹"
-        ),
-
-
-        linkCam(
-            "千曲・國道18號道路 Camera",
-            "https://www.ktr.mlit.go.jp/nagano/douroinfo/",
-            "包括戶倉附近等國道道路狀況。",
-            "🛣️",
-            "道路"
-        ),
-
-
-        linkCam(
-            "千曲川 Live Camera",
-            "https://www.hrr.mlit.go.jp/chikuma/livecamera/",
-            "千曲一帶河川及沿線即時 Camera。",
-            "🌊"
+        LINK(
+            "淺間山即時資訊",
+            "https://www.town.karuizawa.lg.jp/site/bousai/1712.html"
         )
 
     ]
-
 },
 
 
-
-/* ============================================================
-   D3 - Obuse / Shibu / Yudanaka
-============================================================ */
+/* ---------------------------------------------------------
+   上田・千曲
+--------------------------------------------------------- */
 
 {
-
-    id: "shibu",
-
-    nav: "D3 澀溫泉",
-
-    title: "♨️ 小布施・澀溫泉・湯田中",
-
-    day: "D3",
-
-    note:
-        "由千曲前往小布施，再到澀溫泉。可睇小布施、湯田中及澀溫泉即時雪況。",
-
+    id: "ueda",
+    nav: "上田・千曲",
+    title: "🌉 上田・千曲 Ueda / Chikuma",
+    desc: "市區、千曲川及道路實況",
     cams: [
 
-        linkCam(
-            "小布施橋 Live Camera",
-            "https://www.hrr.mlit.go.jp/chikuma/livecamera/c1_obuse.html",
-            "千曲川・小布施橋官方即時圖片。",
-            "🌉"
+        YT(
+            "UCV 上田情報 Cam",
+            "rNQoJqymsKQ",
+            "上田站、千曲川、上田市區"
         ),
 
+        YT(
+            "別所線・赤い鉄橋",
+            "_ISUuji1HUE",
+            "千曲川橋梁"
+        ),
 
-        yt(
-            "澀溫泉 Shibu Onsen",
+        IMG(
+            "千曲川・上田橋",
+            "https://www.hrr.mlit.go.jp/bosai/img/741035.jpg",
+            "國土交通省・定時更新",
+            "https://www.hrr.mlit.go.jp/chikuma/livecamera/c1_ueda.html"
+        ),
+
+        IMG(
+            "千曲市・平和橋",
+            "https://www.hrr.mlit.go.jp/bosai/img/741029.jpg",
+            "千曲川・平和橋",
+            "https://www.hrr.mlit.go.jp/chikuma/livecamera/c1_heiwa.html"
+        )
+
+    ],
+    links: [
+
+        LINK(
+            "UCV Live Camera 一覽",
+            "https://live.ucv.co.jp/"
+        ),
+
+        LINK(
+            "千曲川 Camera Map",
+            "https://www.hrr.mlit.go.jp/chikuma/livecamera/"
+        )
+
+    ]
+},
+
+
+/* ---------------------------------------------------------
+   小布施・澀溫泉・湯田中
+--------------------------------------------------------- */
+
+{
+    id: "yamanouchi",
+    nav: "小布施・澀溫泉",
+    title: "♨️ 小布施・澀溫泉・湯田中",
+    desc: "小布施 → 山之內 → 澀溫泉一帶",
+    cams: [
+
+        IMG(
+            "小布施橋",
+            "https://www.hrr.mlit.go.jp/bosai/img/741013.jpg",
+            "千曲川・小布施橋",
+            "https://www.hrr.mlit.go.jp/chikuma/livecamera/c1_obuse.html"
+        ),
+
+        YT(
+            "澀溫泉街",
             "nOdZW9irJrE",
-            "澀溫泉街 24h Live Camera"
+            "澀溫泉觀光案內所前"
         ),
 
-
-        yt(
+        YT(
             "湯田中站前",
             "lAWdqnXJ0w0",
-            "湯田中駅前 Live Camera",
-            "https://www.info-yamanouchi.net/livecam/"
+            "Yudanaka Station"
         ),
 
-
-        yt(
+        YT(
             "道之驛 北信州やまのうち",
-            "9t7uFd290qY",
-            "山之內町道路／天氣",
+            "9t7uFd290qY"
+        ),
+
+        YT(
+            "志賀高原 山の駅",
+            "SZAawoS2wUE",
+            "山區天氣／雪況參考"
+        )
+
+    ],
+    links: [
+
+        LINK(
+            "山之內町官方 Live Cameras",
             "https://www.info-yamanouchi.net/livecam/"
         ),
 
-
-        linkCam(
-            "山之內町官方 Live Camera",
-            "https://www.info-yamanouchi.net/livecam/",
-            "Snow Monkey、湯田中、道之驛等官方 Live Cam 集合。",
-            "📹"
+        LINK(
+            "澀溫泉官方網站",
+            "https://shibuonsen.net/"
         )
 
     ]
-
 },
 
 
-
-/* ============================================================
-   D4 - Snow Monkey / Suzaka / Nagano
-============================================================ */
+/* ---------------------------------------------------------
+   Snow Monkey / 須坂 / 長野
+--------------------------------------------------------- */
 
 {
-
     id: "nagano",
-
-    nav: "D4 長野",
-
+    nav: "Snow Monkey・長野",
     title: "🐒 Snow Monkey・須坂・長野",
-
-    day: "D4",
-
-    note:
-        "朝早去地獄谷 Snow Monkey，之後須坂、長野。",
-
+    desc: "地獄谷、須坂及長野市區",
     cams: [
 
-        yt(
+        YT(
             "Snow Monkey Park 巴士候車室",
             "zbQvhlnQC9U",
-            "Snow Monkey Park Bus Waiting Area",
-            "https://www.info-yamanouchi.net/livecam/"
+            "山之內町官方 Camera"
         ),
 
-
-        linkCam(
-            "地獄谷野猿公苑 現場 Live Cam",
-            "https://jigokudani-yaenkoen.co.jp/livecam2/video.html",
-            "直接睇猴子公園現場官方 Camera。",
-            "🐒"
-        ),
-
-
-        linkCam(
-            "地獄谷野猿公苑 靜態 Live Image",
-            "https://jigokudani-yaenkoen.co.jp/livecam2/still.html",
-            "如果 Video Cam 較慢，可直接睇即時圖片。",
-            "📷"
-        ),
-
-
-        yt(
+        YT(
             "須坂長野東 IC",
             "hlKxhMVdE_0",
-            "須坂／高速公路附近道路狀況"
+            "國道403號／須坂長野東 IC"
         ),
 
-
-        yt(
+        YT(
             "善光寺",
             "HvJdPF46kak",
-            "善光寺 24h Live Camera"
+            "本堂／仲見世方向"
         ),
 
-
-        yt(
-            "長野站",
+        YT(
+            "JR 長野站",
             "-LxeC1RhMrU",
-            "長野駅 Live Camera"
+            "善光寺口／站前"
+        )
+
+    ],
+    links: [
+
+        LINK(
+            "🐒 地獄谷野猿公苑官方 Live Video",
+            "https://jigokudani-yaenkoen.co.jp/livecam2/video.html"
+        ),
+
+        LINK(
+            "📷 地獄谷野猿公苑即時相",
+            "https://jigokudani-yaenkoen.co.jp/livecam2/still.html"
+        ),
+
+        LINK(
+            "地獄谷野猿公苑官方",
+            "https://jigokudani-yaenkoen.co.jp/"
+        ),
+
+        LINK(
+            "善光寺官方即時資訊",
+            "https://www.zenkoji.jp/0-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E9%80%9A%E5%B8%B8%E6%97%A5-%E4%BF%9D%E7%AE%A1/"
         )
 
     ]
-
 },
 
 
-
-/* ============================================================
-   D5 - Hakuba
-============================================================ */
+/* ---------------------------------------------------------
+   白馬
+--------------------------------------------------------- */
 
 {
-
     id: "hakuba",
-
-    nav: "D5 白馬",
-
+    nav: "白馬",
     title: "🏔️ 白馬 Hakuba",
-
-    day: "D5",
-
-    note:
-        "長野 → 白馬岩岳 → 高山。山頂、山腳、停車場及五竜均可即時比較。",
-
+    desc: "岩岳、Hakuba47、八方尾根、五竜",
     cams: [
 
-        yt(
+        YT(
             "白馬岩岳 Iwatake",
-            "e3EliJKC6z8",
-            "白馬岩岳 Live Camera",
-            "https://www.vill.hakuba.nagano.jp/livecamera/"
+            "e3EliJKC6z8"
         ),
 
-
-        yt(
+        YT(
             "Hakuba47",
-            "4ppkv2HsdEY",
-            "Winter Sports Park",
-            "https://www.vill.hakuba.nagano.jp/livecamera/"
+            "4ppkv2HsdEY"
         ),
 
-
-        yt(
+        YT(
             "八方尾根 Alpen Quad",
             "21HCv58C99o",
             "標高 1,678m"
         ),
 
-
-        yt(
+        YT(
             "八方尾根 Usagidaira",
             "9ej1bDX8Kd8",
-            "うさぎ平・標高 1,391m"
+            "標高 1,391m"
         ),
 
-
-        yt(
+        YT(
             "八方尾根 Gondola",
             "hMY3VnL4Pyk",
             "白樺 Gondola Station・770m"
         ),
 
-
-        yt(
+        YT(
             "八方尾根 第3停車場",
             "BHo4tHKIDow",
-            "Car Park 3・737m"
+            "Car Park 3"
         ),
 
-
-        yt(
+        YT(
             "白馬五竜 Alps 平 北側",
-            "5LbQtmFr1Ws",
-            "Goryu Alps Daira North"
+            "5LbQtmFr1Ws"
         ),
 
-
-        yt(
+        YT(
             "白馬五竜 Alps 平 西側",
-            "aoBkllBoMWQ",
-            "Goryu Alps Daira West"
+            "aoBkllBoMWQ"
         ),
 
-
-        yt(
+        YT(
             "白馬五竜 Escal Plaza",
-            "xHLUcjh_0NQ",
-            "エスカルプラザ入口"
+            "xHLUcjh_0NQ"
         ),
 
-
-        yt(
+        YT(
             "白馬五竜 第2停車場",
-            "itaV65JiPSs",
-            "Goryu Parking Area"
+            "itaV65JiPSs"
         ),
 
-
-        yt(
+        YT(
             "白馬五竜 Toomi Station",
-            "D8wGuRhf7EQ",
-            "五竜 とおみ駅"
-        ),
+            "D8wGuRhf7EQ"
+        )
 
+    ],
+    links: [
 
-        linkCam(
+        LINK(
             "白馬村官方 Live Camera",
-            "https://www.vill.hakuba.nagano.jp/livecamera/",
-            "白馬村官方所有 Live Camera 集合。",
-            "📹"
+            "https://www.vill.hakuba.nagano.jp/livecamera/"
         ),
 
-
-        linkCam(
-            "白馬／大町道路 Camera",
-            "https://www.pref.nagano.lg.jp/omachiken/",
-            "國道148、406 等白馬周邊冬季道路資訊。",
-            "🛣️",
-            "道路"
+        LINK(
+            "八方尾根官方 Live Camera",
+            "https://www.happo-one.jp/gelande/livecamera/"
         )
 
     ]
-
 },
 
 
-
-/* ============================================================
-   D5-D7 - Takayama / Hida Cave
-============================================================ */
+/* ---------------------------------------------------------
+   高山
+--------------------------------------------------------- */
 
 {
-
     id: "takayama",
-
-    nav: "D6 高山",
-
+    nav: "高山",
     title: "🏯 高山・飛驒大鐘乳洞",
-
-    day: "D5 – D7",
-
-    note:
-        "高山市區及前往飛驒大鐘乳洞／平湯方向。R158 Camera 對冬季自駕尤其有用。",
-
+    desc: "高山市區及 R158 丹生川 → 平湯方向",
     cams: [
 
-        yt(
+        YT(
             "高山・中橋",
             "rRJo8uVlAGo",
-            "飛驒高山古い町並附近 Live Camera",
+            "飛驒高山官方"
+        ),
+
+        YT(
+            "高山・陣屋前",
+            "fbY0VRfHsS8",
+            "陣屋前朝市／交差點"
+        ),
+
+        IMG(
+            "R158 丹生川町茶屋野 → 高山",
+            "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0061.jpg",
+            "10 分鐘更新",
+            "https://douro.pref.gifu.lg.jp/"
+        ),
+
+        IMG(
+            "R158 丹生川町茶屋野 → 平湯",
+            "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0062.jpg",
+            "飛驒大鐘乳洞方向參考",
+            "https://douro.pref.gifu.lg.jp/"
+        ),
+
+        IMG(
+            "R158 丹生川町久手 → 平湯",
+            "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0091.jpg",
+            "再入山區前雪況",
+            "https://douro.pref.gifu.lg.jp/"
+        )
+
+    ],
+    links: [
+
+        LINK(
+            "飛驒高山官方 Live Camera",
             "https://www.hidatakayama.or.jp/index_10.html"
         ),
 
+        LINK(
+            "飛驒大鐘乳洞官方",
+            "https://www.syonyudo.com/"
+        ),
 
-        road(
-            "R158 丹生川町茶屋野 → 平湯",
-            "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0062.jpg",
-            "由高山市區往飛驒大鐘乳洞／平湯方向。",
+        LINK(
+            "高山國道道路 Cameras",
+            "https://www.cbr.mlit.go.jp/takayama/cctv/"
+        ),
+
+        LINK(
+            "岐阜縣道路 Camera Map",
             "https://douro.pref.gifu.lg.jp/"
-        ),
-
-
-        road(
-            "R158 丹生川町茶屋野 → 高山",
-            "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0061.jpg",
-            "反方向返高山市區路面情況。",
-            "https://douro.pref.gifu.lg.jp/"
-        ),
-
-
-        road(
-            "R158 丹生川町久手 → 平湯",
-            "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0091.jpg",
-            "再深入山區前睇積雪非常實用。",
-            "https://douro.pref.gifu.lg.jp/"
-        ),
-
-
-        linkCam(
-            "飛驒高山官方 Live Camera",
-            "https://www.hidatakayama.or.jp/index_10.html",
-            "高山市官方觀光 Live Camera。",
-            "📹"
-        ),
-
-
-        linkCam(
-            "高山國道事務所道路 Cameras",
-            "https://www.cbr.mlit.go.jp/takayama/cctv/",
-            "高山、平湯、安房峠一帶國道 Camera。",
-            "🛣️",
-            "道路"
         )
 
     ]
-
 },
 
 
-
-/* ============================================================
-   D7/D8 - Shinhotaka / Okuhida / Hirayu
-============================================================ */
+/* ---------------------------------------------------------
+   新穗高・平湯
+--------------------------------------------------------- */
 
 {
-
     id: "shinhotaka",
-
-    nav: "D7/8 新穗高",
-
+    nav: "新穗高・平湯",
     title: "🚡 新穗高・奧飛驒・平湯",
-
-    day: "D7 / D8",
-
-    note:
-        "新穗高日最重要：先睇山頂能見度、纜車運行情況，再睇平湯及 R158 積雪。",
-
+    desc: "新穗高山頂能見度及 R158 平湯雪況",
     cams: [
 
-        channel(
-            "新穗高 Ropeway Live",
-            "UC3i9y6EYpXlvrHLm2wMbOkQ",
-            "新穗高 Ropeway 官方 YouTube Live",
+        YT(
+            "新穗高 Ropeway",
+            "jXrh_mQxwl8",
+            "西穗高口站展望台・北阿爾卑斯"
+        ),
+
+        IMG(
+            "R158 平湯 → 高山市區",
+            "https://douro.pref.gifu.lg.jp/img/camera/douro_080_0181.jpg",
+            "平湯 Tunnel 前 Parking Area",
+            "https://douro.pref.gifu.lg.jp/"
+        ),
+
+        IMG(
+            "R158 大滝橋 → 平湯市街",
+            "https://douro.pref.gifu.lg.jp/img/camera/douro_080_0081.jpg",
+            "平湯大滝／平湯 Ski Area 附近",
+            "https://douro.pref.gifu.lg.jp/"
+        ),
+
+        IMG(
+            "R158 乗鞍 Skyline 入口 → 高山",
+            "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0132.jpg",
+            "高海拔道路雪況",
+            "https://douro.pref.gifu.lg.jp/"
+        )
+
+    ],
+    links: [
+
+        LINK(
+            "🚡 新穗高官方天氣／運行狀況",
             "https://shinhotaka-ropeway.jp/"
         ),
 
+        LINK(
+            "平湯・安房峠道路 Camera",
+            "https://www.cbr.mlit.go.jp/takayama/cctv/cctv_awa.html"
+        ),
 
-        road(
-            "R158 平湯 → 高山",
-            "https://douro.pref.gifu.lg.jp/img/camera/douro_080_0181.jpg",
-            "平湯地區路面及積雪狀況。",
+        LINK(
+            "岐阜道路 Camera Map",
             "https://douro.pref.gifu.lg.jp/"
-        ),
-
-
-        road(
-            "R158 大滝橋 → 平湯",
-            "https://douro.pref.gifu.lg.jp/img/camera/douro_080_0081.jpg",
-            "進入平湯溫泉前道路情況。",
-            "https://douro.pref.gifu.lg.jp/"
-        ),
-
-
-        road(
-            "R158 乗鞍 Skyline 入口 → 平湯",
-            "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0131.jpg",
-            "高海拔地區雪況參考。",
-            "https://douro.pref.gifu.lg.jp/"
-        ),
-
-
-        linkCam(
-            "新穗高 Ropeway 運行／天氣",
-            "https://shinhotaka-ropeway.jp/",
-            "睇即時天氣、氣溫及 Ropeway 是否正常運行。",
-            "🚡"
-        ),
-
-
-        linkCam(
-            "平湯・安房隧道道路 Cameras",
-            "https://www.cbr.mlit.go.jp/takayama/cctv/cctv_awa.html",
-            "安房隧道及平湯冬季道路狀態。",
-            "🛣️",
-            "道路"
-        ),
-
-
-        linkCam(
-            "奧飛驒／新穗高 Parking Live",
-            "https://chubusangaku.jp/ja/plan/parkingfeed/",
-            "中部山岳國立公園官方 Parking Camera。",
-            "🅿️"
-        ),
-
-
-        linkCam(
-            "槍見館 Live Camera",
-            "https://yarimikan.com/",
-            "奧飛驒新穗高溫泉區天氣參考。",
-            "🏔️"
         )
 
     ]
-
 },
 
 
-
-/* ============================================================
-   D7/D8 - Shirakawa-go
-============================================================ */
+/* ---------------------------------------------------------
+   白川鄉
+--------------------------------------------------------- */
 
 {
-
     id: "shirakawa",
-
-    nav: "D7/8 白川鄉",
-
+    nav: "白川鄉",
     title: "🏘️ 白川鄉 Shirakawa-go",
-
-    day: "D7 / D8",
-
-    note:
-        "白川鄉景觀、停車／交通及進出村道路積雪。",
-
+    desc: "R156 進出白川鄉冬季道路；村內景觀／停車場用官方按鈕",
     cams: [
 
-        linkCam(
-            "白川鄉合掌村官方 Live Cam",
-            "https://www.vill.shirakawa.lg.jp/livecam/",
-            "荻町城跡展望台官方景觀 Live Camera。",
-            "🏘️"
-        ),
-
-
-        linkCam(
-            "白川鄉交通 Live Cameras",
-            "https://shirakawa-going.jp/#live",
-            "停車場、交叉口、國道156等即時交通畫面。",
-            "🚗",
-            "交通"
-        ),
-
-
-        road(
+        IMG(
             "R156 椿原 → 荘川",
             "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0011.jpg",
-            "白川鄉一帶國道156雪況。",
+            "白川村椿原",
             "https://douro.pref.gifu.lg.jp/"
         ),
 
-
-        road(
+        IMG(
             "R156 福島 → 荘川",
             "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0071.jpg",
-            "白川村周邊道路積雪。",
+            "御母衣 Dam 附近",
             "https://douro.pref.gifu.lg.jp/"
         ),
 
-
-        road(
+        IMG(
             "R156 岩瀬橋 → 白川村",
             "https://douro.pref.gifu.lg.jp/img/camera/douro_070_0042.jpg",
-            "前往白川鄉方向道路狀況。",
+            "御母衣湖／白川鄉方向",
+            "https://douro.pref.gifu.lg.jp/"
+        )
+
+    ],
+    links: [
+
+        LINK(
+            "🏘️ 白川鄉合掌村官方 Live Cam",
+            "https://www.vill.shirakawa.lg.jp/livecam/"
+        ),
+
+        LINK(
+            "🚗 白川鄉 5 個交通 Live Cam",
+            "https://shirakawa-going.jp/tw/index.html"
+        ),
+
+        LINK(
+            "岐阜道路 Camera Map",
             "https://douro.pref.gifu.lg.jp/"
         )
 
     ]
-
-},
-
-
-
-/* ============================================================
-   Road Quick Links
-============================================================ */
-
-{
-
-    id: "roads",
-
-    nav: "🚗 道路",
-
-    title: "🚗 冬季道路快速入口",
-
-    day: "自駕",
-
-    note:
-        "如果落大雪，呢一區比景點 Camera 更重要。",
-
-    cams: [
-
-        linkCam(
-            "長野國道 Live Cameras",
-            "https://www.ktr.mlit.go.jp/nagano/douroinfo/",
-            "長野縣主要國道積雪及交通 Camera。",
-            "🛣️",
-            "道路"
-        ),
-
-
-        linkCam(
-            "白馬／大町道路",
-            "https://www.pref.nagano.lg.jp/omachiken/",
-            "白馬、大町、國道148／406一帶。",
-            "🛣️",
-            "道路"
-        ),
-
-
-        linkCam(
-            "千曲川 Live Camera Map",
-            "https://www.hrr.mlit.go.jp/chikuma/livecamera/",
-            "長野、千曲、小布施一帶參考。",
-            "🌊"
-        ),
-
-
-        linkCam(
-            "高山國道 CCTV",
-            "https://www.cbr.mlit.go.jp/takayama/cctv/",
-            "高山 → 平湯 → 安房峠。",
-            "🛣️",
-            "道路"
-        ),
-
-
-        linkCam(
-            "岐阜縣道路 Camera Map",
-            "https://douro.pref.gifu.lg.jp/",
-            "高山、奧飛驒、白川鄉全區道路 Camera。",
-            "🗺️",
-            "道路"
-        ),
-
-
-        linkCam(
-            "白川鄉交通 Live Camera",
-            "https://shirakawa-going.jp/#live",
-            "停車場及村內主要道路即時狀況。",
-            "🚙",
-            "交通"
-        ),
-
-
-        linkCam(
-            "新穗高 Parking Camera",
-            "https://chubusangaku.jp/ja/plan/parkingfeed/",
-            "奧飛驒／新穗高停車場狀況。",
-            "🅿️"
-        ),
-
-
-        linkCam(
-            "JARTIC 日本道路交通資訊",
-            "https://www.jartic.or.jp/",
-            "事故、封路、交通規制。",
-            "⚠️",
-            "交通"
-        ),
-
-
-        linkCam(
-            "NEXCO 中日本",
-            "https://www.c-nexco.co.jp/",
-            "高速公路冬季規制及交通資訊。",
-            "🛣️",
-            "高速"
-        )
-
-    ]
-
 }
 
 ];
 
 
-
-/* ============================================================
+/* =========================================================
    Rendering
-============================================================ */
+========================================================= */
 
-
-function makeYouTubeEmbed(
-    id
-) {
-
+function youtubeEmbed(id) {
     return (
-
         "https://www.youtube-nocookie.com/embed/" +
-
         encodeURIComponent(id) +
-
-        "?autoplay=1" +
-
-        "&mute=1" +
-
-        "&controls=0" +
-
-        "&rel=0" +
-
-        "&playsinline=1"
-
+        "?autoplay=1&mute=1&controls=0&rel=0&playsinline=1"
     );
-
 }
 
-
-
-function makeChannelEmbed(
-    channelId
-) {
-
-    return (
-
-        "https://www.youtube-nocookie.com/embed/live_stream" +
-
-        "?channel=" +
-
-        encodeURIComponent(channelId) +
-
-        "&autoplay=1" +
-
-        "&mute=1" +
-
-        "&controls=0" +
-
-        "&rel=0" +
-
-        "&playsinline=1"
-
-    );
-
+function cacheBust(url) {
+    return url + (url.includes("?") ? "&" : "?") + "t=" + Date.now();
 }
 
+function renderCam(cam) {
 
-
-function addTimestamp(
-    url
-) {
-
-    const joiner =
-        url.includes("?")
-        ? "&"
-        : "?";
-
-
-    return (
-
-        url +
-
-        joiner +
-
-        "t=" +
-
-        Date.now()
-
-    );
-
-}
-
-
-
-function renderCamera(
-    cam
-) {
-
-
-    /* ========================================================
-       YouTube Video
-    ======================================================== */
-
-    if (
-        cam.type === "youtube"
-    ) {
-
-        const embed =
-            makeYouTubeEmbed(
-                cam.id
-            );
-
-
-        const full =
-            "https://www.youtube.com/watch?v=" +
-            encodeURIComponent(
-                cam.id
-            );
-
+    if (cam.type === "youtube") {
 
         return `
+        <div class="cam-card">
 
-            <div class="cam-item">
+            <div class="cam-top">
 
-                <div class="cam-head">
-
-                    <div>
-
-                        <h3>
-                            ${cam.title}
-                        </h3>
-
-                        <p>
-                            ${cam.desc}
-                        </p>
-
-                    </div>
-
-
-                    <span class="
-                        cam-badge
-                        badge-video
-                    ">
-                        LIVE VIDEO
-                    </span>
-
+                <div class="cam-text">
+                    <h3>${cam.name}</h3>
+                    ${cam.desc ? `<p>${cam.desc}</p>` : ""}
                 </div>
 
-
-                <div class="video-shell">
-
-                    <div class="video-loading">
-                        Camera 會去到附近先載入…
-                    </div>
-
-
-                    <iframe
-                        class="
-                            youtube-frame
-                            lazy-video
-                        "
-                        data-src="${embed}"
-                        title="${cam.title}"
-                        allow="
-                            autoplay;
-                            encrypted-media;
-                            picture-in-picture
-                        "
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-
-                <div class="actions">
-
-                    <a
-                        class="button"
-                        href="${full}"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        🔗 全螢幕
-                    </a>
-
-
-                    ${
-                        cam.sourceUrl
-                        ?
-                        `
-
-                        <a
-                            class="
-                                button
-                                secondary
-                            "
-                            href="${cam.sourceUrl}"
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            官方頁面
-                        </a>
-
-                        `
-                        :
-                        ""
-                    }
-
-                </div>
+                <span class="badge badge-video">
+                    LIVE VIDEO
+                </span>
 
             </div>
 
-        `;
+            <div class="media-box">
 
-    }
-
-
-
-    /* ========================================================
-       YouTube Channel Live
-    ======================================================== */
-
-    if (
-        cam.type === "channel"
-    ) {
-
-        const embed =
-            makeChannelEmbed(
-                cam.channelId
-            );
-
-
-        const full =
-
-            "https://www.youtube.com/channel/" +
-
-            encodeURIComponent(
-                cam.channelId
-            ) +
-
-            "/live";
-
-
-        return `
-
-            <div class="cam-item">
-
-                <div class="cam-head">
-
-                    <div>
-
-                        <h3>
-                            ${cam.title}
-                        </h3>
-
-                        <p>
-                            ${cam.desc}
-                        </p>
-
-                    </div>
-
-
-                    <span class="
-                        cam-badge
-                        badge-video
-                    ">
-                        LIVE VIDEO
-                    </span>
-
+                <div class="media-status">
+                    展開地區後載入 Live Camera…
                 </div>
 
-
-                <div class="video-shell">
-
-                    <div class="video-loading">
-                        Camera 會去到附近先載入…
-                    </div>
-
-
-                    <iframe
-                        class="
-                            youtube-frame
-                            lazy-video
-                        "
-                        data-src="${embed}"
-                        title="${cam.title}"
-                        allow="
-                            autoplay;
-                            encrypted-media;
-                            picture-in-picture
-                        "
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-
-                <div class="actions">
-
-                    <a
-                        class="button"
-                        href="${full}"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        🔗 全螢幕
-                    </a>
-
-
-                    ${
-                        cam.sourceUrl
-                        ?
-                        `
-
-                        <a
-                            class="
-                                button
-                                secondary
-                            "
-                            href="${cam.sourceUrl}"
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            官方頁面
-                        </a>
-
-                        `
-                        :
-                        ""
-                    }
-
-                </div>
+                <iframe
+                    class="live-video"
+                    data-src="${youtubeEmbed(cam.id)}"
+                    title="${cam.name}"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
 
             </div>
 
-        `;
-
-    }
-
-
-
-    /* ========================================================
-       Road Camera Image
-    ======================================================== */
-
-    if (
-        cam.type === "image"
-    ) {
-
-        return `
-
-            <div class="cam-item">
-
-                <div class="cam-head">
-
-                    <div>
-
-                        <h3>
-                            ${cam.title}
-                        </h3>
-
-                        <p>
-                            ${cam.desc}
-                        </p>
-
-                    </div>
-
-
-                    <span class="
-                        cam-badge
-                        badge-road
-                    ">
-                        道路 CAM
-                    </span>
-
-                </div>
-
-
-                <div class="road-img-wrap">
-
-                    <img
-                        class="road-img"
-                        data-base="${cam.imageUrl}"
-                        src="${addTimestamp(cam.imageUrl)}"
-                        alt="${cam.title}"
-                        loading="lazy"
-                    >
-
-
-                    <div class="img-error">
-
-                        圖片暫時未能載入。
-                        <br>
-                        可按「官方道路頁面」。
-
-                    </div>
-
-                </div>
-
-
-                <div class="actions">
-
-                    <a
-                        class="button"
-                        href="${cam.sourceUrl}"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        🛣️ 官方道路頁面
-                    </a>
-
-                </div>
-
-            </div>
-
-        `;
-
-    }
-
-
-
-    /* ========================================================
-       External Official Link
-    ======================================================== */
-
-    if (
-        cam.type === "link"
-    ) {
-
-        return `
-
-            <div class="cam-item">
-
-                <div class="cam-head">
-
-                    <div>
-
-                        <h3>
-                            ${cam.title}
-                        </h3>
-
-                        <p>
-                            ${cam.desc}
-                        </p>
-
-                    </div>
-
-
-                    <span class="
-                        cam-badge
-                        badge-link
-                    ">
-                        ${cam.badge}
-                    </span>
-
-                </div>
-
-
-                <div class="link-hero">
-
-                    <div class="link-icon">
-
-                        ${cam.icon}
-
-                    </div>
-
-
-                    <div class="link-text">
-
-                        呢個來源會開啟官方
-                        Live Camera / 即時資訊頁面
-
-                    </div>
-
-                </div>
-
-
-                <div class="actions">
-
-                    <a
-                        class="button"
-                        href="${cam.url}"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        🔗 開啟
-                    </a>
-
-                </div>
-
-            </div>
-
-        `;
-
-    }
-
-
-}
-
-
-
-function renderSections() {
-
-
-    const app =
-        document.getElementById(
-            "app"
-        );
-
-
-    app.innerHTML =
-
-        sections
-
-        .map(
-
-            section => `
-
-                <section
-                    class="location-card"
-                    id="${section.id}">
-
-
-                    <div class="location-title">
-
-                        <h2>
-                            ${section.title}
-                        </h2>
-
-
-                        <span class="day-badge">
-                            ${section.day}
-                        </span>
-
-                    </div>
-
-
-                    <div class="location-note">
-                        ${section.note}
-                    </div>
-
-
-                    <div class="cam-grid">
-
-                        ${
-                            section.cams
-
-                            .map(
-                                renderCamera
-                            )
-
-                            .join("")
-                        }
-
-                    </div>
-
-
-                </section>
-
-            `
-
-        )
-
-        .join("");
-
-
-}
-
-
-
-function renderNavigation() {
-
-
-    const nav =
-        document.getElementById(
-            "quickNav"
-        );
-
-
-    nav.innerHTML =
-
-        sections
-
-        .map(
-
-            section => `
+            <div class="actions">
 
                 <a
-                    href="#${section.id}">
-
-                    ${section.nav}
-
+                    class="button"
+                    href="https://www.youtube.com/watch?v=${cam.id}"
+                    target="_blank"
+                    rel="noopener">
+                    🔗 全螢幕
                 </a>
 
-            `
+            </div>
 
-        )
+        </div>
+        `;
+    }
 
-        .join("");
 
+    if (cam.type === "image") {
+
+        return `
+        <div class="cam-card">
+
+            <div class="cam-top">
+
+                <div class="cam-text">
+                    <h3>${cam.name}</h3>
+                    ${cam.desc ? `<p>${cam.desc}</p>` : ""}
+                </div>
+
+                <span class="badge badge-road">
+                    ROAD CAM
+                </span>
+
+            </div>
+
+            <div class="media-box">
+
+                <div class="media-status">
+                    展開地區後載入最新道路圖片…
+                </div>
+
+                <img
+                    class="live-img"
+                    data-src="${cam.url}"
+                    alt="${cam.name}">
+            </div>
+
+            <div class="actions">
+
+                ${
+                    cam.source
+                    ?
+                    `<a
+                        class="button secondary"
+                        href="${cam.source}"
+                        target="_blank"
+                        rel="noopener">
+                        🛣️ 官方來源
+                    </a>`
+                    :
+                    ""
+                }
+
+            </div>
+
+        </div>
+        `;
+    }
+
+    return "";
 }
 
 
+function renderSection(section) {
 
-/* ============================================================
-   Lazy Loading YouTube
-============================================================ */
+    return `
+    <details
+        class="region"
+        id="${section.id}">
+
+        <summary>
+
+            <div class="summary-main">
+
+                <div class="summary-title">
+                    ${section.title}
+                </div>
+
+                <div class="summary-desc">
+                    ${section.desc}
+                </div>
+
+            </div>
+
+            <span class="count">
+                ${section.cams.length} 個可直接睇
+            </span>
+
+        </summary>
 
 
-function initLazyVideos() {
+        <div class="region-body">
+
+            <div class="cam-grid">
+
+                ${section.cams.map(renderCam).join("")}
+
+            </div>
 
 
-    const frames =
+            ${
+                section.links && section.links.length
+                ?
+                `
+                <div class="official-links">
 
-        document.querySelectorAll(
-            ".lazy-video"
-        );
+                    <div class="official-links-title">
+                        官方／其他實用入口
+                    </div>
+
+                    <div class="link-row">
+
+                        ${section.links.map(link => `
+                            <a
+                                class="small-link"
+                                href="${link.url}"
+                                target="_blank"
+                                rel="noopener">
+                                ${link.name}
+                            </a>
+                        `).join("")}
+
+                    </div>
+
+                </div>
+                `
+                :
+                ""
+            }
+
+        </div>
+
+    </details>
+    `;
+}
 
 
-    if (
-        !(
-            "IntersectionObserver"
-            in window
-        )
-    ) {
+document.getElementById("app").innerHTML =
+    sections.map(renderSection).join("");
 
-        frames.forEach(
 
-            frame => {
+/* =========================================================
+   Navigation
+========================================================= */
+
+const quickNav = document.getElementById("quickNav");
+
+sections.forEach(section => {
+
+    const a = document.createElement("a");
+
+    a.className = "nav-btn";
+
+    a.href = "#" + section.id;
+
+    a.textContent = section.nav;
+
+    a.addEventListener("click", function(e) {
+
+        e.preventDefault();
+
+        const target =
+            document.getElementById(section.id);
+
+        target.open = true;
+
+        loadSection(target);
+
+        setTimeout(() => {
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }, 50);
+
+    });
+
+    quickNav.appendChild(a);
+});
+
+
+/* =========================================================
+   Load / Stop Media
+========================================================= */
+
+function loadSection(details) {
+
+    details
+        .querySelectorAll("iframe.live-video")
+        .forEach(frame => {
+
+            if (!frame.hasAttribute("src")) {
 
                 frame.src =
                     frame.dataset.src;
 
+                frame.addEventListener(
+                    "load",
+                    () => {
+                        frame
+                            .closest(".media-box")
+                            .classList.add("loaded");
+                    },
+                    { once: true }
+                );
             }
 
-        );
+        });
 
 
-        return;
+    details
+        .querySelectorAll("img.live-img")
+        .forEach(img => {
 
-    }
+            loadImage(img);
 
+        });
 
-
-    const observer =
-
-        new IntersectionObserver(
-
-            entries => {
+}
 
 
-                entries.forEach(
+function stopSection(details) {
 
-                    entry => {
+    details
+        .querySelectorAll("iframe.live-video")
+        .forEach(frame => {
 
+            frame.removeAttribute("src");
 
-                        if (
-                            entry.isIntersecting
-                        ) {
+            frame
+                .closest(".media-box")
+                .classList.remove("loaded");
 
+        });
 
-                            const frame =
-                                entry.target;
-
-
-                            if (
-                                !frame.getAttribute(
-                                    "src"
-                                )
-                            ) {
-
-                                frame.setAttribute(
-
-                                    "src",
-
-                                    frame.dataset.src
-
-                                );
-
-                            }
+}
 
 
-                            observer.unobserve(
-                                frame
-                            );
+function loadImage(img) {
 
-                        }
+    const box =
+        img.closest(".media-box");
 
-                    }
+    box.classList.remove("loaded");
 
-                );
+    img.onload = function() {
 
-            },
+        box.classList.add("loaded");
+
+        const status =
+            box.querySelector(".media-status");
+
+        status.textContent = "";
+
+    };
 
 
-            {
+    img.onerror = function() {
 
-                rootMargin:
-                    "500px 0px"
+        box.classList.remove("loaded");
+
+        const status =
+            box.querySelector(".media-status");
+
+        status.innerHTML =
+            "⚠️ 暫時未能讀取圖片<br>請用下面「官方來源」查看";
+
+    };
+
+
+    img.src =
+        cacheBust(img.dataset.src);
+
+}
+
+
+/* =========================================================
+   Details Toggle
+========================================================= */
+
+document
+    .querySelectorAll("details.region")
+    .forEach(details => {
+
+        details.addEventListener(
+            "toggle",
+            function() {
+
+                if (this.open) {
+                    loadSection(this);
+                }
+                else {
+                    stopSection(this);
+                }
 
             }
-
         );
 
-
-    frames.forEach(
-
-        frame => {
-
-            observer.observe(
-                frame
-            );
-
-        }
-
-    );
-
-}
+    });
 
 
+/* =========================================================
+   Controls
+========================================================= */
 
-/* ============================================================
-   Road Camera Refresh
-============================================================ */
+document
+    .getElementById("closeAll")
+    .addEventListener(
+        "click",
+        function() {
 
-
-function refreshRoadImages() {
-
-
-    const images =
-
-        document.querySelectorAll(
-            ".road-img"
-        );
-
-
-    images.forEach(
-
-        img => {
-
-
-            const base =
-                img.dataset.base;
-
-
-            img.src =
-                addTimestamp(
-                    base
-                );
+            document
+                .querySelectorAll("details.region")
+                .forEach(details => {
+                    details.open = false;
+                });
 
         }
-
     );
-
-
-}
-
-
-
-function initRoadErrors() {
-
-
-    const images =
-
-        document.querySelectorAll(
-            ".road-img"
-        );
-
-
-    images.forEach(
-
-        img => {
-
-
-            img.addEventListener(
-
-                "error",
-
-                function() {
-
-
-                    this.style.display =
-                        "none";
-
-
-                    const error =
-
-                        this.parentElement
-
-                        .querySelector(
-                            ".img-error"
-                        );
-
-
-                    if (
-                        error
-                    ) {
-
-                        error.style.display =
-                            "block";
-
-                    }
-
-                }
-
-            );
-
-
-
-            img.addEventListener(
-
-                "load",
-
-                function() {
-
-
-                    this.style.display =
-                        "block";
-
-
-                    const error =
-
-                        this.parentElement
-
-                        .querySelector(
-                            ".img-error"
-                        );
-
-
-                    if (
-                        error
-                    ) {
-
-                        error.style.display =
-                            "none";
-
-                    }
-
-                }
-
-            );
-
-        }
-
-    );
-
-}
-
-
-
-/* ============================================================
-   Start Dashboard
-============================================================ */
-
-
-renderNavigation();
-
-renderSections();
-
-initLazyVideos();
-
-initRoadErrors();
-
 
 
 document
-.getElementById(
-    "refreshRoads"
-)
-.addEventListener(
+    .getElementById("refreshImages")
+    .addEventListener(
+        "click",
+        function() {
 
-    "click",
+            document
+                .querySelectorAll(
+                    "details.region[open] img.live-img"
+                )
+                .forEach(loadImage);
 
-    refreshRoadImages
+        }
+    );
 
-);
 
-
+/* =========================================================
+   Auto refresh OPEN road cams every 10 minutes
+========================================================= */
 
 setInterval(
+    function() {
 
-    refreshRoadImages,
+        document
+            .querySelectorAll(
+                "details.region[open] img.live-img"
+            )
+            .forEach(loadImage);
 
-    5 * 60 * 1000
-
+    },
+    10 * 60 * 1000
 );
 
+
+/* =========================================================
+   Open hash section if URL has #section
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        if (location.hash) {
+
+            const target =
+                document.querySelector(location.hash);
+
+            if (
+                target &&
+                target.matches("details.region")
+            ) {
+
+                target.open = true;
+
+                loadSection(target);
+
+            }
+
+        }
+
+    }
+);
 
 </script>
 
-
 </body>
-
 </html>
