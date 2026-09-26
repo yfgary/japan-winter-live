@@ -67,6 +67,11 @@ body {
         sans-serif;
 }
 
+
+/* =====================================================
+   HEADER
+===================================================== */
+
 header {
     background:
         linear-gradient(
@@ -88,17 +93,18 @@ header h1 {
 }
 
 header p {
-    margin:
-        7px 0 0;
-
+    margin: 7px 0 0;
     opacity: .9;
 }
 
+
+/* =====================================================
+   PAGE SWITCH
+===================================================== */
+
 .page-switch {
     background: white;
-
     padding: 8px;
-
     text-align: center;
 
     box-shadow:
@@ -121,7 +127,7 @@ header p {
     background: #eaf2f8;
     color: #1f4e79;
 
-    font-weight: 600;
+    font-weight: 700;
     font-size: 14px;
 }
 
@@ -130,11 +136,14 @@ header p {
     color: white;
 }
 
+
+/* =====================================================
+   DAY NAV
+===================================================== */
+
 .day-nav {
     position: sticky;
-
     top: 0;
-
     z-index: 1000;
 
     background:
@@ -150,32 +159,27 @@ header p {
 
 .day-nav-inner {
     max-width: 1200px;
-
     margin: auto;
 
     padding:
         8px 9px;
 
     display: flex;
-
     gap: 6px;
 
     overflow-x: auto;
-
     white-space: nowrap;
 }
 
 .nav-btn,
 .day-nav a {
-    flex:
-        0 0 auto;
+    flex: 0 0 auto;
 
     border: 0;
 
     text-decoration: none;
 
     background: #eef4f8;
-
     color: #1f4e79;
 
     padding:
@@ -184,7 +188,6 @@ header p {
     border-radius: 16px;
 
     font-size: 12px;
-
     font-weight: 700;
 
     cursor: pointer;
@@ -208,13 +211,21 @@ header p {
     cursor: default;
 }
 
+
+/* =====================================================
+   MAIN
+===================================================== */
+
 .container {
     max-width: 1150px;
-
     margin: auto;
-
     padding: 17px;
 }
+
+
+/* =====================================================
+   INTRO
+===================================================== */
 
 .intro {
     background: white;
@@ -231,9 +242,7 @@ header p {
 }
 
 .intro h2 {
-    margin:
-        0 0 8px;
-
+    margin: 0 0 8px;
     color: #1f4e79;
 }
 
@@ -260,9 +269,13 @@ header p {
     padding: 10px;
 
     font-size: 13px;
-
     line-height: 1.5;
 }
+
+
+/* =====================================================
+   DAY
+===================================================== */
 
 details.day {
     background: white;
@@ -289,9 +302,7 @@ details.day > summary {
         16px 18px;
 
     display: flex;
-
     align-items: center;
-
     gap: 12px;
 
     background:
@@ -326,7 +337,6 @@ summary::-webkit-details-marker {
     margin-top: 3px;
 
     font-size: 21px;
-
     font-weight: 700;
 
     line-height: 1.35;
@@ -338,7 +348,6 @@ summary::-webkit-details-marker {
     color: #526572;
 
     font-size: 13px;
-
     font-weight: 700;
 }
 
@@ -359,7 +368,6 @@ summary::after {
     color: #1f4e79;
 
     font-size: 25px;
-
     font-weight: 700;
 }
 
@@ -374,9 +382,57 @@ summary {
         1px solid #e0e7ed;
 }
 
-.day-inner {
-    padding-bottom: 2px;
+
+/* =====================================================
+   MAP PIN
+===================================================== */
+
+.map-pin {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 27px;
+    height: 27px;
+
+    margin-left: 6px;
+
+    border-radius: 50%;
+
+    background: #e5f4ea;
+
+    border:
+        1px solid #bcdcc7;
+
+    text-decoration: none;
+
+    vertical-align: middle;
+
+    font-size: 15px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s ease,
+        background .15s ease;
 }
+
+.map-pin:hover {
+    background: #d4ebdc;
+    transform: scale(1.08);
+}
+
+.map-pin:active {
+    transform: scale(.96);
+}
+
+
+/* =====================================================
+   HIGHLIGHTS
+===================================================== */
 
 .day-highlights {
     margin:
@@ -453,6 +509,11 @@ summary {
         1px solid #d8e0e6;
 }
 
+
+/* =====================================================
+   DECISION
+===================================================== */
+
 .quick-decision {
     margin:
         12px 18px 0;
@@ -471,7 +532,6 @@ summary {
     color: #1f4e79;
 
     font-size: 15px;
-
     font-weight: 800;
 
     margin-bottom: 10px;
@@ -479,7 +539,6 @@ summary {
 
 .decision-options {
     display: grid;
-
     gap: 8px;
 }
 
@@ -510,6 +569,11 @@ summary {
     border-left:
         4px solid #cc5a50;
 }
+
+
+/* =====================================================
+   PHOTO
+===================================================== */
 
 .photo-section {
     padding:
@@ -551,8 +615,7 @@ summary {
 
 .hero-photo:hover img,
 .photo-card:hover img {
-    transform:
-        scale(1.015);
+    transform: scale(1.015);
 }
 
 .photo-caption {
@@ -568,7 +631,6 @@ summary {
     color: white;
 
     font-size: 14px;
-
     font-weight: 700;
 
     background:
@@ -584,10 +646,7 @@ summary {
     display: grid;
 
     grid-template-columns:
-        repeat(
-            2,
-            minmax(0, 1fr)
-        );
+        repeat(2, minmax(0, 1fr));
 
     gap: 11px;
 
@@ -613,6 +672,11 @@ summary {
     padding:
         25px 10px 8px;
 }
+
+
+/* =====================================================
+   CONTENT / TIMELINE
+===================================================== */
 
 .day-content {
     padding: 18px;
@@ -679,7 +743,6 @@ summary {
     position: absolute;
 
     left: -22px;
-
     top: 15px;
 
     width: 9px;
@@ -718,7 +781,6 @@ summary {
     color: #657480;
 
     font-size: 11px;
-
     font-weight: 700;
 }
 
@@ -732,6 +794,8 @@ summary {
         0 0 6px;
 
     font-size: 16px;
+
+    line-height: 1.45;
 }
 
 .timeline-card p {
@@ -743,6 +807,11 @@ summary {
 
     line-height: 1.6;
 }
+
+
+/* =====================================================
+   PRICE / BOX
+===================================================== */
 
 .price {
     display: inline-block;
@@ -759,7 +828,6 @@ summary {
     color: #447132;
 
     font-size: 11px;
-
     font-weight: 700;
 }
 
@@ -815,6 +883,11 @@ summary {
     font-size: 14px;
 }
 
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
 .day-buttons {
     margin-top: 14px;
 
@@ -840,9 +913,13 @@ summary {
     border-radius: 7px;
 
     font-size: 12px;
-
     font-weight: 600;
 }
+
+
+/* =====================================================
+   MODAL
+===================================================== */
 
 .photo-modal {
     position: fixed;
@@ -854,7 +931,6 @@ summary {
     display: none;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 20px;
@@ -876,7 +952,6 @@ summary {
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 }
 
@@ -930,6 +1005,11 @@ summary {
     z-index: 5001;
 }
 
+
+/* =====================================================
+   CREDITS
+===================================================== */
+
 details.credits {
     background: white;
 
@@ -968,10 +1048,7 @@ summary {
     display: grid;
 
     grid-template-columns:
-        repeat(
-            2,
-            minmax(0, 1fr)
-        );
+        repeat(2, minmax(0, 1fr));
 
     gap:
         4px 18px;
@@ -992,6 +1069,11 @@ summary {
     color: #1f4e79;
 }
 
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
 footer {
     text-align: center;
 
@@ -1003,6 +1085,11 @@ footer {
         17px 10px
         35px;
 }
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media
 (max-width: 720px) {
@@ -1019,8 +1106,7 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    details.day >
-    summary {
+    details.day > summary {
         padding: 14px;
     }
 
@@ -1049,10 +1135,7 @@ footer {
 
     .photo-gallery {
         grid-template-columns:
-            repeat(
-                2,
-                minmax(0, 1fr)
-            );
+            repeat(2, minmax(0, 1fr));
 
         gap: 7px;
     }
@@ -1131,6 +1214,10 @@ footer {
     href="itinerary.html"
     class="active">
     🗓️ 詳細行程
+</a>
+
+<a href="trip-info.html">
+    🧳 旅程資料
 </a>
 
 </div>
@@ -1218,9 +1305,7 @@ footer {
 
 <div class="intro-item">
 
-<strong>
-    🚗 行程原則
-</strong>
+<strong>🚗 行程原則</strong>
 
 <br>
 
@@ -1232,9 +1317,7 @@ footer {
 
 <div class="intro-item">
 
-<strong>
-    🌨️ D6–D8
-</strong>
+<strong>🌨️ D6–D8</strong>
 
 <br>
 
@@ -1246,14 +1329,12 @@ footer {
 
 <div class="intro-item">
 
-<strong>
-    📹 Live Cam
-</strong>
+<strong>📍 Google Maps</strong>
 
 <br>
 
-每日出發前直接切去
-Live Cam Dashboard。
+景點／酒店旁邊撳 📍，
+直接開駕車導航。
 
 </div>
 
@@ -1262,7 +1343,9 @@ Live Cam Dashboard。
 </section>
 
 
-<!-- D1 -->
+<!-- =====================================================
+     D1
+====================================================== -->
 
 <details class="day" id="d1">
 
@@ -1437,7 +1520,9 @@ UO680 規劃 10:00 起飛。
 <div class="time">14:30</div>
 <div class="timeline-card">
 <span class="event-type">🛂 入境</span>
-<h3>中部國際機場 T2</h3>
+<h3 data-map="Chubu Centrair International Airport Terminal 2">
+    中部國際機場 T2
+</h3>
 <p>
 主行程保守預 75 分鐘處理入境及行李。
 如果實際 30–45 分鐘已出禁區，
@@ -1488,7 +1573,9 @@ T2 前往 Access Plaza／名鐵站，
 <div class="time">19:50</div>
 <div class="timeline-card">
 <span class="event-type">🏨 CHECK-IN</span>
-<h3>TABINO HOTEL lit 松本</h3>
+<h3 data-map="TABINO HOTEL lit Matsumoto">
+    TABINO HOTEL lit 松本
+</h3>
 <p>
 已訂豪華雙人房、非吸煙。
 D1 酒店不包早餐。
@@ -1500,7 +1587,9 @@ D1 酒店不包早餐。
 <div class="time">20:20</div>
 <div class="timeline-card">
 <span class="event-type">⭐ BONUS</span>
-<h3>松本城 Projection Mapping</h3>
+<h3 data-map="Matsumoto Castle">
+    松本城 Projection Mapping
+</h3>
 <p>
 準時抵達而且有精神，
 可睇約 30–45 分鐘夜間光影。
@@ -1511,6 +1600,7 @@ D1 酒店不包早餐。
 </div>
 
 </div>
+
 
 <div class="day-buttons">
 
@@ -1529,7 +1619,9 @@ D1 酒店不包早餐。
 </details>
 
 
-<!-- D2 -->
+<!-- =====================================================
+     D2
+====================================================== -->
 
 <details class="day" id="d2">
 
@@ -1665,7 +1757,9 @@ D1 酒店不包早餐。
 <div class="time">08:00</div>
 <div class="timeline-card">
 <span class="event-type">🍳 早餐</span>
-<h3>松本站一帶</h3>
+<h3 data-map="Matsumoto Station">
+    松本站一帶
+</h3>
 <p>
 酒店不包早餐。
 早餐後 Check-out，
@@ -1678,7 +1772,9 @@ D1 酒店不包早餐。
 <div class="time">09:10</div>
 <div class="timeline-card">
 <span class="event-type">🏯 景點</span>
-<h3>松本城外圍</h3>
+<h3 data-map="Matsumoto Castle">
+    松本城外圍
+</h3>
 <p>
 松本城係日本現存 12 座天守之一。
 今日以外圍 25–30 分鐘為主。
@@ -1691,7 +1787,9 @@ D1 酒店不包早餐。
 <div class="time">09:40</div>
 <div class="timeline-card">
 <span class="event-type">🚗 租車</span>
-<h3>TABINO → Times 松本站前</h3>
+<h3 data-map="Times Car Rental Matsumoto Station">
+    TABINO → Times 松本站前
+</h3>
 <p>
 回酒店拎行李，
 到 Times 完成文件及驗車。
@@ -1703,7 +1801,9 @@ D1 酒店不包早餐。
 <div class="time">10:00</div>
 <div class="timeline-card hard-cut">
 <span class="event-type">🔴 HARD CUT・取車</span>
-<h3>Times 4WD＋雪軚</h3>
+<h3 data-map="Times Car Rental Matsumoto Station">
+    Times 4WD＋雪軚
+</h3>
 <p>
 10:00 正式取車，
 完成車身檢查後向白絲瀑布出發。
@@ -1715,7 +1815,9 @@ D1 酒店不包早餐。
 <div class="time">10:00</div>
 <div class="timeline-card">
 <span class="event-type">🚗 約 1小時55分</span>
-<h3>松本 → 白絲瀑布</h3>
+<h3 data-map="白糸の滝 駐車場 軽井沢">
+    松本 → 白絲瀑布
+</h3>
 <p>
 山岳道路，
 冬季要預留更多時間。
@@ -1727,7 +1829,9 @@ D1 酒店不包早餐。
 <div class="time">11:55</div>
 <div class="timeline-card">
 <span class="event-type">💧 景點</span>
-<h3>白絲瀑布</h3>
+<h3 data-map="白糸の滝 駐車場 軽井沢">
+    白絲瀑布
+</h3>
 <p>
 高約 3 米、闊約 70 米。
 冬季積雪同冰柱係最大特色。
@@ -1743,7 +1847,9 @@ D1 酒店不包早餐。
 <div class="time">12:35</div>
 <div class="timeline-card">
 <span class="event-type">🚗 約 15分鐘</span>
-<h3>白絲瀑布 → 鬼押出園</h3>
+<h3 data-map="鬼押出し園">
+    白絲瀑布 → 鬼押出園
+</h3>
 <p>冬季視道路狀況慢行。</p>
 </div>
 </div>
@@ -1752,7 +1858,9 @@ D1 酒店不包早餐。
 <div class="time">12:50</div>
 <div class="timeline-card">
 <span class="event-type">🌋 景點</span>
-<h3>鬼押出園</h3>
+<h3 data-map="鬼押出し園">
+    鬼押出園
+</h3>
 <p>
 1783 年淺間山大噴發留下嘅大型熔岩地貌。
 冬季黑色熔岩配白雪最有特色。
@@ -1766,7 +1874,9 @@ D1 酒店不包早餐。
 <div class="time">13:40</div>
 <div class="timeline-card">
 <span class="event-type">🍜 午餐</span>
-<h3>鬼押出園／附近</h3>
+<h3 data-map="鬼押出し園">
+    鬼押出園／附近
+</h3>
 <p>
 簡單午餐，
 避免壓縮 Outlet 時間。
@@ -1778,7 +1888,9 @@ D1 酒店不包早餐。
 <div class="time">14:10</div>
 <div class="timeline-card">
 <span class="event-type">🚗 約 50分鐘</span>
-<h3>鬼押出園 → 輕井澤</h3>
+<h3 data-map="Karuizawa Prince Shopping Plaza">
+    鬼押出園 → 輕井澤
+</h3>
 <p>雪天再預鬆。</p>
 </div>
 </div>
@@ -1787,7 +1899,9 @@ D1 酒店不包早餐。
 <div class="time">15:00</div>
 <div class="timeline-card">
 <span class="event-type">🛍️ SHOPPING</span>
-<h3>輕井澤王子購物廣場</h3>
+<h3 data-map="Karuizawa Prince Shopping Plaza">
+    輕井澤王子購物廣場
+</h3>
 <p>
 約 90 分鐘精華 Shopping。
 優先處理最想買嘅品牌。
@@ -1799,7 +1913,9 @@ D1 酒店不包早餐。
 <div class="time">16:30</div>
 <div class="timeline-card hard-cut">
 <span class="event-type">🔴 HARD CUT・離開 Outlet</span>
-<h3>輕井澤 → 千曲</h3>
+<h3 data-map="Club Wyndham Chikumakan">
+    輕井澤 → 千曲
+</h3>
 <p>
 約 1小時20分。
 直接去戶倉上山田溫泉，
@@ -1812,7 +1928,9 @@ D1 酒店不包早餐。
 <div class="time">17:50</div>
 <div class="timeline-card">
 <span class="event-type">🏨 CHECK-IN</span>
-<h3>Club Wyndham 千曲館</h3>
+<h3 data-map="Club Wyndham Chikumakan">
+    Club Wyndham 千曲館
+</h3>
 <p>
 已訂一泊二食。
 晚餐時間有要求就縮短 Outlet，
@@ -1825,7 +1943,9 @@ D1 酒店不包早餐。
 <div class="time">18:30</div>
 <div class="timeline-card">
 <span class="event-type">🍽️ 晚餐</span>
-<h3>千曲館</h3>
+<h3 data-map="Club Wyndham Chikumakan">
+    千曲館
+</h3>
 <p>
 住宿包晚餐。
 飯後可浸溫泉。
@@ -1839,7 +1959,6 @@ D1 酒店不包早餐。
 <div class="scenario-title">
     🔄 Backup：山路狀況唔理想
 </div>
-
 
 <div class="special-box backup">
 
@@ -1856,9 +1975,7 @@ D1 酒店不包早餐。
 
 <div class="day-buttons">
 
-<a
-    class="button"
-    href="index.html#d2">
+<a class="button" href="index.html#d2">
     📹 睇 D2 Live Cam
 </a>
 
@@ -1871,7 +1988,9 @@ D1 酒店不包早餐。
 </details>
 
 
-<!-- D3 -->
+<!-- =====================================================
+     D3
+====================================================== -->
 
 <details class="day" id="d3">
 
@@ -1996,7 +2115,9 @@ D1 酒店不包早餐。
 <div class="time">08:00</div>
 <div class="timeline-card">
 <span class="event-type">🍳 早餐</span>
-<h3>千曲館</h3>
+<h3 data-map="Club Wyndham Chikumakan">
+    千曲館
+</h3>
 <p>旅館早餐。</p>
 </div>
 </div>
@@ -2005,7 +2126,9 @@ D1 酒店不包早餐。
 <div class="time">09:15</div>
 <div class="timeline-card">
 <span class="event-type">🚗 約 45分鐘</span>
-<h3>千曲 → 小布施</h3>
+<h3 data-map="北斎館駐車場 小布施">
+    千曲 → 小布施
+</h3>
 <p>
 今日係成人の日，
 刻意唔安排 Snow Monkey。
@@ -2017,7 +2140,9 @@ D1 酒店不包早餐。
 <div class="time">10:00</div>
 <div class="timeline-card">
 <span class="event-type">🌰 散步／小食</span>
-<h3>小布施舊街＋栗之小徑</h3>
+<h3 data-map="北斎館駐車場 小布施">
+    小布施舊街＋栗之小徑
+</h3>
 <p>
 主力街景、栗子甜品、
 栗おこわ及手信。
@@ -2030,7 +2155,9 @@ D1 酒店不包早餐。
 <div class="time">11:15</div>
 <div class="timeline-card">
 <span class="event-type">🎨 OPTIONAL</span>
-<h3>北齋館</h3>
+<h3 data-map="北斎館 小布施">
+    北齋館
+</h3>
 <p>
 只係有興趣先入，
 約 30–45 分鐘。
@@ -2043,7 +2170,9 @@ D1 酒店不包早餐。
 <div class="time">12:00</div>
 <div class="timeline-card">
 <span class="event-type">🍜 午餐</span>
-<h3>小布施</h3>
+<h3 data-map="北斎館駐車場 小布施">
+    小布施
+</h3>
 <p>可選蕎麥麵／栗おこわ。</p>
 </div>
 </div>
@@ -2052,7 +2181,9 @@ D1 酒店不包早餐。
 <div class="time">12:45</div>
 <div class="timeline-card">
 <span class="event-type">🚗 約 20分鐘</span>
-<h3>小布施 → JA Oranche</h3>
+<h3 data-map="JA中野市 農産物産館 オランチェ">
+    小布施 → JA Oranche
+</h3>
 <p>往信州中野方向。</p>
 </div>
 </div>
@@ -2061,7 +2192,9 @@ D1 酒店不包早餐。
 <div class="time">13:05</div>
 <div class="timeline-card">
 <span class="event-type">🥬 SHOPPING</span>
-<h3>JA 中野市農產物產館 Oranche</h3>
+<h3 data-map="JA中野市 農産物産館 オランチェ">
+    JA 中野市農產物產館 Oranche
+</h3>
 <p>
 地元 JA 農產直賣所。
 有蔬菜、菇菌、蘋果及加工品。
@@ -2073,7 +2206,9 @@ D1 酒店不包早餐。
 <div class="time">13:40</div>
 <div class="timeline-card">
 <span class="event-type">🚗 約 40分鐘</span>
-<h3>JA Oranche → 澀溫泉</h3>
+<h3 data-map="一乃湯果亭">
+    JA Oranche → 澀溫泉
+</h3>
 <p>
 入溫泉街前按旅館指示泊車，
 唔好跟導航亂入窄巷。
@@ -2085,7 +2220,9 @@ D1 酒店不包早餐。
 <div class="time">14:20</div>
 <div class="timeline-card">
 <span class="event-type">♨️ 散步</span>
-<h3>澀溫泉街</h3>
+<h3 data-map="Shibu Onsen">
+    澀溫泉街
+</h3>
 <p>
 先認路、影相，
 15:00 再入住。
@@ -2097,7 +2234,9 @@ D1 酒店不包早餐。
 <div class="time">15:00</div>
 <div class="timeline-card hard-cut">
 <span class="event-type">🔴 CHECK-IN／溫泉</span>
-<h3>一乃湯果亭＋九湯巡禮</h3>
+<h3 data-map="一乃湯果亭">
+    一乃湯果亭＋九湯巡禮
+</h3>
 <p>
 住區內旅館可借專用鎖匙
 進入九個共同浴場。
@@ -2111,7 +2250,9 @@ D1 酒店不包早餐。
 <div class="time">18:00</div>
 <div class="timeline-card">
 <span class="event-type">🍽️ 晚餐</span>
-<h3>一乃湯果亭</h3>
+<h3 data-map="一乃湯果亭">
+    一乃湯果亭
+</h3>
 <p>住宿包晚餐。</p>
 </div>
 </div>
@@ -2120,7 +2261,9 @@ D1 酒店不包早餐。
 <div class="time">20:00</div>
 <div class="timeline-card">
 <span class="event-type">🌙 夜行／溫泉</span>
-<h3>澀溫泉街</h3>
+<h3 data-map="Shibu Onsen">
+    澀溫泉街
+</h3>
 <p>
 飯後再浸外湯，
 浴衣散步及睇夜景。
@@ -2157,7 +2300,9 @@ D1 酒店不包早餐。
 </details>
 
 
-<!-- D4 -->
+<!-- =====================================================
+     D4
+====================================================== -->
 
 <details class="day" id="d4">
 
@@ -2292,7 +2437,9 @@ D1 酒店不包早餐。
 <div class="time">08:00</div>
 <div class="timeline-card">
 <span class="event-type">🍳 早餐</span>
-<h3>一乃湯果亭</h3>
+<h3 data-map="一乃湯果亭">
+    一乃湯果亭
+</h3>
 <p>住宿包早餐。</p>
 </div>
 </div>
@@ -2301,8 +2448,15 @@ D1 酒店不包早餐。
 <div class="time">09:00</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>澀溫泉 → 上林</h3>
-<p>退房後前往 Snow Monkey 入口。</p>
+<h3
+    data-map="Snow Monkey Park Kanbayashi Parking"
+    data-map-label="上林 Snow Monkey 停車場">
+    澀溫泉 → 上林
+</h3>
+<p>
+退房後前往 Snow Monkey 入口。
+冬季導航去上林停車場，唔好導航去山入面 Jigokudani Parking。
+</p>
 </div>
 </div>
 
@@ -2310,7 +2464,11 @@ D1 酒店不包早餐。
 <div class="time">09:40</div>
 <div class="timeline-card">
 <span class="event-type">🥾 雪路</span>
-<h3>上林 → 地獄谷</h3>
+<h3
+    data-map="Snow Monkey Park Kanbayashi Parking"
+    data-map-label="上林 Snow Monkey 停車場">
+    上林 → 地獄谷
+</h3>
 <p>約 30–35 分鐘林道。</p>
 </div>
 </div>
@@ -2319,7 +2477,11 @@ D1 酒店不包早餐。
 <div class="time">10:15</div>
 <div class="timeline-card">
 <span class="event-type">🐒 核心景點</span>
-<h3>地獄谷野猿公苑</h3>
+<h3
+    data-map="Snow Monkey Park Kanbayashi Parking"
+    data-map-label="上林 Snow Monkey 停車場">
+    地獄谷野猿公苑
+</h3>
 <p>
 冬季長期積雪。
 猴子係真正生活喺附近山林嘅野生日本獼猴。
@@ -2333,7 +2495,11 @@ D1 酒店不包早餐。
 <div class="time">11:30</div>
 <div class="timeline-card">
 <span class="event-type">🥾</span>
-<h3>地獄谷 → 上林</h3>
+<h3
+    data-map="Snow Monkey Park Kanbayashi Parking"
+    data-map-label="上林 Snow Monkey 停車場">
+    地獄谷 → 上林
+</h3>
 <p>原路返回。</p>
 </div>
 </div>
@@ -2342,7 +2508,9 @@ D1 酒店不包早餐。
 <div class="time">12:05</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>上林 → 須坂</h3>
+<h3 data-map="AEON MALL Suzaka">
+    上林 → 須坂
+</h3>
 <p>約 40 分鐘。</p>
 </div>
 </div>
@@ -2351,7 +2519,9 @@ D1 酒店不包早餐。
 <div class="time">12:45</div>
 <div class="timeline-card">
 <span class="event-type">🍜 午餐</span>
-<h3>須坂</h3>
+<h3 data-map="AEON MALL Suzaka">
+    須坂
+</h3>
 <p>簡單午餐。</p>
 </div>
 </div>
@@ -2360,7 +2530,9 @@ D1 酒店不包早餐。
 <div class="time">13:30</div>
 <div class="timeline-card">
 <span class="event-type">🛍️ SHOPPING</span>
-<h3>AEON Mall 須坂</h3>
+<h3 data-map="AEON MALL Suzaka">
+    AEON Mall 須坂
+</h3>
 <p>
 食品、生果、日用品、
 服裝、藥妝同補給。
@@ -2373,7 +2545,9 @@ D1 酒店不包早餐。
 <div class="time">17:00</div>
 <div class="timeline-card hard-cut">
 <span class="event-type">🔴 HARD CUT</span>
-<h3>AEON 須坂 → 長野</h3>
+<h3 data-map="Hotel JAL City Nagano">
+    AEON 須坂 → 長野
+</h3>
 <p>
 約 40 分鐘。
 Shopping 唔再延長。
@@ -2385,7 +2559,9 @@ Shopping 唔再延長。
 <div class="time">17:45</div>
 <div class="timeline-card">
 <span class="event-type">🏨 CHECK-IN</span>
-<h3>Hotel JAL City Nagano</h3>
+<h3 data-map="Hotel JAL City Nagano">
+    Hotel JAL City Nagano
+</h3>
 <p>翌朝包兩位早餐。</p>
 </div>
 </div>
@@ -2394,7 +2570,9 @@ Shopping 唔再延長。
 <div class="time">19:00</div>
 <div class="timeline-card">
 <span class="event-type">🍽️ 晚餐</span>
-<h3>長野市內</h3>
+<h3 data-map="Nagano Station">
+    長野市內
+</h3>
 <p>
 飯後有精神可去 Donki／長野站附近。
 </p>
@@ -2429,7 +2607,9 @@ Snow Monkey 提早完成先去。
 </details>
 
 
-<!-- D5 -->
+<!-- =====================================================
+     D5
+====================================================== -->
 
 <details class="day" id="d5">
 
@@ -2554,7 +2734,9 @@ Snow Monkey 提早完成先去。
 <div class="time">07:45</div>
 <div class="timeline-card">
 <span class="event-type">🍳 早餐</span>
-<h3>Hotel JAL City Nagano</h3>
+<h3 data-map="Hotel JAL City Nagano">
+    Hotel JAL City Nagano
+</h3>
 <p>已包兩位自助早餐。</p>
 </div>
 </div>
@@ -2563,7 +2745,9 @@ Snow Monkey 提早完成先去。
 <div class="time">08:30</div>
 <div class="timeline-card">
 <span class="event-type">🧳 CHECK-OUT</span>
-<h3>長野</h3>
+<h3 data-map="Hotel JAL City Nagano">
+    長野
+</h3>
 <p>執行李後出發。</p>
 </div>
 </div>
@@ -2572,8 +2756,15 @@ Snow Monkey 提早完成先去。
 <div class="time">09:00</div>
 <div class="timeline-card">
 <span class="event-type">🚗 約 1小時15分</span>
-<h3>長野 → 白馬岩岳</h3>
-<p>冬季預鬆，遇大雪唔趕。</p>
+<h3
+    data-map="Hakuba Iwatake Mountain Resort"
+    data-map-label="白馬岩岳山腳停車場">
+    長野 → 白馬岩岳
+</h3>
+<p>
+冬季預鬆，遇大雪唔趕。
+導航去岩岳 Mountain Resort 山腳，唔好導航去 Mountain Harbor 山頂。
+</p>
 </div>
 </div>
 
@@ -2581,7 +2772,11 @@ Snow Monkey 提早完成先去。
 <div class="time">10:20</div>
 <div class="timeline-card">
 <span class="event-type">🚡 GONDOLA</span>
-<h3>山麓 → 山頂</h3>
+<h3
+    data-map="Hakuba Iwatake Mountain Resort"
+    data-map-label="白馬岩岳山腳停車場">
+    山麓 → 山頂
+</h3>
 <p>使用非滑雪旅客觀光票。</p>
 </div>
 </div>
@@ -2590,7 +2785,11 @@ Snow Monkey 提早完成先去。
 <div class="time">10:35</div>
 <div class="timeline-card">
 <span class="event-type">🏔️ 核心景點</span>
-<h3>白馬岩岳 Mountain Resort</h3>
+<h3
+    data-map="Hakuba Iwatake Mountain Resort"
+    data-map-label="白馬岩岳山腳停車場">
+    白馬岩岳 Mountain Resort
+</h3>
 <p>
 當純雪景景點，
 唔係滑雪行程。
@@ -2603,8 +2802,15 @@ Snow Monkey 提早完成先去。
 <div class="time">11:15</div>
 <div class="timeline-card">
 <span class="event-type">📷 景點</span>
-<h3>HAKUBA MOUNTAIN HARBOR</h3>
-<p>正面望白馬三山及北阿爾卑斯。</p>
+<h3
+    data-map="Hakuba Iwatake Mountain Resort"
+    data-map-label="白馬岩岳山腳停車場">
+    HAKUBA MOUNTAIN HARBOR
+</h3>
+<p>
+正面望白馬三山及北阿爾卑斯。
+一般車唔可以直接駛上山頂。
+</p>
 </div>
 </div>
 
@@ -2612,7 +2818,11 @@ Snow Monkey 提早完成先去。
 <div class="time">11:50</div>
 <div class="timeline-card">
 <span class="event-type">❄️ 雪地活動</span>
-<h3>IWATAKE WHITE PARK</h3>
+<h3
+    data-map="Hakuba Iwatake Mountain Resort"
+    data-map-label="白馬岩岳山腳停車場">
+    IWATAKE WHITE PARK
+</h3>
 <p>玩雪、散步及影相。</p>
 </div>
 </div>
@@ -2621,7 +2831,11 @@ Snow Monkey 提早完成先去。
 <div class="time">12:20</div>
 <div class="timeline-card">
 <span class="event-type">🚡</span>
-<h3>山頂 → 山麓</h3>
+<h3
+    data-map="Hakuba Iwatake Mountain Resort"
+    data-map-label="白馬岩岳山腳停車場">
+    山頂 → 山麓
+</h3>
 <p>落山後午餐。</p>
 </div>
 </div>
@@ -2630,7 +2844,11 @@ Snow Monkey 提早完成先去。
 <div class="time">12:35</div>
 <div class="timeline-card">
 <span class="event-type">🍜 午餐</span>
-<h3>白馬</h3>
+<h3
+    data-map="Hakuba Iwatake Mountain Resort"
+    data-map-label="白馬岩岳">
+    白馬
+</h3>
 <p>食完直接去高山。</p>
 </div>
 </div>
@@ -2639,7 +2857,9 @@ Snow Monkey 提早完成先去。
 <div class="time">13:20</div>
 <div class="timeline-card hard-cut">
 <span class="event-type">🔴 HARD CUT・離開白馬</span>
-<h3>白馬 → 高山</h3>
+<h3 data-map="Takayama Ouan">
+    白馬 → 高山
+</h3>
 <p>
 約 3小時10分。
 冬季長途山路，
@@ -2652,7 +2872,9 @@ Snow Monkey 提早完成先去。
 <div class="time">16:30</div>
 <div class="timeline-card">
 <span class="event-type">🏨 CHECK-IN</span>
-<h3>飛驒花里之湯 高山櫻庵</h3>
+<h3 data-map="Takayama Ouan">
+    飛驒花里之湯 高山櫻庵
+</h3>
 <p>
 已訂兩晚，
 有天然溫泉及露天風呂。
@@ -2664,7 +2886,9 @@ Snow Monkey 提早完成先去。
 <div class="time">17:00</div>
 <div class="timeline-card">
 <span class="event-type">♨️ 休息</span>
-<h3>高山櫻庵</h3>
+<h3 data-map="Takayama Ouan">
+    高山櫻庵
+</h3>
 <p>D5 以休息為主。</p>
 </div>
 </div>
@@ -2673,7 +2897,9 @@ Snow Monkey 提早完成先去。
 <div class="time">19:15</div>
 <div class="timeline-card">
 <span class="event-type">🍽️ 晚餐</span>
-<h3>高山市內</h3>
+<h3 data-map="Takayama Station">
+    高山市內
+</h3>
 <p>第一晚晚餐彈性。</p>
 </div>
 </div>
@@ -2701,7 +2927,9 @@ Snow Monkey 提早完成先去。
 </details>
 
 
-<!-- D6 -->
+<!-- =====================================================
+     D6
+====================================================== -->
 
 <details class="day" id="d6">
 
@@ -2869,8 +3097,15 @@ Live Camera、山頂能見度及風況。
 <div class="time">08:50</div>
 <div class="timeline-card">
 <span class="event-type">🚗 約 1小時20分</span>
-<h3>高山 → 新穗高</h3>
-<p>冬季山路，預鬆時間。</p>
+<h3
+    data-map="新穂高温泉駐車場"
+    data-map-label="新穗高溫泉停車場">
+    高山 → 新穗高
+</h3>
+<p>
+冬季山路，預鬆時間。
+1 月導航去新穗高溫泉停車場。
+</p>
 </div>
 </div>
 
@@ -2878,7 +3113,11 @@ Live Camera、山頂能見度及風況。
 <div class="time">10:15</div>
 <div class="timeline-card">
 <span class="event-type">🚡 核心景點</span>
-<h3>新穗高纜車</h3>
+<h3
+    data-map="新穂高温泉駐車場"
+    data-map-label="新穗高溫泉停車場">
+    新穗高纜車
+</h3>
 <p>
 兩段纜車去到海拔約 2,156 米西穗高口。
 第二段係雙層車廂，
@@ -2892,7 +3131,11 @@ Live Camera、山頂能見度及風況。
 <div class="time">12:45</div>
 <div class="timeline-card">
 <span class="event-type">🍜 午餐</span>
-<h3>新穗高</h3>
+<h3
+    data-map="新穂高温泉駐車場"
+    data-map-label="新穗高溫泉停車場">
+    新穗高
+</h3>
 <p>簡單午餐。</p>
 </div>
 </div>
@@ -2901,7 +3144,9 @@ Live Camera、山頂能見度及風況。
 <div class="time">13:30</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>新穗高 → 高山</h3>
+<h3 data-map="Takayama Ouan">
+    新穗高 → 高山
+</h3>
 <p>保留道路 Buffer。</p>
 </div>
 </div>
@@ -2920,7 +3165,9 @@ Live Camera、山頂能見度及風況。
 <div class="time">09:30</div>
 <div class="timeline-card">
 <span class="event-type">🥬 景點</span>
-<h3>宮川朝市</h3>
+<h3 data-map="宮川朝市 高山">
+    宮川朝市
+</h3>
 <p>漬物、味噌、蔬菜、小食及手工品。</p>
 </div>
 </div>
@@ -2929,9 +3176,14 @@ Live Camera、山頂能見度及風況。
 <div class="time">10:15</div>
 <div class="timeline-card">
 <span class="event-type">🏯 景點</span>
-<h3>高山陣屋</h3>
+<h3
+    data-map="中橋駐車場 高山"
+    data-map-label="中橋駐車場・高山陣屋附近">
+    高山陣屋
+</h3>
 <p>
 江戶幕府直接管治飛驒時嘅地方行政機關。
+高山陣屋本身冇專用停車場，📍 導航去附近中橋駐車場。
 </p>
 <span class="price">成人約 ¥500</span>
 </div>
@@ -2941,7 +3193,11 @@ Live Camera、山頂能見度及風況。
 <div class="time">11:00</div>
 <div class="timeline-card">
 <span class="event-type">🏘️ 古街／酒藏</span>
-<h3>三町古街＋中橋＋酒藏</h3>
+<h3
+    data-map="中橋駐車場 高山"
+    data-map-label="中橋駐車場・三町古街附近">
+    三町古街＋中橋＋酒藏
+</h3>
 <p>
 古町家、酒藏、味噌店及傳統老舖。
 司機唔試酒。
@@ -2953,7 +3209,9 @@ Live Camera、山頂能見度及風況。
 <div class="time">12:25</div>
 <div class="timeline-card">
 <span class="event-type">🍜 午餐</span>
-<h3>高山市內</h3>
+<h3 data-map="Sanmachi Historic District Takayama">
+    高山市內
+</h3>
 <p>高山拉麵／蕎麥麵。</p>
 </div>
 </div>
@@ -2962,7 +3220,9 @@ Live Camera、山頂能見度及風況。
 <div class="time">13:10</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>高山 → 飛驒大鐘乳洞</h3>
+<h3 data-map="Hida Great Limestone Cave">
+    高山 → 飛驒大鐘乳洞
+</h3>
 <p>約 40 分鐘。</p>
 </div>
 </div>
@@ -2971,7 +3231,9 @@ Live Camera、山頂能見度及風況。
 <div class="time">13:50</div>
 <div class="timeline-card">
 <span class="event-type">🧊 景點</span>
-<h3>飛驒大鐘乳洞＋冰之溪谷</h3>
+<h3 data-map="Hida Great Limestone Cave">
+    飛驒大鐘乳洞＋冰之溪谷
+</h3>
 <p>
 一月重點係大型藍白冰柱。
 洞內亦唔太受落雪影響。
@@ -2984,7 +3246,9 @@ Live Camera、山頂能見度及風況。
 <div class="time">16:00</div>
 <div class="timeline-card">
 <span class="event-type">🛒 SHOPPING</span>
-<h3>高山地元超市</h3>
+<h3 data-map="Surugaya Takayama">
+    高山地元超市
+</h3>
 <p>
 駿河屋／Valor，
 買飛驒牛、蔬果、牛奶及調味料。
@@ -3015,7 +3279,9 @@ Live Camera、山頂能見度及風況。
 </details>
 
 
-<!-- D7 -->
+<!-- =====================================================
+     D7
+====================================================== -->
 
 <details class="day" id="d7">
 
@@ -3164,8 +3430,10 @@ Live Camera、山頂能見度及風況。
 
 
 <div class="special-box weather">
+
 🌨️ 如果 D6 已成功完成新穗高，
 D7 固定去白川鄉。
+
 </div>
 
 
@@ -3180,7 +3448,9 @@ D7 固定去白川鄉。
 <div class="time">08:00</div>
 <div class="timeline-card">
 <span class="event-type">🍳 早餐／行李</span>
-<h3>高山櫻庵</h3>
+<h3 data-map="Takayama Ouan">
+    高山櫻庵
+</h3>
 <p>退房後搬行李去 Residence。</p>
 </div>
 </div>
@@ -3189,8 +3459,15 @@ D7 固定去白川鄉。
 <div class="time">09:15</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>高山 → 白川鄉</h3>
-<p>約 1 小時。</p>
+<h3
+    data-map="せせらぎ公園駐車場 白川郷"
+    data-map-label="白川鄉・せせらぎ公園駐車場">
+    高山 → 白川鄉
+</h3>
+<p>
+約 1 小時。
+導航去官方せせらぎ公園駐車場，唔好直接導航入合掌村。
+</p>
 </div>
 </div>
 
@@ -3198,7 +3475,11 @@ D7 固定去白川鄉。
 <div class="time">10:15</div>
 <div class="timeline-card">
 <span class="event-type">🏘️ 世界遺產</span>
-<h3>荻町合掌村</h3>
+<h3
+    data-map="せせらぎ公園駐車場 白川郷"
+    data-map-label="白川鄉・せせらぎ公園駐車場">
+    荻町合掌村
+</h3>
 <p>
 一月厚雪覆蓋合掌造屋頂及農田，
 係最具代表性季節之一。
@@ -3210,8 +3491,15 @@ D7 固定去白川鄉。
 <div class="time">11:20</div>
 <div class="timeline-card">
 <span class="event-type">🏠 景點</span>
-<h3>和田家</h3>
-<p>睇木樑、圍爐及合掌造結構。</p>
+<h3
+    data-map="せせらぎ公園駐車場 白川郷"
+    data-map-label="白川鄉・せせらぎ公園駐車場">
+    和田家
+</h3>
+<p>
+泊車後步行入村。
+睇木樑、圍爐及合掌造結構。
+</p>
 <span class="price">成人約 ¥400</span>
 </div>
 </div>
@@ -3220,7 +3508,11 @@ D7 固定去白川鄉。
 <div class="time">12:00</div>
 <div class="timeline-card">
 <span class="event-type">🍜 午餐</span>
-<h3>白川鄉</h3>
+<h3
+    data-map="せせらぎ公園駐車場 白川郷"
+    data-map-label="白川鄉・せせらぎ公園駐車場">
+    白川鄉
+</h3>
 <p>鄉土定食／蕎麥麵。</p>
 </div>
 </div>
@@ -3229,7 +3521,11 @@ D7 固定去白川鄉。
 <div class="time">13:00</div>
 <div class="timeline-card">
 <span class="event-type">📷 景點</span>
-<h3>荻町城跡展望台</h3>
+<h3
+    data-map="せせらぎ公園駐車場 白川郷"
+    data-map-label="白川鄉・せせらぎ公園駐車場">
+    荻町城跡展望台
+</h3>
 <p>
 可俯瞰整個合掌村。
 私家車唔可以駛入展望台停車場。
@@ -3244,7 +3540,9 @@ Shuttle 約 ¥300/人/單程
 <div class="time">14:00</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>白川鄉 → 高山</h3>
+<h3 data-map="Residence Hotel Takayama Station">
+    白川鄉 → 高山
+</h3>
 <p>約 1小時15分。</p>
 </div>
 </div>
@@ -3253,7 +3551,9 @@ Shuttle 約 ¥300/人/單程
 <div class="time">15:30</div>
 <div class="timeline-card">
 <span class="event-type">🏨 CHECK-IN</span>
-<h3>Residence Hotel Takayama Station</h3>
+<h3 data-map="Residence Hotel Takayama Station">
+    Residence Hotel Takayama Station
+</h3>
 <p>D7 住宿。</p>
 </div>
 </div>
@@ -3268,6 +3568,10 @@ Shuttle 約 ¥300/人/單程
 <div class="special-box weather">
 
 09:15 高山出發。
+
+<br>
+
+📍 新穗高導航仍然用「新穗高溫泉停車場」。
 
 <br>
 
@@ -3312,6 +3616,22 @@ D8 再畀新穗高最後一次機會。
     📹 睇 D7 Live Cam
 </a>
 
+<a
+    class="button"
+    href="https://www.google.com/maps/dir/?api=1&destination=%E3%81%9B%E3%81%9B%E3%82%89%E3%81%8E%E5%85%AC%E5%9C%92%E9%A7%90%E8%BB%8A%E5%A0%B4%20%E7%99%BD%E5%B7%9D%E9%83%B7&travelmode=driving"
+    target="_blank"
+    rel="noopener">
+    📍 白川鄉停車場
+</a>
+
+<a
+    class="button"
+    href="https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E7%A9%82%E9%AB%98%E6%B8%A9%E6%B3%89%E9%A7%90%E8%BB%8A%E5%A0%B4&travelmode=driving"
+    target="_blank"
+    rel="noopener">
+    📍 新穗高停車場
+</a>
+
 </div>
 
 </div>
@@ -3321,7 +3641,9 @@ D8 再畀新穗高最後一次機會。
 </details>
 
 
-<!-- D8 -->
+<!-- =====================================================
+     D8
+====================================================== -->
 
 <details class="day" id="d8">
 
@@ -3491,7 +3813,9 @@ D8 再畀新穗高最後一次機會。
 <div class="time">09:30</div>
 <div class="timeline-card">
 <span class="event-type">🥬 景點</span>
-<h3>宮川朝市</h3>
+<h3 data-map="宮川朝市 高山">
+    宮川朝市
+</h3>
 <p>約 35 分鐘。</p>
 </div>
 </div>
@@ -3500,7 +3824,11 @@ D8 再畀新穗高最後一次機會。
 <div class="time">10:10</div>
 <div class="timeline-card">
 <span class="event-type">🏯</span>
-<h3>高山陣屋</h3>
+<h3
+    data-map="中橋駐車場 高山"
+    data-map-label="中橋駐車場・高山陣屋附近">
+    高山陣屋
+</h3>
 <p>約 40 分鐘。</p>
 </div>
 </div>
@@ -3509,7 +3837,11 @@ D8 再畀新穗高最後一次機會。
 <div class="time">10:50</div>
 <div class="timeline-card">
 <span class="event-type">🏘️</span>
-<h3>三町古街＋酒藏</h3>
+<h3
+    data-map="中橋駐車場 高山"
+    data-map-label="中橋駐車場・三町古街附近">
+    三町古街＋酒藏
+</h3>
 <p>慢行、買手信。</p>
 </div>
 </div>
@@ -3518,7 +3850,9 @@ D8 再畀新穗高最後一次機會。
 <div class="time">12:40</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>高山 → 飛驒大鐘乳洞</h3>
+<h3 data-map="Hida Great Limestone Cave">
+    高山 → 飛驒大鐘乳洞
+</h3>
 <p>順住去松本方向。</p>
 </div>
 </div>
@@ -3527,7 +3861,9 @@ D8 再畀新穗高最後一次機會。
 <div class="time">13:20</div>
 <div class="timeline-card">
 <span class="event-type">🧊</span>
-<h3>飛驒大鐘乳洞＋冰之溪谷</h3>
+<h3 data-map="Hida Great Limestone Cave">
+    飛驒大鐘乳洞＋冰之溪谷
+</h3>
 <p>約 1小時20分。</p>
 <span class="price">成人約 ¥1,100</span>
 </div>
@@ -3537,7 +3873,9 @@ D8 再畀新穗高最後一次機會。
 <div class="time">14:40</div>
 <div class="timeline-card">
 <span class="event-type">🚗 約 2小時35分</span>
-<h3>飛驒大鐘乳洞 → 松本</h3>
+<h3 data-map="Iroha Grand Hotel Matsumoto Ekimae">
+    飛驒大鐘乳洞 → 松本
+</h3>
 <p>經平湯／安房方向。</p>
 </div>
 </div>
@@ -3546,7 +3884,9 @@ D8 再畀新穗高最後一次機會。
 <div class="time">17:15</div>
 <div class="timeline-card">
 <span class="event-type">🏨 CHECK-IN</span>
-<h3>Iroha Grand Hotel Matsumoto Ekimae</h3>
+<h3 data-map="Iroha Grand Hotel Matsumoto Ekimae">
+    Iroha Grand Hotel Matsumoto Ekimae
+</h3>
 <p>最後一晚。</p>
 </div>
 </div>
@@ -3561,6 +3901,10 @@ D8 再畀新穗高最後一次機會。
 <div class="special-box backup">
 
 09:15 高山出發。
+
+<br>
+
+📍 導航去「白川鄉・せせらぎ公園駐車場」。
 
 <br>
 
@@ -3588,7 +3932,11 @@ D8 再畀新穗高最後一次機會。
 <div class="time">09:00</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>高山 → 新穗高</h3>
+<h3
+    data-map="新穂高温泉駐車場"
+    data-map-label="新穗高溫泉停車場">
+    高山 → 新穗高
+</h3>
 <p>
 正常運行＋能見度值得先出發。
 </p>
@@ -3599,7 +3947,11 @@ D8 再畀新穗高最後一次機會。
 <div class="time">10:30</div>
 <div class="timeline-card">
 <span class="event-type">🚡</span>
-<h3>新穗高纜車</h3>
+<h3
+    data-map="新穂高温泉駐車場"
+    data-map-label="新穗高溫泉停車場">
+    新穗高纜車
+</h3>
 <p>
 今日係最後機會。
 如果仍然大霧／停駛，
@@ -3613,7 +3965,9 @@ D8 再畀新穗高最後一次機會。
 <div class="time">13:30</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>新穗高 → 安曇野／松本</h3>
+<h3 data-map="Daio Wasabi Farm">
+    新穗高 → 安曇野／松本
+</h3>
 <p>向松本方向落山。</p>
 </div>
 </div>
@@ -3622,7 +3976,9 @@ D8 再畀新穗高最後一次機會。
 <div class="time">15:15</div>
 <div class="timeline-card">
 <span class="event-type">⭐ BONUS</span>
-<h3>大王山葵農場</h3>
+<h3 data-map="Daio Wasabi Farm">
+    大王山葵農場
+</h3>
 <p>
 非常早到安曇野先加。
 </p>
@@ -3639,6 +3995,22 @@ D8 再畀新穗高最後一次機會。
     📹 睇 D8 Live Cam
 </a>
 
+<a
+    class="button"
+    href="https://www.google.com/maps/dir/?api=1&destination=%E3%81%9B%E3%81%9B%E3%82%89%E3%81%8E%E5%85%AC%E5%9C%92%E9%A7%90%E8%BB%8A%E5%A0%B4%20%E7%99%BD%E5%B7%9D%E9%83%B7&travelmode=driving"
+    target="_blank"
+    rel="noopener">
+    📍 白川鄉停車場
+</a>
+
+<a
+    class="button"
+    href="https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E7%A9%82%E9%AB%98%E6%B8%A9%E6%B3%89%E9%A7%90%E8%BB%8A%E5%A0%B4&travelmode=driving"
+    target="_blank"
+    rel="noopener">
+    📍 新穗高停車場
+</a>
+
 </div>
 
 </div>
@@ -3648,7 +4020,9 @@ D8 再畀新穗高最後一次機會。
 </details>
 
 
-<!-- D9 -->
+<!-- =====================================================
+     D9
+====================================================== -->
 
 <details class="day" id="d9">
 
@@ -3784,7 +4158,9 @@ AEON、入油、還車同 JR
 <div class="time">08:00</div>
 <div class="timeline-card">
 <span class="event-type">🍳 早餐</span>
-<h3>Iroha Grand Hotel</h3>
+<h3 data-map="Iroha Grand Hotel Matsumoto Ekimae">
+    Iroha Grand Hotel
+</h3>
 <p>
 包兩位早餐，
 最後執行李。
@@ -3796,7 +4172,9 @@ AEON、入油、還車同 JR
 <div class="time">09:00</div>
 <div class="timeline-card">
 <span class="event-type">🧳 CHECK-OUT</span>
-<h3>Iroha</h3>
+<h3 data-map="Iroha Grand Hotel Matsumoto Ekimae">
+    Iroha
+</h3>
 <p>行李全部放車內。</p>
 </div>
 </div>
@@ -3805,7 +4183,9 @@ AEON、入油、還車同 JR
 <div class="time">09:15</div>
 <div class="timeline-card">
 <span class="event-type">🚗</span>
-<h3>酒店 → AEON Mall 松本</h3>
+<h3 data-map="AEON MALL Matsumoto">
+    酒店 → AEON Mall 松本
+</h3>
 <p>約 15 分鐘。</p>
 </div>
 </div>
@@ -3814,7 +4194,9 @@ AEON、入油、還車同 JR
 <div class="time">09:30</div>
 <div class="timeline-card">
 <span class="event-type">🛍️ SHOPPING</span>
-<h3>AEON Mall 松本</h3>
+<h3 data-map="AEON MALL Matsumoto">
+    AEON Mall 松本
+</h3>
 <p>
 最後補貨。
 11:00 左右離開係 Hard Cut。
@@ -3826,10 +4208,13 @@ AEON、入油、還車同 JR
 <div class="time">11:00</div>
 <div class="timeline-card hard-cut">
 <span class="event-type">🔴 HARD CUT</span>
-<h3>AEON → 油站</h3>
+<h3>
+    AEON → 油站
+</h3>
 <p>
 11:00 必須離開 AEON。
 入滿油、保留單據。
+油站到時按 Times 指示／附近油站選擇。
 </p>
 </div>
 </div>
@@ -3838,7 +4223,9 @@ AEON、入油、還車同 JR
 <div class="time">11:40</div>
 <div class="timeline-card">
 <span class="event-type">🚗 還車</span>
-<h3>Times 松本站前</h3>
+<h3 data-map="Times Car Rental Matsumoto Station">
+    Times 松本站前
+</h3>
 <p>
 開始處理還車。
 </p>
@@ -3849,7 +4236,9 @@ AEON、入油、還車同 JR
 <div class="time">12:10</div>
 <div class="timeline-card hard-cut">
 <span class="event-type">🔴 HARD CUT・還車完成</span>
-<h3>松本站</h3>
+<h3 data-map="Matsumoto Station">
+    松本站
+</h3>
 <p>
 目標 12:10 前已經完成還車。
 之後先食午餐或買便當。
@@ -3861,7 +4250,9 @@ AEON、入油、還車同 JR
 <div class="time">13:56</div>
 <div class="timeline-card hard-cut">
 <span class="event-type">🔴 HARD CUT・JR</span>
-<h3>特急信濃・松本 → 名古屋</h3>
+<h3 data-map="Matsumoto Station">
+    特急信濃・松本 → 名古屋
+</h3>
 <p>
 現行參考 13:56 → 16:07。
 </p>
@@ -3883,7 +4274,9 @@ AEON、入油、還車同 JR
 <div class="time">17:17</div>
 <div class="timeline-card">
 <span class="event-type">✈️ CHECK-IN</span>
-<h3>中部國際機場 T2</h3>
+<h3 data-map="Chubu Centrair International Airport Terminal 2">
+    中部國際機場 T2
+</h3>
 <p>
 UO685 Check-in、
 保安、晚餐及候機。
@@ -3895,7 +4288,9 @@ UO685 Check-in、
 <div class="time">20:40</div>
 <div class="timeline-card">
 <span class="event-type">✈️ UO685</span>
-<h3>名古屋 → 香港</h3>
+<h3>
+    名古屋 → 香港
+</h3>
 <p>
 規劃 20:40 起飛，
 翌日約 00:30 抵港。
@@ -3921,7 +4316,9 @@ UO685 Check-in、
 </details>
 
 
-<!-- PHOTO CREDITS -->
+<!-- =====================================================
+     PHOTO CREDITS
+====================================================== -->
 
 <details class="credits">
 
@@ -4189,6 +4586,10 @@ Japan Winter Trip 2027
 
 <br>
 
+📍 = Google Maps 駕車導航
+
+<br>
+
 詳細時間、票價及交通班次
 出發前再作最終確認
 
@@ -4205,7 +4606,6 @@ Japan Winter Trip 2027
     aria-label="關閉">
     ×
 </button>
-
 
 <div class="photo-modal-inner">
 
@@ -4226,6 +4626,121 @@ Japan Winter Trip 2027
 
 <script>
 
+
+/* =====================================================
+   GOOGLE MAPS
+===================================================== */
+
+function googleDriveUrl(
+    destination
+) {
+
+    return (
+        "https://www.google.com/maps/dir/" +
+        "?api=1" +
+        "&destination=" +
+        encodeURIComponent(destination) +
+        "&travelmode=driving"
+    );
+
+}
+
+
+function addMapPins() {
+
+    document
+    .querySelectorAll(
+        "[data-map]"
+    )
+    .forEach(
+
+        function(element) {
+
+            if (
+                element.dataset.mapAdded === "true"
+            ) {
+                return;
+            }
+
+
+            const destination =
+                element.dataset.map;
+
+
+            const label =
+                element.dataset.mapLabel ||
+                destination;
+
+
+            const link =
+                document.createElement("a");
+
+
+            link.className =
+                "map-pin";
+
+
+            link.href =
+                googleDriveUrl(
+                    destination
+                );
+
+
+            link.target =
+                "_blank";
+
+
+            link.rel =
+                "noopener";
+
+
+            link.title =
+                "Google Maps 駕車導航：" +
+                label;
+
+
+            link.setAttribute(
+                "aria-label",
+                "Google Maps 駕車導航：" +
+                label
+            );
+
+
+            link.textContent =
+                "📍";
+
+
+            link.addEventListener(
+
+                "click",
+
+                function(e) {
+
+                    e.stopPropagation();
+
+                }
+
+            );
+
+
+            element.appendChild(
+                link
+            );
+
+
+            element.dataset.mapAdded =
+                "true";
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   OPEN DAY
+===================================================== */
 
 function openDay(
     id,
@@ -4270,6 +4785,10 @@ function openDay(
 }
 
 
+/* =====================================================
+   NAV
+===================================================== */
+
 document
 .querySelectorAll(
     ".day-nav a[data-day]"
@@ -4286,7 +4805,6 @@ document
 
                 e.preventDefault();
 
-
                 openDay(
                     this.dataset.day,
                     true
@@ -4300,6 +4818,10 @@ document
 
 );
 
+
+/* =====================================================
+   COLLAPSE / EXPAND
+===================================================== */
 
 document
 .getElementById(
@@ -4361,6 +4883,10 @@ document
 );
 
 
+/* =====================================================
+   JAPAN DATE
+===================================================== */
+
 function japanDateKey() {
 
     const parts =
@@ -4417,6 +4943,10 @@ function japanDateKey() {
 
 }
 
+
+/* =====================================================
+   TODAY
+===================================================== */
 
 const tripDates = {
 
@@ -4500,17 +5030,23 @@ else {
 
 
     todayBtn.title =
-
         "旅行日期為 2027年1月9日至17日";
 
 }
 
+
+/* =====================================================
+   HASH
+===================================================== */
 
 window.addEventListener(
 
     "load",
 
     function() {
+
+        addMapPins();
+
 
         if (
             location.hash
@@ -4526,10 +5062,7 @@ window.addEventListener(
 
 
             const item =
-
-                document.getElementById(
-                    id
-                );
+                document.getElementById(id);
 
 
             if (
@@ -4574,29 +5107,29 @@ window.addEventListener(
 );
 
 
-const photoModal =
+/* =====================================================
+   PHOTO
+===================================================== */
 
+const photoModal =
     document.getElementById(
         "photoModal"
     );
 
 
 const modalImage =
-
     document.getElementById(
         "modalImage"
     );
 
 
 const modalCaption =
-
     document.getElementById(
         "modalCaption"
     );
 
 
 const modalClose =
-
     document.getElementById(
         "modalClose"
     );
@@ -4665,11 +5198,8 @@ function closePhotoModal() {
 
 
 modalClose.addEventListener(
-
     "click",
-
     closePhotoModal
-
 );
 
 
@@ -4681,8 +5211,7 @@ photoModal.addEventListener(
 
         if (
 
-            e.target ===
-            photoModal
+            e.target === photoModal
 
             ||
 
@@ -4709,8 +5238,7 @@ document.addEventListener(
 
         if (
 
-            e.key ===
-            "Escape"
+            e.key === "Escape"
 
             &&
 
@@ -4730,7 +5258,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   PWA SERVICE WORKER
+   PWA
 ===================================================== */
 
 if (
