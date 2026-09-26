@@ -15,6 +15,31 @@
     content="#1f4e79"
 >
 
+<meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+>
+
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+>
+
+<meta
+    name="apple-mobile-web-app-title"
+    content="Japan 2027"
+>
+
+<link
+    rel="manifest"
+    href="manifest.webmanifest"
+>
+
+<link
+    rel="apple-touch-icon"
+    href="assets/images/app-icon-192.png"
+>
+
 <title>
     Japan Winter 2027 Live Dashboard
 </title>
@@ -972,15 +997,15 @@ footer {
 
 <div class="page-switch">
 
-    <a
-        href="index.html"
-        class="active">
-        📹 Live Cam
-    </a>
+<a
+    href="index.html"
+    class="active">
+    📹 Live Cam
+</a>
 
-    <a href="itinerary.html">
-        🗓️ 詳細行程
-    </a>
+<a href="itinerary.html">
+    🗓️ 詳細行程
+</a>
 
 </div>
 
@@ -992,23 +1017,23 @@ footer {
     class="quick-nav-inner"
     id="quickNav">
 
-    <button
-        class="nav-btn dark"
-        id="todayButton">
-        今日行程
-    </button>
+<button
+    class="nav-btn dark"
+    id="todayButton">
+    今日行程
+</button>
 
-    <button
-        class="nav-btn dark"
-        id="closeAll">
-        全部收起
-    </button>
+<button
+    class="nav-btn dark"
+    id="closeAll">
+    全部收起
+</button>
 
-    <button
-        class="nav-btn dark"
-        id="refreshImages">
-        刷新道路 Cam
-    </button>
+<button
+    class="nav-btn dark"
+    id="refreshImages">
+    刷新道路 Cam
+</button>
 
 </div>
 
@@ -1021,44 +1046,44 @@ footer {
 
 <div class="today-panel">
 
-    <div class="today-main">
+<div class="today-main">
 
-        <div
-            class="today-title"
-            id="todayTitle">
-            正在讀取日本日期…
-        </div>
+<div
+    class="today-title"
+    id="todayTitle">
+    正在讀取日本日期…
+</div>
 
-        <div
-            class="today-text"
-            id="todayText">
-        </div>
-
-
-        <div class="time-info">
-
-            <span
-                class="time-pill"
-                id="pageOpened">
-            </span>
-
-            <span
-                class="time-pill"
-                id="roadUpdated">
-                道路 Cam 尚未刷新
-            </span>
-
-        </div>
-
-    </div>
+<div
+    class="today-text"
+    id="todayText">
+</div>
 
 
-    <button
-        class="button"
-        id="jumpToday"
-        style="display:none;">
-        前往今日行程
-    </button>
+<div class="time-info">
+
+<span
+    class="time-pill"
+    id="pageOpened">
+</span>
+
+<span
+    class="time-pill"
+    id="roadUpdated">
+    道路 Cam 尚未刷新
+</span>
+
+</div>
+
+</div>
+
+
+<button
+    class="button"
+    id="jumpToday"
+    style="display:none;">
+    前往今日行程
+</button>
 
 </div>
 
@@ -1100,10 +1125,6 @@ Japan Winter Trip 2027
 
 <script>
 
-
-/* =========================================================
-   HELPERS
-========================================================= */
 
 const YT = (
     name,
@@ -1153,22 +1174,13 @@ const PLACE = (
 });
 
 
-/* =========================================================
-   DATA
-========================================================= */
-
 const sections = [
-
-
-/* =========================================================
-   D1
-========================================================= */
 
 {
     id: "d1",
 
     nav:
-        "D1 松本",
+        "🏯 D1 松本",
 
     title:
         "🏯 松本 Matsumoto",
@@ -1229,15 +1241,11 @@ const sections = [
 },
 
 
-/* =========================================================
-   D2
-========================================================= */
-
 {
     id: "d2",
 
     nav:
-        "D2 輕井澤・千曲",
+        "🌋 D2 輕井澤・千曲",
 
     title:
         "🌋 輕井澤・千曲 Karuizawa / Chikuma",
@@ -1401,15 +1409,11 @@ const sections = [
 },
 
 
-/* =========================================================
-   D3
-========================================================= */
-
 {
     id: "d3",
 
     nav:
-        "D3 小布施・澀溫泉",
+        "🌰 D3 小布施・澀溫泉",
 
     title:
         "🌰 小布施・澀溫泉 Obuse / Shibu Onsen",
@@ -1500,15 +1504,11 @@ const sections = [
 },
 
 
-/* =========================================================
-   D4
-========================================================= */
-
 {
     id: "d4",
 
     nav:
-        "D4 地獄谷・須坂・長野",
+        "🐒 D4 地獄谷・須坂・長野",
 
     title:
         "🐒 地獄谷・須坂・長野",
@@ -1596,15 +1596,11 @@ const sections = [
 },
 
 
-/* =========================================================
-   D5
-========================================================= */
-
 {
     id: "d5",
 
     nav:
-        "D5 白馬・高山",
+        "🏔️ D5 白馬・高山",
 
     title:
         "🏔️ 白馬・高山 Hakuba / Takayama",
@@ -1740,15 +1736,11 @@ const sections = [
 },
 
 
-/* =========================================================
-   D6
-========================================================= */
-
 {
     id: "d6",
 
     nav:
-        "D6 高山／新穗高",
+        "🏯 D6 高山・新穗高",
 
     title:
         "🏯 高山・新穗高 Takayama / Shinhotaka",
@@ -1909,15 +1901,11 @@ const sections = [
 },
 
 
-/* =========================================================
-   D7
-========================================================= */
-
 {
     id: "d7",
 
     nav:
-        "D7 白川鄉／新穗高",
+        "🏘️ D7 白川鄉・新穗高",
 
     title:
         "🏘️ 白川鄉・新穗高 Shirakawa-go / Shinhotaka",
@@ -2071,15 +2059,11 @@ const sections = [
 },
 
 
-/* =========================================================
-   D8
-========================================================= */
-
 {
     id: "d8",
 
     nav:
-        "D8 主景點→松本",
+        "🚗 D8 主景點→松本",
 
     title:
         "🚗 白川鄉／新穗高 → 松本",
@@ -2235,15 +2219,11 @@ const sections = [
 },
 
 
-/* =========================================================
-   D9
-========================================================= */
-
 {
     id: "d9",
 
     nav:
-        "D9 松本返程",
+        "✈️ D9 松本返程",
 
     title:
         "✈️ 松本・名古屋・中部國際機場",
@@ -2316,10 +2296,6 @@ const sections = [
 ];
 
 
-/* =========================================================
-   PRIORITY
-========================================================= */
-
 function priorityInfo(
     priority
 ) {
@@ -2356,10 +2332,6 @@ function priorityInfo(
 }
 
 
-/* =========================================================
-   VIDEO
-========================================================= */
-
 function youtubeEmbed(
     id
 ) {
@@ -2376,10 +2348,6 @@ function youtubeEmbed(
 
 }
 
-
-/* =========================================================
-   CACHE
-========================================================= */
 
 function cacheBust(
     url
@@ -2399,10 +2367,6 @@ function cacheBust(
 }
 
 
-/* =========================================================
-   MAP
-========================================================= */
-
 function mapsUrl(
     query
 ) {
@@ -2414,10 +2378,6 @@ function mapsUrl(
 
 }
 
-
-/* =========================================================
-   CAMERA RENDER
-========================================================= */
 
 function renderCam(
     cam
@@ -2603,10 +2563,6 @@ function renderCam(
 
 }
 
-
-/* =========================================================
-   SECTION
-========================================================= */
 
 function renderSection(
     section
@@ -2883,10 +2839,6 @@ function renderSection(
 }
 
 
-/* =========================================================
-   RENDER
-========================================================= */
-
 document
 .getElementById("app")
 .innerHTML =
@@ -2895,11 +2847,6 @@ document
     .map(renderSection)
     .join("");
 
-
-
-/* =========================================================
-   NAV
-========================================================= */
 
 const quickNav =
     document.getElementById(
@@ -2961,10 +2908,6 @@ sections.forEach(
 
 );
 
-
-/* =========================================================
-   LOAD MEDIA
-========================================================= */
 
 function loadSection(
     details
@@ -3034,10 +2977,6 @@ function loadSection(
 }
 
 
-/* =========================================================
-   STOP VIDEO
-========================================================= */
-
 function stopSection(
     details
 ) {
@@ -3072,14 +3011,6 @@ function stopSection(
     );
 
 }
-
-
-/* =========================================================
-   ROAD IMAGE
-========================================================= */
-
-let lastRoadRefresh =
-    null;
 
 
 function loadImage(
@@ -3138,10 +3069,6 @@ function loadImage(
 
 }
 
-
-/* =========================================================
-   TIME
-========================================================= */
 
 function japanTime(
     date = new Date()
@@ -3251,12 +3178,7 @@ document
     japanTime();
 
 
-
 function updateRoadTime() {
-
-    lastRoadRefresh =
-        new Date();
-
 
     document
     .getElementById(
@@ -3265,16 +3187,10 @@ function updateRoadTime() {
     .textContent =
 
         "道路 Cam 刷新：" +
-        japanTime(
-            lastRoadRefresh
-        );
+        japanTime();
 
 }
 
-
-/* =========================================================
-   OPEN SECTION
-========================================================= */
 
 function openSection(
     id,
@@ -3287,9 +3203,7 @@ function openSection(
         );
 
 
-    if (
-        !target
-    ) {
+    if (!target) {
         return;
     }
 
@@ -3330,16 +3244,10 @@ function openSection(
 }
 
 
-/* =========================================================
-   TOGGLE
-========================================================= */
-
 document
-
 .querySelectorAll(
     "details.region"
 )
-
 .forEach(
 
     details => {
@@ -3376,10 +3284,6 @@ document
 
 );
 
-
-/* =========================================================
-   TODAY MODE
-========================================================= */
 
 let todaysSectionId =
     null;
@@ -3485,16 +3389,10 @@ function initTodayMode() {
 }
 
 
-/* =========================================================
-   TODAY BUTTON
-========================================================= */
-
 document
-
 .getElementById(
     "todayButton"
 )
-
 .addEventListener(
 
     "click",
@@ -3517,13 +3415,10 @@ document
 );
 
 
-
 document
-
 .getElementById(
     "jumpToday"
 )
-
 .addEventListener(
 
     "click",
@@ -3546,16 +3441,10 @@ document
 );
 
 
-/* =========================================================
-   CLOSE ALL
-========================================================= */
-
 document
-
 .getElementById(
     "closeAll"
 )
-
 .addEventListener(
 
     "click",
@@ -3563,11 +3452,9 @@ document
     function() {
 
         document
-
         .querySelectorAll(
             "details.region"
         )
-
         .forEach(
 
             details => {
@@ -3583,10 +3470,6 @@ document
 
 );
 
-
-/* =========================================================
-   ROAD REFRESH
-========================================================= */
 
 function refreshOpenRoads() {
 
@@ -3618,13 +3501,10 @@ function refreshOpenRoads() {
 }
 
 
-
 document
-
 .getElementById(
     "refreshImages"
 )
-
 .addEventListener(
 
     "click",
@@ -3634,10 +3514,6 @@ document
 );
 
 
-/* =========================================================
-   AUTO REFRESH
-========================================================= */
-
 setInterval(
 
     refreshOpenRoads,
@@ -3646,10 +3522,6 @@ setInterval(
 
 );
 
-
-/* =========================================================
-   LOAD
-========================================================= */
 
 window.addEventListener(
 
@@ -3692,6 +3564,43 @@ window.addEventListener(
     }
 
 );
+
+
+/* =========================================================
+   PWA SERVICE WORKER
+========================================================= */
+
+if (
+    "serviceWorker" in navigator
+) {
+
+    window.addEventListener(
+
+        "load",
+
+        function() {
+
+            navigator
+            .serviceWorker
+            .register("./sw.js")
+            .catch(
+
+                function(error) {
+
+                    console.warn(
+                        "Service Worker registration failed:",
+                        error
+                    );
+
+                }
+
+            );
+
+        }
+
+    );
+
+}
 
 </script>
 
