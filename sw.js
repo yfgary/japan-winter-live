@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v6";
+const CACHE_NAME = "japan-winter-2027-v7";
 
 const CORE_FILES = [
     "./",
@@ -8,6 +8,8 @@ const CORE_FILES = [
     "./manifest.webmanifest",
     "./assets/attraction-info.css",
     "./assets/attraction-info.js",
+    "./assets/site-shell-v7.css",
+    "./assets/site-shell-v7.js",
     "./assets/trip-enhancement-data.js",
     "./assets/trip-user-overrides.js",
     "./assets/trip-enhancements-v2.css",
@@ -75,8 +77,20 @@ self.addEventListener("fetch", event => {
 
     const url = new URL(request.url);
 
-    /* External Live Cam / YouTube / Google Maps are never cached. */
+    /* External Live Cam / YouTube / Google Maps / Weather API are never cached here. */
     if (url.origin !== self.location.origin) return;
+
+    /* version.json must always come from network when online, so an old PWA can see the latest version. */
+    if (url.pathname.endsWith("/version.json")) {
+        event.respondWith(
+            fetch(request, { cache: "no-store" }).catch(() =>
+                new Response(JSON.stringify({version:null,offline:true}), {
+                    headers:{"Content-Type":"application/json"}
+                })
+            )
+        );
+        return;
+    }
 
     /* HTML: Network first, cached copy when offline. */
     if (request.mode === "navigate" || request.destination === "document") {
@@ -96,9 +110,10 @@ self.addEventListener("fetch", event => {
         return;
     }
 
-    /* Same-origin photos / manifest / enhancement assets: cache first. */
+    /* Same-origin photos / manifest / enhancement assets: cache first.
+       Ignore ?v= query strings so precached files also work offline. */
     event.respondWith(
-        caches.match(request).then(cached => {
+        caches.match(request, {ignoreSearch:true}).then(cached => {
             if (cached) return cached;
             return fetch(request).then(response => {
                 if (!response || response.status !== 200) return response;
