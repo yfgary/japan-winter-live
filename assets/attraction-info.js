@@ -12,16 +12,18 @@ function addCss(href){
     document.head.appendChild(l);
 }
 
-addCss('assets/trip-enhancements-v2.css?v=6');
-addCss('assets/trip-enhancements-v3.css?v=6');
+addCss('assets/trip-enhancements-v2.css?v=7');
+addCss('assets/trip-enhancements-v3.css?v=7');
+addCss('assets/site-shell-v7.css?v=7');
 
 const scripts = [
-    'assets/trip-enhancement-data.js?v=6',
-    'assets/trip-user-overrides.js?v=6',
-    'assets/trip-deep-info-d1-d4.js?v=6',
-    'assets/trip-deep-info-d5-d9.js?v=6',
-    'assets/trip-deep-info-backups.js?v=6',
-    'assets/trip-enhancements-v3.js?v=6'
+    'assets/site-shell-v7.js?v=7',
+    'assets/trip-enhancement-data.js?v=7',
+    'assets/trip-user-overrides.js?v=7',
+    'assets/trip-deep-info-d1-d4.js?v=7',
+    'assets/trip-deep-info-d5-d9.js?v=7',
+    'assets/trip-deep-info-backups.js?v=7',
+    'assets/trip-enhancements-v3.js?v=7'
 ];
 
 /* itinerary.html / trip-info.html load this just before </body>.
@@ -34,7 +36,7 @@ if (document.readyState === 'loading') {
     return;
 }
 
-/* Fallback if the loader is ever moved to another position. */
+/* Fallback if the loading position is changed later. */
 function loadScript(src){
     return new Promise(function(resolve,reject){
         const s=document.createElement('script');
@@ -46,9 +48,9 @@ function loadScript(src){
 }
 
 scripts.reduce(function(p,src){
-    return p.then(function(){return loadScript(src);});
+    return p.then(function(){ return loadScript(src); });
 },Promise.resolve()).catch(function(err){
-    console.error('Trip V3 enhancements failed to load',err);
+    console.error('Trip enhancements failed to load',err);
 });
 
 })();
