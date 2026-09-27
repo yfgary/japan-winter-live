@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v5";
+const CACHE_NAME = "japan-winter-2027-v6";
 
 const CORE_FILES = [
     "./",
@@ -10,8 +10,12 @@ const CORE_FILES = [
     "./assets/attraction-info.js",
     "./assets/trip-enhancement-data.js",
     "./assets/trip-user-overrides.js",
-    "./assets/trip-enhancements-v2.js",
     "./assets/trip-enhancements-v2.css",
+    "./assets/trip-enhancements-v3.css",
+    "./assets/trip-deep-info-d1-d4.js",
+    "./assets/trip-deep-info-d5-d9.js",
+    "./assets/trip-deep-info-backups.js",
+    "./assets/trip-enhancements-v3.js",
 
     "./assets/images/d1-matsumoto-castle.jpg",
     "./assets/images/d1-shinano.jpg",
@@ -47,210 +51,61 @@ const CORE_FILES = [
     "./assets/images/d9-matsumoto-station.jpg"
 ];
 
+self.addEventListener("install", event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_FILES))
+    );
+    self.skipWaiting();
+});
 
-/* =====================================================
-   INSTALL
-===================================================== */
+self.addEventListener("activate", event => {
+    event.waitUntil(
+        caches.keys().then(keys =>
+            Promise.all(
+                keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+            )
+        )
+    );
+    self.clients.claim();
+});
 
-self.addEventListener(
-    "install",
-    event => {
+self.addEventListener("fetch", event => {
+    const request = event.request;
+    if (request.method !== "GET") return;
 
-        event.waitUntil(
+    const url = new URL(request.url);
 
-            caches
-                .open(CACHE_NAME)
-                .then(cache => {
-                    return cache.addAll(CORE_FILES);
-                })
+    /* External Live Cam / YouTube / Google Maps are never cached. */
+    if (url.origin !== self.location.origin) return;
 
-        );
-
-        self.skipWaiting();
-
-    }
-);
-
-
-/* =====================================================
-   ACTIVATE
-===================================================== */
-
-self.addEventListener(
-    "activate",
-    event => {
-
-        event.waitUntil(
-
-            caches
-                .keys()
-                .then(keys => {
-
-                    return Promise.all(
-
-                        keys
-                            .filter(
-                                key => key !== CACHE_NAME
-                            )
-                            .map(
-                                key => caches.delete(key)
-                            )
-
-                    );
-
-                })
-
-        );
-
-        self.clients.claim();
-
-    }
-);
-
-
-/* =====================================================
-   FETCH
-===================================================== */
-
-self.addEventListener(
-    "fetch",
-    event => {
-
-        const request = event.request;
-
-        if (request.method !== "GET") {
-            return;
-        }
-
-
-        const url = new URL(request.url);
-
-
-        /*
-         * 外部 Live Cam / YouTube / Google Maps
-         * 一律唔 Cache。
-         */
-
-        if (url.origin !== self.location.origin) {
-            return;
-        }
-
-
-        /*
-         * HTML：
-         * Network first。
-         *
-         * 有網絡就永遠優先攞最新版；
-         * 無網絡先用 Cache。
-         */
-
-        if (
-            request.mode === "navigate" ||
-            request.destination === "document"
-        ) {
-
-            event.respondWith(
-
-                fetch(request)
-
-                    .then(response => {
-
-                        const copy =
-                            response.clone();
-
-
-                        caches
-                            .open(CACHE_NAME)
-                            .then(cache => {
-                                cache.put(
-                                    request,
-                                    copy
-                                );
-                            });
-
-
-                        return response;
-
-                    })
-
-                    .catch(() => {
-
-                        return caches.match(request)
-
-                            .then(cached => {
-
-                                if (cached) {
-                                    return cached;
-                                }
-
-
-                                return caches.match(
-                                    "./itinerary.html"
-                                );
-
-                            });
-
-                    })
-
-            );
-
-
-            return;
-
-        }
-
-
-        /*
-         * 本站相片 / Manifest / Enhancement assets：
-         * Cache first。
-         */
-
+    /* HTML: Network first, cached copy when offline. */
+    if (request.mode === "navigate" || request.destination === "document") {
         event.respondWith(
-
-            caches
-                .match(request)
-                .then(cached => {
-
-                    if (cached) {
-                        return cached;
-                    }
-
-
-                    return fetch(request)
-
-                        .then(response => {
-
-                            if (
-                                !response ||
-                                response.status !== 200
-                            ) {
-                                return response;
-                            }
-
-
-                            const copy =
-                                response.clone();
-
-
-                            caches
-                                .open(CACHE_NAME)
-                                .then(cache => {
-
-                                    cache.put(
-                                        request,
-                                        copy
-                                    );
-
-                                });
-
-
-                            return response;
-
-                        });
-
+            fetch(request)
+                .then(response => {
+                    const copy = response.clone();
+                    caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+                    return response;
                 })
-
+                .catch(() =>
+                    caches.match(request).then(cached =>
+                        cached || caches.match("./itinerary.html")
+                    )
+                )
         );
-
+        return;
     }
-);
+
+    /* Same-origin photos / manifest / enhancement assets: cache first. */
+    event.respondWith(
+        caches.match(request).then(cached => {
+            if (cached) return cached;
+            return fetch(request).then(response => {
+                if (!response || response.status !== 200) return response;
+                const copy = response.clone();
+                caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+                return response;
+            });
+        })
+    );
+});
