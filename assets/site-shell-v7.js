@@ -4,7 +4,7 @@
 if (window.__japan2027SiteShellV7) return;
 window.__japan2027SiteShellV7 = true;
 
-const INSTALLED_VERSION = 'v8.5';
+const INSTALLED_VERSION = 'v8.6';
 const VERSION_URL = 'version.json';
 const WEATHER_CACHE_KEY = 'japan2027_weather_cache_v1';
 const WEATHER_REGION_KEY = 'japan2027_weather_region';
@@ -179,6 +179,7 @@ function writeWeatherCache(cache){
 function weatherApiUrl(region){
     const daily=[
         'weather_code','temperature_2m_max','temperature_2m_min',
+        'apparent_temperature_max','apparent_temperature_min',
         'precipitation_probability_max','snowfall_sum','wind_gusts_10m_max'
     ].join(',');
     return 'https://api.open-meteo.com/v1/forecast?latitude='+encodeURIComponent(region.lat)+
@@ -207,7 +208,7 @@ function buildWeatherPanel(){
         <div class="weather3d-head">\
             <div>\
                 <h2 class="weather3d-title">🌤️ 行程地區・3天天氣預測</h2>\
-                <p class="weather3d-subtitle">由今日起 3 日｜最高／最低溫、降水機率、降雪量、最大陣風</p>\
+                <p class="weather3d-subtitle">由今日起 3 日｜最高／最低溫、體感溫度、降水機率、降雪量、最大陣風</p>\
             </div>\
             <button type="button" class="weather3d-refresh" id="weather3dRefresh">↻ 刷新</button>\
         </div>\
@@ -256,6 +257,8 @@ function buildWeatherPanel(){
             const w=weatherText(x.weather_code && x.weather_code[i]);
             const max=x.temperature_2m_max && x.temperature_2m_max[i];
             const min=x.temperature_2m_min && x.temperature_2m_min[i];
+            const feelMax=x.apparent_temperature_max && x.apparent_temperature_max[i];
+            const feelMin=x.apparent_temperature_min && x.apparent_temperature_min[i];
             const rain=x.precipitation_probability_max && x.precipitation_probability_max[i];
             const snow=x.snowfall_sum && x.snowfall_sum[i];
             const gust=x.wind_gusts_10m_max && x.wind_gusts_10m_max[i];
@@ -264,6 +267,7 @@ function buildWeatherPanel(){
                 '<div class="weather3d-main"><span class="weather3d-icon">'+w[0]+'</span><span class="weather3d-condition">'+w[1]+'</span></div>'+
                 '<div class="weather3d-temp">'+Math.round(max)+'° <span>/ '+Math.round(min)+'°C</span></div>'+
                 '<div class="weather3d-metrics">'+
+                    '<div>🧣 體感 '+(feelMax==null?'—':Math.round(feelMax)+'°')+' / '+(feelMin==null?'—':Math.round(feelMin)+'°C')+'</div>'+
                     '<div>☔ 降水 '+(rain==null?'—':Math.round(rain)+'%')+'</div>'+
                     '<div>❄️ 降雪 '+(snow==null?'—':Number(snow).toFixed(1)+' cm')+'</div>'+
                     '<div>💨 陣風 '+(gust==null?'—':Math.round(gust)+' km/h')+'</div>'+
