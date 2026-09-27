@@ -1,0 +1,71 @@
+name: Enable Checklist Sync v8.3
+
+on:
+  push:
+    paths:
+      - ".github/workflows/enable-checklist-sync-v8-3.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch site
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json
+
+          p=Path('assets/trip-user-overrides.js')
+          s=p.read_text(encoding='utf-8')
+          loader="""
+
+/* Cross-device departure checklist sync */
+(function(){
+  if(document.getElementById('checklistSyncScript')) return;
+  const s=document.createElement('script');
+  s.id='checklistSyncScript';
+  s.src='assets/checklist-sync.js?v=1';
+  s.defer=true;
+  document.head.appendChild(s);
+})();
+"""
+          if 'checklistSyncScript' not in s:
+              s += loader
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('assets/site-shell-v7.js')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r"const INSTALLED_VERSION = 'v[^']+';","const INSTALLED_VERSION = 'v8.3';",s,count=1)
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('sw.js')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'const CACHE_NAME = "japan-winter-2027-v[^"]+";','const CACHE_NAME = "japan-winter-2027-v8.3";',s,count=1)
+          if '"./assets/checklist-sync.js"' not in s:
+              anchor='    "./assets/trip-user-overrides.js",\n'
+              s=s.replace(anchor,anchor+'    "./assets/checklist-sync.js",\n',1)
+          p.write_text(s,encoding='utf-8')
+
+          Path('version.json').write_text(json.dumps({
+              'version':'v8.3',
+              'build':'2026-09-27.5',
+              'updated':'2026-09-27T22:30:00+08:00',
+              'notes':'Cross-device checklist sync via Supabase'
+          },ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Commit and remove temporary workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/trip-user-overrides.js assets/site-shell-v7.js assets/checklist-sync.js sw.js version.json
+          git rm .github/workflows/enable-checklist-sync-v8-3.yml
+          git commit -m "Enable cross-device checklist sync v8.3"
+          git push
