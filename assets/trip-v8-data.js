@@ -251,7 +251,7 @@ const visits = {
 };
 
 window.Japan2027V8 = {
-  version:'v8.0',
+  version:'v8.2',
   checked:'2026-09-27',
   checklist:checklist,
   visits:visits

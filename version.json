@@ -1,6 +1,6 @@
 {
-  "version": "v8.1",
-  "build": "2026-09-27.3",
-  "updated": "2026-09-27T19:05:00+08:00",
-  "notes": "Split packing checklist items, add masks/earplugs/disposable gloves, and show selfie-stick/photo restrictions where relevant"
+  "version": "v8.2",
+  "build": "2026-09-27.4",
+  "updated": "2026-09-27T21:41:00+08:00",
+  "notes": "Hotel breakfast inclusion and breakfast service times"
 }
