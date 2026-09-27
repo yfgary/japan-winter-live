@@ -3,44 +3,56 @@
 const d=window.Japan2027EnhancementData;
 if(!d) return;
 
-function replaceHotel(alias, patch){
+function replaceHotel(alias, patch, extraAliases){
   const h=d.hotels.find(x=>x.aliases.some(a=>a.includes(alias)||alias.includes(a)));
-  if(h) Object.assign(h,patch);
+  if(!h) return;
+  Object.assign(h,patch);
+  (extraAliases||[]).forEach(a=>{if(!h.aliases.includes(a))h.aliases.push(a);});
 }
 
 /* Arrival-payment view: only show what still needs to be paid at the hotel. */
 replaceHotel('TABINO HOTEL lit 松本',{
   badges:[['arrival-pay','🏨 到店要付房費']],
   detail:'到店以日圓支付房費 ¥13,668。'
-});
+},['松本・TABINO HOTEL lit']);
+
 replaceHotel('Club Wyndham 千曲館',{
   badges:[['onsen','♨️ 溫泉酒店'],['arrival-clear','✅ 到店唔使付房費']],
   detail:'房費按預訂安排稍後由信用卡扣款；去到酒店唔需要再付房費。'
-});
+},['千曲館溫泉酒店・Club Wyndham']);
+
 replaceHotel('一乃湯果亭',{
   badges:[['onsen','♨️ 溫泉旅館'],['arrival-tax','⚠️ 到店只付地方稅']],
   detail:'房費唔需要再付；到店只需付地方稅約 HK$15.25。'
-});
+},['澀溫泉・一乃湯果亭']);
+
 replaceHotel('Hotel JAL City Nagano',{
   badges:[['arrival-clear','✅ 到店唔使付房費']],
   detail:'房費已處理；到店毋須再付房費。'
-});
+},['長野日航都市酒店']);
+
 replaceHotel('高山櫻庵',{
   badges:[['onsen','♨️ 天然溫泉酒店'],['arrival-tax','⚠️ 到店只付地方稅']],
   detail:'房費唔需要再付；到店只需付城市／地方稅約 HK$30.19（2晚合計）。'
-});
+},['飛驒花里之湯・高山櫻庵']);
+
 replaceHotel('Residence Hotel Takayama Station',{
   badges:[['booked','✅ 已正式預訂'],['arrival-clear','✅ 到店唔使付房費']],
   detail:'Hotels.com 訂單已確認，HK$447.28 已支付；到店毋須再付房費。',
   noteOverride:'標準雙人房・非吸煙｜1/15 15:00 入住 → 1/16 11:00 退房｜已正式預訂'
-});
+},['高山站前 Residence Hotel']);
+
+replaceHotel('Iroha Grand Hotel Matsumoto Ekimae',{
+  badges:[['pending','📝 尚待正式訂單／付款資料']],
+  detail:'目前未有正式付款資料，所以暫時只標示為待確認；確認後只會顯示「到店要付／到店唔使付」。'
+},['松本站前 Iroha Grand Hotel']);
 
 /* Extra pre-departure items that are easy to forget. */
 const ids=new Set(d.departureChecklist.flatMap(g=>g.items.map(x=>x[0])));
 function addGroup(group,items){
   const fresh=items.filter(x=>!ids.has(x[0]));
   fresh.forEach(x=>ids.add(x[0]));
-  if(fresh.length) d.departureChecklist.push({group,items:fresh});
+  if(fresh.length)d.departureChecklist.push({group,items:fresh});
 }
 addGroup('🧴 個人用品／藥物',[
   ['meds','平時需要嘅藥物＋少量常用藥'],
