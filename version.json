@@ -1,6 +1,6 @@
 {
-  "version": "v8.4",
-  "build": "2026-09-27.6",
-  "updated": "2026-09-27T22:45:00+08:00",
-  "notes": "Fix Supabase checklist login and email confirmation redirect"
+  "version": "v8.5",
+  "build": "2026-09-27.7",
+  "updated": "2026-09-27T22:58:00+08:00",
+  "notes": "Fix checklist progress counter after cross-device sync; add periodic background sync"
 }

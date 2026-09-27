@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v8.4";
+const CACHE_NAME = "japan-winter-2027-v8.5";
 
 const CORE_FILES = [
     "./",
