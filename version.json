@@ -1,6 +1,6 @@
 {
-  "version": "v8.0",
-  "build": "2026-09-27.2",
-  "updated": "2026-09-27T18:25:00+08:00",
-  "notes": "Exact Hong Kong packing checklist plus attraction opening hours, last admission, closing times and admission fees"
+  "version": "v8.1",
+  "build": "2026-09-27.3",
+  "updated": "2026-09-27T19:05:00+08:00",
+  "notes": "Split packing checklist items, add masks/earplugs/disposable gloves, and show selfie-stick/photo restrictions where relevant"
 }
