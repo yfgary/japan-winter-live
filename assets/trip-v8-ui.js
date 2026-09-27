@@ -1,0 +1,144 @@
+(function(){
+'use strict';
+
+if(window.__japan2027V8UI) return;
+window.__japan2027V8UI=true;
+
+const v8=window.Japan2027V8;
+const data=window.Japan2027EnhancementData;
+if(!v8 || !data) return;
+
+function norm(t){
+  return (t||'').replace(/📍|ⓘ/g,'').replace(/\s+/g,' ').trim().toLowerCase();
+}
+
+function attractionById(id){
+  return (data.attractions||[]).find(function(x){return x.id===id;}) || null;
+}
+
+function attractionFromText(text){
+  const n=norm(text);
+  let best=null,bestLen=0;
+  (data.attractions||[]).forEach(function(a){
+    (a.aliases||[]).forEach(function(alias){
+      const x=norm(alias);
+      if(x && n.includes(x) && x.length>bestLen){best=a;bestLen=x.length;}
+    });
+    const title=norm(a.title||'');
+    if(title && (n.includes(title)||title.includes(n)) && Math.min(title.length,n.length)>bestLen){
+      best=a;bestLen=Math.min(title.length,n.length);
+    }
+  });
+  return best;
+}
+
+function getVisitForElement(el){
+  const btn=el.querySelector('[data-deep-info-id]');
+  const info=btn ? attractionById(btn.dataset.deepInfoId) : attractionFromText(el.textContent);
+  if(!info) return null;
+  const visit=v8.visits[info.id];
+  return visit ? {info:info,visit:visit} : null;
+}
+
+function compactHtml(v){
+  return '<div class="visit-meta-line">'+
+    '<span>🕒 <strong>開門</strong> '+v.open+'</span>'+
+    '<span>⏳ <strong>最後入場</strong> '+v.last+'</span>'+
+    '<span>🚪 <strong>關門</strong> '+v.close+'</span>'+
+    '<span>🎟️ <strong>收費</strong> '+v.fee+'</span>'+
+    '</div>'+
+    (v.note?'<div class="visit-meta-note">'+v.note+'</div>':'');
+}
+
+function decorateTimeline(root){
+  (root||document).querySelectorAll('.timeline-card').forEach(function(card){
+    if(card.dataset.v8Visit==='true') return;
+    const match=getVisitForElement(card);
+    if(!match) return;
+    const box=document.createElement('div');
+    box.className='visit-meta-card';
+    box.innerHTML=compactHtml(match.visit);
+    const price=card.querySelector('.price');
+    if(price) price.insertAdjacentElement('afterend',box);
+    else card.appendChild(box);
+    card.dataset.v8Visit='true';
+  });
+}
+
+function decorateBackups(root){
+  (root||document).querySelectorAll('.backup-attraction-card').forEach(function(card){
+    if(card.dataset.v8Visit==='true') return;
+    const match=getVisitForElement(card);
+    if(!match) return;
+    const box=document.createElement('div');
+    box.className='visit-meta-backup';
+    box.innerHTML=compactHtml(match.visit);
+    const jp=card.querySelector('.backup-jp');
+    if(jp) jp.insertAdjacentElement('afterend',box);
+    else card.prepend(box);
+    card.dataset.v8Visit='true';
+  });
+}
+
+function findModalInfo(){
+  const modal=document.getElementById('tripDeepInfoModal');
+  if(!modal || !modal.classList.contains('show')) return null;
+  const title=modal.querySelector('.enhance-modal-title');
+  if(!title) return null;
+  const n=norm(title.textContent);
+  let found=(data.attractions||[]).find(function(a){return norm(a.title)===n;});
+  if(!found) found=attractionFromText(title.textContent);
+  if(!found || !v8.visits[found.id]) return null;
+  return {modal:modal,info:found,visit:v8.visits[found.id]};
+}
+
+function enrichModal(){
+  const x=findModalInfo();
+  if(!x) return;
+  const body=x.modal.querySelector('.enhance-modal-body');
+  if(!body) return;
+  const existing=body.querySelector('.deep-visit-info');
+  if(existing && existing.dataset.id===x.info.id) return;
+  if(existing) existing.remove();
+  const v=x.visit;
+  const section=document.createElement('div');
+  section.className='deep-visit-info';
+  section.dataset.id=x.info.id;
+  section.innerHTML=
+    '<h3>🕒 開放時間／最後入場／收費</h3>'+
+    '<div class="deep-visit-grid">'+
+      '<div class="deep-visit-item"><strong>開門／開始</strong>'+v.open+'</div>'+
+      '<div class="deep-visit-item"><strong>最後入場／最後受付</strong>'+v.last+'</div>'+
+      '<div class="deep-visit-item"><strong>關門／結束</strong>'+v.close+'</div>'+
+      '<div class="deep-visit-item deep-visit-fee"><strong>入場收費</strong>'+v.fee+'</div>'+
+    '</div>'+
+    (v.note?'<div class="deep-visit-warning">⚠️ '+v.note+'</div>':'')+
+    (v.source?'<a class="deep-visit-source" href="'+v.source+'" target="_blank" rel="noopener">↗ 營業時間／收費官方資料</a>':'')+
+    '<span class="deep-visit-checked">資料查核：'+v8.checked+'。2027年1月尚未正式公布嘅季節時間／票價已明確標示，出發前會再核對。</span>';
+  const first=body.firstElementChild;
+  body.insertBefore(section,first||null);
+}
+
+function decorateAll(root){
+  decorateTimeline(root||document);
+  decorateBackups(root||document);
+  enrichModal();
+}
+
+function start(){
+  decorateAll(document);
+  const observer=new MutationObserver(function(mutations){
+    let needs=false;
+    mutations.forEach(function(m){
+      if(m.type==='attributes' || m.addedNodes.length) needs=true;
+    });
+    if(needs) requestAnimationFrame(function(){decorateAll(document);});
+  });
+  observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+  document.addEventListener('click',function(){setTimeout(enrichModal,0);},false);
+}
+
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true});
+else start();
+
+})();
