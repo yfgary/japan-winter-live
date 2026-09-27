@@ -79,7 +79,7 @@ addGroup('🧳 行李／雜項',[
   if(document.getElementById("checklistSyncScript")) return;
   const s=document.createElement("script");
   s.id="checklistSyncScript";
-  s.src="assets/checklist-sync.js?v=1";
+  s.src="assets/checklist-sync.js?v=2";
   s.defer=true;
   document.head.appendChild(s);
 })();

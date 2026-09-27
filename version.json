@@ -1,6 +1,6 @@
 {
-  "version": "v8.3",
-  "build": "2026-09-27.5",
-  "updated": "2026-09-27T22:30:00+08:00",
-  "notes": "Cross-device checklist sync via Supabase"
+  "version": "v8.4",
+  "build": "2026-09-27.6",
+  "updated": "2026-09-27T22:45:00+08:00",
+  "notes": "Fix Supabase checklist login and email confirmation redirect"
 }
