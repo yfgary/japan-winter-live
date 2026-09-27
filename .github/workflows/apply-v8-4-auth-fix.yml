@@ -1,0 +1,43 @@
+name: Apply v8.4 Auth Fix
+
+on:
+  push:
+    paths:
+      - ".github/workflows/apply-v8-4-auth-fix.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update version and cache
+        shell: bash
+        run: |
+          python3 -c "from pathlib import Path; p=Path('assets/site-shell-v7.js'); s=p.read_text(encoding='utf-8'); p.write_text(s.replace(\"const INSTALLED_VERSION = 'v8.3';\", \"const INSTALLED_VERSION = 'v8.4';\", 1), encoding='utf-8')"
+          python3 -c "from pathlib import Path; p=Path('assets/trip-user-overrides.js'); s=p.read_text(encoding='utf-8'); p.write_text(s.replace('assets/checklist-sync.js?v=1','assets/checklist-sync.js?v=2'), encoding='utf-8')"
+          python3 -c "from pathlib import Path; p=Path('sw.js'); s=p.read_text(encoding='utf-8'); p.write_text(s.replace('japan-winter-2027-v8.3','japan-winter-2027-v8.4',1), encoding='utf-8')"
+          cat > version.json <<'EOF'
+          {
+            "version": "v8.4",
+            "build": "2026-09-27.6",
+            "updated": "2026-09-27T22:45:00+08:00",
+            "notes": "Fix Supabase checklist login and email confirmation redirect"
+          }
+          EOF
+          sed -i 's/^          //' version.json
+
+      - name: Commit update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/site-shell-v7.js assets/trip-user-overrides.js assets/checklist-sync.js sw.js version.json
+          git rm .github/workflows/apply-v8-4-auth-fix.yml
+          git commit -m "Fix checklist auth flow v8.4"
+          git push
