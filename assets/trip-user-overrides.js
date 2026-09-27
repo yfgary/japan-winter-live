@@ -13,38 +13,38 @@ function replaceHotel(alias, patch, extraAliases){
 /* Arrival-payment view: only show what still needs to be paid at the hotel. */
 replaceHotel('TABINO HOTEL lit 松本',{
   badges:[['arrival-pay','🏨 到店要付房費']],
-  detail:'到店以日圓支付房費 ¥13,668。'
+  detail:'到店以日圓支付房費 ¥13,668。🍳 此訂房方案不包早餐。'
 },['松本・TABINO HOTEL lit']);
 
 replaceHotel('Club Wyndham 千曲館',{
-  badges:[['onsen','♨️ 溫泉酒店'],['arrival-clear','✅ 到店唔使付房費']],
-  detail:'房費按預訂安排稍後由信用卡扣款；去到酒店唔需要再付房費。'
+  badges:[['onsen','♨️ 溫泉酒店'],['arrival-clear','✅ 到店唔使付房費'],['breakfast','🍳 包早餐']],
+  detail:'房費按預訂安排稍後由信用卡扣款；去到酒店唔需要再付房費。🍳 行程預定早餐 08:00–09:00；酒店官方未見公開固定早餐供應時段，入住時再確認。'
 },['千曲館溫泉酒店・Club Wyndham']);
 
 replaceHotel('一乃湯果亭',{
-  badges:[['onsen','♨️ 溫泉旅館'],['arrival-tax','⚠️ 到店只付地方稅']],
-  detail:'房費唔需要再付；到店只需付地方稅約 HK$15.25。'
+  badges:[['onsen','♨️ 溫泉旅館'],['arrival-tax','⚠️ 到店只付地方稅'],['breakfast','🍳 包早餐']],
+  detail:'房費唔需要再付；到店只需付地方稅約 HK$15.25。🍳 行程預定早餐 08:00–09:00；官方訂單確認包早晚餐，但未列固定早餐供應時間，入住時再確認。'
 },['澀溫泉・一乃湯果亭']);
 
 replaceHotel('Hotel JAL City Nagano',{
-  badges:[['arrival-clear','✅ 到店唔使付房費']],
-  detail:'房費已處理；到店毋須再付房費。'
+  badges:[['arrival-clear','✅ 到店唔使付房費'],['breakfast','🍳 包2人自助早餐']],
+  detail:'房費已處理；到店毋須再付房費。🍳 酒店現行早餐 06:30–09:30，最遲入場 09:10；行程預定 07:45–08:30。繁忙日酒店可能提早開餐或採分時段安排。'
 },['長野日航都市酒店']);
 
 replaceHotel('高山櫻庵',{
   badges:[['onsen','♨️ 天然溫泉酒店'],['arrival-tax','⚠️ 到店只付地方稅']],
-  detail:'房費唔需要再付；到店只需付城市／地方稅約 HK$30.19（2晚合計）。'
+  detail:'房費唔需要再付；到店只需付城市／地方稅約 HK$30.19（2晚合計）。🍳 目前訂房資料寫「早餐另議」，未確認包含早餐；如最終方案包含／加購，酒店現行早餐用餐時段 06:30–10:00，季節可能調整。'
 },['飛驒花里之湯・高山櫻庵']);
 
 replaceHotel('Residence Hotel Takayama Station',{
   badges:[['booked','✅ 已正式預訂'],['arrival-clear','✅ 到店唔使付房費']],
-  detail:'Hotels.com 訂單已確認，HK$447.28 已支付；到店毋須再付房費。',
+  detail:'Hotels.com 訂單已確認，HK$447.28 已支付；到店毋須再付房費。🍳 目前預訂資料未見包含早餐。',
   noteOverride:'標準雙人房・非吸煙｜1/15 15:00 入住 → 1/16 11:00 退房｜已正式預訂'
 },['高山站前 Residence Hotel']);
 
 replaceHotel('Iroha Grand Hotel Matsumoto Ekimae',{
-  badges:[['pending','📝 尚待正式訂單／付款資料']],
-  detail:'目前未有正式付款資料，所以暫時只標示為待確認；確認後只會顯示「到店要付／到店唔使付」。'
+  badges:[['pending','📝 尚待正式訂單／付款資料'],['breakfast','🍳 目前選定方案包2人早餐']],
+  detail:'目前未有正式付款資料，所以暫時只標示為待確認；確認後只會顯示「到店要付／到店唔使付」。🍳 酒店現行早餐 06:30–10:00，最遲入場／LO 09:30；行程預定 08:00–09:00。'
 },['松本站前 Iroha Grand Hotel']);
 
 /* Extra pre-departure items that are easy to forget. */
