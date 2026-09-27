@@ -47,6 +47,11 @@ function getVisitForElement(el){
   return visit ? {info:info,visit:visit} : null;
 }
 
+function photoHtml(v){
+  if(!v.photo || !v.photo.show) return '';
+  return '<div class="visit-photo-warning '+(v.photo.level||'caution')+'">'+v.photo.text+'</div>';
+}
+
 function compactHtml(v){
   return '<div class="visit-meta-line">'+
     '<span>🕒 <strong>開門</strong> '+v.open+'</span>'+
@@ -54,7 +59,8 @@ function compactHtml(v){
     '<span>🚪 <strong>關門</strong> '+v.close+'</span>'+
     '<span>🎟️ <strong>收費</strong> '+v.fee+'</span>'+
     '</div>'+
-    (v.note?'<div class="visit-meta-note">'+v.note+'</div>':'');
+    (v.note?'<div class="visit-meta-note">'+v.note+'</div>':'')+
+    photoHtml(v);
 }
 
 function decorateTimeline(root){
@@ -108,6 +114,10 @@ function enrichModal(){
   if(existing && existing.dataset.id===x.info.id) return;
   if(existing) existing.remove();
   const v=x.visit;
+  const photo=(v.photo&&v.photo.show)
+    ? '<div class="deep-photo-rule '+(v.photo.level||'caution')+'">'+v.photo.text+
+      (v.photo.source?'<br><a class="deep-photo-source" href="'+v.photo.source+'" target="_blank" rel="noopener">↗ 攝影／自拍神棍規則來源</a>':'')+'</div>'
+    : '';
   const section=document.createElement('div');
   section.className='deep-visit-info';
   section.dataset.id=x.info.id;
@@ -120,6 +130,7 @@ function enrichModal(){
       '<div class="deep-visit-item deep-visit-fee"><strong>入場收費</strong>'+v.fee+'</div>'+
     '</div>'+
     (v.note?'<div class="deep-visit-warning">⚠️ '+v.note+'</div>':'')+
+    photo+
     (v.source?'<a class="deep-visit-source" href="'+v.source+'" target="_blank" rel="noopener">↗ 營業時間／收費官方資料</a>':'')+
     '<span class="deep-visit-checked">資料查核：'+v8.checked+'。2027年1月尚未正式公布嘅季節時間／票價已明確標示，出發前會再核對。</span>';
   const first=body.firstElementChild;
