@@ -1,0 +1,42 @@
+name: Patch index with V7 site shell
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-index-v7.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Add V7 common assets to index
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          css='<link rel="stylesheet" href="assets/site-shell-v7.css?v=7">'
+          js='<script src="assets/site-shell-v7.js?v=7"></script>'
+          changed=False
+          if css not in s:
+              s=s.replace('</head>', css+'\n</head>', 1)
+              changed=True
+          if js not in s:
+              s=s.replace('</body>', js+'\n</body>', 1)
+              changed=True
+          if changed:
+              p.write_text(s,encoding='utf-8')
+          PY
+          if git diff --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add V7 version, back-to-top and weather to live dashboard"
+          git push
