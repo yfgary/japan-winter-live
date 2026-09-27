@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v4";
+const CACHE_NAME = "japan-winter-2027-v5";
 
 const CORE_FILES = [
     "./",
@@ -8,6 +8,10 @@ const CORE_FILES = [
     "./manifest.webmanifest",
     "./assets/attraction-info.css",
     "./assets/attraction-info.js",
+    "./assets/trip-enhancement-data.js",
+    "./assets/trip-user-overrides.js",
+    "./assets/trip-enhancements-v2.js",
+    "./assets/trip-enhancements-v2.css",
 
     "./assets/images/d1-matsumoto-castle.jpg",
     "./assets/images/d1-shinano.jpg",
@@ -197,7 +201,7 @@ self.addEventListener(
 
 
         /*
-         * 本站相片 / Manifest：
+         * 本站相片 / Manifest / Enhancement assets：
          * Cache first。
          */
 
