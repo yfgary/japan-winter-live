@@ -29,7 +29,7 @@ const scripts = [
  */
 if (document.readyState === 'loading') {
     scripts.forEach(function(src){
-        document.write('<script src="' + src + '"><\\/script>');
+        document.write('<script src="' + src + '"><' + '/script>');
     });
     return;
 }
