@@ -72,3 +72,14 @@ addGroup('🧳 行李／雜項',[
   ['copies','護照／駕照／保險重要資料另存雲端＋離線副本']
 ]);
 })();
+
+
+/* Cross-device departure checklist sync */
+(function(){
+  if(document.getElementById("checklistSyncScript")) return;
+  const s=document.createElement("script");
+  s.id="checklistSyncScript";
+  s.src="assets/checklist-sync.js?v=1";
+  s.defer=true;
+  document.head.appendChild(s);
+})();
