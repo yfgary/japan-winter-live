@@ -1,0 +1,53 @@
+name: Apply v8.5 Progress Fix
+
+on:
+  push:
+    paths:
+      - ".github/workflows/apply-v8-5-progress-fix.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bump site version and cache
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          p=Path('assets/site-shell-v7.js')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace("const INSTALLED_VERSION = 'v8.4';", "const INSTALLED_VERSION = 'v8.5';")
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('sw.js')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('japan-winter-2027-v8.4','japan-winter-2027-v8.5')
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('version.json')
+          d=json.loads(p.read_text(encoding='utf-8'))
+          d['version']='v8.5'
+          d['build']='2026-09-27.7'
+          d['updated']='2026-09-27T22:58:00+08:00'
+          d['notes']='Fix checklist progress counter after cross-device sync; add periodic background sync'
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Commit update and remove workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/apply-v8-5-progress-fix.yml
+          git add assets/site-shell-v7.js sw.js version.json
+          git commit -m "Fix checklist progress sync v8.5"
+          git push
