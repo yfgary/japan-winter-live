@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 
-if (window.__japan2027EnhancementLoaderV3) return;
-window.__japan2027EnhancementLoaderV3 = true;
+if (window.__japan2027EnhancementLoaderV4) return;
+window.__japan2027EnhancementLoaderV4 = true;
 
 function addCss(href){
     if (document.querySelector('link[href="' + href + '"]')) return;
@@ -12,23 +12,24 @@ function addCss(href){
     document.head.appendChild(l);
 }
 
-addCss('assets/trip-enhancements-v2.css?v=81');
-addCss('assets/trip-enhancements-v3.css?v=81');
-addCss('assets/site-shell-v7.css?v=81');
-addCss('assets/trip-v8.css?v=81');
-addCss('assets/trip-v8-1.css?v=81');
+addCss('assets/trip-enhancements-v2.css?v=87');
+addCss('assets/trip-enhancements-v3.css?v=87');
+addCss('assets/site-shell-v7.css?v=87');
+addCss('assets/trip-v8.css?v=87');
+addCss('assets/trip-v8-1.css?v=87');
 
 const scripts = [
-    'assets/site-shell-v7.js?v=81',
-    'assets/trip-enhancement-data.js?v=81',
-    'assets/trip-user-overrides.js?v=81',
-    'assets/trip-deep-info-d1-d4.js?v=81',
-    'assets/trip-deep-info-d5-d9.js?v=81',
-    'assets/trip-deep-info-backups.js?v=81',
-    'assets/trip-v8-data.js?v=81',
-    'assets/trip-v8-1-overrides.js?v=81',
-    'assets/trip-enhancements-v3.js?v=81',
-    'assets/trip-v8-ui.js?v=81'
+    'assets/site-shell-v7.js?v=87',
+    'assets/trip-enhancement-data.js?v=87',
+    'assets/trip-user-overrides.js?v=87',
+    'assets/trip-deep-info-d1-d4.js?v=87',
+    'assets/trip-deep-info-d5-d9.js?v=87',
+    'assets/trip-deep-info-backups.js?v=87',
+    'assets/trip-v8-data.js?v=87',
+    'assets/trip-v8-1-overrides.js?v=87',
+    'assets/trip-enhancements-v3.js?v=87',
+    'assets/trip-v8-ui.js?v=87',
+    'assets/trip-v8-7-user-plan.js?v=87'
 ];
 
 /* itinerary.html / trip-info.html load this just before </body>.

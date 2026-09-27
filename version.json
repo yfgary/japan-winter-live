@@ -1,6 +1,6 @@
 {
   "version": "v8.6",
-  "build": "2026-09-28.1",
-  "updated": "2026-09-28T02:20:00+08:00",
-  "notes": "Add apparent temperature; D1 airport lunch and ticket-buying steps; D9 Plaza Premium Lounge terminal check and meal fallback"
+  "build": "2026-09-28.2",
+  "updated": "2026-09-28T03:05:00+08:00",
+  "notes": "D2 changed to Matsumoto Castle + 2-hour Karuizawa Outlet + arrive Chikuma by 17:30; Shiraito/Onioshidashi moved to Backup; itinerary is now the default landing page; added shrine/parking notes and rail fare references"
 }

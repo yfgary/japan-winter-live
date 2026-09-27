@@ -1,8 +1,9 @@
-const CACHE_NAME = "japan-winter-2027-v8.6";
+const CACHE_NAME = "japan-winter-2027-v8.6-d2-home-20260928";
 
 const CORE_FILES = [
     "./",
     "./index.html",
+    "./live.html",
     "./itinerary.html",
     "./trip-info.html",
     "./manifest.webmanifest",
@@ -17,6 +18,7 @@ const CORE_FILES = [
     "./assets/trip-v8-ui.js",
     "./assets/trip-enhancement-data.js",
     "./assets/trip-user-overrides.js",
+    "./assets/trip-v8-7-user-plan.js",
     "./assets/checklist-sync.js",
     "./assets/trip-enhancements-v2.css",
     "./assets/trip-enhancements-v3.css",
@@ -86,7 +88,7 @@ self.addEventListener("fetch", event => {
     /* External Live Cam / YouTube / Google Maps / Weather API are never cached here. */
     if (url.origin !== self.location.origin) return;
 
-    /* version.json must always come from network when online, so an old PWA can see the latest version. */
+    /* version.json must always come from network when online. */
     if (url.pathname.endsWith("/version.json")) {
         event.respondWith(
             fetch(request, { cache: "no-store" }).catch(() =>
