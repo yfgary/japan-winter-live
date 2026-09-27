@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 
-if (window.__japan2027EnhancementLoader) return;
-window.__japan2027EnhancementLoader = true;
+if (window.__japan2027EnhancementLoaderV3) return;
+window.__japan2027EnhancementLoaderV3 = true;
 
 function addCss(href){
     if (document.querySelector('link[href="' + href + '"]')) return;
@@ -12,38 +12,43 @@ function addCss(href){
     document.head.appendChild(l);
 }
 
-addCss('assets/trip-enhancements-v2.css?v=3');
+addCss('assets/trip-enhancements-v2.css?v=6');
+addCss('assets/trip-enhancements-v3.css?v=6');
 
-/*
- * itinerary.html / trip-info.html load this file as a normal parser-blocking
- * script just before </body>. Inject the enhancement scripts synchronously so
- * they can register their DOMContentLoaded handler before that event fires.
- * This fixes the iPhone Home Screen/PWA case where the previous Promise-based
- * dynamic loader could finish after DOMContentLoaded and therefore never build
- * the departure checklist / backup panels.
+const scripts = [
+    'assets/trip-enhancement-data.js?v=6',
+    'assets/trip-user-overrides.js?v=6',
+    'assets/trip-deep-info-d1-d4.js?v=6',
+    'assets/trip-deep-info-d5-d9.js?v=6',
+    'assets/trip-deep-info-backups.js?v=6',
+    'assets/trip-enhancements-v3.js?v=6'
+];
+
+/* itinerary.html / trip-info.html load this just before </body>.
+ * Parser-blocking document.write keeps script order deterministic on iPhone PWA.
  */
 if (document.readyState === 'loading') {
-    document.write('<script src="assets/trip-enhancement-data.js?v=3"><\/script>');
-    document.write('<script src="assets/trip-user-overrides.js?v=3"><\/script>');
-    document.write('<script src="assets/trip-enhancements-v2.js?v=3"><\/script>');
+    scripts.forEach(function(src){
+        document.write('<script src="' + src + '"><\\/script>');
+    });
     return;
 }
 
-/* Fallback if the loading position is changed in future. */
+/* Fallback if the loader is ever moved to another position. */
 function loadScript(src){
-    return new Promise((resolve,reject)=>{
-        const s = document.createElement('script');
-        s.src = src;
-        s.onload = resolve;
-        s.onerror = reject;
+    return new Promise(function(resolve,reject){
+        const s=document.createElement('script');
+        s.src=src;
+        s.onload=resolve;
+        s.onerror=reject;
         document.head.appendChild(s);
     });
 }
 
-loadScript('assets/trip-enhancement-data.js?v=3')
-    .then(()=>loadScript('assets/trip-user-overrides.js?v=3'))
-    .then(()=>loadScript('assets/trip-enhancements-v2.js?v=3'))
-    .then(()=>document.dispatchEvent(new Event('DOMContentLoaded')))
-    .catch(err=>console.error('Trip enhancements failed to load', err));
+scripts.reduce(function(p,src){
+    return p.then(function(){return loadScript(src);});
+},Promise.resolve()).catch(function(err){
+    console.error('Trip V3 enhancements failed to load',err);
+});
 
 })();
