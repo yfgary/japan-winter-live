@@ -34,7 +34,14 @@ function attractionFromText(text){
 
 function getVisitForElement(el){
   const btn=el.querySelector('[data-deep-info-id]');
-  const info=btn ? attractionById(btn.dataset.deepInfoId) : attractionFromText(el.textContent);
+  let info=null;
+  if(btn){
+    info=attractionById(btn.dataset.deepInfoId);
+  }else{
+    const type=(el.querySelector('.event-type')?.textContent||'');
+    if(/(🚗|CHECK|HARD CUT|🍳|🍜|✈️|🚆|名鐵|入境|轉車|還車|入油|休息|Gondola|步行|接駁|Check-out|🏨)/i.test(type)) return null;
+    info=attractionFromText(el.textContent);
+  }
   if(!info) return null;
   const visit=v8.visits[info.id];
   return visit ? {info:info,visit:visit} : null;
