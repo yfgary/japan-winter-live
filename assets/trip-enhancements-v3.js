@@ -150,7 +150,7 @@ function setJapaneseAfter(h3,jp){
 }
 function isAttractionCard(card){
   const type=card?.querySelector('.event-type')?.textContent||'';
-  return !/(🚗|CHECK|HARD CUT|🍳|🍜|✈️|🚆|名鐵|入境|轉車|還車|入油|休息|溫泉 \/ 休息)/.test(type);
+  return !/(🚗|CHECK|HARD CUT|🍳|🍜|✈️|🚆|名鐵|入境|轉車|還車|入油|休息|溫泉 \/ 休息|Gondola|步行|接駁|Check-out)/.test(type);
 }
 function localizeTimeline(root){
   (root||document).querySelectorAll('.timeline-card h3').forEach(h3=>{
