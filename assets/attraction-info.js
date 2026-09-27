@@ -12,21 +12,23 @@ function addCss(href){
     document.head.appendChild(l);
 }
 
-addCss('assets/trip-enhancements-v2.css?v=8');
-addCss('assets/trip-enhancements-v3.css?v=8');
-addCss('assets/site-shell-v7.css?v=8');
-addCss('assets/trip-v8.css?v=8');
+addCss('assets/trip-enhancements-v2.css?v=81');
+addCss('assets/trip-enhancements-v3.css?v=81');
+addCss('assets/site-shell-v7.css?v=81');
+addCss('assets/trip-v8.css?v=81');
+addCss('assets/trip-v8-1.css?v=81');
 
 const scripts = [
-    'assets/site-shell-v7.js?v=8',
-    'assets/trip-enhancement-data.js?v=8',
-    'assets/trip-user-overrides.js?v=8',
-    'assets/trip-deep-info-d1-d4.js?v=8',
-    'assets/trip-deep-info-d5-d9.js?v=8',
-    'assets/trip-deep-info-backups.js?v=8',
-    'assets/trip-v8-data.js?v=8',
-    'assets/trip-enhancements-v3.js?v=8',
-    'assets/trip-v8-ui.js?v=8'
+    'assets/site-shell-v7.js?v=81',
+    'assets/trip-enhancement-data.js?v=81',
+    'assets/trip-user-overrides.js?v=81',
+    'assets/trip-deep-info-d1-d4.js?v=81',
+    'assets/trip-deep-info-d5-d9.js?v=81',
+    'assets/trip-deep-info-backups.js?v=81',
+    'assets/trip-v8-data.js?v=81',
+    'assets/trip-v8-1-overrides.js?v=81',
+    'assets/trip-enhancements-v3.js?v=81',
+    'assets/trip-v8-ui.js?v=81'
 ];
 
 /* itinerary.html / trip-info.html load this just before </body>.
