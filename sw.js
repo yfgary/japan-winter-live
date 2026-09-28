@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v8.6-d2-home-20260928";
+const CACHE_NAME = "japan-winter-2027-v8.8-d2-final-20260928";
 
 const CORE_FILES = [
     "./",
@@ -19,6 +19,7 @@ const CORE_FILES = [
     "./assets/trip-enhancement-data.js",
     "./assets/trip-user-overrides.js",
     "./assets/trip-v8-7-user-plan.js",
+    "./assets/trip-v8-8-d2-plan.js",
     "./assets/checklist-sync.js",
     "./assets/trip-enhancements-v2.css",
     "./assets/trip-enhancements-v3.css",
