@@ -1,6 +1,6 @@
 {
   "version": "v9.0",
-  "build": "2026-09-30.2",
-  "updated": "2026-09-30T01:40:00+08:00",
-  "notes": "D2 exact 3-photo layout; reliable D6-D8 Shinhotaka selector and matching photos; scheduled Hida Toshogu, Toyokawa Shiroyama Inari and Hirayu Shrine; detailed shrine guides; SA/PA and roadside rest-stop notes."
+  "build": "2026-09-30.3",
+  "updated": "2026-09-30T02:55:00+08:00",
+  "notes": "Performance fix for v9 DOM update loop; shrine detailed guides now also appear in Trip Info; D2 photo layout, D6-D8 Shinhotaka selector, matching photos, scheduled Hida Toshogu / Toyokawa Shiroyama Inari / Hirayu Shrine, and SA/PA rest-stop notes retained."
 }
