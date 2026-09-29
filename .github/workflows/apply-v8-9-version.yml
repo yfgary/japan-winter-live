@@ -3,7 +3,7 @@ name: Apply v8.9 Version
 on:
   push:
     paths:
-      - ".github/workflows/apply-v8-9-version.yml"
+      - ".trigger-v89"
   workflow_dispatch:
 
 permissions:
@@ -46,12 +46,12 @@ jobs:
           },ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           PY
 
-      - name: Commit and remove one-time workflow
+      - name: Commit update and clean temporary files
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm .github/workflows/apply-v8-9-version.yml
+          git rm .github/workflows/apply-v8-9-version.yml .trigger-v89
           git add assets/site-shell-v7.js sw.js version.json
           git commit -m "Finalize app v8.9"
           git push
