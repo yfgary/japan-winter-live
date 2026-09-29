@@ -1,6 +1,6 @@
 {
-  "version": "v8.8",
-  "build": "2026-09-28.3",
-  "updated": "2026-09-28T23:55:00+08:00",
-  "notes": "D2 final plan: 08:30 quick breakfast, walk to Matsumoto Castle and allow 1.5 hours for photos + tower, return to hotel for luggage, then pick up rental car; Karuizawa Outlet about 2 hours including quick lunch; leave by 15:30 and arrive Chikumakan by 17:30; Shiraito/Onioshidashi moved to a future trip."
+  "version": "v8.9",
+  "build": "2026-09-30.1",
+  "updated": "2026-09-30T01:30:00+08:00",
+  "notes": "Restore D2 Shiraito/Onioshidashi backups and standard 3-photo layout with daytime Matsumoto Castle; schedule shrines into D6-D8 without removing core sights; restore train/shrine topics; Google Maps opens place pages instead of driving directions."
 }
