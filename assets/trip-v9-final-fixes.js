@@ -1,6 +1,9 @@
 (function(){
 'use strict';
 
+if(window.__japan2027V90FinalFixes)return;
+window.__japan2027V90FinalFixes=true;
+
 const SH_KEY='japanWinter2027_shinhotakaDay';
 const DATA=window.Japan2027EnhancementData||null;
 const DAY_MATSUMOTO='https://commons.wikimedia.org/wiki/Special:FilePath/Matsumoto-Castle-day-view-2019-Luka-Peternel.jpg?width=1600';
@@ -27,7 +30,7 @@ function injectStyles(){
 }
 
 /* =========================================================
-   D2 PHOTO LAYOUT — hero Matsumoto daytime; small Outlet + castle interior
+   D2 PHOTO LAYOUT
 ========================================================= */
 function photoCard(src,alt,caption,credit){
  return '<div class="photo-card"><img class="zoomable" src="'+src+'" alt="'+htmlEsc(alt)+'" data-caption="'+htmlEsc(caption)+'" loading="lazy"><div class="photo-caption">'+caption+(credit?' <span class="v90-plan-photo-credit">'+credit+'</span>':'')+'</div></div>';
@@ -48,7 +51,7 @@ function patchD2Photos(){
 }
 
 /* =========================================================
-   D6-D8 SELECTOR — force stored selection to apply reliably
+   D6-D8 SELECTOR
 ========================================================= */
 function selectedPlan(){return localStorage.getItem(SH_KEY)||'';}
 function updateChoiceState(){
@@ -65,7 +68,7 @@ function installChoiceFix(){
 }
 
 /* =========================================================
-   D6-D8 PHOTOS — follow actual selected itinerary
+   D6-D8 PHOTOS
 ========================================================= */
 const PHOTO_SETS={
  d6:{
@@ -92,8 +95,6 @@ function setDayPhotos(dayId,photos,plan){
  p.dataset.v90Plan=key;
 }
 function patchFlexiblePhotos(){const plan=selectedPlan();if(!PHOTO_SETS[plan])return;['d6','d7','d8'].forEach(id=>setDayPhotos(id,PHOTO_SETS[plan][id],plan));}
-
-/* delegated zoom for all photos recreated by this script */
 function setupZoom(){if(window.__v90Zoom)return;window.__v90Zoom=true;document.addEventListener('click',e=>{const img=e.target.closest?.('.photo-section img.zoomable');if(!img)return;const m=document.getElementById('photoModal'),mi=document.getElementById('modalImage'),c=document.getElementById('modalCaption');if(!m||!mi||!c)return;mi.src=img.src;mi.alt=img.alt;c.textContent=img.dataset.caption||img.alt;m.classList.add('show');document.body.style.overflow='hidden';});}
 
 /* =========================================================
@@ -106,7 +107,7 @@ const SHRINES={
   history:'元和5年（1619），高山藩第三代藩主金森重賴將原本供奉喺高山城內嘅德川家康遷座到今日位置，成為飛驒東照宮。金森家係德川體制下嘅大名，所以東照宮唔只係宗教場所，亦有相當清楚嘅政治象徵。金森家離開飛驒之後，建築曾經荒廢；現存主要社殿到文政元年（1818）由名匠水間相模主持重建。即係你今日見到嘅唔係現代仿古，而係有二百年以上歷史、代表江戶後期飛驒工藝水平嘅建築。',
   importance:'官方資料指出，本殿、唐門同全長約62米嘅透塀都屬岐阜縣指定重要文化財；本地堂等亦有高山市文化財身份。對高山而言，佢係少見能夠同時講「德川政治」、「東照宮信仰」同「飛驒匠」嘅地方，所以比單純影古街更能理解高山點解會形成今日嘅文化面貌。',
   look:['先睇唐門同本殿比例：東照宮系建築比一般地方神社更有「廟」嘅華麗感。','沿住約62米透塀行，留意木格、光影同保存狀態；呢段係官方特別指出極具價值嘅構件。','睇雕刻、樑柱同細部木工，將佢同高山祭屋台嘅精細工藝放埋一齊理解。','冬季如果有雪，木建築、石階、樹林同白雪層次非常適合影相，但真正重點仍然係建築本身。'],
-  fit:'如果 D6/D7/D8 入面有完整高山市區日，就放喺飛驒大鐘乳洞返高山後；如果 D6 已經用咗去新穗高，則放 D7 白川鄉返高山、Residence Check-in 之後。兩個方案都唔Cut松本城、白川鄉、新穗高、鐘乳洞等核心景點。',winter:'戶外參拜為主；石階同樹蔭位置一月有機會結冰，防滑鞋慢行。',time:'約20–30分鐘。',source:'https://www.hidatakayama.or.jp/spot/detail_1184.html'
+  fit:'如果 D6/D7/D8 入面有完整高山市區日，就放喺飛驒大鐘乳洞返高山後；如果 D6 已經用咗去新穗高，則放 D7 白川鄉返高山、Residence Check-in 之後。兩個方案都唔 Cut 松本城、白川鄉、新穗高、鐘乳洞等核心景點。',winter:'戶外參拜為主；石階同樹蔭位置一月有機會結冰，防滑鞋慢行。',time:'約20–30分鐘。',source:'https://www.hidatakayama.or.jp/spot/detail_1184.html'
  },
  '豐川城山稻荷':{
   title:'⛩️ 豐川城山稻荷｜城山雪林入面嘅朱紅鳥居',jp:'豊川城山稲荷（とよかわしろやまいなり）',
@@ -114,7 +115,7 @@ const SHRINES={
   history:'城山一帶本身就係昔日高山城附近嘅歷史地景，除城跡外亦有寺社。豐川稻荷信仰源自愛知縣妙嚴寺所奉嘅豐川吒枳尼真天，歷史背景同一般人最熟悉嘅伏見稻荷系神社並唔完全一樣。高山呢個城山稻荷喺明治時期由地方人士建立，亦反映近代城下町居民將稻荷信仰帶入日常生活。',
   importance:'佢唔係「日本最重要神社」嗰類大型目的地，而係理解高山城山周邊宗教地景嘅好例子。對今次行程而言，佢價值在於短時間內由商人古街切換到山林寺社空間，同時滿足你想影雪＋紅鳥居嘅要求。',
   look:['鳥居排列嘅縱深感係第一重點，最好由入口向內構圖。','留意狐狸／稻荷元素，同一般神社狛犬不同。','如果有新雪，避免踩入未清理斜坡；用已清路線影紅白對比已經足夠。'],
-  fit:'同飛驒東照宮一程串連。完整高山市區日就放鐘乳洞返高山後；若 D6 去新穗高，就改放 D7 白川鄉返高山之後。',winter:'城山坡道一月可能積雪、結冰；路況唔安全就保留東照宮而Skip呢個短停，唔值得冒險。',time:'約15–20分鐘。',source:'https://www.hidatakayama.or.jp/'
+  fit:'同飛驒東照宮一程串連。完整高山市區日就放鐘乳洞返高山後；若 D6 去新穗高，就改放 D7 白川鄉返高山之後。',winter:'城山坡道一月可能積雪、結冰；路況唔安全就保留東照宮而 Skip 呢個短停，唔值得冒險。',time:'約15–20分鐘。',source:'https://www.hidatakayama.or.jp/'
  },
  '平湯神社':{
   title:'⛩️ 平湯神社｜奧飛驒溫泉鄉嘅地方信仰',jp:'平湯神社（ひらゆじんじゃ）',
@@ -137,21 +138,39 @@ const SHRINES={
 function patchShrineData(){
  if(!DATA?.attractions)return;
  Object.entries(SHRINES).forEach(([name,d])=>{
-   let a=DATA.attractions.find(x=>(x.aliases||[]).some(z=>z.includes(name)||name.includes(z)));
-   if(!a){a={id:'v90-'+name,aliases:[name]};DATA.attractions.push(a);}
-   Object.assign(a,{title:d.title,why:d.why,background:d.history+'<br><br>'+d.importance,look:d.look,fit:d.fit,winter:d.winter,time:d.time,source:d.source});
+   const jpBase=d.jp.split('（')[0];
+   let a=DATA.attractions.find(x=>(x.aliases||[]).some(z=>z.includes(name)||name.includes(z)||z.includes(jpBase)||jpBase.includes(z)));
+   if(!a){a={id:'v90-'+name,aliases:[name,jpBase]};DATA.attractions.push(a);}
+   Object.assign(a,{title:d.title,jp:d.jp,why:d.why,background:d.history+'<br><br>'+d.importance,look:d.look,fit:d.fit,winter:d.winter,time:d.time,source:d.source});
  });
 }
-function shrineForText(t){const n=text({textContent:t});return Object.entries(SHRINES).find(([k,v])=>n.includes(k)||n.includes(v.jp.split('（')[0]))?.[1]||null;}
+function shrineForText(t){const n=String(t||'').replace(/\s+/g,' ').trim();return Object.entries(SHRINES).find(([k,v])=>n.includes(k)||n.includes(v.jp.split('（')[0]))?.[1]||null;}
+function dataAttractionForText(t){
+ const n=String(t||'').replace(/\s+/g,' ').trim();let best=null,bestLen=-1;
+ (DATA?.attractions||[]).forEach(a=>(a.aliases||[]).forEach(alias=>{if(alias&&n.includes(alias)&&alias.length>bestLen){best=a;bestLen=alias.length;}}));
+ return best;
+}
 let shrineModal=null;
 function ensureShrineModal(){if(shrineModal)return;shrineModal=document.createElement('div');shrineModal.className='enhance-modal';shrineModal.id='v90ShrineModal';shrineModal.innerHTML='<div class="enhance-modal-card" role="dialog" aria-modal="true"><div class="enhance-modal-head"><h2 class="enhance-modal-title"></h2><button type="button" class="enhance-modal-close" aria-label="關閉">×</button></div><div class="enhance-modal-body"></div></div>';document.body.appendChild(shrineModal);shrineModal.querySelector('.enhance-modal-close').onclick=()=>{shrineModal.classList.remove('show');document.body.style.overflow='';};shrineModal.addEventListener('click',e=>{if(e.target===shrineModal){shrineModal.classList.remove('show');document.body.style.overflow='';}});}
 function openShrine(d){ensureShrineModal();shrineModal.querySelector('.enhance-modal-title').textContent=d.title;shrineModal.querySelector('.enhance-modal-body').innerHTML='<div class="jp-place-name">🇯🇵 '+d.jp+'</div><div class="enhance-why"><h3>🧭 點解值得去</h3><p>'+d.why+'</p></div><div class="enhance-section"><h3>📚 完整背景／歷史</h3><p>'+d.history+'</p></div><div class="enhance-section"><h3>🏯 點解喺高山／奧飛驒重要</h3><p>'+d.importance+'</p></div><div class="enhance-section"><h3>👀 到場應該睇乜</h3><ul>'+d.look.map(x=>'<li>'+x+'</li>').join('')+'</ul></div><div class="enhance-section"><h3>🗺️ 點解排喺呢日</h3><p>'+d.fit+'</p></div><div class="enhance-section"><h3>❄️ 1月重點</h3><p>'+d.winter+'</p></div><div class="enhance-time"><strong>⏱ 建議停留：</strong>'+d.time+'</div><a class="enhance-source" href="'+d.source+'" target="_blank" rel="noopener">↗ 官方／主要資料來源</a>';shrineModal.classList.add('show');document.body.style.overflow='hidden';}
 function attachShrineInfo(){
- document.querySelectorAll('.timeline-card h3,.backup-attraction-title').forEach(h=>{const d=shrineForText(text(h));if(!d)return;h.querySelectorAll('.v90-shrine-info-btn').forEach(x=>x.remove());const b=document.createElement('button');b.type='button';b.className='v90-shrine-info-btn';b.textContent='ⓘ';b.title='詳細神社介紹';b.onclick=e=>{e.preventDefault();e.stopPropagation();openShrine(d);};h.appendChild(b);});
+ document.querySelectorAll('.timeline-card h3,.backup-attraction-title').forEach(h=>{
+   const d=shrineForText(text(h));if(!d||h.querySelector('.v90-shrine-info-btn'))return;
+   const b=document.createElement('button');b.type='button';b.className='v90-shrine-info-btn';b.textContent='ⓘ';b.title='詳細神社介紹';b.onclick=e=>{e.preventDefault();e.stopPropagation();openShrine(d);};h.appendChild(b);
+ });
+ document.querySelectorAll('#winter-shrines .parking-main h3').forEach(h=>{
+   if(h.querySelector('.enhance-info-btn,.v90-shrine-info-btn'))return;
+   const info=dataAttractionForText(text(h));
+   if(info){
+     const b=document.createElement('button');b.type='button';b.className='enhance-info-btn';b.textContent='ⓘ';b.dataset.deepInfoId=info.id;b.title='詳盡介紹：歷史、重要性、現場睇乜';h.appendChild(b);return;
+   }
+   const d=shrineForText(text(h));if(!d)return;
+   const b=document.createElement('button');b.type='button';b.className='v90-shrine-info-btn';b.textContent='ⓘ';b.title='詳細神社介紹';b.onclick=e=>{e.preventDefault();e.stopPropagation();openShrine(d);};h.appendChild(b);
+ });
 }
 
 /* =========================================================
-   SHRINE SCHEDULING — 3 confirmed additions; Hie remains Backup
+   SHRINE SCHEDULING
 ========================================================= */
 function makeTimeline(cls,time,type,title,jp,desc,map,dur){const d=document.createElement('div');d.className='timeline-item v90-shrine-card '+cls;d.innerHTML='<div class="time">'+time+'</div><div class="timeline-card"><span class="event-type">'+type+'</span><span class="duration-badge">⏱ '+dur+'</span><h3 data-map="'+htmlEsc(map)+'">'+title+'</h3><div class="jp-place-name">🇯🇵 '+jp+'</div><p>'+desc+'</p></div>';return d;}
 function scheduleCityShrines(dayId,mode){
@@ -191,7 +210,7 @@ function scheduleHirayu(dayId){
    const hotel=findItem(day,'Residence Hotel Takayama Station');if(hotel){const t=hotel.querySelector('.time');if(t)t.textContent='15:50';}
  }
  if(dayId==='d8'){
-   const bonus=findItem(day,'大王山葵農場');if(bonus){const t=bonus.querySelector('.time');if(t)t.textContent='超早到先加';const p=bonus.querySelector('p');if(p)p.textContent='加咗平湯神社後，正常時間已唔追呢個Bonus；只有實際行程比預定早好多，而且仍趕到冬季關門前先考慮。';}
+   const bonus=findItem(day,'大王山葵農場');if(bonus){const t=bonus.querySelector('.time');if(t)t.textContent='超早到先加';const p=bonus.querySelector('p');if(p)p.textContent='加咗平湯神社後，正常時間已唔追呢個 Bonus；只有實際行程比預定早好多，而且仍趕到冬季關門前先考慮。';}
  }
 }
 function ensureHieBackup(){
@@ -226,14 +245,27 @@ const REST_RULES=[
 function addRestNotes(){
  document.querySelectorAll('.timeline-item').forEach(item=>{if(item.querySelector('.v90-route-stop'))return;const type=text(item.querySelector('.event-type')),title=text(item.querySelector('h3'));if(!/(🚗|車)/.test(type))return;const r=REST_RULES.find(x=>x.match.some(m=>title.includes(m)));if(!r)return;const div=document.createElement('div');div.className='v90-route-stop';div.innerHTML=r.html;item.querySelector('.timeline-card')?.appendChild(div);});
 }
-
 function rewriteMapLinks(){document.querySelectorAll('a.map-pin,a.backup-map,a[href*="google.com/maps/dir"],a[href*="maps.google.com"]').forEach(a=>{let q=a.closest?.('[data-map]')?.dataset?.map||a.dataset?.mapQuery||'';try{const u=new URL(a.href,location.href);q=q||u.searchParams.get('destination')||u.searchParams.get('daddr')||u.searchParams.get('query')||'';}catch(e){}if(q){a.href=placeUrl(q);a.target='_blank';a.rel='noopener';a.title='Google Maps：開啟地點';}});}
 
-let timer=null;
 function applyAll(){
- injectStyles();patchShrineData();patchD2Photos();patchFlexiblePhotos();scheduleShrines();addRestNotes();attachShrineInfo();rewriteMapLinks();updateChoiceState();setupZoom();
+ injectStyles();
+ patchShrineData();
+ patchD2Photos();
+ patchFlexiblePhotos();
+ scheduleShrines();
+ addRestNotes();
+ attachShrineInfo();
+ rewriteMapLinks();
+ updateChoiceState();
+ setupZoom();
 }
-function scheduleApply(){clearTimeout(timer);timer=setTimeout(applyAll,80);}
-function start(){installChoiceFix();applyAll();[300,900,1800,3200].forEach(t=>setTimeout(applyAll,t));const host=document.querySelector('.container')||document.body;new MutationObserver(ms=>{if(ms.some(m=>m.addedNodes.length))scheduleApply();}).observe(host,{childList:true,subtree:true});}
+function start(){
+ installChoiceFix();
+ applyAll();
+ /* Older enhancement scripts finish a few delayed DOM updates after DOMContentLoaded.
+    Use a few bounded retries instead of a permanent MutationObserver.  The old observer
+    could retrigger itself through the shrine info buttons and cause high CPU/RAM usage. */
+ [250,700,1500].forEach(t=>setTimeout(applyAll,t));
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
