@@ -170,6 +170,9 @@ function scheduleCityShrines(dayId,mode){
  const c=makeTimeline('v90-city-shrines',times[2][0],'🚗 市內短程','飛驒東照宮 → 豐川城山稻荷','飛騨東照宮 → 豊川城山稲荷','短程移動去城山一帶。','豊川城山稲荷',times[2][1]);
  const d=makeTimeline('v90-city-shrines',times[3][0],'⛩️ 神社','豐川城山稻荷・朱紅鳥居','豊川城山稲荷（とよかわしろやまいなり）','正式主線短停：雪地朱紅鳥居係攝影重點；路面結冰嚴重就以安全為先。','豊川城山稲荷',times[3][1]);
  let tail=ref;[a,b,c,d].forEach(n=>{insertAfter(tail,n);tail=n;});
+ if(mode==='after-cave'){
+   const shop=findItem(day,'高山地元超市');if(shop){const t=shop.querySelector('.time');if(t)t.textContent='17:15–17:45';}
+ }
 }
 function scheduleHirayu(dayId){
  const day=document.getElementById(dayId);if(!day||day.querySelector('.v90-hirayu-shrine'))return;
@@ -177,13 +180,19 @@ function scheduleHirayu(dayId){
  let ref=candidates.find(x=>/午餐/.test(text(x.querySelector('.event-type'))));
  if(!ref)ref=candidates.reverse().find(x=>!/(🚗|車)/.test(text(x.querySelector('.event-type'))));
  if(!ref)return;
- [...day.querySelectorAll('.timeline-item')].forEach(x=>{const h=text(x.querySelector('h3'));if(x.compareDocumentPosition(ref)&Node.DOCUMENT_POSITION_PRECEDING)return;if(/新穗高\s*→\s*(高山|松本|安曇野)/.test(h))x.remove();});
+ let passed=false;[...day.querySelectorAll('.timeline-item')].forEach(x=>{if(x===ref){passed=true;return;}if(!passed)return;const h=text(x.querySelector('h3'));if(/新穗高\s*→\s*(高山|松本|安曇野)/.test(h))x.remove();});
  const time=dayId==='d7'?[['14:00–14:35','35分鐘'],['14:35–14:55','20分鐘'],['14:55–15:45','50分鐘']]:dayId==='d8'?[['13:30–14:00','30分鐘'],['14:00–14:20','20分鐘'],['14:20–16:00','約1小時40分']]:[['13:30–14:05','35分鐘'],['14:05–14:25','20分鐘'],['14:25–15:15','50分鐘']];
  const dest=dayId==='d8'?'松本':'高山';
  const a=makeTimeline('v90-hirayu-shrine',time[0][0],'🚗 車','新穗高 → 平湯神社','新穂高温泉 → 平湯神社','沿R471／R158方向返平湯，神社就在自然回程線，唔需要繞大圈。','平湯神社',time[0][1]);
  const b=makeTimeline('v90-hirayu-shrine',time[1][0],'⛩️ 神社','平湯神社・奧飛驒溫泉鄉信仰','平湯神社（ひらゆじんじゃ）','正式加入新穗高日；短停約20分鐘，了解白猿傳說、溫泉聚落同地方信仰。','平湯神社',time[1][1]);
  const c=makeTimeline('v90-hirayu-shrine',time[2][0],'🚗 車','平湯 → '+dest,'平湯 → '+(dest==='松本'?'松本市':'高山市'),'參拜後繼續原本主線。冬季以道路安全同即時導航為準。',dest,time[2][1]);
  let tail=ref;[a,b,c].forEach(n=>{insertAfter(tail,n);tail=n;});
+ if(dayId==='d7'){
+   const hotel=findItem(day,'Residence Hotel Takayama Station');if(hotel){const t=hotel.querySelector('.time');if(t)t.textContent='15:50';}
+ }
+ if(dayId==='d8'){
+   const bonus=findItem(day,'大王山葵農場');if(bonus){const t=bonus.querySelector('.time');if(t)t.textContent='超早到先加';const p=bonus.querySelector('p');if(p)p.textContent='加咗平湯神社後，正常時間已唔追呢個Bonus；只有實際行程比預定早好多，而且仍趕到冬季關門前先考慮。';}
+ }
 }
 function ensureHieBackup(){
  const day=document.getElementById('d6');if(!day||day.querySelector('.v90-hie-backup'))return;
