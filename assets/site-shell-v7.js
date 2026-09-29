@@ -4,7 +4,7 @@
 if (window.__japan2027SiteShellV7) return;
 window.__japan2027SiteShellV7 = true;
 
-const INSTALLED_VERSION = 'v8.6';
+const INSTALLED_VERSION = 'v8.9';
 const VERSION_URL = 'version.json';
 const WEATHER_CACHE_KEY = 'japan2027_weather_cache_v1';
 const WEATHER_REGION_KEY = 'japan2027_weather_region';
