@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/apply-v8-9-version.yml"
+  workflow_dispatch:
 
 permissions:
   contents: write
