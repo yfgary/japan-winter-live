@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-09-30.4",
-  "updated": "2026-09-30T13:43:00+08:00",
-  "notes": "Hotfix: remove duplicate shrine info icons; Trip Info now uses a lightweight script set without the heavy itinerary renderer/observers; shrine detailed guides remain available."
+  "build": "2026-09-30.5",
+  "updated": "2026-09-30T15:52:00+08:00",
+  "notes": "Hotfix 2: restore the Hong Kong departure checklist on Trip Info while keeping the lightweight loader; correct the installed version badge to v9.0.1; duplicate shrine info icons remain fixed."
 }
