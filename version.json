@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-09-30.5",
-  "updated": "2026-09-30T15:52:00+08:00",
-  "notes": "Hotfix 2: restore the Hong Kong departure checklist on Trip Info while keeping the lightweight loader; correct the installed version badge to v9.0.1; duplicate shrine info icons remain fixed."
+  "build": "2026-09-30.6",
+  "updated": "2026-09-30T15:58:00+08:00",
+  "notes": "Hotfix 3: restore the final split 96-item departure packing checklist from v8.1 on Trip Info, including the original per-item IDs and cross-device checklist sync, while keeping the lightweight Trip Info loader and v9 performance fixes."
 }
