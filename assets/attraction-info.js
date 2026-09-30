@@ -12,28 +12,47 @@ function addCss(href){
     document.head.appendChild(l);
 }
 
-addCss('assets/trip-enhancements-v2.css?v=901');
-addCss('assets/trip-enhancements-v3.css?v=901');
-addCss('assets/site-shell-v7.css?v=901');
-addCss('assets/trip-v8.css?v=901');
-addCss('assets/trip-v8-1.css?v=901');
+addCss('assets/trip-enhancements-v2.css?v=902');
+addCss('assets/trip-enhancements-v3.css?v=902');
+addCss('assets/site-shell-v7.css?v=902');
+addCss('assets/trip-v8.css?v=902');
+addCss('assets/trip-v8-1.css?v=902');
 
-const scripts = [
-    'assets/site-shell-v7.js?v=901',
-    'assets/trip-enhancement-data.js?v=901',
-    'assets/trip-user-overrides.js?v=901',
-    'assets/trip-deep-info-d1-d4.js?v=901',
-    'assets/trip-deep-info-d5-d9.js?v=901',
-    'assets/trip-deep-info-backups.js?v=901',
-    'assets/trip-v8-data.js?v=901',
-    'assets/trip-v8-1-overrides.js?v=901',
-    'assets/trip-enhancements-v3.js?v=901',
-    'assets/trip-v8-ui.js?v=901',
-    'assets/trip-v8-7-user-plan.js?v=901',
-    'assets/trip-v8-8-d2-plan.js?v=901',
-    'assets/trip-v8-9-user-fixes.js?v=901',
-    'assets/trip-v9-final-fixes.js?v=901'
+const isTripInfo = /(?:^|\/)trip-info\.html$/.test(location.pathname);
+
+const itineraryScripts = [
+    'assets/site-shell-v7.js?v=902',
+    'assets/trip-enhancement-data.js?v=902',
+    'assets/trip-user-overrides.js?v=902',
+    'assets/trip-deep-info-d1-d4.js?v=902',
+    'assets/trip-deep-info-d5-d9.js?v=902',
+    'assets/trip-deep-info-backups.js?v=902',
+    'assets/trip-v8-data.js?v=902',
+    'assets/trip-v8-1-overrides.js?v=902',
+    'assets/trip-enhancements-v3.js?v=902',
+    'assets/trip-v8-ui.js?v=902',
+    'assets/trip-v8-7-user-plan.js?v=902',
+    'assets/trip-v8-8-d2-plan.js?v=902',
+    'assets/trip-v8-9-user-fixes.js?v=902',
+    'assets/trip-v9-final-fixes.js?v=902',
+    'assets/trip-v9-hotfix.js?v=902'
 ];
+
+/* Trip Info does not need the heavy itinerary renderer / mutation observers.
+   Loading only the data + trip-info patch scripts keeps the page responsive. */
+const tripInfoScripts = [
+    'assets/site-shell-v7.js?v=902',
+    'assets/trip-enhancement-data.js?v=902',
+    'assets/trip-user-overrides.js?v=902',
+    'assets/trip-deep-info-d1-d4.js?v=902',
+    'assets/trip-deep-info-d5-d9.js?v=902',
+    'assets/trip-deep-info-backups.js?v=902',
+    'assets/trip-v8-7-user-plan.js?v=902',
+    'assets/trip-v9-final-fixes.js?v=902',
+    'assets/trip-v9-hotfix.js?v=902'
+];
+
+const scripts = isTripInfo ? tripInfoScripts : itineraryScripts;
 
 /* itinerary.html / trip-info.html load this just before </body>.
  * Parser-blocking document.write keeps script order deterministic on iPhone PWA.
