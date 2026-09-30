@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0-performance-20260930";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-hotfix-20260930";
 
 const CORE_FILES = [
     "./",
@@ -22,6 +22,7 @@ const CORE_FILES = [
     "./assets/trip-v8-8-d2-plan.js",
     "./assets/trip-v8-9-user-fixes.js",
     "./assets/trip-v9-final-fixes.js",
+    "./assets/trip-v9-hotfix.js",
     "./assets/checklist-sync.js",
     "./assets/trip-enhancements-v2.css",
     "./assets/trip-enhancements-v3.css",
@@ -88,10 +89,8 @@ self.addEventListener("fetch", event => {
 
     const url = new URL(request.url);
 
-    /* External Live Cam / YouTube / Google Maps / Weather API are never cached here. */
     if (url.origin !== self.location.origin) return;
 
-    /* version.json must always come from network when online. */
     if (url.pathname.endsWith("/version.json")) {
         event.respondWith(
             fetch(request, { cache: "no-store" }).catch(() =>
@@ -103,7 +102,6 @@ self.addEventListener("fetch", event => {
         return;
     }
 
-    /* HTML: Network first, cached copy when offline. */
     if (request.mode === "navigate" || request.destination === "document") {
         event.respondWith(
             fetch(request)
@@ -121,8 +119,6 @@ self.addEventListener("fetch", event => {
         return;
     }
 
-    /* Same-origin photos / manifest / enhancement assets: cache first.
-       Ignore ?v= query strings so precached files also work offline. */
     event.respondWith(
         caches.match(request, {ignoreSearch:true}).then(cached => {
             if (cached) return cached;
