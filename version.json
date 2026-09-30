@@ -1,6 +1,6 @@
 {
-  "version": "v9.0",
-  "build": "2026-09-30.3",
-  "updated": "2026-09-30T02:55:00+08:00",
-  "notes": "Performance fix for v9 DOM update loop; shrine detailed guides now also appear in Trip Info; D2 photo layout, D6-D8 Shinhotaka selector, matching photos, scheduled Hida Toshogu / Toyokawa Shiroyama Inari / Hirayu Shrine, and SA/PA rest-stop notes retained."
+  "version": "v9.0.1",
+  "build": "2026-09-30.4",
+  "updated": "2026-09-30T13:43:00+08:00",
+  "notes": "Hotfix: remove duplicate shrine info icons; Trip Info now uses a lightweight script set without the heavy itinerary renderer/observers; shrine detailed guides remain available."
 }
