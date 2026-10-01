@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1f4e79">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Japan 2027">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/images/app-icon-192.png">
+<title>Japan Winter 2027 景點總覽</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f6;color:#22313d;font-family:Arial,"Microsoft JhengHei","Noto Sans TC",sans-serif}header{background:linear-gradient(135deg,#163a5c,#28689d);color:#fff;text-align:center;padding:23px 15px}header h1{margin:0;font-size:27px}header p{margin:7px 0 0;opacity:.9;font-size:13px}.page-switch{background:#fff;padding:8px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.08)}.page-switch a{display:inline-block;margin:3px;padding:8px 14px;border-radius:18px;text-decoration:none;background:#eaf2f8;color:#1f4e79;font-size:14px;font-weight:700}.page-switch a.active{background:#1f4e79;color:#fff}.catalog-nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.97);border-bottom:1px solid #d6dee5;box-shadow:0 2px 7px rgba(0,0,0,.06)}.location-nav{max-width:1180px;margin:auto;padding:8px 10px;display:flex;gap:7px;overflow-x:auto;white-space:nowrap}.location-nav a{flex:0 0 auto;text-decoration:none;background:#eef4f8;color:#1f4e79;padding:7px 11px;border-radius:16px;font-size:12px;font-weight:700}.location-nav b{opacity:.65}.container{max-width:1180px;margin:auto;padding:16px}.catalog-intro{background:#fff;border-radius:14px;padding:17px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.07)}.catalog-intro h2{margin:0 0 7px;color:#1f4e79;font-size:21px}.catalog-intro p{margin:6px 0;color:#5c6c77;font-size:13px;line-height:1.6}.catalog-count{margin-top:10px;font-weight:800;color:#2d5f85}.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.toolbar button{border:1px solid #d3dfe7;background:#f5f8fa;color:#31566f;border-radius:18px;padding:7px 11px;font-size:12px;font-weight:800;cursor:pointer}.toolbar button.active{background:#1f4e79;color:#fff;border-color:#1f4e79}.cat-group{scroll-margin-top:58px;margin-bottom:16px}.cat-group-head{display:flex;justify-content:space-between;align-items:center;padding:9px 3px}.cat-group-head h2{margin:0;color:#1f4e79;font-size:21px}.cat-group-head span{font-size:12px;color:#71818d;font-weight:700}.cat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cat-card{background:#fff;border:1px solid #e1e8ed;border-radius:13px;padding:14px;box-shadow:0 2px 7px rgba(0,0,0,.06)}.cat-card-head{display:flex;gap:12px;justify-content:space-between;align-items:flex-start}.cat-title-wrap{min-width:0}.cat-card h3{margin:0;color:#263d4d;font-size:18px;line-height:1.45}.cat-jp{margin-top:5px;color:#75838d;font-size:12px;line-height:1.45}.cat-score{flex:0 0 auto;background:#edf6ff;color:#1f4e79;border:1px solid #c9dfef;border-radius:10px;padding:7px 9px;font-size:16px;font-weight:900}.cat-badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0}.cat-badge,.cat-map{display:inline-flex;align-items:center;border-radius:14px;padding:5px 8px;font-size:10.5px;font-weight:800;text-decoration:none}.cat-badge.main{background:#e4f4e9;color:#2b6a40}.cat-badge.backup{background:#fff0d8;color:#875d00}.cat-badge.day{background:#edf2f6;color:#516876}.cat-map{background:#e8f5ec;color:#2d6a42;border:1px solid #cae1d1}.cat-full{border-top:1px solid #e8edf0;padding-top:9px}.cat-full summary{cursor:pointer;color:#1f4e79;font-size:12px;font-weight:900}.cat-full-body{padding-top:5px}.cat-detail{margin-top:10px;padding:10px 11px;border-radius:9px;background:#f6f8fa}.cat-detail.why{background:#eef6fb}.cat-detail.fit{background:#f4f0fb}.cat-detail.winter{background:#f1f7fb}.cat-detail h4{margin:0 0 6px;font-size:12px;color:#294b63}.cat-detail p{margin:5px 0;color:#53636e;font-size:12px;line-height:1.65}.cat-detail ul{margin:5px 0 0;padding-left:19px;color:#53636e;font-size:12px;line-height:1.65}.cat-time{margin-top:10px;padding:9px 10px;border-radius:8px;background:#f7f3e8;color:#66521c;font-size:12px}.cat-source{display:inline-block;margin-top:8px;color:#1f5f91;font-size:11px;font-weight:700;text-decoration:none}.score-note{font-size:11px!important;color:#7a8790!important}.floating-top{position:fixed;right:14px;bottom:16px;width:46px;height:46px;border:0;border-radius:50%;background:#1f4e79;color:#fff;font-size:24px;font-weight:900;box-shadow:0 3px 12px rgba(0,0,0,.22);cursor:pointer}.version-badge{position:fixed;left:14px;bottom:16px;background:#edf7ef;color:#2c6a3e;border:1px solid #c6decf;border-radius:18px;padding:7px 11px;font-size:11px;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,.12)}footer{text-align:center;color:#77848e;font-size:12px;padding:12px 10px 70px}@media(max-width:760px){header h1{font-size:22px}.container{padding:10px}.cat-grid{grid-template-columns:1fr}.cat-card{padding:12px}.cat-card h3{font-size:17px}.cat-score{font-size:15px}.page-switch a{font-size:12px;padding:7px 10px}.version-badge{left:8px;bottom:8px}.floating-top{right:8px;bottom:8px}}
+</style>
+</head>
+<body>
+<header><h1>🗾 Japan Winter 2027・景點總覽</h1><p>主行程＋所有 Backup｜按地區分類｜完整介紹＋推薦分數</p></header>
+<div class="page-switch">
+<a href="index.html">📹 Live Cam</a>
+<a href="itinerary.html">🗓️ 詳細行程</a>
+<a href="trip-info.html">🧳 旅程資料</a>
+<a href="attractions.html" class="active">🗾 景點總覽</a>
+</div>
+<nav class="catalog-nav"><div class="location-nav" id="locationNav"><span>載入地區…</span></div></nav>
+<div class="container">
+<section class="catalog-intro">
+<h2>全部景點一頁睇晒</h2>
+<p>呢頁會用返「詳細行程」同一套景點資料：點解值得去、歷史／背景、現場應該睇乜、行程安排、1月冬季重點同建議停留時間。主行程同後備景點會清楚分開。</p>
+<p class="score-note">⭐ 分數係我按今次你呢個冬季自駕行程嘅「獨特性、冬季景觀、攝影價值、文化價值、順路程度同時間成本」綜合評分；10/10 代表今次行程非常值得保留，唔係官方評級。</p>
+<div class="catalog-count" id="catalogCount">整理景點中…</div>
+<div class="toolbar">
+<button class="filter-btn active" data-filter="all">全部</button>
+<button class="filter-btn" data-filter="main">✅ 主行程</button>
+<button class="filter-btn" data-filter="backup">🔄 後備景點</button>
+<button id="expandAll">全部展開</button>
+<button id="collapseAll">全部收起</button>
+</div>
+</section>
+<div id="catalogGroups"></div>
+</div>
+<button class="floating-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返頁頂">↑</button>
+<div class="version-badge" id="catalogVersion">版本讀取中…</div>
+<footer>Japan Winter Trip 2027｜景點總覽</footer>
+<script src="assets/trip-enhancement-data.js?v=904"></script>
+<script src="assets/trip-deep-info-d1-d4.js?v=904"></script>
+<script src="assets/trip-deep-info-d5-d9.js?v=904"></script>
+<script src="assets/trip-deep-info-backups.js?v=904"></script>
+<script src="assets/trip-v9-final-fixes.js?v=904"></script>
+<script src="assets/attractions-catalog.js?v=1"></script>
+</body>
+</html>
