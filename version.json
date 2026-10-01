@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.1",
-  "updated": "2026-10-02T03:11:00+08:00",
-  "notes": "Added a complete attraction catalog page grouped by location, covering the main itinerary and all backup attractions, with the same detailed attraction descriptions, day/status labels, Google Maps links, and a 10-point recommendation score."
+  "build": "2026-10-02.2",
+  "updated": "2026-10-02T03:26:00+08:00",
+  "notes": "Redesigned the attraction catalog to match the detailed itinerary card layout. Cards now show only itinerary-style practical information with day, main/backup status, duration, recommendation score, map and visit metadata; the same full attraction introduction used by the itinerary opens from the info icon."
 }
