@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.2",
-  "updated": "2026-10-02T03:26:00+08:00",
-  "notes": "Redesigned the attraction catalog to match the detailed itinerary card layout. Cards now show only itinerary-style practical information with day, main/backup status, duration, recommendation score, map and visit metadata; the same full attraction introduction used by the itinerary opens from the info icon."
+  "build": "2026-10-02.3",
+  "updated": "2026-10-02T03:35:00+08:00",
+  "notes": "Catalog hotfix: force-load a new layout script filename so older PWA caches cannot keep serving the previous expanded catalog. Attraction cards now use the itinerary timeline-card presentation, with full details only behind the info icon."
 }
