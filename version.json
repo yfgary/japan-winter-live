@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-09-30.6",
-  "updated": "2026-09-30T15:58:00+08:00",
-  "notes": "Hotfix 3: restore the final split 96-item departure packing checklist from v8.1 on Trip Info, including the original per-item IDs and cross-device checklist sync, while keeping the lightweight Trip Info loader and v9 performance fixes."
+  "build": "2026-10-02.1",
+  "updated": "2026-10-02T03:11:00+08:00",
+  "notes": "Added a complete attraction catalog page grouped by location, covering the main itinerary and all backup attractions, with the same detailed attraction descriptions, day/status labels, Google Maps links, and a 10-point recommendation score."
 }
