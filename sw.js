@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-hotfix3-20260930";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-catalog-20261002";
 
 const CORE_FILES = [
     "./",
@@ -6,9 +6,12 @@ const CORE_FILES = [
     "./live.html",
     "./itinerary.html",
     "./trip-info.html",
+    "./attractions.html",
     "./manifest.webmanifest",
     "./assets/attraction-info.css",
     "./assets/attraction-info.js",
+    "./assets/attractions-catalog.js",
+    "./assets/catalog-link.js",
     "./assets/site-shell-v7.css",
     "./assets/site-shell-v7.js",
     "./assets/trip-v8.css",
