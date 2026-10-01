@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-catalog2-20261002";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-catalog3-20261002";
 
 const CORE_FILES = [
     "./",
@@ -11,6 +11,7 @@ const CORE_FILES = [
     "./assets/attraction-info.css",
     "./assets/attraction-info.js",
     "./assets/attractions-catalog.js",
+    "./assets/attractions-layout-v2.js",
     "./assets/catalog-link.js",
     "./assets/site-shell-v7.css",
     "./assets/site-shell-v7.js",
