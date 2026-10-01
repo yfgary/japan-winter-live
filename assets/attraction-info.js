@@ -12,30 +12,31 @@ function addCss(href){
     document.head.appendChild(l);
 }
 
-addCss('assets/trip-enhancements-v2.css?v=903');
-addCss('assets/trip-enhancements-v3.css?v=903');
-addCss('assets/site-shell-v7.css?v=903');
-addCss('assets/trip-v8.css?v=903');
-addCss('assets/trip-v8-1.css?v=903');
+addCss('assets/trip-enhancements-v2.css?v=904');
+addCss('assets/trip-enhancements-v3.css?v=904');
+addCss('assets/site-shell-v7.css?v=904');
+addCss('assets/trip-v8.css?v=904');
+addCss('assets/trip-v8-1.css?v=904');
 
 const isTripInfo = /(?:^|\/)trip-info\.html$/.test(location.pathname);
 
 const itineraryScripts = [
-    'assets/site-shell-v7.js?v=903',
-    'assets/trip-enhancement-data.js?v=903',
-    'assets/trip-user-overrides.js?v=903',
-    'assets/trip-deep-info-d1-d4.js?v=903',
-    'assets/trip-deep-info-d5-d9.js?v=903',
-    'assets/trip-deep-info-backups.js?v=903',
-    'assets/trip-v8-data.js?v=903',
-    'assets/trip-v8-1-overrides.js?v=903',
-    'assets/trip-enhancements-v3.js?v=903',
-    'assets/trip-v8-ui.js?v=903',
-    'assets/trip-v8-7-user-plan.js?v=903',
-    'assets/trip-v8-8-d2-plan.js?v=903',
-    'assets/trip-v8-9-user-fixes.js?v=903',
-    'assets/trip-v9-final-fixes.js?v=903',
-    'assets/trip-v9-hotfix.js?v=903'
+    'assets/site-shell-v7.js?v=904',
+    'assets/trip-enhancement-data.js?v=904',
+    'assets/trip-user-overrides.js?v=904',
+    'assets/trip-deep-info-d1-d4.js?v=904',
+    'assets/trip-deep-info-d5-d9.js?v=904',
+    'assets/trip-deep-info-backups.js?v=904',
+    'assets/trip-v8-data.js?v=904',
+    'assets/trip-v8-1-overrides.js?v=904',
+    'assets/trip-enhancements-v3.js?v=904',
+    'assets/trip-v8-ui.js?v=904',
+    'assets/trip-v8-7-user-plan.js?v=904',
+    'assets/trip-v8-8-d2-plan.js?v=904',
+    'assets/trip-v8-9-user-fixes.js?v=904',
+    'assets/trip-v9-final-fixes.js?v=904',
+    'assets/trip-v9-hotfix.js?v=904',
+    'assets/catalog-link.js?v=1'
 ];
 
 /* Trip Info keeps the lightweight loader, but must still load the v8.1 data
@@ -43,17 +44,18 @@ const itineraryScripts = [
    These two files are data/metadata only; the heavy itinerary renderers and
    mutation observers remain excluded from Trip Info. */
 const tripInfoScripts = [
-    'assets/site-shell-v7.js?v=903',
-    'assets/trip-enhancement-data.js?v=903',
-    'assets/trip-user-overrides.js?v=903',
-    'assets/trip-deep-info-d1-d4.js?v=903',
-    'assets/trip-deep-info-d5-d9.js?v=903',
-    'assets/trip-deep-info-backups.js?v=903',
-    'assets/trip-v8-data.js?v=903',
-    'assets/trip-v8-1-overrides.js?v=903',
-    'assets/trip-v8-7-user-plan.js?v=903',
-    'assets/trip-v9-final-fixes.js?v=903',
-    'assets/trip-v9-hotfix.js?v=903'
+    'assets/site-shell-v7.js?v=904',
+    'assets/trip-enhancement-data.js?v=904',
+    'assets/trip-user-overrides.js?v=904',
+    'assets/trip-deep-info-d1-d4.js?v=904',
+    'assets/trip-deep-info-d5-d9.js?v=904',
+    'assets/trip-deep-info-backups.js?v=904',
+    'assets/trip-v8-data.js?v=904',
+    'assets/trip-v8-1-overrides.js?v=904',
+    'assets/trip-v8-7-user-plan.js?v=904',
+    'assets/trip-v9-final-fixes.js?v=904',
+    'assets/trip-v9-hotfix.js?v=904',
+    'assets/catalog-link.js?v=1'
 ];
 
 const scripts = isTripInfo ? tripInfoScripts : itineraryScripts;
