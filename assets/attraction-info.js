@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 
-if (window.__japan2027EnhancementLoaderV7) return;
-window.__japan2027EnhancementLoaderV7 = true;
+if (window.__japan2027EnhancementLoaderV8) return;
+window.__japan2027EnhancementLoaderV8 = true;
 
 function addCss(href){
     if (document.querySelector('link[href="' + href + '"]')) return;
@@ -12,56 +12,59 @@ function addCss(href){
     document.head.appendChild(l);
 }
 
-addCss('assets/trip-enhancements-v2.css?v=911');
-addCss('assets/trip-enhancements-v3.css?v=911');
-addCss('assets/site-shell-v7.css?v=911');
-addCss('assets/trip-v8.css?v=911');
-addCss('assets/trip-v8-1.css?v=911');
+addCss('assets/trip-enhancements-v2.css?v=912');
+addCss('assets/trip-enhancements-v3.css?v=912');
+addCss('assets/site-shell-v7.css?v=912');
+addCss('assets/trip-v8.css?v=912');
+addCss('assets/trip-v8-1.css?v=912');
 
 const isTripInfo = /(?:^|\/)trip-info\.html$/.test(location.pathname);
 
 const itineraryScripts = [
     'assets/trip-no-observers-v2.js?v=1',
-    'assets/trip-core-v1.js?v=1',
-    'assets/site-shell-v7.js?v=911',
-    'assets/weather-suitability-v1.js?v=4',
-    'assets/version-v901-fix.js?v=3',
-    'assets/trip-enhancement-data.js?v=911',
-    'assets/trip-user-overrides.js?v=911',
-    'assets/trip-deep-info-d1-d4.js?v=911',
-    'assets/trip-deep-info-d5-d9.js?v=911',
-    'assets/trip-deep-info-backups.js?v=911',
-    'assets/trip-v8-data.js?v=911',
-    'assets/trip-v8-1-overrides.js?v=911',
-    'assets/trip-enhancements-v3.js?v=911',
-    'assets/trip-v8-ui.js?v=911',
-    'assets/trip-v8-7-user-plan.js?v=911',
-    'assets/trip-v8-8-d2-plan.js?v=911',
-    'assets/trip-v8-9-user-fixes.js?v=911',
-    'assets/trip-v9-final-fixes.js?v=911',
-    'assets/trip-v9-hotfix.js?v=911',
-    'assets/trip-v9-1-routing.js?v=1',
+    'assets/trip-core-v1.js?v=2',
+    'assets/site-shell-v7.js?v=912',
+    'assets/weather-suitability-v1.js?v=5',
+    'assets/version-v901-fix.js?v=4',
+    'assets/nav-enhancements-v1.js?v=1',
+    'assets/trip-enhancement-data.js?v=912',
+    'assets/trip-user-overrides.js?v=912',
+    'assets/trip-deep-info-d1-d4.js?v=912',
+    'assets/trip-deep-info-d5-d9.js?v=912',
+    'assets/trip-deep-info-backups.js?v=912',
+    'assets/trip-v8-data.js?v=912',
+    'assets/trip-v8-1-overrides.js?v=912',
+    'assets/trip-enhancements-v3.js?v=912',
+    'assets/trip-v8-ui.js?v=912',
+    'assets/trip-v8-7-user-plan.js?v=912',
+    'assets/trip-v8-8-d2-plan.js?v=912',
+    'assets/trip-v8-9-user-fixes.js?v=912',
+    'assets/trip-v9-final-fixes.js?v=912',
+    'assets/trip-v9-hotfix.js?v=912',
+    'assets/trip-v9-1-routing.js?v=2',
     'assets/trip-v9-1-visit-fix.js?v=1',
-    'assets/catalog-link.js?v=2'
+    'assets/catalog-link.js?v=2',
+    'assets/travel-mode-v1.js?v=1'
 ];
 
 /* Trip Info stays lightweight. It shares the same central trip core, weather,
    checklist and final data overrides without loading the itinerary renderers. */
 const tripInfoScripts = [
-    'assets/trip-core-v1.js?v=1',
-    'assets/site-shell-v7.js?v=911',
-    'assets/weather-suitability-v1.js?v=4',
-    'assets/version-v901-fix.js?v=3',
-    'assets/trip-enhancement-data.js?v=911',
-    'assets/trip-user-overrides.js?v=911',
-    'assets/trip-deep-info-d1-d4.js?v=911',
-    'assets/trip-deep-info-d5-d9.js?v=911',
-    'assets/trip-deep-info-backups.js?v=911',
-    'assets/trip-v8-data.js?v=911',
-    'assets/trip-v8-1-overrides.js?v=911',
-    'assets/trip-v8-7-user-plan.js?v=911',
-    'assets/trip-v9-final-fixes.js?v=911',
-    'assets/trip-v9-hotfix.js?v=911',
+    'assets/trip-core-v1.js?v=2',
+    'assets/site-shell-v7.js?v=912',
+    'assets/weather-suitability-v1.js?v=5',
+    'assets/version-v901-fix.js?v=4',
+    'assets/nav-enhancements-v1.js?v=1',
+    'assets/trip-enhancement-data.js?v=912',
+    'assets/trip-user-overrides.js?v=912',
+    'assets/trip-deep-info-d1-d4.js?v=912',
+    'assets/trip-deep-info-d5-d9.js?v=912',
+    'assets/trip-deep-info-backups.js?v=912',
+    'assets/trip-v8-data.js?v=912',
+    'assets/trip-v8-1-overrides.js?v=912',
+    'assets/trip-v8-7-user-plan.js?v=912',
+    'assets/trip-v9-final-fixes.js?v=912',
+    'assets/trip-v9-hotfix.js?v=912',
     'assets/catalog-link.js?v=2'
 ];
 
