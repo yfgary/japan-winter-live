@@ -1,6 +1,6 @@
 {
-  "version": "v9.0.9",
-  "build": "2026-10-03.21",
+  "version": "v9.1.0",
+  "build": "2026-10-03.22",
   "updated": "2026-10-03T05:37:00+08:00",
-  "notes": "Driving Mode: add a large high-contrast in-car view with D1-D9 preview, current/next destination, one-tap Google Maps driving directions, previous/next stop controls, schedule countdown, upcoming parking point, hotel/end point, hard-cut reminder, compact winter-driving weather warning, Live Cam and 5-day forecast shortcuts, plus optional screen wake lock where supported. Shared navigation now exposes Driving Mode across the app, while the itinerary remains the single rendered source for destination data."
+  "notes": "Bilingual app foundation: add a shared Traditional Chinese / English one-tap language switch across Live Cam, Detailed Itinerary, Trip Info and Attractions, including dynamically rendered weather, D6-D8 decision panels, Today Mode and Driving Mode. The selected language is saved locally and follows the user across pages. Official Japanese place-name lines are intentionally preserved where useful for navigation."
 }
