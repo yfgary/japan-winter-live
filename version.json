@@ -1,6 +1,6 @@
 {
-  "version": "v9.0.3",
-  "build": "2026-10-03.15",
-  "updated": "2026-10-03T03:50:00+08:00",
-  "notes": "Five-day weather release: extend current plus forecast view from 3 to 5 days, add model-estimated ground snow depth, mark day 4-5 as trend reference, keep location-specific /10 suitability scores across all five days, and make the Live Cam D6-D8 Shinhotaka selector match the itinerary selector so only the active day is dark blue."
+  "version": "v9.0.4",
+  "build": "2026-10-03.16",
+  "updated": "2026-10-03T04:32:00+08:00",
+  "notes": "Core architecture release: add assets/trip-core-v1.js as the central source for shared trip dates, weather regions, D6-D8 Shinhotaka routing rules, Live Cam route summaries, navigation places, camera groups and shared selection state. Detailed Itinerary and Trip Info load the core first; Live Cam loads it directly and now renders D2/D6-D8 from the core; five-day weather reads the same central region and route data. This is the foundation for Travel Mode, weather comparison, Driving Mode, bilingual UI and Offline Emergency Pack."
 }
