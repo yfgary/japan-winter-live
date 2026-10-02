@@ -1,8 +1,9 @@
 (function(){
 'use strict';
-if(window.__japan2027LiveV94Sync)return;
-window.__japan2027LiveV94Sync=true;
+if(window.__japan2027LiveV95Sync)return;
+window.__japan2027LiveV95Sync=true;
 
+const RELEASE='v9.0.5';
 const tpl=new Map();
 const $=s=>document.querySelector(s);
 const section=id=>document.getElementById(id);
@@ -14,7 +15,7 @@ function ensureCore(){
  return new Promise((resolve,reject)=>{
   let s=document.getElementById('tripCoreV1Script');
   if(s){s.addEventListener('load',()=>resolve(window.Japan2027Core),{once:true});s.addEventListener('error',reject,{once:true});return;}
-  s=document.createElement('script');s.id='tripCoreV1Script';s.src='assets/trip-core-v1.js?v=1';s.async=false;
+  s=document.createElement('script');s.id='tripCoreV1Script';s.src='assets/trip-core-v1.js?v=2';s.async=false;
   s.onload=()=>resolve(window.Japan2027Core);s.onerror=reject;(document.head||document.documentElement).appendChild(s);
  });
 }
@@ -84,21 +85,25 @@ function refreshChooser(core,box){
  const st=box.querySelector('#livePlanStatusV92');if(st)st.innerHTML='<strong>目前：</strong>'+esc(core.selectorStatus(cur));
  box.querySelectorAll('button[data-sh]').forEach(b=>b.classList.toggle('v90-active',!!cur&&b.dataset.sh===cur));
 }
-function fixVersion(core){
+function fixVersion(){
  const b=document.getElementById('siteVersionBadge');if(!b)return;
  const offline=/離線/.test(b.textContent||'');b.classList.remove('outdated');b.classList.add(offline?'offline':'current');
- b.textContent='版本 '+core.version+(offline?'・離線':'');b.title=(offline?'目前離線；本機版本 ':'已係最新版本 ')+core.version;
+ b.textContent='版本 '+RELEASE+(offline?'・離線':'');b.title=(offline?'目前離線；本機版本 ':'已係最新版本 ')+RELEASE;
 }
 function loadWeather(){
  if(document.getElementById('weatherSuitabilityScriptV1'))return;
- const s=document.createElement('script');s.id='weatherSuitabilityScriptV1';s.src='assets/weather-suitability-v1.js?v=4';s.async=false;document.body.appendChild(s);
+ const s=document.createElement('script');s.id='weatherSuitabilityScriptV1';s.src='assets/weather-suitability-v1.js?v=5';s.async=false;document.body.appendChild(s);
+}
+function loadNav(){
+ if(document.getElementById('navEnhancementsV1Script'))return;
+ const s=document.createElement('script');s.id='navEnhancementsV1Script';s.src='assets/nav-enhancements-v1.js?v=1';s.async=false;document.body.appendChild(s);
 }
 function run(core){
  if(!section('d2'))return false;
  capture();patch('d2',core.liveConfig('d2'));patchD3();
  ['d6','d7','d8'].forEach(id=>patch(id,core.liveConfig(id)));
- chooser(core);fixVersion(core);[250,900,1800].forEach(t=>setTimeout(()=>fixVersion(core),t));
- document.documentElement.dataset.liveSync='v9.4-core';loadWeather();return true;
+ chooser(core);fixVersion();[250,900,1800].forEach(t=>setTimeout(fixVersion,t));
+ document.documentElement.dataset.liveSync='v9.5-core';loadWeather();loadNav();return true;
 }
 function boot(core){let n=0;const go=()=>{n++;if(run(core)||n>=12)return;setTimeout(go,n<4?100:300);};go();}
 
