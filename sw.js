@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-routing6c-20261002";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-live7-20261002";
 
 const CORE_FILES = [
     "./",
@@ -14,6 +14,7 @@ const CORE_FILES = [
     "./assets/attractions-layout-v2.js",
     "./assets/attractions-group-fix.js",
     "./assets/catalog-link.js",
+    "./assets/live-v9-1-sync.js",
     "./assets/trip-no-observers-v2.js",
     "./assets/trip-v9-1-routing.js",
     "./assets/trip-v9-1-visit-fix.js",
@@ -92,6 +93,30 @@ self.addEventListener("activate", event => {
     self.clients.claim();
 });
 
+async function patchLiveDocument(response, url) {
+    if (!response || !url.pathname.endsWith("/live.html")) return response;
+    try {
+        const text = await response.text();
+        if (text.includes("assets/live-v9-1-sync.js")) {
+            return new Response(text, {status: response.status, statusText: response.statusText, headers: response.headers});
+        }
+        const injected = text.replace(
+            /<\/body>/i,
+            '<script src="assets/live-v9-1-sync.js?v=1"><\/script>\n</body>'
+        );
+        const headers = new Headers(response.headers);
+        headers.delete("content-length");
+        headers.delete("content-encoding");
+        return new Response(injected, {
+            status: response.status,
+            statusText: response.statusText,
+            headers
+        });
+    } catch (e) {
+        return response;
+    }
+}
+
 self.addEventListener("fetch", event => {
     const request = event.request;
     if (request.method !== "GET") return;
@@ -111,19 +136,19 @@ self.addEventListener("fetch", event => {
     }
 
     if (request.mode === "navigate" || request.destination === "document") {
-        event.respondWith(
-            fetch(request)
-                .then(response => {
-                    const copy = response.clone();
-                    caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-                    return response;
-                })
-                .catch(() =>
-                    caches.match(request).then(cached =>
-                        cached || caches.match("./itinerary.html")
-                    )
-                )
-        );
+        event.respondWith((async () => {
+            try {
+                const response = await fetch(request);
+                const delivered = await patchLiveDocument(response, url);
+                const copy = delivered.clone();
+                caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+                return delivered;
+            } catch (e) {
+                const cached = await caches.match(request);
+                if (cached) return patchLiveDocument(cached, url);
+                return caches.match("./itinerary.html");
+            }
+        })());
         return;
     }
 
