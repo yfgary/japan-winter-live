@@ -39,6 +39,7 @@ const itineraryScripts = [
     'assets/trip-v9-final-fixes.js?v=908',
     'assets/trip-v9-hotfix.js?v=908',
     'assets/trip-v9-1-routing.js?v=1',
+    'assets/trip-v9-1-visit-fix.js?v=1',
     'assets/catalog-link.js?v=2'
 ];
 
