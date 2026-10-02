@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.10",
-  "updated": "2026-10-02T23:59:00+08:00",
-  "notes": "Live Cam sync hardening: use a brand-new live-v9-2-sync.js filename, load it directly from site-shell, and inject the same file from the service worker as a fallback. The script patches the rendered Live Cam DOM directly, including D2 Matsumoto Castle routing, D6-D8 flexible Shinhotaka/Shirakawago/Hida Cave routing, matching camera groups, and the D6-D8 Shinhotaka selector."
+  "build": "2026-10-02.11",
+  "updated": "2026-10-02T23:58:00+08:00",
+  "notes": "Weather upgrade: add current/live model weather above the 3-day forecast, including temperature, feels-like temperature, humidity, cloud cover, precipitation, snowfall, wind speed/gusts and visibility. Add average and minimum visibility to each of the 3 forecast days. Weather cache refresh interval reduced from 30 minutes to 10 minutes; Live Cam continues to load the stable live-v9-2-sync.js routing patch."
 }
