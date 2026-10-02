@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-routing6-20261002";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-routing6b-20261002";
 
 const CORE_FILES = [
     "./",
@@ -16,6 +16,7 @@ const CORE_FILES = [
     "./assets/catalog-link.js",
     "./assets/trip-no-observers-v2.js",
     "./assets/trip-v9-1-routing.js",
+    "./assets/version-v901-fix.js",
     "./assets/site-shell-v7.css",
     "./assets/site-shell-v7.js",
     "./assets/trip-v8.css",
