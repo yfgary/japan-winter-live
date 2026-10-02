@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.3-weather5-snow-20261003";
+const CACHE_NAME = "japan-winter-2027-v9.0.4-core-20261003";
 
 const CORE_FILES = [
     "./",
@@ -16,6 +16,7 @@ const CORE_FILES = [
     "./assets/catalog-link.js",
     "./assets/live-v9-1-sync.js",
     "./assets/live-v9-2-sync.js",
+    "./assets/trip-core-v1.js",
     "./assets/weather-suitability-v1.js",
     "./assets/trip-no-observers-v2.js",
     "./assets/trip-v9-1-routing.js",
@@ -78,20 +79,12 @@ const CORE_FILES = [
 ];
 
 self.addEventListener("install", event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_FILES))
-    );
+    event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_FILES)));
     self.skipWaiting();
 });
 
 self.addEventListener("activate", event => {
-    event.waitUntil(
-        caches.keys().then(keys =>
-            Promise.all(
-                keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-            )
-        )
-    );
+    event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))));
     self.clients.claim();
 });
 
@@ -102,52 +95,34 @@ async function patchLiveDocument(response, url) {
         if (text.includes("assets/live-v9-2-sync.js")) {
             return new Response(text, {status: response.status, statusText: response.statusText, headers: response.headers});
         }
-        const injected = text.replace(
-            /<\/body>/i,
-            '<script src="assets/live-v9-2-sync.js?v=1"><\/script>\n</body>'
-        );
+        const injected = text.replace(/<\/body>/i,'<script src="assets/live-v9-2-sync.js?v=2"><\/script>\n</body>');
         const headers = new Headers(response.headers);
-        headers.delete("content-length");
-        headers.delete("content-encoding");
-        return new Response(injected, {
-            status: response.status,
-            statusText: response.statusText,
-            headers
-        });
-    } catch (e) {
-        return response;
-    }
+        headers.delete("content-length");headers.delete("content-encoding");
+        return new Response(injected,{status:response.status,statusText:response.statusText,headers});
+    } catch (e) { return response; }
 }
 
 self.addEventListener("fetch", event => {
     const request = event.request;
     if (request.method !== "GET") return;
-
     const url = new URL(request.url);
     if (url.origin !== self.location.origin) return;
 
     if (url.pathname.endsWith("/version.json")) {
-        event.respondWith(
-            fetch(request, { cache: "no-store" }).catch(() =>
-                new Response(JSON.stringify({version:null,offline:true}), {
-                    headers:{"Content-Type":"application/json"}
-                })
-            )
-        );
+        event.respondWith(fetch(request,{cache:"no-store"}).catch(()=>new Response(JSON.stringify({version:null,offline:true}),{headers:{"Content-Type":"application/json"}})));
         return;
     }
 
     if (request.mode === "navigate" || request.destination === "document") {
-        event.respondWith((async () => {
+        event.respondWith((async()=>{
             try {
-                const response = await fetch(request);
-                const delivered = await patchLiveDocument(response, url);
-                const copy = delivered.clone();
-                caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+                const response=await fetch(request);
+                const delivered=await patchLiveDocument(response,url);
+                const copy=delivered.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));
                 return delivered;
-            } catch (e) {
-                const cached = await caches.match(request);
-                if (cached) return patchLiveDocument(cached, url);
+            } catch(e) {
+                const cached=await caches.match(request);
+                if(cached)return patchLiveDocument(cached,url);
                 return caches.match("./itinerary.html");
             }
         })());
@@ -155,29 +130,18 @@ self.addEventListener("fetch", event => {
     }
 
     if (request.destination === "script" || request.destination === "style" || /\.(?:js|css)$/.test(url.pathname)) {
-        event.respondWith(
-            fetch(request, {cache:"no-store"})
-                .then(response => {
-                    if (response && response.status === 200) {
-                        const copy = response.clone();
-                        caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-                    }
-                    return response;
-                })
-                .catch(() => caches.match(request, {ignoreSearch:true}))
-        );
+        event.respondWith(fetch(request,{cache:"no-store"}).then(response=>{
+            if(response&&response.status===200){const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));}
+            return response;
+        }).catch(()=>caches.match(request,{ignoreSearch:true})));
         return;
     }
 
-    event.respondWith(
-        caches.match(request, {ignoreSearch:true}).then(cached => {
-            if (cached) return cached;
-            return fetch(request).then(response => {
-                if (!response || response.status !== 200) return response;
-                const copy = response.clone();
-                caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-                return response;
-            });
-        })
-    );
+    event.respondWith(caches.match(request,{ignoreSearch:true}).then(cached=>{
+        if(cached)return cached;
+        return fetch(request).then(response=>{
+            if(!response||response.status!==200)return response;
+            const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));return response;
+        });
+    }));
 });
