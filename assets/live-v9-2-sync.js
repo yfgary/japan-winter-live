@@ -1,9 +1,9 @@
 (function(){
 'use strict';
-if(window.__japan2027LiveV98Sync)return;
-window.__japan2027LiveV98Sync=true;
+if(window.__japan2027LiveV99Sync)return;
+window.__japan2027LiveV99Sync=true;
 
-const RELEASE='v9.0.8';
+const RELEASE='v9.0.9';
 const tpl=new Map();
 const $=s=>document.querySelector(s);
 const section=id=>document.getElementById(id);
@@ -15,7 +15,7 @@ function ensureCore(){
  return new Promise((resolve,reject)=>{
   let s=document.getElementById('tripCoreV1Script');
   if(s){s.addEventListener('load',()=>resolve(window.Japan2027Core),{once:true});s.addEventListener('error',reject,{once:true});return;}
-  s=document.createElement('script');s.id='tripCoreV1Script';s.src='assets/trip-core-v1.js?v=5';s.async=false;
+  s=document.createElement('script');s.id='tripCoreV1Script';s.src='assets/trip-core-v1.js?v=6';s.async=false;
   s.onload=()=>resolve(window.Japan2027Core);s.onerror=reject;(document.head||document.documentElement).appendChild(s);
  });
 }
@@ -31,8 +31,8 @@ function refreshChooser(core,box){const cur=core.getSelectedShinhotakaDay();cons
 function fixVersion(){const b=document.getElementById('siteVersionBadge');if(!b)return;const offline=/離線/.test(b.textContent||'');b.classList.remove('outdated');b.classList.add(offline?'offline':'current');b.textContent='版本 '+RELEASE+(offline?'・離線':'');b.title=(offline?'目前離線；本機版本 ':'已係最新版本 ')+RELEASE;}
 function loadWeather(){if(document.getElementById('weatherSuitabilityScriptV1'))return;const s=document.createElement('script');s.id='weatherSuitabilityScriptV1';s.src='assets/weather-suitability-v1.js?v=6';s.async=false;document.body.appendChild(s);}
 function loadDecision(){if(document.getElementById('d6d8WeatherDecisionScriptV1'))return;const s=document.createElement('script');s.id='d6d8WeatherDecisionScriptV1';s.src='assets/d6-d8-weather-decision-v1.js?v=1';s.async=false;document.body.appendChild(s);}
-function loadNav(){if(document.getElementById('navEnhancementsV1Script'))return;const s=document.createElement('script');s.id='navEnhancementsV1Script';s.src='assets/nav-enhancements-v1.js?v=1';s.async=false;document.body.appendChild(s);}
-function run(core){if(!section('d2'))return false;capture();patch('d2',core.liveConfig('d2'));patchD3();['d6','d7','d8'].forEach(id=>patch(id,core.liveConfig(id)));chooser(core);fixVersion();[250,900,1800].forEach(t=>setTimeout(fixVersion,t));document.documentElement.dataset.liveSync='v9.8-core';loadWeather();loadDecision();loadNav();return true;}
+function loadNav(){if(document.getElementById('navEnhancementsV1Script'))return;const s=document.createElement('script');s.id='navEnhancementsV1Script';s.src='assets/nav-enhancements-v1.js?v=2';s.async=false;document.body.appendChild(s);}
+function run(core){if(!section('d2'))return false;capture();patch('d2',core.liveConfig('d2'));patchD3();['d6','d7','d8'].forEach(id=>patch(id,core.liveConfig(id)));chooser(core);fixVersion();[250,900,1800].forEach(t=>setTimeout(fixVersion,t));document.documentElement.dataset.liveSync='v9.9-core';loadWeather();loadDecision();loadNav();return true;}
 function boot(core){let n=0;const go=()=>{n++;if(run(core)||n>=12)return;setTimeout(go,n<4?100:300);};go();}
 ensureCore().then(core=>{if(!core)throw new Error('Trip core unavailable');if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>boot(core),{once:true});else boot(core);}).catch(err=>console.error('Live core load failed',err));
 })();
