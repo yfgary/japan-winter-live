@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.11",
-  "updated": "2026-10-02T23:58:00+08:00",
-  "notes": "Weather upgrade: add current/live model weather above the 3-day forecast, including temperature, feels-like temperature, humidity, cloud cover, precipitation, snowfall, wind speed/gusts and visibility. Add average and minimum visibility to each of the 3 forecast days. Weather cache refresh interval reduced from 30 minutes to 10 minutes; Live Cam continues to load the stable live-v9-2-sync.js routing patch."
+  "build": "2026-10-03.12",
+  "updated": "2026-10-03T03:24:00+08:00",
+  "notes": "Weather suitability scoring: add green/yellow/red 10-point weather suitability ratings to both current conditions and each of the 3 forecast days for all weather regions. Scores use location-specific weighting for visibility, cloud cover, wind gusts, precipitation and snowfall; mountain destinations such as Shinhotaka and Hakuba use stricter visibility/cloud thresholds, while Shirakawago allows cloudy/light-snow conditions more generously."
 }
