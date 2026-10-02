@@ -58,7 +58,6 @@ header{background:linear-gradient(135deg,#163a5c,#28689d);color:#fff;text-align:
 
 <script src="assets/trip-core-v1.js?v=7"></script>
 <script src="assets/nav-enhancements-v1.js?v=2"></script>
-<script src="assets/i18n-v1.js?v=1"></script>
 <script src="assets/trip-enhancement-data.js?v=913"></script>
 <script src="assets/trip-deep-info-d1-d4.js?v=913"></script>
 <script src="assets/trip-deep-info-d5-d9.js?v=913"></script>
@@ -68,15 +67,16 @@ header{background:linear-gradient(135deg,#163a5c,#28689d);color:#fff;text-align:
 <script src="assets/attractions-catalog.js?v=3"></script>
 <script src="assets/attractions-layout-v2.js?v=2"></script>
 <script src="assets/attractions-group-fix.js?v=2"></script>
+<script src="assets/i18n-v1.js?v=2"></script>
 <script>
 (function(){
   const b=document.getElementById('catalogVersion');
   if(!b)return;
-  const local='v9.1.0';
+  const local='v9.1.1';
   fetch('version.json?t='+Date.now(),{cache:'no-store'})
     .then(r=>{if(!r.ok)throw new Error('version');return r.json();})
-    .then(v=>{b.textContent='版本 '+(v.version||local);b.title='同步中央版本 '+(v.version||local);if(window.Japan2027I18n)window.Japan2027I18n.refresh();})
-    .catch(()=>{b.textContent='版本 '+local;b.title='離線版本 '+local;if(window.Japan2027I18n)window.Japan2027I18n.refresh();});
+    .then(v=>{const en=document.documentElement.lang==='en';b.textContent=(en?'Version ':'版本 ')+(v.version||local);b.title=(en?'Central version ':'同步中央版本 ')+(v.version||local);if(window.Japan2027I18n)window.Japan2027I18n.refresh();})
+    .catch(()=>{const en=document.documentElement.lang==='en';b.textContent=(en?'Version ':'版本 ')+local;b.title=(en?'Offline version ':'離線版本 ')+local;if(window.Japan2027I18n)window.Japan2027I18n.refresh();});
 })();
 </script>
 </body>
