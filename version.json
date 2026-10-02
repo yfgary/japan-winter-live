@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-03.12",
-  "updated": "2026-10-03T03:24:00+08:00",
-  "notes": "Weather suitability scoring: add green/yellow/red 10-point weather suitability ratings to both current conditions and each of the 3 forecast days for all weather regions. Scores use location-specific weighting for visibility, cloud cover, wind gusts, precipitation and snowfall; mountain destinations such as Shinhotaka and Hakuba use stricter visibility/cloud thresholds, while Shirakawago allows cloudy/light-snow conditions more generously."
+  "build": "2026-10-03.13",
+  "updated": "2026-10-03T03:31:00+08:00",
+  "notes": "Weather suitability scores are now loaded on Detailed Itinerary and Trip Info as well as Live Cam. All three pages show the same green/yellow/red 10-point suitability ratings for current conditions and the 3-day forecast, with location-specific weighting for visibility, cloud cover, gusts, precipitation and snowfall."
 }
