@@ -1,8 +1,8 @@
 (function(){
 'use strict';
-if(window.__japan2027VersionV904Fix)return;
-window.__japan2027VersionV904Fix=true;
-const VERSION='v9.0.4';
+if(window.__japan2027VersionV905Fix)return;
+window.__japan2027VersionV905Fix=true;
+const VERSION='v9.0.5';
 function fix(){
   const b=document.getElementById('siteVersionBadge');if(!b)return;
   const offline=/離線/.test(b.textContent||'');
