@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-live7-20261002";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-live8-20261002";
 
 const CORE_FILES = [
     "./",
@@ -102,7 +102,7 @@ async function patchLiveDocument(response, url) {
         }
         const injected = text.replace(
             /<\/body>/i,
-            '<script src="assets/live-v9-1-sync.js?v=1"><\/script>\n</body>'
+            '<script src="assets/live-v9-1-sync.js?v=2"><\/script>\n</body>'
         );
         const headers = new Headers(response.headers);
         headers.delete("content-length");
