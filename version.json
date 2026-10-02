@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.5",
-  "updated": "2026-10-02T15:05:00+08:00",
-  "notes": "Itinerary performance fix: legacy whole-page MutationObservers are now disabled completely; startup renderers still run their normal initial/delayed passes and explicit click handlers, but no background DOM watchers remain. Attraction catalog grouping fix now supports the current spot-* card IDs as well as v2-* IDs, so Matsumoto Projection and AEON Matsumoto move to Matsumoto, Mountain Harbor and White Park move to Hakuba, and Takayama supermarket moves to Takayama. Empty Other group is removed."
+  "build": "2026-10-02.6",
+  "updated": "2026-10-02T15:20:00+08:00",
+  "notes": "D6-D8 routing revision: keep the Shinhotaka D6/D7/D8 selector, but move Shirakawago earlier. Shirakawago is now D6 by default and only moves to D7 when D6 is selected for Shinhotaka; D8 never goes west to Shirakawago. D8 is reserved for eastbound Shinhotaka or Takayama/Hida Great Limestone Cave before Matsumoto. D7 Jan 15 keeps Santera Mairi as an optional bonus."
 }
