@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 
-if (window.__japan2027EnhancementLoaderV14) return;
-window.__japan2027EnhancementLoaderV14 = true;
+if (window.__japan2027EnhancementLoaderV15) return;
+window.__japan2027EnhancementLoaderV15 = true;
 
 function addCss(href){
     if (document.querySelector('link[href="' + href + '"]')) return;
@@ -22,11 +22,11 @@ const isTripInfo = /(?:^|\/)trip-info\.html$/.test(location.pathname);
 
 const itineraryScripts = [
     'assets/trip-no-observers-v2.js?v=1',
-    'assets/trip-core-v1.js?v=7',
-    'assets/site-shell-v7.js?v=914',
+    'assets/trip-core-v1.js?v=8',
+    'assets/site-shell-v7.js?v=915',
     'assets/weather-suitability-v1.js?v=6',
     'assets/d6-d8-weather-decision-v1.js?v=1',
-    'assets/version-v901-fix.js?v=10',
+    'assets/version-v901-fix.js?v=11',
     'assets/nav-enhancements-v1.js?v=2',
     'assets/trip-enhancement-data.js?v=913',
     'assets/trip-user-overrides.js?v=913',
@@ -35,6 +35,7 @@ const itineraryScripts = [
     'assets/trip-deep-info-backups.js?v=913',
     'assets/trip-v8-data.js?v=913',
     'assets/trip-v8-1-overrides.js?v=913',
+    'assets/i18n-content-en-v1.js?v=1',
     'assets/trip-enhancements-v3.js?v=913',
     'assets/trip-v8-ui.js?v=913',
     'assets/trip-v8-7-user-plan.js?v=913',
@@ -48,15 +49,15 @@ const itineraryScripts = [
     'assets/travel-mode-v1.js?v=2',
     'assets/travel-mode-nav-fix-v1.js?v=2',
     'assets/driving-mode-v1.js?v=1',
-    'assets/i18n-v1.js?v=2'
+    'assets/i18n-v1.js?v=3'
 ];
 
 const tripInfoScripts = [
-    'assets/trip-core-v1.js?v=7',
-    'assets/site-shell-v7.js?v=914',
+    'assets/trip-core-v1.js?v=8',
+    'assets/site-shell-v7.js?v=915',
     'assets/weather-suitability-v1.js?v=6',
     'assets/d6-d8-weather-decision-v1.js?v=1',
-    'assets/version-v901-fix.js?v=10',
+    'assets/version-v901-fix.js?v=11',
     'assets/nav-enhancements-v1.js?v=2',
     'assets/trip-enhancement-data.js?v=913',
     'assets/trip-user-overrides.js?v=913',
@@ -65,11 +66,12 @@ const tripInfoScripts = [
     'assets/trip-deep-info-backups.js?v=913',
     'assets/trip-v8-data.js?v=913',
     'assets/trip-v8-1-overrides.js?v=913',
+    'assets/i18n-content-en-v1.js?v=1',
     'assets/trip-v8-7-user-plan.js?v=913',
     'assets/trip-v9-final-fixes.js?v=913',
     'assets/trip-v9-hotfix.js?v=913',
     'assets/catalog-link.js?v=2',
-    'assets/i18n-v1.js?v=2'
+    'assets/i18n-v1.js?v=3'
 ];
 
 const scripts = isTripInfo ? tripInfoScripts : itineraryScripts;
