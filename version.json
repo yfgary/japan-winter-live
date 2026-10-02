@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.7",
-  "updated": "2026-10-02T16:25:00+08:00",
-  "notes": "Live Cam dashboard sync: add the Attraction Overview link, align D2 with the final Matsumoto Castle + Karuizawa Outlet plan, correct JA Oranche navigation, and make D6-D8 cameras/routes follow the selected Shinhotaka day. Shirakawago is only D6/D7 and never D8; D8 only shows eastbound Shinhotaka or Takayama/Hida Cave routes to Matsumoto. A matching D6-D8 Shinhotaka selector is now available on the Live Cam page and uses the same saved choice as the itinerary."
+  "build": "2026-10-02.8",
+  "updated": "2026-10-02T22:38:00+08:00",
+  "notes": "Direct Live Cam bootstrap fix: site-shell now identifies itself as v9.0.1, adds the Attraction Overview link directly, loads live-v9-1-sync.js from the Live Cam page itself instead of depending only on Service Worker HTML injection, and uses the revised D6-D8 weather-region logic (Shirakawago D6/D7 only; D8 eastbound only). PWA cache bumped to live8."
 }
