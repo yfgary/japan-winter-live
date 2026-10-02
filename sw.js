@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-live11-weather-20261002";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-live12-score-20261003";
 
 const CORE_FILES = [
     "./",
@@ -16,6 +16,7 @@ const CORE_FILES = [
     "./assets/catalog-link.js",
     "./assets/live-v9-1-sync.js",
     "./assets/live-v9-2-sync.js",
+    "./assets/weather-suitability-v1.js",
     "./assets/trip-no-observers-v2.js",
     "./assets/trip-v9-1-routing.js",
     "./assets/trip-v9-1-visit-fix.js",
