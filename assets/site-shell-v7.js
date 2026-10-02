@@ -116,8 +116,8 @@ function ensureCatalogLink(){
 }
 function loadLiveSync(){
  if(!/(?:^|\/)live\.html$/.test(location.pathname))return;
- if(document.getElementById('liveV91SyncScript'))return;
- const s=document.createElement('script');s.id='liveV91SyncScript';s.src='assets/live-v9-1-sync.js?v=2';s.async=false;document.body.appendChild(s);
+ if(document.getElementById('liveV92SyncScript'))return;
+ const s=document.createElement('script');s.id='liveV92SyncScript';s.src='assets/live-v9-2-sync.js?v=1';s.async=false;document.body.appendChild(s);
 }
 function init(){setupVersion();setupBackToTop();buildWeatherPanel();ensureCatalogLink();loadLiveSync();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
