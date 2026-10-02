@@ -1,6 +1,6 @@
 {
-  "version": "v9.0.6",
-  "build": "2026-10-03.18",
-  "updated": "2026-10-03T05:18:00+08:00",
-  "notes": "Travel Mode navigation fix: the Complete Itinerary and 5-Day Forecast buttons now close the full-screen Travel Mode overlay first, then open and scroll to the selected itinerary day or weather panel on the same page. Version numbers remain synchronized across the shared core and visible badges."
+  "version": "v9.0.7",
+  "build": "2026-10-03.19",
+  "updated": "2026-10-03T05:32:00+08:00",
+  "notes": "Travel Mode weather-region sync fix: when opening the 5-day forecast from Today Mode, the app now switches the forecast to the region that belongs to the D1-D9 day currently selected in Today Mode instead of keeping the previously selected forecast region. D6-D8 continue to respect the shared Shinhotaka day selection."
 }
