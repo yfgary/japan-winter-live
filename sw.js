@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-routing6b-20261002";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-routing6c-20261002";
 
 const CORE_FILES = [
     "./",
@@ -16,6 +16,7 @@ const CORE_FILES = [
     "./assets/catalog-link.js",
     "./assets/trip-no-observers-v2.js",
     "./assets/trip-v9-1-routing.js",
+    "./assets/trip-v9-1-visit-fix.js",
     "./assets/version-v901-fix.js",
     "./assets/site-shell-v7.css",
     "./assets/site-shell-v7.js",
@@ -126,8 +127,6 @@ self.addEventListener("fetch", event => {
         return;
     }
 
-    /* Code files are network-first when online so a new build cannot be held
-       back by an old PWA cache. Offline use still falls back to the cache. */
     if (request.destination === "script" || request.destination === "style" || /\.(?:js|css)$/.test(url.pathname)) {
         event.respondWith(
             fetch(request, {cache:"no-store"})
