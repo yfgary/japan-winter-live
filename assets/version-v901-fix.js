@@ -1,8 +1,8 @@
 (function(){
 'use strict';
-if(window.__japan2027VersionV910Fix)return;
-window.__japan2027VersionV910Fix=true;
-const VERSION='v9.1.0';
+if(window.__japan2027VersionV911Fix)return;
+window.__japan2027VersionV911Fix=true;
+const VERSION='v9.1.1';
 function fix(){
   const b=document.getElementById('siteVersionBadge');if(!b)return;
   const en=document.documentElement.lang==='en';
@@ -16,5 +16,4 @@ function schedule(){[0,250,800,1800,3000,6000].forEach(t=>setTimeout(fix,t));}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
 window.addEventListener('online',()=>setTimeout(fix,250));
 window.addEventListener('offline',()=>setTimeout(fix,50));
-document.addEventListener('japan2027:languagechange',()=>setTimeout(fix,0));
 })();
