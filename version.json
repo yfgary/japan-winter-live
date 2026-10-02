@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.3",
-  "updated": "2026-10-02T03:35:00+08:00",
-  "notes": "Catalog hotfix: force-load a new layout script filename so older PWA caches cannot keep serving the previous expanded catalog. Attraction cards now use the itinerary timeline-card presentation, with full details only behind the info icon."
+  "build": "2026-10-02.4",
+  "updated": "2026-10-02T14:52:00+08:00",
+  "notes": "Performance and catalog grouping hotfix: itinerary MutationObservers are throttled during startup and automatically disconnected after delayed rendering finishes to prevent the page becoming unresponsive after several minutes. The attraction catalog now moves the five previously unclassified places into their correct location groups: Matsumoto Castle Projection Mapping and AEON Matsumoto to Matsumoto, Mountain Harbor and White Park to Hakuba, and Takayama local supermarket to Takayama. PWA JS/CSS is now network-first when online to reduce stale-code cache problems."
 }
