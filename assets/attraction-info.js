@@ -23,6 +23,7 @@ const isTripInfo = /(?:^|\/)trip-info\.html$/.test(location.pathname);
 const itineraryScripts = [
     'assets/trip-no-observers-v2.js?v=1',
     'assets/site-shell-v7.js?v=908',
+    'assets/version-v901-fix.js?v=1',
     'assets/trip-enhancement-data.js?v=908',
     'assets/trip-user-overrides.js?v=908',
     'assets/trip-deep-info-d1-d4.js?v=908',
@@ -45,6 +46,7 @@ const itineraryScripts = [
    their legacy observers, but still loads the final data overrides/checklist. */
 const tripInfoScripts = [
     'assets/site-shell-v7.js?v=908',
+    'assets/version-v901-fix.js?v=1',
     'assets/trip-enhancement-data.js?v=908',
     'assets/trip-user-overrides.js?v=908',
     'assets/trip-deep-info-d1-d4.js?v=908',
