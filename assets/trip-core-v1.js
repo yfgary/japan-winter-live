@@ -2,7 +2,7 @@
 'use strict';
 if(window.Japan2027Core)return;
 
-const VERSION='v9.0.6';
+const VERSION='v9.0.7';
 const SH_KEY='japanWinter2027_shinhotakaDay';
 const WEATHER_REGION_KEY='japan2027_weather_region';
 
