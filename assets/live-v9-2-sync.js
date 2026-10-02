@@ -122,3 +122,13 @@ function run(){
 function boot(){let n=0;const go=()=>{n++;if(run()||n>=12)return;setTimeout(go,n<4?100:300);};go();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
+
+(function(){
+ if(window.__japan2027WeatherSuitabilityLoader)return;
+ window.__japan2027WeatherSuitabilityLoader=true;
+ function load(){
+  if(document.getElementById('weatherSuitabilityScriptV1'))return;
+  const s=document.createElement('script');s.id='weatherSuitabilityScriptV1';s.src='assets/weather-suitability-v1.js?v=1';s.async=false;document.body.appendChild(s);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load,{once:true});else load();
+})();
