@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.9-driving-mode-20261003";
+const CACHE_NAME = "japan-winter-2027-v9.1.0-i18n-20261003";
 
 const CORE_FILES = [
     "./",
@@ -15,6 +15,7 @@ const CORE_FILES = [
     "./assets/attractions-group-fix.js",
     "./assets/catalog-link.js",
     "./assets/nav-enhancements-v1.js",
+    "./assets/i18n-v1.js",
     "./assets/travel-mode-v1.js",
     "./assets/travel-mode-nav-fix-v1.js",
     "./assets/driving-mode-v1.js",
@@ -91,7 +92,7 @@ async function patchLiveDocument(response, url) {
         if (text.includes("assets/live-v9-2-sync.js")) {
             return new Response(text, {status: response.status, statusText: response.statusText, headers: response.headers});
         }
-        const injected = text.replace(/<\/body>/i,'<script src="assets/live-v9-2-sync.js?v=5"><\/script>\n</body>');
+        const injected = text.replace(/<\/body>/i,'<script src="assets/live-v9-2-sync.js?v=6"><\/script>\n</body>');
         const headers = new Headers(response.headers);
         headers.delete("content-length");headers.delete("content-encoding");
         return new Response(injected,{status:response.status,statusText:response.statusText,headers});
