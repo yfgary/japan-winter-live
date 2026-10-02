@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.5-travel-mode-20261003";
+const CACHE_NAME = "japan-winter-2027-v9.0.6-travel-navfix-20261003";
 
 const CORE_FILES = [
     "./",
@@ -16,6 +16,7 @@ const CORE_FILES = [
     "./assets/catalog-link.js",
     "./assets/nav-enhancements-v1.js",
     "./assets/travel-mode-v1.js",
+    "./assets/travel-mode-nav-fix-v1.js",
     "./assets/live-v9-1-sync.js",
     "./assets/live-v9-2-sync.js",
     "./assets/trip-core-v1.js",
@@ -45,37 +46,28 @@ const CORE_FILES = [
     "./assets/trip-deep-info-d5-d9.js",
     "./assets/trip-deep-info-backups.js",
     "./assets/trip-enhancements-v3.js",
-
     "./assets/images/d1-matsumoto-castle.jpg",
     "./assets/images/d1-shinano.jpg",
     "./assets/images/d1-centrair.jpg",
-
     "./assets/images/d2-shiraito.jpg",
     "./assets/images/d2-onioshidashi.jpg",
     "./assets/images/d2-karuizawa-outlet.jpg",
-
     "./assets/images/d3-obuse.jpg",
     "./assets/images/d3-shibu-onsen.jpg",
     "./assets/images/d3-shibu-onsen-day.jpg",
-
     "./assets/images/d4-aeon-suzaka.jpg",
     "./assets/images/d4-monkey-trail.jpg",
     "./assets/images/d4-snow-monkey.jpg",
-
     "./assets/images/d5-hakuba-iwatake.jpg",
     "./assets/images/d5-mountain-harbor.jpg",
     "./assets/images/d5-white-park.jpg",
-
     "./assets/images/d6-shinhotaka.jpg",
     "./assets/images/d6-takayama.jpg",
     "./assets/images/d6-hida-cave.jpg",
-
     "./assets/images/d7-shirakawago.jpg",
     "./assets/images/d7-shirakawago-view.jpg",
     "./assets/images/d7-hida-furukawa.jpg",
-
     "./assets/images/d8-daio-wasabi.jpg",
-
     "./assets/images/d9-aeon-matsumoto.jpg",
     "./assets/images/d9-matsumoto-station.jpg"
 ];
