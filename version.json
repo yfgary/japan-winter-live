@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.8",
-  "updated": "2026-10-02T22:38:00+08:00",
-  "notes": "Direct Live Cam bootstrap fix: site-shell now identifies itself as v9.0.1, adds the Attraction Overview link directly, loads live-v9-1-sync.js from the Live Cam page itself instead of depending only on Service Worker HTML injection, and uses the revised D6-D8 weather-region logic (Shirakawago D6/D7 only; D8 eastbound only). PWA cache bumped to live8."
+  "build": "2026-10-02.9",
+  "updated": "2026-10-02T22:46:00+08:00",
+  "notes": "Live Cam DOM sync fix: replace the previous section-data patcher with a DOM-based synchronizer so the dashboard updates reliably even when the original page's const sections object is not accessible from the dynamically loaded script. D2, D6-D8 routes, camera sets, the Shinhotaka day selector, Attraction Overview link and JA Oranche navigation now update independently of the old global data scope."
 }
