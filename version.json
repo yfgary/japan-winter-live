@@ -1,6 +1,6 @@
 {
-  "version": "v9.0.1",
-  "build": "2026-10-03.13",
-  "updated": "2026-10-03T03:31:00+08:00",
-  "notes": "Weather suitability scores are now loaded on Detailed Itinerary and Trip Info as well as Live Cam. All three pages show the same green/yellow/red 10-point suitability ratings for current conditions and the 3-day forecast, with location-specific weighting for visibility, cloud cover, gusts, precipitation and snowfall."
+  "version": "v9.0.2",
+  "build": "2026-10-03.14",
+  "updated": "2026-10-03T03:38:00+08:00",
+  "notes": "Version synchronization release: all main pages now use the same v9.0.2 release number. Detailed Itinerary, Trip Info and Live Cam use the shared site shell version; Attractions reads the same central version.json directly. Future functional updates should increment the visible version number rather than only the build number."
 }
