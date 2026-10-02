@@ -1,6 +1,6 @@
 {
-  "version": "v9.1.1",
-  "build": "2026-10-03.23",
-  "updated": "2026-10-03T06:30:00+08:00",
-  "notes": "Bilingual stability fix: remove the heavy character-data MutationObserver that could freeze navigation, load the translation layer only after itinerary/trip data renderers, cache-bust the bilingual script, and expand English phrase coverage across itinerary routes, weather, parking, hotels, transport, schedule notes and common attraction text. Language switching now saves the choice and reloads cleanly instead of rewriting the whole live DOM in place."
+  "version": "v9.1.2",
+  "build": "2026-10-03.24",
+  "updated": "2026-10-03T06:55:00+08:00",
+  "notes": "English content pass: move bilingual support from mostly DOM phrase replacement to a data-level English layer for attractions, deep-info modals, 96-item packing checklist, hotels, backup rules, visit metadata and photography notes. Keep the stable child-list-only translator for remaining static itinerary and UI text, with no character-data observer. Attractions now render English data before the catalog UI is built."
 }
