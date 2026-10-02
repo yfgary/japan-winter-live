@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-catalog3-20261002";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-perf4-20261002";
 
 const CORE_FILES = [
     "./",
@@ -12,7 +12,9 @@ const CORE_FILES = [
     "./assets/attraction-info.js",
     "./assets/attractions-catalog.js",
     "./assets/attractions-layout-v2.js",
+    "./assets/attractions-group-fix.js",
     "./assets/catalog-link.js",
+    "./assets/trip-performance-guard.js",
     "./assets/site-shell-v7.css",
     "./assets/site-shell-v7.js",
     "./assets/trip-v8.css",
@@ -92,7 +94,6 @@ self.addEventListener("fetch", event => {
     if (request.method !== "GET") return;
 
     const url = new URL(request.url);
-
     if (url.origin !== self.location.origin) return;
 
     if (url.pathname.endsWith("/version.json")) {
@@ -119,6 +120,23 @@ self.addEventListener("fetch", event => {
                         cached || caches.match("./itinerary.html")
                     )
                 )
+        );
+        return;
+    }
+
+    /* Code files are network-first when online so a new build cannot be held
+       back by an old PWA cache. Offline use still falls back to the cache. */
+    if (request.destination === "script" || request.destination === "style" || /\.(?:js|css)$/.test(url.pathname)) {
+        event.respondWith(
+            fetch(request, {cache:"no-store"})
+                .then(response => {
+                    if (response && response.status === 200) {
+                        const copy = response.clone();
+                        caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+                    }
+                    return response;
+                })
+                .catch(() => caches.match(request, {ignoreSearch:true}))
         );
         return;
     }
