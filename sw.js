@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.1.1-i18n-fix-20261003";
+const CACHE_NAME = "japan-winter-2027-v9.1.2-content-i18n-20261003";
 
 const CORE_FILES = [
     "./",
@@ -16,6 +16,7 @@ const CORE_FILES = [
     "./assets/catalog-link.js",
     "./assets/nav-enhancements-v1.js",
     "./assets/i18n-v1.js",
+    "./assets/i18n-content-en-v1.js",
     "./assets/travel-mode-v1.js",
     "./assets/travel-mode-nav-fix-v1.js",
     "./assets/driving-mode-v1.js",
