@@ -1,9 +1,9 @@
 (function(){
 'use strict';
-if(window.__japan2027LiveV95Sync)return;
-window.__japan2027LiveV95Sync=true;
+if(window.__japan2027LiveV98Sync)return;
+window.__japan2027LiveV98Sync=true;
 
-const RELEASE='v9.0.5';
+const RELEASE='v9.0.8';
 const tpl=new Map();
 const $=s=>document.querySelector(s);
 const section=id=>document.getElementById(id);
@@ -15,97 +15,24 @@ function ensureCore(){
  return new Promise((resolve,reject)=>{
   let s=document.getElementById('tripCoreV1Script');
   if(s){s.addEventListener('load',()=>resolve(window.Japan2027Core),{once:true});s.addEventListener('error',reject,{once:true});return;}
-  s=document.createElement('script');s.id='tripCoreV1Script';s.src='assets/trip-core-v1.js?v=2';s.async=false;
+  s=document.createElement('script');s.id='tripCoreV1Script';s.src='assets/trip-core-v1.js?v=5';s.async=false;
   s.onload=()=>resolve(window.Japan2027Core);s.onerror=reject;(document.head||document.documentElement).appendChild(s);
  });
 }
-
-function capture(){
- document.querySelectorAll('.cam-card').forEach(card=>{
-  const h=card.querySelector('h3');
-  const name=h?(h.textContent||'').replace(/\s+/g,' ').trim():'';
-  if(name&&!tpl.has(name))tpl.set(name,card.cloneNode(true));
- });
-}
-function cloneCam(name){
- const x=tpl.get(name);if(!x)return null;
- const n=x.cloneNode(true);
- n.querySelectorAll('iframe.live-video').forEach(f=>{f.removeAttribute('src');const b=f.closest('.media-box');if(b)b.classList.remove('loaded');});
- n.querySelectorAll('img.live-img').forEach(i=>{i.removeAttribute('src');const b=i.closest('.media-box');if(b)b.classList.remove('loaded');});
- return n;
-}
-function rebuild(id,names){
- const el=section(id);if(!el)return;
- const grid=el.querySelector('.cam-grid');if(!grid)return;
- const frag=document.createDocumentFragment();
- (names||[]).forEach(name=>{const c=cloneCam(name);if(c)frag.appendChild(c);});
- if(frag.childNodes.length){grid.innerHTML='';grid.appendChild(frag);}
- const count=el.querySelector('.count');if(count)count.textContent=grid.querySelectorAll('.cam-card').length+' 個 Camera';
- if(el.open&&typeof loadSection==='function'){try{loadSection(el);}catch(e){}}
-}
-function places(id,items){
- const el=section(id);if(!el)return;
- let box=el.querySelector('.places-box');const grid=el.querySelector('.cam-grid');
- if(!box&&grid){box=document.createElement('div');box.className='places-box';box.innerHTML='<div class="places-title">📍 今日景點導航</div><div class="places-row"></div>';grid.insertAdjacentElement('beforebegin',box);}
- if(!box)return;const row=box.querySelector('.places-row');if(!row)return;
- row.innerHTML=(items||[]).map(x=>'<a class="map-link" href="'+mapUrl(x[1])+'" target="_blank" rel="noopener">📍 '+esc(x[0])+'</a>').join('');
-}
-function decision(id,cfg){
- const el=section(id);if(!el)return;
- let box=el.querySelector('.decision-panel');const grid=el.querySelector('.cam-grid');
- if(!cfg){if(box)box.remove();return;}
- if(!box&&grid){box=document.createElement('div');box.className='decision-panel';grid.insertAdjacentElement('beforebegin',box);}
- if(!box)return;
- box.innerHTML='<div class="decision-title">🌨️ '+esc(cfg.title)+'</div>'+(cfg.steps||[]).map(s=>'<div class="decision-step">'+esc(s)+'</div>').join('')+'<div class="decision-links">'+(cfg.links||[]).map(x=>'<a class="button" href="'+x[1]+'" target="_blank" rel="noopener">'+esc(x[0])+'</a>').join('')+'</div>';
-}
-function patch(id,cfg){
- if(!cfg)return;const el=section(id);if(!el)return;
- const t=el.querySelector('.summary-title');if(t)t.textContent=cfg.title||'';
- const d=el.querySelector('.summary-desc');if(d)d.textContent=cfg.desc||'';
- const r=el.querySelector('.route-text');if(r)r.textContent=cfg.route||'';
- const nav=document.querySelector('.quick-nav a[data-day="'+id+'"]');if(nav)nav.textContent=cfg.nav||id.toUpperCase();
- places(id,cfg.places||[]);decision(id,cfg.decision||null);rebuild(id,cfg.cams||[]);
-}
+function capture(){document.querySelectorAll('.cam-card').forEach(card=>{const h=card.querySelector('h3'),name=h?(h.textContent||'').replace(/\s+/g,' ').trim():'';if(name&&!tpl.has(name))tpl.set(name,card.cloneNode(true));});}
+function cloneCam(name){const x=tpl.get(name);if(!x)return null;const n=x.cloneNode(true);n.querySelectorAll('iframe.live-video').forEach(f=>{f.removeAttribute('src');const b=f.closest('.media-box');if(b)b.classList.remove('loaded');});n.querySelectorAll('img.live-img').forEach(i=>{i.removeAttribute('src');const b=i.closest('.media-box');if(b)b.classList.remove('loaded');});return n;}
+function rebuild(id,names){const el=section(id);if(!el)return;const grid=el.querySelector('.cam-grid');if(!grid)return;const frag=document.createDocumentFragment();(names||[]).forEach(name=>{const c=cloneCam(name);if(c)frag.appendChild(c);});if(frag.childNodes.length){grid.innerHTML='';grid.appendChild(frag);}const count=el.querySelector('.count');if(count)count.textContent=grid.querySelectorAll('.cam-card').length+' 個 Camera';if(el.open&&typeof loadSection==='function'){try{loadSection(el);}catch(e){}}}
+function places(id,items){const el=section(id);if(!el)return;let box=el.querySelector('.places-box');const grid=el.querySelector('.cam-grid');if(!box&&grid){box=document.createElement('div');box.className='places-box';box.innerHTML='<div class="places-title">📍 今日景點導航</div><div class="places-row"></div>';grid.insertAdjacentElement('beforebegin',box);}if(!box)return;const row=box.querySelector('.places-row');if(!row)return;row.innerHTML=(items||[]).map(x=>'<a class="map-link" href="'+mapUrl(x[1])+'" target="_blank" rel="noopener">📍 '+esc(x[0])+'</a>').join('');}
+function decision(id,cfg){const el=section(id);if(!el)return;let box=el.querySelector('.decision-panel');const grid=el.querySelector('.cam-grid');if(!cfg){if(box)box.remove();return;}if(!box&&grid){box=document.createElement('div');box.className='decision-panel';grid.insertAdjacentElement('beforebegin',box);}if(!box)return;box.innerHTML='<div class="decision-title">🌨️ '+esc(cfg.title)+'</div>'+(cfg.steps||[]).map(s=>'<div class="decision-step">'+esc(s)+'</div>').join('')+'<div class="decision-links">'+(cfg.links||[]).map(x=>'<a class="button" href="'+x[1]+'" target="_blank" rel="noopener">'+esc(x[0])+'</a>').join('')+'</div>';}
+function patch(id,cfg){if(!cfg)return;const el=section(id);if(!el)return;const t=el.querySelector('.summary-title');if(t)t.textContent=cfg.title||'';const d=el.querySelector('.summary-desc');if(d)d.textContent=cfg.desc||'';const r=el.querySelector('.route-text');if(r)r.textContent=cfg.route||'';const nav=document.querySelector('.quick-nav a[data-day="'+id+'"]');if(nav)nav.textContent=cfg.nav||id.toUpperCase();places(id,cfg.places||[]);decision(id,cfg.decision||null);rebuild(id,cfg.cams||[]);}
 function patchD3(){const el=section('d3');if(!el)return;el.querySelectorAll('.map-link').forEach(a=>{if(/JA/.test(a.textContent||'')){a.textContent='📍 JA中野市 Oranche';a.href=mapUrl('JA中野市 農産物産館 オランチェ');}});}
-
-function chooser(core){
- let box=document.getElementById('livePlanChooserV92');if(box){refreshChooser(core,box);return;}
- const notice=$('.notice');if(!notice)return;
- if(!document.getElementById('livePlanChooserCoreStyle')){
-  const s=document.createElement('style');s.id='livePlanChooserCoreStyle';s.textContent='#livePlanChooserV92 .tripv2-choice{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #b8d3e6;border-radius:8px;background:#eaf4fb;color:#1f4e79;font-weight:800;cursor:pointer;text-decoration:none;margin:3px 4px 3px 0}#livePlanChooserV92 .tripv2-choice:hover{background:#dcecf7}#livePlanChooserV92 .tripv2-choice.v90-active{background:#1f4e79!important;color:#fff!important;box-shadow:0 0 0 2px #a9c8dd}#livePlanChooserV92 .tripv2-choice.secondary{background:#f3f5f7;color:#55636d;border-color:#d7dde1}';document.head.appendChild(s);
- }
- box=document.createElement('section');box.id='livePlanChooserV92';box.className='decision-panel';box.style.margin='0 0 14px';
- box.innerHTML='<div class="decision-title">🌨️ D6–D8 新穗高日子｜同行程同步</div><div class="decision-step" id="livePlanStatusV92"></div><div class="decision-links"><button class="tripv2-choice" data-sh="d6">🚡 D6 去新穗高</button><button class="tripv2-choice" data-sh="d7">🚡 D7 去新穗高</button><button class="tripv2-choice" data-sh="d8">🚡 D8 去新穗高</button><button class="tripv2-choice secondary" data-sh="">重設／規劃模式</button><a class="tripv2-choice secondary" href="itinerary.html#d6">🗓️ 睇 D6–D8 行程</a></div>';
- notice.insertAdjacentElement('afterend',box);
- box.querySelectorAll('button[data-sh]').forEach(b=>b.addEventListener('click',()=>{core.setSelectedShinhotakaDay(b.dataset.sh||'');location.reload();}));
- refreshChooser(core,box);
-}
-function refreshChooser(core,box){
- const cur=core.getSelectedShinhotakaDay();
- const st=box.querySelector('#livePlanStatusV92');if(st)st.innerHTML='<strong>目前：</strong>'+esc(core.selectorStatus(cur));
- box.querySelectorAll('button[data-sh]').forEach(b=>b.classList.toggle('v90-active',!!cur&&b.dataset.sh===cur));
-}
-function fixVersion(){
- const b=document.getElementById('siteVersionBadge');if(!b)return;
- const offline=/離線/.test(b.textContent||'');b.classList.remove('outdated');b.classList.add(offline?'offline':'current');
- b.textContent='版本 '+RELEASE+(offline?'・離線':'');b.title=(offline?'目前離線；本機版本 ':'已係最新版本 ')+RELEASE;
-}
-function loadWeather(){
- if(document.getElementById('weatherSuitabilityScriptV1'))return;
- const s=document.createElement('script');s.id='weatherSuitabilityScriptV1';s.src='assets/weather-suitability-v1.js?v=5';s.async=false;document.body.appendChild(s);
-}
-function loadNav(){
- if(document.getElementById('navEnhancementsV1Script'))return;
- const s=document.createElement('script');s.id='navEnhancementsV1Script';s.src='assets/nav-enhancements-v1.js?v=1';s.async=false;document.body.appendChild(s);
-}
-function run(core){
- if(!section('d2'))return false;
- capture();patch('d2',core.liveConfig('d2'));patchD3();
- ['d6','d7','d8'].forEach(id=>patch(id,core.liveConfig(id)));
- chooser(core);fixVersion();[250,900,1800].forEach(t=>setTimeout(fixVersion,t));
- document.documentElement.dataset.liveSync='v9.5-core';loadWeather();loadNav();return true;
-}
+function chooser(core){let box=document.getElementById('livePlanChooserV92');if(box){refreshChooser(core,box);return;}const notice=$('.notice');if(!notice)return;if(!document.getElementById('livePlanChooserCoreStyle')){const s=document.createElement('style');s.id='livePlanChooserCoreStyle';s.textContent='#livePlanChooserV92 .tripv2-choice{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #b8d3e6;border-radius:8px;background:#eaf4fb;color:#1f4e79;font-weight:800;cursor:pointer;text-decoration:none;margin:3px 4px 3px 0}#livePlanChooserV92 .tripv2-choice:hover{background:#dcecf7}#livePlanChooserV92 .tripv2-choice.v90-active{background:#1f4e79!important;color:#fff!important;box-shadow:0 0 0 2px #a9c8dd}#livePlanChooserV92 .tripv2-choice.secondary{background:#f3f5f7;color:#55636d;border-color:#d7dde1}';document.head.appendChild(s);}box=document.createElement('section');box.id='livePlanChooserV92';box.className='decision-panel';box.style.margin='0 0 14px';box.innerHTML='<div class="decision-title">🌨️ D6–D8 新穗高日子｜同行程同步</div><div class="decision-step" id="livePlanStatusV92"></div><div class="decision-links"><button class="tripv2-choice" data-sh="d6">🚡 D6 去新穗高</button><button class="tripv2-choice" data-sh="d7">🚡 D7 去新穗高</button><button class="tripv2-choice" data-sh="d8">🚡 D8 去新穗高</button><button class="tripv2-choice secondary" data-sh="">重設／規劃模式</button><a class="tripv2-choice secondary" href="itinerary.html#d6">🗓️ 睇 D6–D8 行程</a></div>';notice.insertAdjacentElement('afterend',box);box.querySelectorAll('button[data-sh]').forEach(b=>b.addEventListener('click',()=>{core.setSelectedShinhotakaDay(b.dataset.sh||'');location.reload();}));refreshChooser(core,box);}
+function refreshChooser(core,box){const cur=core.getSelectedShinhotakaDay();const st=box.querySelector('#livePlanStatusV92');if(st)st.innerHTML='<strong>目前：</strong>'+esc(core.selectorStatus(cur));box.querySelectorAll('button[data-sh]').forEach(b=>b.classList.toggle('v90-active',!!cur&&b.dataset.sh===cur));}
+function fixVersion(){const b=document.getElementById('siteVersionBadge');if(!b)return;const offline=/離線/.test(b.textContent||'');b.classList.remove('outdated');b.classList.add(offline?'offline':'current');b.textContent='版本 '+RELEASE+(offline?'・離線':'');b.title=(offline?'目前離線；本機版本 ':'已係最新版本 ')+RELEASE;}
+function loadWeather(){if(document.getElementById('weatherSuitabilityScriptV1'))return;const s=document.createElement('script');s.id='weatherSuitabilityScriptV1';s.src='assets/weather-suitability-v1.js?v=6';s.async=false;document.body.appendChild(s);}
+function loadDecision(){if(document.getElementById('d6d8WeatherDecisionScriptV1'))return;const s=document.createElement('script');s.id='d6d8WeatherDecisionScriptV1';s.src='assets/d6-d8-weather-decision-v1.js?v=1';s.async=false;document.body.appendChild(s);}
+function loadNav(){if(document.getElementById('navEnhancementsV1Script'))return;const s=document.createElement('script');s.id='navEnhancementsV1Script';s.src='assets/nav-enhancements-v1.js?v=1';s.async=false;document.body.appendChild(s);}
+function run(core){if(!section('d2'))return false;capture();patch('d2',core.liveConfig('d2'));patchD3();['d6','d7','d8'].forEach(id=>patch(id,core.liveConfig(id)));chooser(core);fixVersion();[250,900,1800].forEach(t=>setTimeout(fixVersion,t));document.documentElement.dataset.liveSync='v9.8-core';loadWeather();loadDecision();loadNav();return true;}
 function boot(core){let n=0;const go=()=>{n++;if(run(core)||n>=12)return;setTimeout(go,n<4?100:300);};go();}
-
 ensureCore().then(core=>{if(!core)throw new Error('Trip core unavailable');if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>boot(core),{once:true});else boot(core);}).catch(err=>console.error('Live core load failed',err));
 })();
