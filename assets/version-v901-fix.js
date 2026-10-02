@@ -2,7 +2,7 @@
 'use strict';
 if(window.__japan2027VersionV901Fix)return;
 window.__japan2027VersionV901Fix=true;
-const VERSION='v9.0.1';
+const VERSION='v9.0.2';
 function fix(){
   const b=document.getElementById('siteVersionBadge');if(!b)return;
   const offline=/離線/.test(b.textContent||'');
