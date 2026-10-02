@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 
-if (window.__japan2027EnhancementLoaderV15) return;
-window.__japan2027EnhancementLoaderV15 = true;
+if (window.__japan2027EnhancementLoaderV16) return;
+window.__japan2027EnhancementLoaderV16 = true;
 
 function addCss(href){
     if (document.querySelector('link[href="' + href + '"]')) return;
@@ -49,7 +49,8 @@ const itineraryScripts = [
     'assets/travel-mode-v1.js?v=2',
     'assets/travel-mode-nav-fix-v1.js?v=2',
     'assets/driving-mode-v1.js?v=1',
-    'assets/i18n-v1.js?v=3'
+    'assets/i18n-v1.js?v=3',
+    'assets/i18n-polish-en-v1.js?v=1'
 ];
 
 const tripInfoScripts = [
@@ -71,7 +72,8 @@ const tripInfoScripts = [
     'assets/trip-v9-final-fixes.js?v=913',
     'assets/trip-v9-hotfix.js?v=913',
     'assets/catalog-link.js?v=2',
-    'assets/i18n-v1.js?v=3'
+    'assets/i18n-v1.js?v=3',
+    'assets/i18n-polish-en-v1.js?v=1'
 ];
 
 const scripts = isTripInfo ? tripInfoScripts : itineraryScripts;
