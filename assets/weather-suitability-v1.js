@@ -1,123 +1,62 @@
 (function(){
 'use strict';
-if(window.__japan2027WeatherSuitabilityV1)return;
-window.__japan2027WeatherSuitabilityV1=true;
+if(window.__japan2027WeatherSuitabilityV2)return;
+window.__japan2027WeatherSuitabilityV2=true;
 
-const CACHE='japan2027_weather_suitability_v1';
+const VERSION='v9.0.3';
+const CACHE='japan2027_weather_suitability_v2';
+const REGION_KEY='japan2027_weather_region';
+const SH_KEY='japanWinter2027_shinhotakaDay';
 const TTL=10*60*1000;
 const REGIONS={
- matsumoto:{name:'松本',label:'松本城／市區',type:'cityscenic',lat:36.2381,lon:137.9720},
- karuizawa:{name:'輕井澤',label:'輕井澤戶外／Outlet',type:'cityscenic',lat:36.3485,lon:138.5969},
- chikuma:{name:'千曲',label:'千曲',type:'road',lat:36.5330,lon:138.1200},
- yamanouchi:{name:'山之內／澀溫泉',label:'地獄谷／澀溫泉',type:'snowwalk',lat:36.7344,lon:138.4331},
- nagano:{name:'長野／須坂',label:'長野／須坂',type:'city',lat:36.6486,lon:138.2450},
- hakuba:{name:'白馬',label:'白馬岩岳',type:'mountain',lat:36.6982,lon:137.8619},
- takayama:{name:'高山',label:'高山市區',type:'cityscenic',lat:36.1461,lon:137.2522},
- shinhotaka:{name:'新穗高',label:'新穗高',type:'mountain',lat:36.2828,lon:137.5804},
- shirakawago:{name:'白川鄉',label:'白川鄉',type:'village',lat:36.2573,lon:136.9068}
+ matsumoto:{name:'松本',jp:'松本市',label:'松本城／市區',type:'cityscenic',lat:36.2381,lon:137.9720},
+ karuizawa:{name:'輕井澤',jp:'軽井沢町',label:'輕井澤戶外／Outlet',type:'cityscenic',lat:36.3485,lon:138.5969},
+ chikuma:{name:'千曲',jp:'千曲市',label:'千曲',type:'road',lat:36.5330,lon:138.1200},
+ yamanouchi:{name:'山之內／澀溫泉',jp:'山ノ内町・渋温泉',label:'地獄谷／澀溫泉',type:'snowwalk',lat:36.7344,lon:138.4331},
+ nagano:{name:'長野／須坂',jp:'長野市・須坂市',label:'長野／須坂',type:'city',lat:36.6486,lon:138.2450},
+ hakuba:{name:'白馬',jp:'白馬村',label:'白馬岩岳',type:'mountain',lat:36.6982,lon:137.8619},
+ takayama:{name:'高山',jp:'高山市',label:'高山市區',type:'cityscenic',lat:36.1461,lon:137.2522},
+ shinhotaka:{name:'新穗高',jp:'新穂高ロープウェイ周辺',label:'新穗高',type:'mountain',lat:36.2828,lon:137.5804},
+ shirakawago:{name:'白川鄉',jp:'白川郷・荻町',label:'白川鄉',type:'village',lat:36.2573,lon:136.9068}
 };
+const ORDER=Object.keys(REGIONS);
 
+function n(v){const x=Number(v);return Number.isFinite(x)?x:null;}
+function round1(v){return Math.round(v*10)/10;}
+function km(v){const x=n(v);return x==null?'—':(x/1000).toFixed(x>=10000?0:1)+' km';}
+function cmFromM(v){const x=n(v);if(x==null)return'—';const c=x*100;return(c>=10?Math.round(c):round1(c))+' cm';}
+function fmt(v,suffix,dp){const x=n(v);return x==null?'—':(dp==null?Math.round(x):x.toFixed(dp))+suffix;}
 function cacheRead(){try{return JSON.parse(localStorage.getItem(CACHE)||'{}');}catch(e){return{};}}
 function cacheWrite(x){try{localStorage.setItem(CACHE,JSON.stringify(x));}catch(e){}}
-function n(v){const x=Number(v);return Number.isFinite(x)?x:null;}
-function visKm(v){const x=n(v);return x==null?null:x/1000;}
-function round1(v){return Math.round(v*10)/10;}
+function weatherText(code){const c=Number(code);if(c===0)return['☀️','晴天'];if(c===1)return['🌤️','大致晴朗'];if(c===2)return['⛅','部分多雲'];if(c===3)return['☁️','多雲／陰天'];if(c===45||c===48)return['🌫️','有霧'];if(c>=51&&c<=57)return['🌦️','毛毛雨'];if(c>=61&&c<=67)return['🌧️','有雨'];if(c>=71&&c<=77)return['🌨️','有雪'];if(c>=80&&c<=82)return['🌦️','驟雨'];if(c===85||c===86)return['🌨️','驟雪'];if(c>=95)return['⛈️','雷暴'];return['🌡️','天氣'];}
+function formatDate(s){const d=new Date(s+'T12:00:00');const w=['日','一','二','三','四','五','六'];return(d.getMonth()+1)+'/'+d.getDate()+' ('+w[d.getDay()]+')';}
+function japanTimeLabel(date){try{return new Intl.DateTimeFormat('zh-HK',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',hour12:false}).format(date||new Date());}catch(e){return'';}}
+function japanDateKey(){try{const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()),o={};p.forEach(x=>o[x.type]=x.value);return o.year+'-'+o.month+'-'+o.day;}catch(e){return new Date().toISOString().slice(0,10);}}
+function defaultRegion(){const saved=localStorage.getItem(REGION_KEY);if(REGIONS[saved])return saved;const d=japanDateKey(),sh=localStorage.getItem(SH_KEY)||'';const fixed={'2027-01-09':'matsumoto','2027-01-10':'karuizawa','2027-01-11':'yamanouchi','2027-01-12':'yamanouchi','2027-01-13':'hakuba','2027-01-17':'matsumoto'};if(d==='2027-01-14')return sh==='d6'?'shinhotaka':'shirakawago';if(d==='2027-01-15'){if(sh==='d7')return'shinhotaka';if(sh==='d6')return'shirakawago';return'takayama';}if(d==='2027-01-16')return sh==='d8'?'shinhotaka':'takayama';return fixed[d]||'matsumoto';}
+
 function weighted(parts){let s=0,w=0;parts.forEach(p=>{if(p[0]!=null&&p[1]>0){s+=p[0]*p[1];w+=p[1];}});return w?Math.max(0,Math.min(10,s/w)):null;}
 function bandScore(v,rows){if(v==null)return null;for(const r of rows){if(v>=r[0])return r[1];}return rows[rows.length-1][1];}
 function invBandScore(v,rows){if(v==null)return null;for(const r of rows){if(v<=r[0])return r[1];}return rows[rows.length-1][1];}
-
-function visibilityScore(type,km){
- if(km==null)return null;
- if(type==='mountain')return bandScore(km,[[20,10],[15,9],[10,7.5],[5,5],[0,2.5]]);
- if(type==='village')return bandScore(km,[[10,10],[7,9],[5,7.5],[3,5.5],[0,3]]);
- if(type==='snowwalk')return bandScore(km,[[10,10],[7,9],[5,7],[3,5],[0,3]]);
- if(type==='road')return bandScore(km,[[10,10],[5,8],[3,6],[0,3.5]]);
- if(type==='cityscenic')return bandScore(km,[[10,10],[7,9],[5,8],[3,6.5],[0,4]]);
- return bandScore(km,[[7,10],[5,9],[3,7.5],[0,5]]);
-}
-function cloudScore(type,v){
- if(type==='mountain')return invBandScore(v,[[20,10],[30,9.5],[50,8],[70,5.5],[85,3.5],[100,2]]);
- if(type==='village')return invBandScore(v,[[80,10],[95,9],[100,8]]);
- if(type==='snowwalk')return invBandScore(v,[[70,10],[90,8.5],[100,7]]);
- if(type==='cityscenic')return invBandScore(v,[[60,10],[80,9],[95,8],[100,7]]);
- return invBandScore(v,[[90,10],[100,9]]);
-}
-function gustScore(type,v){
- if(type==='mountain')return invBandScore(v,[[20,10],[30,9],[40,7],[50,4.5],[999,2]]);
- if(type==='village')return invBandScore(v,[[25,10],[35,8.5],[45,6],[999,3]]);
- if(type==='snowwalk')return invBandScore(v,[[20,10],[30,8.5],[40,6],[50,4],[999,2]]);
- if(type==='road')return invBandScore(v,[[20,10],[30,8.5],[40,6.5],[50,4],[999,2]]);
- if(type==='cityscenic')return invBandScore(v,[[25,10],[35,9],[45,7],[55,5],[999,3]]);
- return invBandScore(v,[[30,10],[40,8.5],[50,6.5],[999,4]]);
-}
-function precipScore(v,daily){
- if(v==null)return null;
- return daily?invBandScore(v,[[20,10],[40,9],[60,7.5],[80,5.5],[100,3.5]]):invBandScore(v,[[0,10],[0.5,8.5],[2,6.5],[5,4],[999,2]]);
-}
-function snowScore(type,v,daily){
- if(v==null)return null;
- if(!daily){if(v<=0)return 10;if(v<=0.2)return 9;if(v<=0.7)return 7;if(v<=1.5)return 5;return 3;}
- if(type==='village')return invBandScore(v,[[5,10],[10,9],[20,7],[999,4]]);
- if(type==='snowwalk')return invBandScore(v,[[5,10],[10,8.5],[20,6],[999,3]]);
- if(type==='mountain')return invBandScore(v,[[1,10],[5,8.5],[10,6],[20,4],[999,2]]);
- return invBandScore(v,[[2,10],[5,9],[10,7],[999,4.5]]);
-}
-function scoreWeather(region,m,daily){
- const p=REGIONS[region];if(!p)return null;
- const vk=visKm(m.visibility);
- const a=visibilityScore(p.type,vk),b=cloudScore(p.type,n(m.cloud)),c=gustScore(p.type,n(m.gust)),d=precipScore(n(m.precip),daily),e=snowScore(p.type,n(m.snow),daily);
- const weights={mountain:[.35,.25,.20,.10,.10],village:[.30,.05,.25,.20,.20],snowwalk:[.20,.08,.25,.22,.25],road:[.25,.05,.30,.25,.15],cityscenic:[.20,.10,.25,.30,.15],city:[.15,.05,.25,.40,.15]}[p.type]||[.20,.10,.25,.30,.15];
- const score=weighted([[a,weights[0]],[b,weights[1]],[c,weights[2]],[d,weights[3]],[e,weights[4]]]);
- if(score==null)return null;
- const s=round1(score),colour=s>=8?'green':s>=5.5?'yellow':'red';
- let text=s>=9?'非常理想':s>=8?'適合':s>=6.5?'可以去':s>=5.5?'勉強可以':'不理想';
- if(region==='shinhotaka'&&s>=9)text='非常適合・值得優先去';
- if(region==='shinhotaka'&&s<5.5)text='不建議用呢日去';
- if(region==='shirakawago'&&s<5.5)text='不理想・道路安全優先';
- const basis=[];
- if(vk!=null)basis.push((daily?'平均能見度 ':'能見度 ')+round1(vk)+' km');
- if(n(m.cloud)!=null)basis.push((daily?'平均雲量 ':'雲量 ')+Math.round(n(m.cloud))+'%');
- if(n(m.gust)!=null)basis.push((daily?'最大陣風 ':'陣風 ')+Math.round(n(m.gust))+' km/h');
- if(daily&&n(m.precip)!=null)basis.push('降水 '+Math.round(n(m.precip))+'%');
- const notes={shinhotaka:'最後仍要睇山頂 Live Cam＋纜車運行',hakuba:'最後仍要睇岩岳 Live Cam／運行狀況',shirakawago:'道路積雪／封路狀況要另外確認',yamanouchi:'步道積雪／結冰要另外確認',chikuma:'實際道路積雪／結冰要另外確認',matsumoto:'道路積雪／結冰要另外確認',karuizawa:'道路積雪／結冰要另外確認',nagano:'道路積雪／結冰要另外確認',takayama:'道路積雪／結冰要另外確認'};
- return {score:s,colour,text,basis:basis.join(' ・ '),note:notes[region]||''};
-}
+function visibilityScore(type,v){if(v==null)return null;if(type==='mountain')return bandScore(v,[[20,10],[15,9],[10,7.5],[5,5],[0,2.5]]);if(type==='village')return bandScore(v,[[10,10],[7,9],[5,7.5],[3,5.5],[0,3]]);if(type==='snowwalk')return bandScore(v,[[10,10],[7,9],[5,7],[3,5],[0,3]]);if(type==='road')return bandScore(v,[[10,10],[5,8],[3,6],[0,3.5]]);if(type==='cityscenic')return bandScore(v,[[10,10],[7,9],[5,8],[3,6.5],[0,4]]);return bandScore(v,[[7,10],[5,9],[3,7.5],[0,5]]);}
+function cloudScore(type,v){if(type==='mountain')return invBandScore(v,[[20,10],[30,9.5],[50,8],[70,5.5],[85,3.5],[100,2]]);if(type==='village')return invBandScore(v,[[80,10],[95,9],[100,8]]);if(type==='snowwalk')return invBandScore(v,[[70,10],[90,8.5],[100,7]]);if(type==='cityscenic')return invBandScore(v,[[60,10],[80,9],[95,8],[100,7]]);return invBandScore(v,[[90,10],[100,9]]);}
+function gustScore(type,v){if(type==='mountain')return invBandScore(v,[[20,10],[30,9],[40,7],[50,4.5],[999,2]]);if(type==='village')return invBandScore(v,[[25,10],[35,8.5],[45,6],[999,3]]);if(type==='snowwalk')return invBandScore(v,[[20,10],[30,8.5],[40,6],[50,4],[999,2]]);if(type==='road')return invBandScore(v,[[20,10],[30,8.5],[40,6.5],[50,4],[999,2]]);if(type==='cityscenic')return invBandScore(v,[[25,10],[35,9],[45,7],[55,5],[999,3]]);return invBandScore(v,[[30,10],[40,8.5],[50,6.5],[999,4]]);}
+function precipScore(v,daily){if(v==null)return null;return daily?invBandScore(v,[[20,10],[40,9],[60,7.5],[80,5.5],[100,3.5]]):invBandScore(v,[[0,10],[0.5,8.5],[2,6.5],[5,4],[999,2]]);}
+function snowScore(type,v,daily){if(v==null)return null;if(!daily){if(v<=0)return 10;if(v<=0.2)return 9;if(v<=0.7)return 7;if(v<=1.5)return 5;return 3;}if(type==='village')return invBandScore(v,[[5,10],[10,9],[20,7],[999,4]]);if(type==='snowwalk')return invBandScore(v,[[5,10],[10,8.5],[20,6],[999,3]]);if(type==='mountain')return invBandScore(v,[[1,10],[5,8.5],[10,6],[20,4],[999,2]]);return invBandScore(v,[[2,10],[5,9],[10,7],[999,4.5]]);}
+function scoreWeather(region,m,daily){const p=REGIONS[region];if(!p)return null;const vk=n(m.visibility)==null?null:n(m.visibility)/1000;const vals=[visibilityScore(p.type,vk),cloudScore(p.type,n(m.cloud)),gustScore(p.type,n(m.gust)),precipScore(n(m.precip),daily),snowScore(p.type,n(m.snow),daily)];const wt={mountain:[.35,.25,.20,.10,.10],village:[.30,.05,.25,.20,.20],snowwalk:[.20,.08,.25,.22,.25],road:[.25,.05,.30,.25,.15],cityscenic:[.20,.10,.25,.30,.15],city:[.15,.05,.25,.40,.15]}[p.type]||[.20,.10,.25,.30,.15];const score=weighted(vals.map((v,i)=>[v,wt[i]]));if(score==null)return null;const s=round1(score),colour=s>=8?'green':s>=5.5?'yellow':'red';let text=s>=9?'非常理想':s>=8?'適合':s>=6.5?'可以去':s>=5.5?'勉強可以':'不理想';if(region==='shinhotaka'&&s>=9)text='非常適合・值得優先去';if(region==='shinhotaka'&&s<5.5)text='不建議用呢日去';if(region==='shirakawago'&&s<5.5)text='不理想・道路安全優先';const basis=[];if(vk!=null)basis.push((daily?'平均能見度 ':'能見度 ')+round1(vk)+' km');if(n(m.cloud)!=null)basis.push((daily?'平均雲量 ':'雲量 ')+Math.round(n(m.cloud))+'%');if(n(m.gust)!=null)basis.push((daily?'最大陣風 ':'陣風 ')+Math.round(n(m.gust))+' km/h');if(daily&&n(m.precip)!=null)basis.push('降水 '+Math.round(n(m.precip))+'%');const notes={shinhotaka:'最後仍要睇山頂 Live Cam＋纜車運行',hakuba:'最後仍要睇岩岳 Live Cam／運行狀況',shirakawago:'道路積雪／封路狀況要另外確認',yamanouchi:'步道積雪／結冰要另外確認',chikuma:'實際道路積雪／結冰要另外確認',matsumoto:'道路積雪／結冰要另外確認',karuizawa:'道路積雪／結冰要另外確認',nagano:'道路積雪／結冰要另外確認',takayama:'道路積雪／結冰要另外確認'};return{score:s,colour,text,basis:basis.join(' ・ '),note:notes[region]||''};}
 function dot(c){return c==='green'?'🟢':c==='yellow'?'🟡':'🔴';}
-function scoreHtml(region,res){if(!res)return '';const p=REGIONS[region];return '<div class="weather-suit weather-suit-'+res.colour+'"><div class="weather-suit-main"><span>'+dot(res.colour)+'</span><strong>'+p.label+'天氣適合度 '+res.score.toFixed(1)+'/10</strong><span>'+res.text+'</span></div><div class="weather-suit-basis">'+res.basis+(res.note?'｜'+res.note:'')+'</div></div>';}
-function addStyle(){
- if(document.getElementById('weatherSuitStyleV1'))return;
- const s=document.createElement('style');s.id='weatherSuitStyleV1';s.textContent='.weather-suit{margin:9px 0 0;padding:8px 10px;border-radius:9px;border:1px solid;font-size:10px;line-height:1.45}.weather-suit-main{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.weather-suit-main strong{font-size:11px}.weather-suit-basis{margin-top:3px;opacity:.82}.weather-suit-green{background:#edf8ef;border-color:#b9ddc0;color:#25623a}.weather-suit-yellow{background:#fff8df;border-color:#ead38c;color:#755900}.weather-suit-red{background:#fff0ef;border-color:#efbbb6;color:#9b3029}.weather3d-day .weather-suit{margin-top:8px;padding:7px 8px}.weather3d-day .weather-suit-main strong{font-size:10px}@media(max-width:720px){.weather-suit-main{gap:4px}.weather-suit-basis{font-size:9px}}';document.head.appendChild(s);
-}
-function apiUrl(r){
- const current=['visibility','cloud_cover','wind_gusts_10m','precipitation','snowfall','weather_code'].join(',');
- const daily=['visibility_mean','visibility_min','cloud_cover_mean','wind_gusts_10m_max','precipitation_probability_max','snowfall_sum','weather_code'].join(',');
- return 'https://api.open-meteo.com/v1/forecast?latitude='+r.lat+'&longitude='+r.lon+'&current='+encodeURIComponent(current)+'&daily='+encodeURIComponent(daily)+'&timezone=Asia%2FTokyo&forecast_days=3';
-}
-function render(region,data){
- const live=document.querySelector('.weather-live-wrap'),days=[...document.querySelectorAll('.weather3d-day')];
- if(!live||!days.length)return false;
- live.querySelectorAll('.weather-suit').forEach(x=>x.remove());days.forEach(x=>x.querySelectorAll('.weather-suit').forEach(y=>y.remove()));
- const c=data.current||{};
- const cr=scoreWeather(region,{visibility:c.visibility,cloud:c.cloud_cover,gust:c.wind_gusts_10m,precip:c.precipitation,snow:c.snowfall},false);
- const main=live.querySelector('.weather-live-main');if(main)main.insertAdjacentHTML('afterend',scoreHtml(region,cr));
- const d=data.daily||{};
- days.slice(0,3).forEach((card,i)=>{const rr=scoreWeather(region,{visibility:d.visibility_mean&&d.visibility_mean[i],cloud:d.cloud_cover_mean&&d.cloud_cover_mean[i],gust:d.wind_gusts_10m_max&&d.wind_gusts_10m_max[i],precip:d.precipitation_probability_max&&d.precipitation_probability_max[i],snow:d.snowfall_sum&&d.snowfall_sum[i]},true);const temp=card.querySelector('.weather3d-temp');if(temp)temp.insertAdjacentHTML('afterend',scoreHtml(region,rr));});
- return true;
-}
-function applyWhenReady(region,data,tries){if(render(region,data))return;if((tries||0)>=8)return;setTimeout(()=>applyWhenReady(region,data,(tries||0)+1),180);}
-function load(region,force){
- const r=REGIONS[region];if(!r)return;
- const cache=cacheRead(),hit=cache[region];if(!force&&hit&&Date.now()-hit.at<TTL){applyWhenReady(region,hit.data,0);return;}
- fetch(apiUrl(r),{cache:'no-store'}).then(x=>{if(!x.ok)throw new Error('weather-score');return x.json();}).then(data=>{cache[region]={at:Date.now(),data};cacheWrite(cache);applyWhenReady(region,data,0);}).catch(()=>{if(hit)applyWhenReady(region,hit.data,0);});
-}
-function activeRegion(){const b=document.querySelector('.weather3d-region.active');return b&&REGIONS[b.dataset.region]?b.dataset.region:null;}
-function bind(){
- const panel=document.getElementById('weather3dPanel');if(!panel)return false;
- addStyle();
- panel.querySelectorAll('.weather3d-region').forEach(b=>{if(b.dataset.suitBound)return;b.dataset.suitBound='1';b.addEventListener('click',()=>setTimeout(()=>load(b.dataset.region,false),120));});
- const ref=document.getElementById('weather3dRefresh');if(ref&&!ref.dataset.suitBound){ref.dataset.suitBound='1';ref.addEventListener('click',()=>{const id=activeRegion();if(id)setTimeout(()=>load(id,true),120);});}
- const id=activeRegion();if(id)load(id,false);return true;
-}
-function boot(){let i=0;const go=()=>{i++;if(bind()||i>=12)return;setTimeout(go,i<4?120:300);};go();}
+function scoreHtml(region,res,trend){if(!res)return'';const p=REGIONS[region];return'<div class="weather-suit weather-suit-'+res.colour+(trend?' weather-suit-trend':'')+'"><div class="weather-suit-main"><span>'+dot(res.colour)+'</span><strong>'+p.label+'天氣適合度 '+res.score.toFixed(1)+'/10</strong><span>'+res.text+(trend?'｜趨勢參考':'')+'</span></div><div class="weather-suit-basis">'+res.basis+(res.note?'｜'+res.note:'')+'</div></div>';}
+
+function apiUrl(r){const current=['temperature_2m','relative_humidity_2m','apparent_temperature','precipitation','snowfall','weather_code','cloud_cover','wind_speed_10m','wind_gusts_10m','visibility'].join(',');const daily=['weather_code','temperature_2m_max','temperature_2m_min','apparent_temperature_max','apparent_temperature_min','precipitation_probability_max','snowfall_sum','wind_gusts_10m_max','visibility_mean','visibility_min','visibility_max','cloud_cover_mean'].join(',');return'https://api.open-meteo.com/v1/forecast?latitude='+r.lat+'&longitude='+r.lon+'&current='+encodeURIComponent(current)+'&hourly=snow_depth&daily='+encodeURIComponent(daily)+'&timezone=Asia%2FTokyo&forecast_days=5';}
+function closestSnow(data,target){const h=data&&data.hourly,t=h&&h.time,v=h&&h.snow_depth;if(!t||!v||!t.length)return null;let best=0,bd=Infinity,tt=Date.parse(target||t[0]);for(let i=0;i<t.length;i++){const d=Math.abs(Date.parse(t[i])-tt);if(d<bd){bd=d;best=i;}}return n(v[best]);}
+function noonSnow(data,day){const h=data&&data.hourly,t=h&&h.time,v=h&&h.snow_depth;if(!t||!v)return null;let i=t.indexOf(day+'T12:00');if(i<0)i=t.findIndex(x=>x.indexOf(day+'T12:')===0);if(i<0)i=t.findIndex(x=>x.indexOf(day+'T')===0);return i>=0?n(v[i]):null;}
+function forecastNote(){return japanDateKey()<'2026-12-20'?'⚠️ 5 日預測係「由今日起 5 日」，唔係 2027 年 1 月行程天氣；到出發前幾日先會變成真正有用嘅行程預報。第 4–5 日只當趨勢參考。':'❄️ 第 1–3 日可用作主要決策；第 4–5 日只作趨勢參考。山區仍要配合 Live Cam、纜車運行及道路狀況。積雪深度係模型估算地面積雪，唔代表路面積雪。';}
+function takeOverPanel(){const old=document.getElementById('weather3dPanel');if(!old)return null;if(old.dataset.weatherV2==='1')return old;const p=document.createElement('section');p.id='weather3dPanel';p.dataset.weatherV2='1';p.className='weather3d-panel';p.innerHTML='<div class="weather3d-head"><div><h2 class="weather3d-title">🌤️ 行程地區・即時天氣＋5天天氣預測</h2><p class="weather3d-subtitle">即時天氣＋未來 5 日｜第 1–3 日主要決策，第 4–5 日趨勢參考｜新增地面積雪深度（模型估算）</p></div><button type="button" class="weather3d-refresh" id="weather3dRefresh">↻ 刷新</button></div><div class="weather3d-regions" id="weather3dRegions"></div><div class="weather3d-body" id="weather3dBody"><div class="weather3d-status">載入即時天氣及 5 日預報…</div></div>';old.insertAdjacentElement('afterend',p);old.remove();return p;}
+function mark(panel,id){panel.querySelectorAll('.weather3d-region').forEach(b=>b.classList.toggle('active',b.dataset.region===id));}
+function render(panel,region,data,meta){const r=REGIONS[region],body=panel.querySelector('#weather3dBody');if(!r||!body||!data||!data.daily||!data.daily.time){if(body)body.innerHTML='<div class="weather3d-status weather3d-offline">暫時攞唔到天氣資料。</div>';return;}const c=data.current||{},cw=weatherText(c.weather_code),snowNow=closestSnow(data,c.time),cr=scoreWeather(region,{visibility:c.visibility,cloud:c.cloud_cover,gust:c.wind_gusts_10m,precip:c.precipitation,snow:c.snowfall},false);const live='<div class="weather-live-wrap"><div class="weather-live-head"><span class="weather-live-label">📡 即時天氣</span><span class="weather-live-time">'+(c.time?c.time.replace('T',' ')+' JST':'最新資料')+'</span></div><div class="weather-live-main"><span class="weather-live-icon">'+cw[0]+'</span><div><div class="weather-live-temp">'+fmt(c.temperature_2m,'°C')+'</div><div class="weather-live-cond">'+cw[1]+'｜體感 '+fmt(c.apparent_temperature,'°C')+'</div></div></div>'+scoreHtml(region,cr,false)+'<div class="weather-live-grid"><div class="weather-live-metric">👁️ 能見度<strong>'+km(c.visibility)+'</strong></div><div class="weather-live-metric">☁️ 雲量<strong>'+fmt(c.cloud_cover,'%')+'</strong></div><div class="weather-live-metric">💧 濕度<strong>'+fmt(c.relative_humidity_2m,'%')+'</strong></div><div class="weather-live-metric">💨 風速／陣風<strong>'+fmt(c.wind_speed_10m,'')+' / '+fmt(c.wind_gusts_10m,' km/h')+'</strong></div><div class="weather-live-metric">☔ 降水<strong>'+fmt(c.precipitation,' mm',1)+'</strong></div><div class="weather-live-metric">❄️ 降雪<strong>'+fmt(c.snowfall,' cm',1)+'</strong></div><div class="weather-live-metric">☃️ 地面積雪<strong>'+cmFromM(snowNow)+'</strong></div></div></div>';const d=data.daily,cards=d.time.slice(0,5).map((day,i)=>{const w=weatherText(d.weather_code&&d.weather_code[i]),trend=i>=3,rr=scoreWeather(region,{visibility:d.visibility_mean&&d.visibility_mean[i],cloud:d.cloud_cover_mean&&d.cloud_cover_mean[i],gust:d.wind_gusts_10m_max&&d.wind_gusts_10m_max[i],precip:d.precipitation_probability_max&&d.precipitation_probability_max[i],snow:d.snowfall_sum&&d.snowfall_sum[i]},true),depth=noonSnow(data,day);return'<div class="weather3d-day'+(trend?' weather-far-day':'')+'"><div class="weather3d-date">'+formatDate(day)+(trend?'<span class="weather-trend-tag">趨勢參考</span>':'')+'</div><div class="weather3d-main"><span class="weather3d-icon">'+w[0]+'</span><span class="weather3d-condition">'+w[1]+'</span></div><div class="weather3d-temp">'+fmt(d.temperature_2m_max&&d.temperature_2m_max[i],'°')+' <span>/ '+fmt(d.temperature_2m_min&&d.temperature_2m_min[i],'°C')+'</span></div>'+scoreHtml(region,rr,trend)+'<div class="weather3d-metrics"><div>🧣 體感 '+fmt(d.apparent_temperature_max&&d.apparent_temperature_max[i],'°')+' / '+fmt(d.apparent_temperature_min&&d.apparent_temperature_min[i],'°C')+'</div><div>☔ 降水 '+fmt(d.precipitation_probability_max&&d.precipitation_probability_max[i],'%')+'</div><div>❄️ 新降雪 '+fmt(d.snowfall_sum&&d.snowfall_sum[i],' cm',1)+'</div><div>☃️ 地面積雪 '+cmFromM(depth)+' <small>（約12:00）</small></div><div>💨 陣風 '+fmt(d.wind_gusts_10m_max&&d.wind_gusts_10m_max[i],' km/h')+'</div><div class="weather-vis">👁️ 能見度 平均 '+km(d.visibility_mean&&d.visibility_mean[i])+'｜最低 '+km(d.visibility_min&&d.visibility_min[i])+'</div></div></div>';}).join('');const stamp=meta&&meta.cachedAt?new Date(meta.cachedAt):new Date();body.innerHTML='<div class="weather3d-location"><strong>'+r.name+'</strong><span class="weather3d-jp">🇯🇵 '+r.jp+'</span></div>'+live+'<div class="weather-forecast-label">📅 未來 5 日預測</div><div class="weather3d-days">'+cards+'</div><div class="weather3d-foot"><span>資料：Open-Meteo</span><span>'+((meta&&meta.fromCache)?'上次資料':'更新')+'：日本時間 '+japanTimeLabel(stamp)+'</span><span>積雪＝模型估算地面雪深；唔等於路面積雪</span></div><div class="weather3d-warning">'+forecastNote()+'</div>';}
+function load(panel,region,force){const r=REGIONS[region],body=panel.querySelector('#weather3dBody'),cache=cacheRead(),hit=cache[region];if(!r)return;body.innerHTML='<div class="weather3d-status">🌤️ 讀取 '+r.name+' 即時天氣＋5 日預報…</div>';if(!force&&hit&&Date.now()-hit.at<TTL){render(panel,region,hit.data,{cachedAt:hit.at,fromCache:true});return;}fetch(apiUrl(r),{cache:'no-store'}).then(x=>{if(!x.ok)throw new Error('weather5');return x.json();}).then(data=>{cache[region]={at:Date.now(),data};cacheWrite(cache);render(panel,region,data,{cachedAt:Date.now(),fromCache:false});}).catch(()=>{if(hit){render(panel,region,hit.data,{cachedAt:hit.at,fromCache:true});const x=document.createElement('div');x.className='weather3d-warning weather3d-offline';x.textContent='目前無法連線更新，以上係上次成功下載嘅資料。';body.appendChild(x);}else body.innerHTML='<div class="weather3d-status weather3d-offline">🟠 天氣資料需要上網；目前未有離線快取。</div>';});}
+function addStyle(){if(document.getElementById('weatherSuitStyleV2'))return;const s=document.createElement('style');s.id='weatherSuitStyleV2';s.textContent='.weather-suit{margin:9px 0 0;padding:8px 10px;border-radius:9px;border:1px solid;font-size:10px;line-height:1.45}.weather-suit-main{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.weather-suit-main strong{font-size:11px}.weather-suit-basis{margin-top:3px;opacity:.82}.weather-suit-green{background:#edf8ef;border-color:#b9ddc0;color:#25623a}.weather-suit-yellow{background:#fff8df;border-color:#ead38c;color:#755900}.weather-suit-red{background:#fff0ef;border-color:#efbbb6;color:#9b3029}.weather3d-days{grid-template-columns:repeat(5,minmax(0,1fr))!important}.weather-far-day{opacity:.86;border-style:dashed!important;background:#f6f8fa!important}.weather-trend-tag{display:inline-block;margin-left:5px;padding:2px 5px;border-radius:8px;background:#eef1f3;color:#6f7b84;font-size:8px;font-weight:800;vertical-align:middle}.weather-suit-trend{opacity:.9}.weather3d-metrics small{font-size:8px;color:#7a8790}.tripv2-weather-select{margin:12px 18px 14px;padding:14px;background:#fffdf5;border:1px solid #eadfb5;border-left:5px solid #e0ac35;border-radius:10px}.tripv2-weather-select h2{margin:0 0 6px;color:#1f4e79;font-size:19px}.tripv2-weather-select p{margin:5px 0 10px;color:#5e6d78;font-size:13px;line-height:1.55}.tripv2-choice-row{display:flex;flex-wrap:wrap;gap:7px}.tripv2-choice{border:1px solid #cddce7;background:#eef4f8;color:#1f4e79;border-radius:8px;padding:9px 12px;font-weight:800;cursor:pointer}.tripv2-choice.active{background:#1f4e79;color:#fff;border-color:#1f4e79}.tripv2-choice.reset{background:#f2f2f2;color:#666;border-color:#ddd}@media(max-width:720px){.weather3d-days{display:flex!important;grid-template-columns:none!important}.tripv2-weather-select{margin:10px 0 14px}.tripv2-choice{flex:1 1 calc(33% - 7px);padding:9px 7px;font-size:12px}}';document.head.appendChild(s);}
+function normalizeLiveChooser(){if(!/(?:^|\/)live\.html$/.test(location.pathname))return true;const box=document.getElementById('livePlanChooserV92');if(!box)return false;box.className='tripv2-weather-select';box.removeAttribute('style');const selected=localStorage.getItem(SH_KEY)||'';box.innerHTML='<h2>🌨️ D6–D8 新穗高日子</h2><p>揀邊一日去新穗高。揀咗之後 D6–D8 會直接變成完整嘅實際行程；白川鄉只會放 D6／D7，D8 會一路向東返松本。撳「重設」會返回規劃模式。</p><div class="tripv2-choice-row"><button class="tripv2-choice" data-sh="d6">🚡 D6 去新穗高</button><button class="tripv2-choice" data-sh="d7">🚡 D7 去新穗高</button><button class="tripv2-choice" data-sh="d8">🚡 D8 去新穗高</button><button class="tripv2-choice reset" data-sh="">重設／規劃模式</button></div>';box.querySelectorAll('.tripv2-choice').forEach(b=>{b.classList.toggle('active',!!selected&&b.dataset.sh===selected);b.onclick=()=>{const v=b.dataset.sh;if(v)localStorage.setItem(SH_KEY,v);else localStorage.removeItem(SH_KEY);location.reload();};});return true;}
+function forceVersion(){const b=document.getElementById('siteVersionBadge');if(!b)return;const off=/離線/.test(b.textContent||'');b.classList.remove('outdated');b.classList.add(off?'offline':'current');b.textContent='版本 '+VERSION+(off?'・離線':'');b.title=(off?'目前離線；本機版本 ':'已係最新版本 ')+VERSION;}
+function boot(){addStyle();let tries=0;const go=()=>{tries++;const old=document.getElementById('weather3dPanel');if(!old){if(tries<15)setTimeout(go,150);return;}const panel=takeOverPanel();if(!panel)return;const bar=panel.querySelector('#weather3dRegions');let active=defaultRegion();ORDER.forEach(id=>{const r=REGIONS[id],b=document.createElement('button');b.type='button';b.className='weather3d-region';b.dataset.region=id;b.textContent=r.name;b.onclick=()=>{active=id;localStorage.setItem(REGION_KEY,id);mark(panel,id);load(panel,id,false);};bar.appendChild(b);});panel.querySelector('#weather3dRefresh').onclick=()=>load(panel,active,true);mark(panel,active);load(panel,active,false);};go();[0,250,800,1800,3500,6000].forEach(t=>setTimeout(forceVersion,t));let c=0;const chooserTry=()=>{c++;if(normalizeLiveChooser()||c>=12)return;setTimeout(chooserTry,c<4?120:300);};chooserTry();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
