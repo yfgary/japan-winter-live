@@ -1,6 +1,6 @@
 {
-  "version": "v9.1.0",
-  "build": "2026-10-03.22",
-  "updated": "2026-10-03T05:37:00+08:00",
-  "notes": "Bilingual app foundation: add a shared Traditional Chinese / English one-tap language switch across Live Cam, Detailed Itinerary, Trip Info and Attractions, including dynamically rendered weather, D6-D8 decision panels, Today Mode and Driving Mode. The selected language is saved locally and follows the user across pages. Official Japanese place-name lines are intentionally preserved where useful for navigation."
+  "version": "v9.1.1",
+  "build": "2026-10-03.23",
+  "updated": "2026-10-03T06:30:00+08:00",
+  "notes": "Bilingual stability fix: remove the heavy character-data MutationObserver that could freeze navigation, load the translation layer only after itinerary/trip data renderers, cache-bust the bilingual script, and expand English phrase coverage across itinerary routes, weather, parking, hotels, transport, schedule notes and common attraction text. Language switching now saves the choice and reloads cleanly instead of rewriting the whole live DOM in place."
 }
