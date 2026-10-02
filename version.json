@@ -1,6 +1,6 @@
 {
-  "version": "v9.0.5",
-  "build": "2026-10-03.17",
-  "updated": "2026-10-03T05:05:00+08:00",
-  "notes": "Travel Mode release: add a shared Today Mode entry across the app. On the itinerary it opens a full-screen travel dashboard using the already-rendered final itinerary as its source, so it stays synchronized with D6-D8 routing. During the trip it auto-selects the current Japan day and determines the next stop from Japan time; before the trip it provides D1-D9 preview. The dashboard shows the next stop, Google Maps navigation, live local weather, visibility, gusts, snowfall and estimated snow depth, parking/navigation hints, hotel/end-of-day information, hard time limits and the next five schedule items."
+  "version": "v9.0.6",
+  "build": "2026-10-03.18",
+  "updated": "2026-10-03T05:18:00+08:00",
+  "notes": "Travel Mode navigation fix: the Complete Itinerary and 5-Day Forecast buttons now close the full-screen Travel Mode overlay first, then open and scroll to the selected itinerary day or weather panel on the same page. Version numbers remain synchronized across the shared core and visible badges."
 }
