@@ -1,6 +1,6 @@
 {
-  "version": "v9.0.2",
-  "build": "2026-10-03.14",
-  "updated": "2026-10-03T03:38:00+08:00",
-  "notes": "Version synchronization release: all main pages now use the same v9.0.2 release number. Detailed Itinerary, Trip Info and Live Cam use the shared site shell version; Attractions reads the same central version.json directly. Future functional updates should increment the visible version number rather than only the build number."
+  "version": "v9.0.3",
+  "build": "2026-10-03.15",
+  "updated": "2026-10-03T03:50:00+08:00",
+  "notes": "Five-day weather release: extend current plus forecast view from 3 to 5 days, add model-estimated ground snow depth, mark day 4-5 as trend reference, keep location-specific /10 suitability scores across all five days, and make the Live Cam D6-D8 Shinhotaka selector match the itinerary selector so only the active day is dark blue."
 }
