@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.9",
-  "updated": "2026-10-02T22:46:00+08:00",
-  "notes": "Live Cam DOM sync fix: replace the previous section-data patcher with a DOM-based synchronizer so the dashboard updates reliably even when the original page's const sections object is not accessible from the dynamically loaded script. D2, D6-D8 routes, camera sets, the Shinhotaka day selector, Attraction Overview link and JA Oranche navigation now update independently of the old global data scope."
+  "build": "2026-10-02.10",
+  "updated": "2026-10-02T23:59:00+08:00",
+  "notes": "Live Cam sync hardening: use a brand-new live-v9-2-sync.js filename, load it directly from site-shell, and inject the same file from the service worker as a fallback. The script patches the rendered Live Cam DOM directly, including D2 Matsumoto Castle routing, D6-D8 flexible Shinhotaka/Shirakawago/Hida Cave routing, matching camera groups, and the D6-D8 Shinhotaka selector."
 }
