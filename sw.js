@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-live12-score-20261003";
+const CACHE_NAME = "japan-winter-2027-v9.0.1-live13-score-all-pages-20261003";
 
 const CORE_FILES = [
     "./",
