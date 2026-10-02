@@ -1,6 +1,6 @@
 {
-  "version": "v9.0.7",
-  "build": "2026-10-03.19",
-  "updated": "2026-10-03T05:32:00+08:00",
-  "notes": "Travel Mode weather-region sync fix: when opening the 5-day forecast from Today Mode, the app now switches the forecast to the region that belongs to the D1-D9 day currently selected in Today Mode instead of keeping the previously selected forecast region. D6-D8 continue to respect the shared Shinhotaka day selection."
+  "version": "v9.0.8",
+  "build": "2026-10-03.20",
+  "updated": "2026-10-03T05:37:00+08:00",
+  "notes": "D6-D8 Shinhotaka weather decision panel: compare Jan 14-16 side by side using the same mountain-oriented 10-point logic, show forecast confidence, automatically recommend the strongest day when all three dates are available, highlight the current manual selection, and offer one-tap apply without changing the itinerary automatically. Main 5-day forecast remains unchanged; this dedicated comparison uses an 8-day forecast window so all three candidate days can be compared from Jan 9 onward."
 }
