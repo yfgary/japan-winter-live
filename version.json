@@ -1,6 +1,6 @@
 {
   "version": "v9.0.1",
-  "build": "2026-10-02.4",
-  "updated": "2026-10-02T14:52:00+08:00",
-  "notes": "Performance and catalog grouping hotfix: itinerary MutationObservers are throttled during startup and automatically disconnected after delayed rendering finishes to prevent the page becoming unresponsive after several minutes. The attraction catalog now moves the five previously unclassified places into their correct location groups: Matsumoto Castle Projection Mapping and AEON Matsumoto to Matsumoto, Mountain Harbor and White Park to Hakuba, and Takayama local supermarket to Takayama. PWA JS/CSS is now network-first when online to reduce stale-code cache problems."
+  "build": "2026-10-02.5",
+  "updated": "2026-10-02T15:05:00+08:00",
+  "notes": "Itinerary performance fix: legacy whole-page MutationObservers are now disabled completely; startup renderers still run their normal initial/delayed passes and explicit click handlers, but no background DOM watchers remain. Attraction catalog grouping fix now supports the current spot-* card IDs as well as v2-* IDs, so Matsumoto Projection and AEON Matsumoto move to Matsumoto, Mountain Harbor and White Park move to Hakuba, and Takayama supermarket moves to Takayama. Empty Other group is removed."
 }
