@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.0.1-live13-score-all-pages-20261003";
+const CACHE_NAME = "japan-winter-2027-v9.0.2-version-sync-20261003";
 
 const CORE_FILES = [
     "./",
@@ -55,9 +55,9 @@ const CORE_FILES = [
     "./assets/images/d3-shibu-onsen.jpg",
     "./assets/images/d3-shibu-onsen-day.jpg",
 
+    "./assets/images/d4-aeon-suzaka.jpg",
     "./assets/images/d4-monkey-trail.jpg",
     "./assets/images/d4-snow-monkey.jpg",
-    "./assets/images/d4-aeon-suzaka.jpg",
 
     "./assets/images/d5-hakuba-iwatake.jpg",
     "./assets/images/d5-mountain-harbor.jpg",
