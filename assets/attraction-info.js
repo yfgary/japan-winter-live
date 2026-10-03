@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 
-if (window.__japan2027EnhancementLoaderV24) return;
-window.__japan2027EnhancementLoaderV24 = true;
+if (window.__japan2027EnhancementLoaderV25) return;
+window.__japan2027EnhancementLoaderV25 = true;
 
 function addCss(href){
     if (document.querySelector('link[href="' + href + '"]')) return;
@@ -25,14 +25,14 @@ const isJapanLegacy=selectedTrip===DEFAULT_TRIP;
 const isTripInfo = /(?:^|\/)trip-info\.html$/.test(location.pathname);
 
 const itineraryScripts = [
-    'assets/multi-trip-context-v1.js?v=6',
+    'assets/multi-trip-context-v1.js?v=7',
     'assets/multi-trip-data-v1.js?v=2',
     'assets/trip-no-observers-v2.js?v=1',
     'assets/trip-core-v1.js?v=8',
     'assets/site-shell-v7.js?v=915',
     'assets/weather-suitability-v1.js?v=6',
     'assets/d6-d8-weather-decision-v1.js?v=1',
-    'assets/version-v901-fix.js?v=15',
+    'assets/version-v901-fix.js?v=16',
     'assets/nav-enhancements-v1.js?v=3',
     'assets/trip-enhancement-data.js?v=913',
     'assets/trip-user-overrides.js?v=913',
@@ -62,13 +62,13 @@ const itineraryScripts = [
 ];
 
 const tripInfoScripts = [
-    'assets/multi-trip-context-v1.js?v=6',
+    'assets/multi-trip-context-v1.js?v=7',
     'assets/multi-trip-data-v1.js?v=2',
     'assets/trip-core-v1.js?v=8',
     'assets/site-shell-v7.js?v=915',
     'assets/weather-suitability-v1.js?v=6',
     'assets/d6-d8-weather-decision-v1.js?v=1',
-    'assets/version-v901-fix.js?v=15',
+    'assets/version-v901-fix.js?v=16',
     'assets/nav-enhancements-v1.js?v=3',
     'assets/trip-enhancement-data.js?v=913',
     'assets/trip-user-overrides.js?v=913',
@@ -82,22 +82,22 @@ const tripInfoScripts = [
     'assets/trip-v9-final-fixes.js?v=913',
     'assets/trip-v9-hotfix.js?v=913',
     'assets/catalog-link.js?v=2',
-    'assets/multi-trip-trip-info-renderer-v1.js?v=2',
+    'assets/multi-trip-trip-info-renderer-v1.js?v=3',
     'assets/i18n-v1.js?v=3',
     'assets/i18n-polish-en-v1.js?v=1'
 ];
 
 const genericItineraryScripts=[
-    'assets/multi-trip-context-v1.js?v=6',
+    'assets/multi-trip-context-v1.js?v=7',
     'assets/multi-trip-data-v1.js?v=2',
-    'assets/version-v901-fix.js?v=15',
+    'assets/version-v901-fix.js?v=16',
     'assets/multi-trip-itinerary-renderer-v1.js?v=2'
 ];
 const genericTripInfoScripts=[
-    'assets/multi-trip-context-v1.js?v=6',
+    'assets/multi-trip-context-v1.js?v=7',
     'assets/multi-trip-data-v1.js?v=2',
-    'assets/version-v901-fix.js?v=15',
-    'assets/multi-trip-trip-info-renderer-v1.js?v=2'
+    'assets/version-v901-fix.js?v=16',
+    'assets/multi-trip-trip-info-renderer-v1.js?v=3'
 ];
 
 const scripts = isJapanLegacy
