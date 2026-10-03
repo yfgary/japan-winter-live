@@ -1,8 +1,8 @@
 (function(){
 'use strict';
-if(window.__multiTripVersionV1020Fix)return;
-window.__multiTripVersionV1020Fix=true;
-const VERSION='v10.2.0';
+if(window.__multiTripVersionV1021Fix)return;
+window.__multiTripVersionV1021Fix=true;
+const VERSION='v10.2.1';
 function fix(){
   const b=document.getElementById('siteVersionBadge');if(!b)return;
   const en=document.documentElement.lang==='en';
