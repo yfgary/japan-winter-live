@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "new-trip-id",
+  "name": "新旅行名稱",
+  "shortName": "短名稱",
+  "subtitle": "地區・日數・旅行方式",
+  "startDate": "2028-01-01",
+  "endDate": "2028-01-05",
+  "timezone": "Asia/Tokyo",
+  "language": "zh-HK",
+  "country": "日本",
+  "features": {
+    "itinerary": true,
+    "tripInfo": true,
+    "attractions": true,
+    "liveCam": false,
+    "todayMode": true,
+    "drivingMode": false,
+    "weather": true,
+    "weatherScore": true,
+    "packingChecklist": true,
+    "bilingual": false,
+    "winterDriving": false
+  },
+  "modules": [],
+  "pages": {
+    "itinerary": "itinerary.html",
+    "tripInfo": "trip-info.html",
+    "attractions": "attractions.html",
+    "liveCam": "live.html"
+  },
+  "days": [
+    {
+      "day": 1,
+      "date": "2028-01-01",
+      "title": "城市 A → 城市 B",
+      "weatherRegion": "city-b",
+      "items": [
+        {
+          "time": "09:00",
+          "type": "transport",
+          "title": "出發",
+          "map": "Example Station",
+          "note": "行程備註"
+        }
+      ]
+    }
+  ]
+}
