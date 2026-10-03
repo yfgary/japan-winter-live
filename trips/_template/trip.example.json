@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 5,
   "id": "new-trip-id",
   "name": "新旅行名稱",
   "shortName": "短名稱",
@@ -47,6 +47,11 @@
       "mode": "generate",
       "source": "tripInfo",
       "preserveLegacyShell": false
+    },
+    "attractions": {
+      "mode": "generate",
+      "source": "attractions",
+      "preserveLegacyDetails": false
     }
   }
 }
