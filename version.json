@@ -1,6 +1,6 @@
 {
-  "version": "v10.7.0",
-  "build": "2026-10-04.36",
-  "updated": "2026-10-04T02:20:00+08:00",
-  "notes": "Weather Activity Profile Standard v1: suitability is now split into Experience and Access/Safety, then combined with a safety cap. Add reusable activity profiles for indoor, city, mountain, snow, road, coastal, beach, boat, open-sea, ferry, snorkeling/diving, water sports and more. Map Japan 2027 regions and attractions to profile-specific standards while preserving Shinhotaka's Japan-only decision module."
+  "version": "v10.8.0",
+  "build": "2026-10-04.37",
+  "updated": "2026-10-04T02:42:00+08:00",
+  "notes": "Multi Trip phase 8: Today Mode and Driving Mode now share a reusable per-trip mode core for trip timezone/day detection, itinerary items, map routing, weather regions and Weather Activity Profile scoring. Future trips get generated Today/Driving modes directly from itinerary.json; Japan 2027 preserves its tested legacy overlays and bridges destination/road suitability scores into them."
 }
