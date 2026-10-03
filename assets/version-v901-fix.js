@@ -1,8 +1,8 @@
 (function(){
 'use strict';
-if(window.__multiTripVersionV1060Fix)return;
-window.__multiTripVersionV1060Fix=true;
-const VERSION='v10.6.0';
+if(window.__multiTripVersionV1070Fix)return;
+window.__multiTripVersionV1070Fix=true;
+const VERSION='v10.7.0';
 function fix(){
   const ids=['siteVersionBadge','catalogVersion'];
   ids.forEach(id=>{
