@@ -33,6 +33,22 @@
       "status": "test",
       "badge": "架構測試",
       "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":false}
+    },
+    {
+      "id": "bangkok-2026",
+      "name": "曼谷 8日7夜 2026",
+      "shortName": "曼谷 2026・8日7夜",
+      "subtitle": "On Nut 美食・夜市・Outlet・按摩之旅",
+      "startDate": "2026-08-29",
+      "endDate": "2026-09-05",
+      "country": "泰國・曼谷",
+      "emoji": "🇹🇭",
+      "cover": "",
+      "entry": "itinerary.html",
+      "config": "trips/bangkok-2026/trip.json",
+      "status": "test",
+      "badge": "真實行程測試",
+      "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":false}
     }
   ]
 }
