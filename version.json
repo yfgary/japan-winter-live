@@ -1,6 +1,6 @@
 {
-  "version": "v10.8.0",
-  "build": "2026-10-04.37",
-  "updated": "2026-10-04T02:42:00+08:00",
-  "notes": "Multi Trip phase 9: Today Mode and Driving Mode now share a reusable per-trip mode core for trip timezone/day detection, itinerary items, map routing, weather regions and Weather Activity Profile scoring. Future trips get generated Today/Driving modes directly from itinerary.json; Japan 2027 preserves its tested legacy overlays and bridges destination/road suitability scores into them."
+  "version": "v10.9.0",
+  "build": "2026-10-04.38",
+  "updated": "2026-10-04T03:05:00+08:00",
+  "notes": "Multi Trip phase 10: add the real Trip Selector workflow and a visible non-production Okinawa demo trip to validate generic renderers end-to-end. The demo uses shared Itinerary, Trip Info, Attractions, Weather, Today and Driving engines without Japan 2027 legacy scripts. Attractions page now conditionally loads legacy code only for the Japan trip, feature links hide when disabled, and the selector clearly separates the formal trip from architecture-test data."
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "defaultTrip": "shirakawago-shinhotaka-2027",
   "trips": [
     {
@@ -14,7 +14,25 @@
       "cover": "assets/images/d7-shirakawago-view.jpg",
       "entry": "itinerary.html",
       "config": "trips/shirakawago-shinhotaka-2027/trip.json",
-      "status": "active"
+      "status": "active",
+      "badge": "正式旅程",
+      "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":true}
+    },
+    {
+      "id": "multi-trip-demo-okinawa",
+      "name": "🧪 Multi Trip Demo・沖繩 3日",
+      "shortName": "🧪 沖繩 Demo 3日",
+      "subtitle": "Generic Renderer 驗證・城市＋自駕＋海岸活動",
+      "startDate": "2028-06-10",
+      "endDate": "2028-06-12",
+      "country": "測試旅程",
+      "emoji": "🧪",
+      "cover": "",
+      "entry": "itinerary.html",
+      "config": "trips/multi-trip-demo-okinawa/trip.json",
+      "status": "test",
+      "badge": "架構測試",
+      "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":false}
     }
   ]
 }
