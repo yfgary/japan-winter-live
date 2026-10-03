@@ -1,6 +1,6 @@
 {
-  "version": "v10.9.2",
-  "build": "2026-10-04.40",
-  "updated": "2026-10-04T04:55:00+08:00",
-  "notes": "Move weather presentation and back-to-top controls into shared Multi Trip UI. Generic Okinawa now uses the same styled 5-day weather cards as the Japan trip, and itinerary/trip-info pages restore the floating back-to-top button without loading Japan-only site shell logic."
+  "version": "v10.9.3",
+  "build": "2026-10-04.41",
+  "updated": "2026-10-04T05:10:00+08:00",
+  "notes": "Restore the floating version badge as a shared Multi Trip UI control. Generic trips such as Okinawa now create and style the bottom-left version badge independently of the Japan 2027 legacy site shell, while preserving the shared back-to-top and weather UI introduced in v10.9.2."
 }
