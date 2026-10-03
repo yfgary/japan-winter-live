@@ -1,4 +1,4 @@
-const CACHE_NAME = "multi-trip-v10.7.0-weather-profiles-20261004";
+const CACHE_NAME = "multi-trip-v10.8.0-today-driving-20261004";
 
 const CORE_FILES = [
     "./",
@@ -23,6 +23,10 @@ const CORE_FILES = [
     "./assets/multi-trip-live-renderer-v1.js",
     "./assets/multi-trip-weather-v1.js",
     "./assets/weather-profile-standard-v1.js",
+    "./assets/multi-trip-mode-core-v1.js",
+    "./assets/multi-trip-today-mode-v1.js",
+    "./assets/multi-trip-driving-mode-v1.js",
+    "./assets/multi-trip-mode-weather-bridge-v1.js",
     "./assets/itinerary-hotel-detail-v1.js",
     "./assets/multi-trip-trip-info-renderer-v1.js",
     "./assets/info-icon-repair-v1.js",
@@ -127,6 +131,14 @@ self.addEventListener("fetch", event => {
 
     if (url.pathname.endsWith("/version.json")) {
         event.respondWith(fetch(request,{cache:"no-store"}).catch(()=>new Response(JSON.stringify({version:null,offline:true}),{headers:{"Content-Type":"application/json"}})));
+        return;
+    }
+
+    if (/\/trips\/.*\.json$/.test(url.pathname) || url.pathname.endsWith('/trips/registry.json')) {
+        event.respondWith(fetch(request,{cache:"no-store"}).then(response=>{
+            if(response&&response.status===200){const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));}
+            return response;
+        }).catch(()=>caches.match(request,{ignoreSearch:true})));
         return;
     }
 
