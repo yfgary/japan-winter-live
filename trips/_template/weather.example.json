@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "tripId": "new-trip-id",
+  "regions": {
+    "city-a": {
+      "name": "城市 A",
+      "en": "City A",
+      "label": "城市 A 市區",
+      "type": "city",
+      "lat": 35.0000,
+      "lon": 135.0000,
+      "scoreNote": "落雨／大風時留意交通安排"
+    },
+    "mountain-a": {
+      "name": "山區 A",
+      "en": "Mountain A",
+      "label": "山區 A",
+      "type": "mountain",
+      "lat": 36.0000,
+      "lon": 137.0000,
+      "scoreNote": "最後仍要配合 Live Cam／官方運行狀況"
+    }
+  },
+  "dayRegions": {
+    "d1": "city-a",
+    "d2": "mountain-a"
+  },
+  "dynamicRegionRules": {},
+  "scoreProfiles": {
+    "mountain": {
+      "visibility": 0.35,
+      "cloud": 0.25,
+      "gust": 0.20,
+      "precipitation": 0.10,
+      "snow": 0.10
+    },
+    "city": {
+      "visibility": 0.15,
+      "cloud": 0.05,
+      "gust": 0.25,
+      "precipitation": 0.40,
+      "snow": 0.15
+    }
+  }
+}
