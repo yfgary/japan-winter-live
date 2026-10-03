@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "shirakawago-shinhotaka-2027",
   "name": "白川鄉・新穗高之旅 2027",
   "shortName": "白川鄉・新穗高 2027",
@@ -39,9 +39,17 @@
     "attractions": "attractions.html",
     "liveCam": "live.html"
   },
+  "dataFiles": {
+    "itinerary": "itinerary.json",
+    "hotels": "hotels.json",
+    "attractions": "attractions.json",
+    "liveCams": "live-cams.json",
+    "weather": "weather.json"
+  },
   "legacy": {
     "core": "assets/trip-core-v1.js",
-    "dataMode": "hybrid",
-    "note": "v10 migration profile. Existing Japan 2027 data remains active while the shared Multi Trip engine progressively takes over rendering."
+    "dataMode": "hybrid-data-v1",
+    "migrationStage": 2,
+    "note": "v10.1 migration: reusable Trip Data files are now loaded centrally. Existing Japan renderers stay as fallback until each page is switched to the generic renderer."
   }
 }

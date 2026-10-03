@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "tripId": "shirakawago-shinhotaka-2027",
+  "hotels": [
+    {
+      "id":"tabino-matsumoto",
+      "name":"TABINO HOTEL lit 松本",
+      "en":"TABINO HOTEL lit Matsumoto",
+      "map":"TABINO HOTEL lit Matsumoto",
+      "nights":["2027-01-09"],
+      "status":"booked",
+      "badges":["arrival-pay"],
+      "payment":"到店以 JPY 支付 ¥13,668。"
+    },
+    {
+      "id":"chikumakan",
+      "name":"Club Wyndham 千曲館",
+      "en":"Club Wyndham Chikumakan",
+      "map":"Club Wyndham Chikumakan",
+      "nights":["2027-01-10"],
+      "status":"booked",
+      "badges":["onsen","arrival-clear"],
+      "payment":"Pay later：房費按預訂安排稍後由信用卡扣款，唔係到酒店付款。"
+    },
+    {
+      "id":"ichinoyu-katei",
+      "name":"一乃湯果亭",
+      "en":"Ichinoyu Katei",
+      "map":"Ichinoyu Katei",
+      "nights":["2027-01-11"],
+      "status":"booked",
+      "badges":["onsen","arrival-tax"],
+      "payment":"房費已處理；到店只需付地方稅約 HK$15.25。"
+    },
+    {
+      "id":"jal-nagano",
+      "name":"Hotel JAL City Nagano",
+      "en":"Hotel JAL City Nagano",
+      "map":"Hotel JAL City Nagano",
+      "nights":["2027-01-12"],
+      "status":"booked",
+      "badges":["arrival-clear"],
+      "payment":"房費已支付；到店毋須再付房費。"
+    },
+    {
+      "id":"takayama-ouan",
+      "name":"高山櫻庵",
+      "en":"Takayama Ouan",
+      "map":"Takayama Ouan",
+      "nights":["2027-01-13","2027-01-14"],
+      "status":"booked",
+      "badges":["onsen","arrival-tax"],
+      "payment":"房費主要部分已支付；到店只需付城市／地方稅約 HK$30.19（2晚合計）。"
+    },
+    {
+      "id":"residence-takayama",
+      "name":"Residence Hotel Takayama Station",
+      "en":"Residence Hotel Takayama Station",
+      "map":"Residence Hotel Takayama Station",
+      "nights":["2027-01-15"],
+      "status":"booked",
+      "badges":["booked","arrival-clear"],
+      "payment":"Hotels.com 訂單已確認；HK$447.28 已支付，到店毋須再付房費。",
+      "note":"標準雙人房・非吸煙｜1/15 15:00 入住 → 1/16 11:00 退房"
+    },
+    {
+      "id":"iroha-matsumoto",
+      "name":"Iroha Grand Hotel Matsumoto Ekimae",
+      "en":"Iroha Grand Hotel Matsumoto Ekimae",
+      "map":"Iroha Grand Hotel Matsumoto Ekimae",
+      "nights":["2027-01-16"],
+      "status":"selected",
+      "badges":["pending"],
+      "payment":"目前資料仍只記錄為已選方案；未有正式訂單前，不標示到店付款方式。"
+    }
+  ]
+}

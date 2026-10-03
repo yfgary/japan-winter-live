@@ -1,6 +1,6 @@
 {
-  "version": "v10.0.0",
-  "build": "2026-10-03.25",
-  "updated": "2026-10-03T21:26:00+08:00",
-  "notes": "Multi Trip foundation: add a shared trip launcher, trip registry and per-trip configuration profile. Rename Japan Winter 2027 to 白川鄉・新穗高之旅 2027. Existing Japan features remain active in hybrid mode while shared pages begin reading the active trip context. Trip-specific features such as the D6–D8 Shinhotaka planner are declared as optional modules instead of becoming mandatory for every future trip."
+  "version": "v10.1.0",
+  "build": "2026-10-03.26",
+  "updated": "2026-10-03T21:46:00+08:00",
+  "notes": "Multi Trip data layer phase 2: move 白川鄉・新穗高之旅 2027 core trip metadata into reusable per-trip JSON files for D1-D9 itinerary, hotels, attraction index, Live Cam grouping and weather regions. Add a shared MultiTripData loader and keep the existing Japan renderers as safe fallback while generic pages are migrated gradually."
 }

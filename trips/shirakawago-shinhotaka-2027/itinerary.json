@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "tripId": "shirakawago-shinhotaka-2027",
+  "days": [
+    {
+      "id": "d1",
+      "day": 1,
+      "date": "2027-01-09",
+      "title": "香港 → 名古屋 → 松本",
+      "route": "香港 → 中部國際機場 T2 → 名古屋 → JR 特急しなの → 松本",
+      "weatherRegion": "matsumoto",
+      "driving": false,
+      "hotelId": "tabino-matsumoto",
+      "items": [
+        {"time":"10:00","type":"flight","title":"UO680 香港 → 名古屋","map":"Chubu Centrair International Airport Terminal 2"},
+        {"time":"17:40","type":"train","title":"JR 特急しなの 名古屋 → 松本","map":"Nagoya Station"},
+        {"time":"19:46","type":"hotel","title":"松本入住","map":"TABINO HOTEL lit Matsumoto"}
+      ]
+    },
+    {
+      "id": "d2",
+      "day": 2,
+      "date": "2027-01-10",
+      "title": "松本城 → 輕井澤 → 千曲",
+      "route": "早餐 → 松本城 → 回酒店取行李 → Times 取車 → 輕井澤 Outlet → 千曲館",
+      "weatherRegion": "karuizawa",
+      "driving": true,
+      "hotelId": "chikumakan",
+      "hardCuts": [
+        {"time":"15:30","label":"最遲離開輕井澤 Outlet"},
+        {"time":"17:30","label":"最遲抵達千曲館"}
+      ],
+      "items": [
+        {"time":"08:30","type":"meal","title":"快速早餐"},
+        {"time":"09:00","type":"attraction","title":"松本城","map":"Matsumoto Castle","durationMinutes":90},
+        {"time":"10:45","type":"luggage","title":"回酒店取行李"},
+        {"time":"11:00","type":"car","title":"Times 松本站前取車","map":"Times Car Rental Matsumoto Station"},
+        {"time":"13:00","type":"shopping","title":"輕井澤王子購物廣場","map":"Karuizawa Prince Shopping Plaza","durationMinutes":120},
+        {"time":"15:20","type":"drive","title":"離開輕井澤前往千曲","map":"Club Wyndham Chikumakan"},
+        {"time":"17:00","type":"hotel","title":"千曲館入住","map":"Club Wyndham Chikumakan"}
+      ],
+      "backups": ["shiraito","onioshidashi"]
+    },
+    {
+      "id": "d3",
+      "day": 3,
+      "date": "2027-01-11",
+      "title": "千曲 → 小布施 → 澀溫泉",
+      "route": "千曲 → 小布施舊街／栗之小徑 → JA Oranche → 澀溫泉 → 九湯巡禮",
+      "weatherRegion": "yamanouchi",
+      "driving": true,
+      "hotelId": "ichinoyu-katei",
+      "items": [
+        {"time":"09:15","type":"drive","title":"千曲 → 小布施","map":"Obuse Nagano"},
+        {"time":"10:00","type":"attraction","title":"小布施舊街＋栗之小徑","map":"Obuse Nagano"},
+        {"time":"12:45","type":"shopping","title":"JA中野市 Oranche","map":"JA中野市 農産物産館 オランチェ"},
+        {"time":"15:00","type":"hotel","title":"澀溫泉入住","map":"Ichinoyu Katei"},
+        {"time":"16:00","type":"onsen","title":"九湯巡禮","map":"Shibu Onsen"}
+      ]
+    },
+    {
+      "id": "d4",
+      "day": 4,
+      "date": "2027-01-12",
+      "title": "澀溫泉 → 地獄谷 → 須坂 → 長野",
+      "route": "澀溫泉 → 上林停車場 → 地獄谷野猿公苑 → AEON Mall 須坂 → 長野",
+      "weatherRegion": "yamanouchi",
+      "driving": true,
+      "hotelId": "jal-nagano",
+      "items": [
+        {"time":"09:00","type":"drive","title":"前往上林停車場","map":"Snow Monkey Park parking Kanbayashi"},
+        {"time":"10:00","type":"attraction","title":"地獄谷野猿公苑","map":"Jigokudani Yaen Koen"},
+        {"time":"14:00","type":"shopping","title":"AEON Mall 須坂","map":"AEON MALL Suzaka"},
+        {"time":"17:00","type":"hotel","title":"長野入住","map":"Hotel JAL City Nagano"}
+      ]
+    },
+    {
+      "id": "d5",
+      "day": 5,
+      "date": "2027-01-13",
+      "title": "長野 → 白馬岩岳 → 高山",
+      "route": "長野 → 白馬岩岳 → 山頂觀景／雪地活動 → 高山",
+      "weatherRegion": "hakuba",
+      "driving": true,
+      "hotelId": "takayama-ouan",
+      "items": [
+        {"time":"09:00","type":"drive","title":"長野 → 白馬岩岳","map":"Hakuba Iwatake Mountain Resort"},
+        {"time":"10:30","type":"attraction","title":"白馬岩岳 Mountain Harbor","map":"Hakuba Iwatake Mountain Resort"},
+        {"time":"14:00","type":"drive","title":"白馬 → 高山","map":"Takayama Ouan"},
+        {"time":"17:30","type":"hotel","title":"高山入住","map":"Takayama Ouan"}
+      ]
+    },
+    {
+      "id": "d6",
+      "day": 6,
+      "date": "2027-01-14",
+      "title": "白川鄉／新穗高／高山市區彈性日",
+      "route": "由 D6–D8 新穗高天氣模組決定",
+      "weatherRegion": "dynamic",
+      "driving": true,
+      "hotelId": "takayama-ouan",
+      "moduleRefs": ["shinhotaka-weather-day-selector"]
+    },
+    {
+      "id": "d7",
+      "day": 7,
+      "date": "2027-01-15",
+      "title": "白川鄉／新穗高／高山市區彈性日",
+      "route": "由 D6–D8 新穗高天氣模組決定；三寺まいり只做 Bonus",
+      "weatherRegion": "dynamic",
+      "driving": true,
+      "hotelId": "residence-takayama",
+      "moduleRefs": ["shinhotaka-weather-day-selector"],
+      "bonus": ["santera-mairi"]
+    },
+    {
+      "id": "d8",
+      "day": 8,
+      "date": "2027-01-16",
+      "title": "新穗高／高山市區 → 松本",
+      "route": "D8 只向東返松本；不安排白川鄉",
+      "weatherRegion": "dynamic",
+      "driving": true,
+      "hotelId": "iroha-matsumoto",
+      "moduleRefs": ["shinhotaka-weather-day-selector"],
+      "constraints": ["no-shirakawago-on-d8"]
+    },
+    {
+      "id": "d9",
+      "day": 9,
+      "date": "2027-01-17",
+      "title": "松本 → 名古屋 → 香港",
+      "route": "松本 → 還車 → JR 特急しなの → 名古屋 → 中部國際機場 T2 → 香港",
+      "weatherRegion": "matsumoto",
+      "driving": true,
+      "items": [
+        {"time":"12:30","type":"car","title":"還車","map":"Times Car Rental Matsumoto Station"},
+        {"time":"13:56","type":"train","title":"JR 特急しなの 松本 → 名古屋","map":"Matsumoto Station"},
+        {"time":"16:49","type":"train","title":"名鐵 名古屋 → 中部國際機場","map":"Meitetsu Nagoya Station"},
+        {"time":"20:40","type":"flight","title":"UO685 名古屋 → 香港","map":"Chubu Centrair International Airport Terminal 2"}
+      ]
+    }
+  ],
+  "flexibleRules": {
+    "storageKey": "japanWinter2027_shinhotakaDay",
+    "choices": ["d6","d7","d8"],
+    "scenarios": {
+      "d6": {"d6":"shinhotaka","d7":"shirakawago","d8":"cityCave"},
+      "d7": {"d6":"shirakawago","d7":"shinhotaka","d8":"cityCave"},
+      "d8": {"d6":"shirakawago","d7":"cityCave","d8":"shinhotaka"},
+      "unset": {"d6":"shirakawago","d7":"planning","d8":"planningEast"}
+    }
+  }
+}

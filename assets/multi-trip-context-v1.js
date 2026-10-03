@@ -2,7 +2,7 @@
 'use strict';
 if(window.MultiTrip&&window.MultiTrip.__v1)return;
 
-const APP_VERSION='v10.0.0';
+const APP_VERSION='v10.1.0';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const STORAGE_KEY='multiTrip.activeTrip';
 const params=new URLSearchParams(location.search);
@@ -52,12 +52,8 @@ function syncLinks(){
   const raw=a.getAttribute('href')||'';
   if(!raw||raw.startsWith('#')||raw.startsWith('javascript:'))return;
   const text=(a.textContent||'').trim();
-  let parsed=null;
-  try{parsed=new URL(raw,location.href);}catch(e){}
-  const file=parsed?parsed.pathname.split('/').pop():'';
-  if(file==='index.html'&&/Live Cam/i.test(text)){
-   const anchor=parsed&&parsed.hash?parsed.hash:'';
-   a.setAttribute('href',withTrip('live.html'+anchor,id));
+  if((raw==='index.html'||raw.endsWith('/index.html'))&&/Live Cam/i.test(text)){
+   a.setAttribute('href',withTrip('live.html'+(new URL(raw,location.href).hash||''),id));
    return;
   }
   const next=withTrip(raw,id);

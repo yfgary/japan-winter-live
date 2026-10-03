@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 
-if (window.__japan2027EnhancementLoaderV17) return;
-window.__japan2027EnhancementLoaderV17 = true;
+if (window.__japan2027EnhancementLoaderV18) return;
+window.__japan2027EnhancementLoaderV18 = true;
 
 function addCss(href){
     if (document.querySelector('link[href="' + href + '"]')) return;
@@ -21,7 +21,8 @@ addCss('assets/trip-v8-1.css?v=913');
 const isTripInfo = /(?:^|\/)trip-info\.html$/.test(location.pathname);
 
 const itineraryScripts = [
-    'assets/multi-trip-context-v1.js?v=1',
+    'assets/multi-trip-context-v1.js?v=2',
+    'assets/multi-trip-data-v1.js?v=1',
     'assets/trip-no-observers-v2.js?v=1',
     'assets/trip-core-v1.js?v=8',
     'assets/site-shell-v7.js?v=915',
@@ -55,7 +56,8 @@ const itineraryScripts = [
 ];
 
 const tripInfoScripts = [
-    'assets/multi-trip-context-v1.js?v=1',
+    'assets/multi-trip-context-v1.js?v=2',
+    'assets/multi-trip-data-v1.js?v=1',
     'assets/trip-core-v1.js?v=8',
     'assets/site-shell-v7.js?v=915',
     'assets/weather-suitability-v1.js?v=6',

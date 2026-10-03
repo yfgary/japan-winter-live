@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "new-trip-id",
   "name": "新旅行名稱",
   "shortName": "短名稱",
@@ -29,21 +29,11 @@
     "attractions": "attractions.html",
     "liveCam": "live.html"
   },
-  "days": [
-    {
-      "day": 1,
-      "date": "2028-01-01",
-      "title": "城市 A → 城市 B",
-      "weatherRegion": "city-b",
-      "items": [
-        {
-          "time": "09:00",
-          "type": "transport",
-          "title": "出發",
-          "map": "Example Station",
-          "note": "行程備註"
-        }
-      ]
-    }
-  ]
+  "dataFiles": {
+    "itinerary": "itinerary.json",
+    "hotels": "hotels.json",
+    "attractions": "attractions.json",
+    "liveCams": "live-cams.json",
+    "weather": "weather.json"
+  }
 }
