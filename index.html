@@ -10,7 +10,7 @@
 <header class="hero"><h1>✈️ My Trips</h1><p>旅行中心・所有行程共用同一套 App Engine</p></header>
 <main class="wrap"><div class="bar"><h2>我的旅程</h2><span class="count" id="tripCount">載入中…</span></div><div class="trip-grid" id="tripGrid"></div><div class="status" id="tripStatus">正在載入旅程資料…</div></main>
 <div class="footer">Multi Trip App｜共用頁面＋獨立 Trip Data＋可選專用 Module</div>
-<script src="assets/multi-trip-context-v1.js?v=20"></script>
+<script src="assets/multi-trip-context-v1.js?v=21"></script>
 <script>
 (function(){
  const fallback={id:'shirakawago-shinhotaka-2027',name:'白川鄉・新穗高之旅 2027',shortName:'白川鄉・新穗高 2027',subtitle:'日本中部冬季自駕・9日8夜',startDate:'2027-01-09',endDate:'2027-01-17',country:'日本',emoji:'🇯🇵',cover:'assets/images/d7-shirakawago-view.jpg',entry:'itinerary.html',status:'active',badge:'正式旅程',features:{itinerary:true,tripInfo:true,attractions:true,liveCam:true}};
@@ -28,7 +28,7 @@
   el.innerHTML='<div class="cover" style="'+cover+'"><div class="country">'+esc(t.emoji||'✈️')+' '+esc(t.country||'')+'</div><div class="trip-badges"><span class="badge '+(isTest?'test':'')+'">'+esc(t.badge||(isTest?'測試':'旅程'))+'</span>'+(isCurrent?'<span class="badge current">上次使用</span>':'')+'</div></div><div class="trip-body"><div class="trip-name">'+esc(t.name)+'</div><div class="trip-sub">'+esc(t.subtitle||'')+'</div><div class="trip-date">📅 '+esc(fmt(t.startDate))+' – '+esc(fmt(t.endDate))+'</div>'+(isTest?'<div class="trip-note">🧪 呢個係架構驗證 Trip，資料唔代表真實預訂；用嚟測試第二套行程係咪完全由共用 Renderer 生成。</div>':'')+'<div class="actions">'+actions+'</div></div>';
   el.querySelectorAll('[data-trip]').forEach(x=>x.addEventListener('click',()=>{try{localStorage.setItem('multiTrip.activeTrip',t.id);}catch(e){}}));return el;
  }
- function render(trips){grid.innerHTML='';trips.forEach(t=>grid.appendChild(card(t)));count.textContent=trips.length+' 個旅程';status.innerHTML=trips.some(t=>t.status==='test')?'✅ Multi Trip Selector 已啟用。<strong>正式旅程</strong>同<strong>架構測試 Trip</strong>共用同一套 HTML／Weather／Today／Driving Engine；測試 Trip 唔會改動你正式日本行程資料。':'選擇一個旅程開始。';}
+ function render(trips){trips=[...trips].sort((a,b)=>String(b.startDate||'').localeCompare(String(a.startDate||'')));grid.innerHTML='';trips.forEach(t=>grid.appendChild(card(t)));count.textContent=trips.length+' 個旅程';status.innerHTML=trips.some(t=>t.status==='test')?'✅ Multi Trip Selector 已啟用。<strong>正式旅程</strong>同<strong>架構測試 Trip</strong>共用同一套 HTML／Weather／Today／Driving Engine；測試 Trip 唔會改動你正式日本行程資料。':'選擇一個旅程開始。';}
  fetch('trips/registry.json?t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json();}).then(x=>render((x.trips||[]).filter(t=>t.status!=='hidden'))).catch(()=>{render([fallback]);status.textContent='目前離線，顯示已內置旅程。';});
 })();
 </script>
