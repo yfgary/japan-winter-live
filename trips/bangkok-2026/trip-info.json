@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "tripId": "bangkok-2026",
   "overview": {
     "title": "曼谷 8日7夜 2026",
@@ -12,7 +12,7 @@
     ]
   },
   "nav": [
-    {"id":"transport","label":"交通"},{"id":"hotels","label":"住宿"},{"id":"hardcuts","label":"Hard Cut"},{"id":"weather","label":"天氣"},{"id":"departure-checklist","label":"出發前 Checklist"},{"id":"checklist","label":"每日 Checklist"}
+    {"id":"transport","label":"交通"},{"id":"hotels","label":"住宿"},{"id":"hardcuts","label":"Hard Cut"},{"id":"weather","label":"天氣"},{"id":"departure-checklist","label":"出發前 Checklist"},{"id":"checklist","label":"每日 Checklist"},{"id":"emergency","label":"緊急資料"}
   ],
   "transport": {
     "title":"✈️ 交通",
@@ -72,5 +72,15 @@
       "D8 Lotus’s On Nut + Big C On Nut 兩間都去，最後午餐 CHARM Bistro and Restaurant，之後預留足夠時間去 BKK"
     ],
     "note":"呢份係已完成行程重建資料，Checklist 用作 Multi Trip 功能測試。"
+  },
+  "emergency": {
+    "title":"🆘 緊急資料",
+    "desc":"泰國常用緊急聯絡＋今次住宿／返程備忘",
+    "items":[
+      {"number":"191","title":"警方緊急求助","note":"泰國一般警察／緊急求助。"},
+      {"number":"1669","title":"醫療急救","note":"泰國緊急醫療服務。"},
+      {"number":"1155","title":"旅遊警察 Tourist Police","note":"旅客常用求助熱線；可處理旅遊相關協助。"}
+    ],
+    "note":"住宿基地：The President Condo Sukhumvit 81・On Nut。回程 D8：UO703，BKK 19:40 起飛；行程安排 15:15–15:30 左右由 On Nut 出發去機場。"
   }
 }
