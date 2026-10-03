@@ -1,0 +1,65 @@
+(function(){
+'use strict';
+if(window.MultiTripAttractionsRenderer&&window.MultiTripAttractionsRenderer.__v1)return;
+
+const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
+const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const mapUrl=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q||'');
+const STATUS={main:'✅ 主行程',backup:'🔄 後備景點'};
+const ID_ALIASES={'santera-mairi':'santera','daio-wasabi':'daio'};
+
+function cfg(){return window.MultiTrip&&window.MultiTrip.config||{};}
+function mode(){const c=cfg(),r=c.renderers&&c.renderers.attractions;return r&&r.mode?r.mode:((c.id||'')===DEFAULT_TRIP?'hydrate':'generate');}
+function data(){const d=window.MultiTripData&&window.MultiTripData.all('attractions');return d&&Array.isArray(d.attractions)?d.attractions:[];}
+function score(n){n=Number(n);if(!Number.isFinite(n))return'';return (Number.isInteger(n)?n.toFixed(0):n.toFixed(1))+'/10';}
+function findCard(a){
+ const id=ID_ALIASES[a.id]||a.id;
+ let el=document.getElementById('spot-'+id);if(el)return el;
+ const cards=[...document.querySelectorAll('.catalog-item')];
+ return cards.find(c=>{const h=c.querySelector('h3');return h&&(h.textContent||'').includes(a.name||'');})||null;
+}
+function hydrateOne(a){
+ const c=findCard(a);if(!c)return false;
+ c.dataset.tripAttractionId=a.id;c.dataset.tripDataSource='attractions.json';c.dataset.status=a.status||'main';
+ const day=c.querySelector('.catalog-day');if(day)day.innerHTML=esc(a.day||'')+(a.dayNote?'<small>'+esc(a.dayNote)+'</small>':'');
+ const type=c.querySelector('.event-type');if(type)type.textContent=STATUS[a.status]||STATUS.main;
+ const sc=c.querySelector('.catalog-score');if(sc&&a.score!=null)sc.textContent='⭐ '+score(a.score);
+ const h=c.querySelector('.timeline-card h3');if(h&&a.map){let pin=h.querySelector('.map-pin');if(!pin){pin=document.createElement('a');pin.className='map-pin';pin.textContent='📍';h.appendChild(pin);}pin.href=mapUrl(a.map);pin.target='_blank';pin.rel='noopener';pin.title='Google Maps';}
+ return true;
+}
+function hydrateAll(){let n=0;data().forEach(a=>{if(hydrateOne(a))n++;});document.documentElement.dataset.attractionsRenderer='hydrate';document.documentElement.dataset.attractionsDataCount=String(n);return n;}
+
+function groupOrder(ds){const seen=[];ds.forEach(a=>{const l=a.location||'其他';if(!seen.includes(l))seen.push(l);});return seen;}
+function detailText(a){return a.summary||a.note||a.description||'';}
+function card(a){
+ const info=detailText(a),dur=a.duration||a.time||'';
+ return '<div class="catalog-item" data-status="'+esc(a.status||'main')+'" id="spot-'+esc(a.id)+'" data-trip-attraction-id="'+esc(a.id)+'" data-trip-data-source="attractions.json">'
+  +'<div class="catalog-day">'+esc(a.day||'')+(a.dayNote?'<small>'+esc(a.dayNote)+'</small>':'')+'</div>'
+  +'<div class="timeline-card"><span class="event-type">'+esc(STATUS[a.status]||STATUS.main)+'</span>'
+  +(dur?'<span class="duration-badge">⏱ '+esc(dur)+'</span>':'')
+  +(a.score!=null?'<span class="catalog-score">⭐ '+score(a.score)+'</span>':'')
+  +'<h3>'+esc(a.name||a.title||a.id)+(a.map?'<a class="map-pin" href="'+mapUrl(a.map)+'" target="_blank" rel="noopener" title="Google Maps">📍</a>':'')+'</h3>'
+  +(info?'<p>'+esc(info)+'</p>':'')
+  +(a.price?'<div class="price">🎟️ '+esc(a.price)+'</div>':'')
+  +((a.info||a.history||a.winter||a.tips)?'<button type="button" class="enhance-info-btn multi-trip-info-btn" data-attraction-id="'+esc(a.id)+'">ⓘ</button>':'')
+  +'</div></div>';
+}
+function groupHtml(loc,items){return '<section class="cat-group" id="loc-'+encodeURIComponent(loc).replace(/%/g,'')+'"><div class="cat-group-head"><h2>'+esc(loc)+'</h2><span>'+items.length+' 個景點</span></div><div class="catalog-timeline">'+items.map(card).join('')+'</div></section>';}
+function renderNav(ds){const nav=document.getElementById('locationNav');if(!nav)return;const order=groupOrder(ds);nav.innerHTML=order.map(l=>'<a href="#loc-'+encodeURIComponent(l).replace(/%/g,'')+'">'+esc(l)+'</a>').join('');}
+function renderModal(a){
+ let old=document.getElementById('multiTripAttractionModal');if(old)old.remove();
+ const modal=document.createElement('div');modal.id='multiTripAttractionModal';modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px';
+ modal.innerHTML='<div style="max-width:760px;max-height:88vh;overflow:auto;background:#fff;border-radius:14px;padding:18px;width:100%;box-shadow:0 8px 35px rgba(0,0,0,.3)"><button type="button" data-close style="float:right;border:0;background:#eef3f7;border-radius:18px;padding:7px 11px;font-weight:800">✕</button><h2 style="color:#1f4e79;margin-top:0">'+esc(a.name||a.title||'景點')+'</h2>'+(a.info?'<p>'+esc(a.info)+'</p>':'')+(a.history?'<h3>歷史／背景</h3><p>'+esc(a.history)+'</p>':'')+(a.winter?'<h3>冬季重點</h3><p>'+esc(a.winter)+'</p>':'')+(a.tips?'<h3>實用提示</h3><p>'+esc(a.tips)+'</p>':'')+'</div>';
+ modal.addEventListener('click',e=>{if(e.target===modal||e.target.closest('[data-close]'))modal.remove();});document.body.appendChild(modal);
+}
+function bindGeneric(){document.addEventListener('click',e=>{const b=e.target.closest('.multi-trip-info-btn');if(!b)return;const a=data().find(x=>x.id===b.dataset.attractionId);if(a)renderModal(a);});document.addEventListener('click',e=>{const f=e.target.closest('.filter-btn');if(!f)return;const m=f.dataset.filter;document.querySelectorAll('.filter-btn').forEach(x=>x.classList.toggle('active',x===f));document.querySelectorAll('.catalog-item').forEach(c=>c.classList.toggle('catalog-hidden',m!=='all'&&c.dataset.status!==m));document.querySelectorAll('.cat-group').forEach(g=>g.classList.toggle('catalog-hidden',![...g.querySelectorAll('.catalog-item')].some(c=>!c.classList.contains('catalog-hidden'))));});}
+function generateAll(){
+ const ds=data(),root=document.getElementById('catalogGroups');if(!ds.length||!root)return 0;
+ const order=groupOrder(ds);root.innerHTML=order.map(l=>groupHtml(l,ds.filter(a=>(a.location||'其他')===l))).join('');renderNav(ds);
+ const count=document.getElementById('catalogCount');if(count)count.textContent='共 '+ds.length+' 個景點｜主行程 '+ds.filter(x=>x.status==='main').length+'｜Backup '+ds.filter(x=>x.status==='backup').length;
+ document.documentElement.dataset.attractionsRenderer='generate';document.documentElement.dataset.attractionsDataCount=String(ds.length);return ds.length;
+}
+function render(){if(!/(?:^|\/)attractions\.html$/.test(location.pathname))return 0;return mode()==='generate'?generateAll():hydrateAll();}
+window.MultiTripAttractionsRenderer={__v1:true,render,hydrateAll,generateAll,mode};
+Promise.all([window.MultiTrip&&window.MultiTrip.ready?window.MultiTrip.ready:Promise.resolve(),window.MultiTripData&&window.MultiTripData.ready?window.MultiTripData.ready:Promise.resolve()]).then(()=>{bindGeneric();[0,250,800,1600].forEach(t=>setTimeout(render,t));}).catch(()=>{});
+})();
