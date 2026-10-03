@@ -1,6 +1,6 @@
 {
-  "version": "v10.5.0",
-  "build": "2026-10-04.34",
-  "updated": "2026-10-04T00:58:00+08:00",
-  "notes": "Multi Trip phase 6: Live Cam is now connected to live-cams.json. Japan 2027 stays in safe hydrate mode so D2 and D6-D8 camera-group bindings come from JSON while preserving the existing tested media templates, route text and Shinhotaka chooser. Future trips can use generate mode to build day sections, cameras, map buttons and official links from JSON without loading Japan-only Live logic."
+  "version": "v10.6.0",
+  "build": "2026-10-04.35",
+  "updated": "2026-10-04T01:18:00+08:00",
+  "notes": "Multi Trip phase 7: Weather is now data-driven. weather.json owns region names, coordinates, day-to-region mapping, D6-D8 dynamic region mapping, score notes and scoring weights. Add a shared 5-day weather engine with per-trip region/cache storage and trip-specific timezone/date handling, while preserving the Japan-only Shinhotaka decision module."
 }
