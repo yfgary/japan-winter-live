@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 6,
+  "schemaVersion": 7,
   "id": "shirakawago-shinhotaka-2027",
   "name": "白川鄉・新穗高之旅 2027",
   "shortName": "白川鄉・新穗高 2027",
@@ -67,12 +67,17 @@
       "mode": "hydrate",
       "source": "liveCams",
       "preserveLegacyMediaTemplates": true
+    },
+    "weather": {
+      "mode": "generate",
+      "source": "weather",
+      "preserveLegacyDecisionModules": true
     }
   },
   "legacy": {
     "core": "assets/trip-core-v1.js",
-    "dataMode": "hybrid-data-v5",
-    "migrationStage": 6,
-    "note": "v10.5 migration: live-cams.json now controls the Japan trip's D2 and D6-D8 camera-group bindings while the existing tested camera media templates, route text and Shinhotaka chooser remain preserved. Future trips use the shared Live Cam generate renderer and do not load Japan-specific Live logic."
+    "dataMode": "hybrid-data-v6",
+    "migrationStage": 7,
+    "note": "v10.6 migration: weather.json now owns weather regions, day-to-region mapping, dynamic D6-D8 region mapping, coordinates and scoring weights. The shared Multi Trip weather engine renders the 5-day panel while the Japan-specific D6-D8 decision module remains preserved."
   }
 }
