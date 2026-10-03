@@ -47,7 +47,7 @@ function boot(cfg){
   const tripId=(cfg&&cfg.id)||(window.MultiTrip&&window.MultiTrip.id)||'';
   state.tripId=tripId;
   state.basePath='trips/'+encodeURIComponent(tripId)+'/';
-  const defaults={itinerary:'itinerary.json',hotels:'hotels.json',attractions:'attractions.json',liveCams:'live-cams.json',weather:'weather.json'};
+  const defaults={itinerary:'itinerary.json',tripInfo:'trip-info.json',hotels:'hotels.json',attractions:'attractions.json',liveCams:'live-cams.json',weather:'weather.json'};
   const files=Object.assign({},defaults,(cfg&&cfg.dataFiles)||{});
   state.files=files;
   const jobs=Object.entries(files).map(([key,file])=>loadJson(state.basePath+file).then(data=>{state.data[key]=data;}).catch(err=>{state.errors[key]=String(err&&err.message||err);}));
