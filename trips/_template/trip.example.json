@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "new-trip-id",
   "name": "新旅行名稱",
   "shortName": "短名稱",
@@ -31,6 +31,7 @@
   },
   "dataFiles": {
     "itinerary": "itinerary.json",
+    "tripInfo": "trip-info.json",
     "hotels": "hotels.json",
     "attractions": "attractions.json",
     "liveCams": "live-cams.json",
@@ -41,6 +42,11 @@
       "mode": "generate",
       "source": "itinerary",
       "preserveLegacyDetails": false
+    },
+    "tripInfo": {
+      "mode": "generate",
+      "source": "tripInfo",
+      "preserveLegacyShell": false
     }
   }
 }
