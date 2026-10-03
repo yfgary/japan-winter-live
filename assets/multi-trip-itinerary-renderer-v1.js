@@ -27,6 +27,7 @@ function formatDate(date){
 function typeMeta(t){return TYPE_META[t]||['•','行程'];}
 function hardCutMap(day){const m=new Map();(day.hardCuts||[]).forEach(x=>{if(x&&x.time)m.set(x.time,x);});return m;}
 function mapPin(q){return q?'<a class="map-pin" href="'+mapUrl(q)+'" target="_blank" rel="noopener" title="Google Maps">📍</a>':'';}
+function isDynamicDay(day){return day&&((day.weatherRegion==='dynamic')||(Array.isArray(day.moduleRefs)&&day.moduleRefs.length>0));}
 
 function hydrateDay(day){
  const el=document.getElementById(day.id);if(!el)return false;
@@ -34,9 +35,13 @@ function hydrateDay(day){
  el.dataset.tripDay=String(day.day||'');
  el.dataset.tripDate=day.date||'';
  const n=el.querySelector('.day-number');if(n)n.textContent='DAY '+(day.day||String(day.id||'').replace(/\D/g,''));
- const t=el.querySelector('.day-title');if(t&&day.title)t.textContent=day.title;
  const d=el.querySelector('.day-date');if(d&&day.date)d.textContent=formatDate(day.date);
- const r=el.querySelector('.day-route');if(r&&day.route)r.textContent=day.route;
+ if(!isDynamicDay(day)){
+  const t=el.querySelector('.day-title');if(t&&day.title)t.textContent=day.title;
+  const r=el.querySelector('.day-route');if(r&&day.route)r.textContent=day.route;
+ }else{
+  el.dataset.tripDynamic='1';
+ }
  return true;
 }
 function hydrateAll(){
