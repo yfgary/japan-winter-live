@@ -1,4 +1,4 @@
-const CACHE_NAME = "multi-trip-v10.3.0-trip-info-json-20261003";
+const CACHE_NAME = "multi-trip-v10.3.1-hotel-detail-restore-20261003";
 
 const CORE_FILES = [
     "./",
