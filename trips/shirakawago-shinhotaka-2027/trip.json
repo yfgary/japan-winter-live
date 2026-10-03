@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "shirakawago-shinhotaka-2027",
   "name": "白川鄉・新穗高之旅 2027",
   "shortName": "白川鄉・新穗高 2027",
@@ -41,6 +41,7 @@
   },
   "dataFiles": {
     "itinerary": "itinerary.json",
+    "tripInfo": "trip-info.json",
     "hotels": "hotels.json",
     "attractions": "attractions.json",
     "liveCams": "live-cams.json",
@@ -51,12 +52,17 @@
       "mode": "hydrate",
       "source": "itinerary",
       "preserveLegacyDetails": true
+    },
+    "tripInfo": {
+      "mode": "hydrate",
+      "source": "tripInfo",
+      "preserveLegacyShell": true
     }
   },
   "legacy": {
     "core": "assets/trip-core-v1.js",
-    "dataMode": "hybrid-data-v2",
-    "migrationStage": 3,
-    "note": "v10.2 migration: itinerary.json is now the source of truth for day/date/title/route summaries. Existing rich Japan day content, photos and trip-specific modules are preserved while the generic renderer is introduced for future trips."
+    "dataMode": "hybrid-data-v3",
+    "migrationStage": 4,
+    "note": "v10.3 migration: itinerary.json drives itinerary summaries and trip-info.json now drives the Trip Info content. Existing Japan-specific shell, rich itinerary details and D6-D8 modules remain preserved while shared renderers are used for future trips."
   }
 }
