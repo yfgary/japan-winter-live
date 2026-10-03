@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tripId": "new-trip-id",
   "days": [
     {
@@ -23,6 +23,7 @@
           "type": "attraction",
           "title": "主要景點",
           "map": "Example Attraction",
+          "attractionId": "example-attraction",
           "durationMinutes": 90
         },
         {
@@ -42,23 +43,22 @@
       "weatherRegion": "mountain-a",
       "driving": true,
       "hardCuts": [
-        {
-          "time": "16:30",
-          "label": "最遲離開景點 B"
-        }
+        {"time": "16:30", "label": "最遲離開景點 B"}
       ],
       "items": [
         {
           "time": "09:30",
           "type": "drive",
           "title": "出發去景點 A",
-          "map": "Example Attraction A"
+          "map": "Example Attraction A",
+          "attractionId": "example-attraction"
         },
         {
           "time": "13:00",
           "type": "attraction",
           "title": "景點 B",
-          "map": "Example Attraction B"
+          "map": "Example Attraction B",
+          "attractionId": "example-backup"
         },
         {
           "time": "16:30",
