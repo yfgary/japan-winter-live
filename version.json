@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.1",
-  "build": "2026-10-04.50",
-  "updated": "2026-10-04T09:05:00+08:00",
-  "notes": "Fix endless update prompt caused by server version v10.10.0 while the running shared context still identified itself as v10.9.10. Bangkok attractions are expanded with richer info/history/tips, Thai names, and geographic-only grouping. Correct D1 seafood buffet to Mungkorn Seafood @ Sukhumvit and D6 crocodile venue to Samut Prakan Crocodile Farm & Zoo; unresolved venue names are explicitly marked for user confirmation instead of being guessed."
+  "version": "v10.10.2",
+  "build": "2026-10-04.51",
+  "updated": "2026-10-04T09:45:00+08:00",
+  "notes": "Harden PWA update detection by only showing the update prompt after the matching client bundle is actually deployed, preventing repeated update loops during partial GitHub Pages rollout. Bangkok real-trip data is synced with user-confirmed details: flexible On Nut massage area, Prannok-to-Ratchawong ferry, both Crocodile and Elephant shows inside Samut Prakan Crocodile Farm & Zoo, both Lotus's and Big C in On Nut on D8, and CHARM Bistro as the final lunch. Generic attraction detail modals now show Thai local names plus richer background, actual-visit notes, highlights, access and tips; Bangkok grouping is geographic only."
 }
