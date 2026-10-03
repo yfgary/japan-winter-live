@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 9,
+  "id": "bangkok-2026",
+  "name": "曼谷 8日7夜 2026",
+  "shortName": "曼谷 2026・8日7夜",
+  "subtitle": "On Nut 美食・夜市・Outlet・按摩之旅",
+  "startDate": "2026-08-29",
+  "endDate": "2026-09-05",
+  "timezone": "Asia/Bangkok",
+  "language": "zh-HK",
+  "country": "泰國・曼谷",
+  "features": {
+    "itinerary": true,
+    "tripInfo": true,
+    "attractions": true,
+    "liveCam": false,
+    "todayMode": true,
+    "drivingMode": false,
+    "weather": true,
+    "weatherScore": true,
+    "weatherActivityProfiles": true,
+    "packingChecklist": true,
+    "bilingual": false,
+    "winterDriving": false
+  },
+  "modules": [],
+  "pages": {
+    "itinerary": "itinerary.html",
+    "tripInfo": "trip-info.html",
+    "attractions": "attractions.html",
+    "liveCam": "live.html"
+  },
+  "dataFiles": {
+    "itinerary": "itinerary.json",
+    "tripInfo": "trip-info.json",
+    "hotels": "hotels.json",
+    "attractions": "attractions.json",
+    "liveCams": "live-cams.json",
+    "weather": "weather.json"
+  },
+  "renderers": {
+    "itinerary": {"mode":"generate","source":"itinerary","preserveLegacyDetails":false},
+    "tripInfo": {"mode":"generate","source":"tripInfo","preserveLegacyShell":false},
+    "attractions": {"mode":"generate","source":"attractions","preserveLegacyDetails":false},
+    "liveCam": {"mode":"generate","source":"liveCams","preserveLegacyMediaTemplates":false},
+    "weather": {"mode":"generate","source":"weather","profileStandard":"v1","preserveLegacyDecisionModules":false},
+    "todayMode": {"mode":"generate","source":"itinerary"},
+    "drivingMode": {"mode":"generate","source":"itinerary"}
+  },
+  "legacy": {
+    "dataMode": "generic-only",
+    "migrationStage": 10,
+    "note": "Real completed Bangkok trip used as the third-trip validation case. Itinerary content follows the user's 2026 8-day source plan; shared generic renderers should handle it without Bangkok-specific core code."
+  }
+}
