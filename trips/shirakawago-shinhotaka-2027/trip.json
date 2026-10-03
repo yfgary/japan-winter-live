@@ -49,37 +49,18 @@
     "weather": "weather.json"
   },
   "renderers": {
-    "itinerary": {
-      "mode": "hydrate",
-      "source": "itinerary",
-      "preserveLegacyDetails": true
-    },
-    "tripInfo": {
-      "mode": "hydrate",
-      "source": "tripInfo",
-      "preserveLegacyShell": true
-    },
-    "attractions": {
-      "mode": "hydrate",
-      "source": "attractions",
-      "preserveLegacyDetails": true
-    },
-    "liveCam": {
-      "mode": "hydrate",
-      "source": "liveCams",
-      "preserveLegacyMediaTemplates": true
-    },
-    "weather": {
-      "mode": "generate",
-      "source": "weather",
-      "profileStandard": "v1",
-      "preserveLegacyDecisionModules": true
-    }
+    "itinerary": {"mode":"hydrate","source":"itinerary","preserveLegacyDetails":true},
+    "tripInfo": {"mode":"hydrate","source":"tripInfo","preserveLegacyShell":true},
+    "attractions": {"mode":"hydrate","source":"attractions","preserveLegacyDetails":true},
+    "liveCam": {"mode":"hydrate","source":"liveCams","preserveLegacyMediaTemplates":true},
+    "weather": {"mode":"generate","source":"weather","profileStandard":"v1","preserveLegacyDecisionModules":true},
+    "todayMode": {"mode":"hydrate","source":"itinerary","useActivityProfiles":true},
+    "drivingMode": {"mode":"hydrate","source":"itinerary","useActivityProfiles":true}
   },
   "legacy": {
     "core": "assets/trip-core-v1.js",
-    "dataMode": "hybrid-data-v7",
-    "migrationStage": 8,
-    "note": "v10.7 migration: Weather Activity Profile Standard v1 separates experience from access/safety, applies safety caps, and maps regions/attractions to activity-specific weather profiles. Japan-specific D6-D8 Shinhotaka logic remains preserved."
+    "dataMode": "hybrid-data-v8",
+    "migrationStage": 9,
+    "note": "v10.8 migration: Today Mode and Driving Mode share Multi Trip itinerary, timezone, weather and Weather Activity Profile data. Japan 2027 keeps the tested rich overlays in hydrate mode while profile scores are bridged into them; future trips use shared generated modes directly from itinerary.json."
   }
 }
