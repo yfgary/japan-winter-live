@@ -1,4 +1,4 @@
-const CACHE_NAME = "multi-trip-v10.2.0-itinerary-renderer-20261003";
+const CACHE_NAME = "multi-trip-v10.2.1-info-icon-repair-20261003";
 
 const CORE_FILES = [
     "./",
@@ -18,6 +18,7 @@ const CORE_FILES = [
     "./assets/multi-trip-context-v1.js",
     "./assets/multi-trip-data-v1.js",
     "./assets/multi-trip-itinerary-renderer-v1.js",
+    "./assets/info-icon-repair-v1.js",
     "./assets/attraction-info.css",
     "./assets/attraction-info.js",
     "./assets/attractions-catalog.js",
