@@ -49,6 +49,22 @@
       "status": "test",
       "badge": "真實行程測試",
       "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":false}
+    },
+    {
+      "id": "hokkaido-2025",
+      "name": "北海道道南・札幌自駕 8日 2025",
+      "shortName": "北海道 2025・8日",
+      "subtitle": "函館櫻花・洞爺湖・登別溫泉・札幌・小樽自駕",
+      "startDate": "2025-04-26",
+      "endDate": "2025-05-03",
+      "country": "日本・北海道",
+      "emoji": "🇯🇵",
+      "cover": "https://commons.wikimedia.org/wiki/Special:FilePath/Hokkaido-Cherry%20blossoms%20are%20fully%20bloomed%20in%20Goryokaku%20park-xl.jpg?width=1400",
+      "entry": "itinerary.html",
+      "config": "trips/hokkaido-2025/trip.json",
+      "status": "active",
+      "badge": "真實旅程",
+      "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":false}
     }
   ]
 }
