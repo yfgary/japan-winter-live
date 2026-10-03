@@ -1,6 +1,6 @@
 {
-  "version": "v10.9.7",
-  "build": "2026-10-04.45",
-  "updated": "2026-10-04T06:24:00+08:00",
-  "notes": "Fix duplicate version/back-to-top controls on Attractions by removing the legacy catalog controls once the shared Multi Trip UI is present. Improve manual version checking so tapping the version badge clearly shows checking status and confirms when the app is already up to date. This release also exercises the visible update prompt from v10.9.6 to v10.9.7."
+  "version": "v10.9.8",
+  "build": "2026-10-04.46",
+  "updated": "2026-10-04T06:55:00+08:00",
+  "notes": "Full Multi Trip QA release. Fix active-trip subtitle leakage on generic itinerary headers, remove Attractions legacy duplicate version/back-to-top controls at source, refresh stale shared-context loaders on Attractions and Live Cam, and move the Travel Center onto the same shared PWA version/update flow so it cannot display the server version as if it were the running app version."
 }
