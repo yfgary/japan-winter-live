@@ -1,6 +1,6 @@
 {
-  "version": "v10.9.9",
-  "build": "2026-10-04.47",
-  "updated": "2026-10-04T07:35:00+08:00",
-  "notes": "Fix sticky active-trip routing where a previously selected Okinawa demo could override the Japan trip on pages without an explicit trip query. Routing now uses the URL trip parameter only, defaulting safely to the official Shirakawago-Shinhotaka 2027 trip; localStorage is retained only as a last-used UI hint. Attractions loader is aligned to the same rule and the service-worker cache is refreshed."
+  "version": "v10.9.10",
+  "build": "2026-10-04.48",
+  "updated": "2026-10-04T07:58:00+08:00",
+  "notes": "Fix Travel Center rewriting trip-card URLs after render. Home no longer propagates its default Japan context into Okinawa links, and opening the Travel Center no longer overwrites the last-used trip. Explicit ?trip= routing remains authoritative on trip pages; pages without a trip parameter still safely default to Shirakawago-Shinhotaka 2027."
 }
