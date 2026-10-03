@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "tripId": "new-trip-id",
+  "attractions": [
+    {
+      "id": "example-attraction",
+      "name": "主要景點",
+      "location": "城市 A",
+      "day": "D1",
+      "status": "main",
+      "score": 9.0,
+      "map": "Example Attraction",
+      "duration": "約 90 分鐘",
+      "summary": "景點卡片顯示嘅簡短實用介紹。",
+      "info": "完整介紹可放呢度。",
+      "history": "景點歷史或背景。",
+      "winter": "冬季／天氣注意事項。",
+      "tips": "現場實用提示。"
+    },
+    {
+      "id": "example-backup",
+      "name": "後備景點",
+      "location": "城市 A",
+      "day": "D1",
+      "status": "backup",
+      "score": 7.0,
+      "map": "Example Backup Attraction",
+      "summary": "時間足夠先去。"
+    }
+  ]
+}
