@@ -1,6 +1,6 @@
 {
-  "version": "v10.9.10",
-  "build": "2026-10-04.48",
-  "updated": "2026-10-04T07:58:00+08:00",
-  "notes": "Fix Travel Center rewriting trip-card URLs after render. Home no longer propagates its default Japan context into Okinawa links, and opening the Travel Center no longer overwrites the last-used trip. Explicit ?trip= routing remains authoritative on trip pages; pages without a trip parameter still safely default to Shirakawago-Shinhotaka 2027."
+  "version": "v10.10.0",
+  "build": "2026-10-04.49",
+  "updated": "2026-10-04T08:20:00+08:00",
+  "notes": "Add Bangkok 2026 as the third Multi Trip validation case using a completed real 8-day itinerary. New generic-only Trip Data covers D1-D8 itinerary, accommodation, attractions with info content, trip-info/checklists, weather region and disabled Live Cam. Image-plan metadata is included for one hero plus two supporting images per day; actual image assets are the next visual pass."
 }
