@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.2",
-  "build": "2026-10-04.51",
-  "updated": "2026-10-04T09:45:00+08:00",
-  "notes": "Harden PWA update detection by only showing the update prompt after the matching client bundle is actually deployed, preventing repeated update loops during partial GitHub Pages rollout. Bangkok real-trip data is synced with user-confirmed details: flexible On Nut massage area, Prannok-to-Ratchawong ferry, both Crocodile and Elephant shows inside Samut Prakan Crocodile Farm & Zoo, both Lotus's and Big C in On Nut on D8, and CHARM Bistro as the final lunch. Generic attraction detail modals now show Thai local names plus richer background, actual-visit notes, highlights, access and tips; Bangkok grouping is geographic only."
+  "version": "v10.10.3",
+  "build": "2026-10-04.52",
+  "updated": "2026-10-04T10:20:00+08:00",
+  "notes": "Bangkok UI consistency pass. Generic itinerary cards now show the activity icon in the title, elapsed-duration badges, and attraction info buttons where detail data exists. Generic attractions now keep status -> elapsed duration -> score badge order, place info before the map pin, infer activity icons, derive duration from itinerary minutes instead of displaying clock ranges, and use a Japan-style sectioned detail modal. Bangkok Trip Info restores the Emergency section with Thailand emergency numbers plus accommodation and return-flight notes. PWA cache refreshed."
 }
