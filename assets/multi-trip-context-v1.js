@@ -52,8 +52,12 @@ function syncLinks(){
   const raw=a.getAttribute('href')||'';
   if(!raw||raw.startsWith('#')||raw.startsWith('javascript:'))return;
   const text=(a.textContent||'').trim();
-  if((raw==='index.html'||raw.endsWith('/index.html'))&&/Live Cam/i.test(text)){
-   a.setAttribute('href',withTrip('live.html',id));
+  let parsed=null;
+  try{parsed=new URL(raw,location.href);}catch(e){}
+  const file=parsed?parsed.pathname.split('/').pop():'';
+  if(file==='index.html'&&/Live Cam/i.test(text)){
+   const anchor=parsed&&parsed.hash?parsed.hash:'';
+   a.setAttribute('href',withTrip('live.html'+anchor,id));
    return;
   }
   const next=withTrip(raw,id);
