@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 
-if (window.__japan2027EnhancementLoaderV18) return;
-window.__japan2027EnhancementLoaderV18 = true;
+if (window.__japan2027EnhancementLoaderV19) return;
+window.__japan2027EnhancementLoaderV19 = true;
 
 function addCss(href){
     if (document.querySelector('link[href="' + href + '"]')) return;
@@ -21,14 +21,14 @@ addCss('assets/trip-v8-1.css?v=913');
 const isTripInfo = /(?:^|\/)trip-info\.html$/.test(location.pathname);
 
 const itineraryScripts = [
-    'assets/multi-trip-context-v1.js?v=2',
+    'assets/multi-trip-context-v1.js?v=3',
     'assets/multi-trip-data-v1.js?v=1',
     'assets/trip-no-observers-v2.js?v=1',
     'assets/trip-core-v1.js?v=8',
     'assets/site-shell-v7.js?v=915',
     'assets/weather-suitability-v1.js?v=6',
     'assets/d6-d8-weather-decision-v1.js?v=1',
-    'assets/version-v901-fix.js?v=11',
+    'assets/version-v901-fix.js?v=12',
     'assets/nav-enhancements-v1.js?v=3',
     'assets/trip-enhancement-data.js?v=913',
     'assets/trip-user-overrides.js?v=913',
@@ -47,6 +47,7 @@ const itineraryScripts = [
     'assets/trip-v9-hotfix.js?v=913',
     'assets/trip-v9-1-routing.js?v=2',
     'assets/trip-v9-1-visit-fix.js?v=1',
+    'assets/multi-trip-itinerary-renderer-v1.js?v=1',
     'assets/catalog-link.js?v=2',
     'assets/travel-mode-v1.js?v=2',
     'assets/travel-mode-nav-fix-v1.js?v=2',
@@ -56,13 +57,13 @@ const itineraryScripts = [
 ];
 
 const tripInfoScripts = [
-    'assets/multi-trip-context-v1.js?v=2',
+    'assets/multi-trip-context-v1.js?v=3',
     'assets/multi-trip-data-v1.js?v=1',
     'assets/trip-core-v1.js?v=8',
     'assets/site-shell-v7.js?v=915',
     'assets/weather-suitability-v1.js?v=6',
     'assets/d6-d8-weather-decision-v1.js?v=1',
-    'assets/version-v901-fix.js?v=11',
+    'assets/version-v901-fix.js?v=12',
     'assets/nav-enhancements-v1.js?v=3',
     'assets/trip-enhancement-data.js?v=913',
     'assets/trip-user-overrides.js?v=913',
