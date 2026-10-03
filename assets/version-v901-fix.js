@@ -1,16 +1,19 @@
 (function(){
 'use strict';
-if(window.__multiTripVersionV1033Fix)return;
-window.__multiTripVersionV1033Fix=true;
-const VERSION='v10.3.3';
+if(window.__multiTripVersionV1040Fix)return;
+window.__multiTripVersionV1040Fix=true;
+const VERSION='v10.4.0';
 function fix(){
-  const b=document.getElementById('siteVersionBadge');if(!b)return;
-  const en=document.documentElement.lang==='en';
-  const offline=/離線|Offline/.test(b.textContent||'');
-  b.classList.remove('outdated');
-  b.classList.add(offline?'offline':'current');
-  b.textContent=(en?'Version ':'版本 ')+VERSION+(offline?(en?' · Offline':'・離線'):'');
-  b.title=(offline?(en?'Offline; local version ':'目前離線；本機版本 '):(en?'Latest version ':'已係最新版本 '))+VERSION;
+  const ids=['siteVersionBadge','catalogVersion'];
+  ids.forEach(id=>{
+    const b=document.getElementById(id);if(!b)return;
+    const en=document.documentElement.lang==='en';
+    const offline=/離線|Offline/.test(b.textContent||'');
+    b.classList.remove('outdated');
+    b.classList.add(offline?'offline':'current');
+    b.textContent=(en?'Version ':'版本 ')+VERSION+(offline?(en?' · Offline':'・離線'):'');
+    b.title=(offline?(en?'Offline; local version ':'目前離線；本機版本 '):(en?'Latest version ':'已係最新版本 '))+VERSION;
+  });
 }
 function schedule(){[0,250,800,1800,3000,6000].forEach(t=>setTimeout(fix,t));}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
