@@ -1,6 +1,6 @@
 {
-  "version": "v10.9.1",
-  "build": "2026-10-04.39",
-  "updated": "2026-10-04T03:28:00+08:00",
-  "notes": "Generic Multi Trip QA fix: rebuild shared navigation so Home, Attractions, Today and Driving tabs behave consistently; remove Japan-only Shinhotaka selector from generic trips; gate Live Cam per trip including direct URLs; add a reusable pre-departure checklist section; and fix same-page Full Itinerary links from generated Today/Driving overlays. Okinawa demo Trip Info now shows the trip name instead of an engine-test title."
+  "version": "v10.9.2",
+  "build": "2026-10-04.40",
+  "updated": "2026-10-04T04:55:00+08:00",
+  "notes": "Move weather presentation and back-to-top controls into shared Multi Trip UI. Generic Okinawa now uses the same styled 5-day weather cards as the Japan trip, and itinerary/trip-info pages restore the floating back-to-top button without loading Japan-only site shell logic."
 }
