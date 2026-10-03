@@ -1,6 +1,6 @@
 {
-  "version": "v10.2.0",
-  "build": "2026-10-03.27",
-  "updated": "2026-10-03T22:10:00+08:00",
-  "notes": "Multi Trip itinerary renderer phase 3: itinerary.json now drives the day/date/title/route summaries for 白川鄉・新穗高之旅 2027 while preserving the existing rich Japan-specific details, photos and D6–D8 modules. Add a generic generate mode for future trips so a new trip can build D1–Dn itinerary cards and timelines from JSON without creating another HTML page."
+  "version": "v10.2.1",
+  "build": "2026-10-03.28",
+  "updated": "2026-10-03T22:41:00+08:00",
+  "notes": "Repair missing itinerary info icons across D1-D9. Add a bounded post-render repair pass that restores ⓘ buttons for attraction and shopping timeline cards such as D2 Matsumoto Castle, Karuizawa Prince Shopping Plaza and D4 AEON Mall Suzaka, while avoiding drive/transport/hotel cards and without adding a permanent MutationObserver."
 }
