@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.3",
-  "build": "2026-10-04.52",
-  "updated": "2026-10-04T10:20:00+08:00",
-  "notes": "Bangkok UI consistency pass. Generic itinerary cards now show the activity icon in the title, elapsed-duration badges, and attraction info buttons where detail data exists. Generic attractions now keep status -> elapsed duration -> score badge order, place info before the map pin, infer activity icons, derive duration from itinerary minutes instead of displaying clock ranges, and use a Japan-style sectioned detail modal. Bangkok Trip Info restores the Emergency section with Thailand emergency numbers plus accommodation and return-flight notes. PWA cache refreshed."
+  "version": "v10.10.4",
+  "build": "2026-10-04.53",
+  "updated": "2026-10-04T10:55:00+08:00",
+  "notes": "Bangkok factual-detail, checklist-sync and image pass. Attraction info is rewritten to separate researched place history/background from the user's actual visit, with source links on researched entries such as Chatuchak, Yaowarat, Samut Prakan Crocodile Farm & Zoo, Wat Paknam and ICONSIAM. Generic Trip departure checklists regain account sync across PC/iPhone using trip-scoped cloud item IDs, including reset propagation. Generic itinerary rendering now supports config-driven per-day galleries; Bangkok D1-D8 each includes the requested one-large-plus-two-small photo composition from the completed-trip source material. PWA cache includes all new sync and gallery assets."
 }
