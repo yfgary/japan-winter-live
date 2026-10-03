@@ -27,17 +27,23 @@ function noteBox(text){return text?'<div class="note-box">'+nl(text)+'</div>':''
 function ensureStyles(){
  if(document.getElementById('multiTripTripInfoStyles'))return;
  const s=document.createElement('style');s.id='multiTripTripInfoStyles';s.textContent=`
- #hotels .hotel-row{grid-template-columns:86px minmax(180px,.9fr) minmax(0,1.7fr);align-items:start}
- .hotel-rich{font-size:12px;line-height:1.55;color:#56656f}
- .hotel-rich-badges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
- .hotel-rich-line{margin:3px 0}
+ #hotels .hotel-list{gap:9px}
+ #hotels .hotel-row{grid-template-columns:76px minmax(190px,.8fr) minmax(0,2.45fr);gap:12px;align-items:start;padding:10px 12px}
+ #hotels .hotel-day{padding-top:2px}
+ #hotels .hotel-name{line-height:1.42;padding-top:1px}
+ .hotel-name-badges{display:flex;flex-wrap:wrap;gap:3px;margin-top:7px}
+ .hotel-rich{font-size:11.5px;line-height:1.45;color:#56656f;min-width:0}
+ .hotel-rich-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .hotel-rich-group{min-width:0;padding:8px 9px;border:1px solid #e2e8ed;border-radius:8px;background:#fff}
+ .hotel-rich-group-title{margin:0 0 5px;color:#1f4e79;font-size:11px;font-weight:800}
+ .hotel-rich-line{margin:2px 0;overflow-wrap:anywhere}
  .hotel-rich-line strong{color:#263f52}
- .hotel-arrival{margin:7px 0;padding:7px 9px;border-radius:7px;background:#eef7ef;border:1px solid #cfe2d2;color:#285f38;font-weight:700}
+ .hotel-arrival{margin:5px 0 0;padding:6px 7px;border-radius:6px;background:#eef7ef;border:1px solid #cfe2d2;color:#285f38;font-weight:700;line-height:1.4}
  .hotel-arrival.pay{background:#fff1ef;border-color:#edcbc5;color:#9a342b}
  .hotel-arrival.tax{background:#fff7df;border-color:#ead99d;color:#785b00}
- .hotel-address{margin-top:6px;color:#66747e}
- .hotel-extra-note{margin-top:7px;padding-top:7px;border-top:1px dashed #d6dee5;color:#66747e}
- @media(max-width:720px){#hotels .hotel-row{grid-template-columns:1fr}.hotel-rich{margin-top:2px}}
+ .hotel-extra-note{margin-top:5px;padding-top:5px;border-top:1px dashed #d6dee5;color:#66747e}
+ @media(max-width:980px){#hotels .hotel-row{grid-template-columns:72px minmax(175px,.85fr) minmax(0,2fr)}.hotel-rich-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hotel-rich-group:last-child{grid-column:1/-1}}
+ @media(max-width:720px){#hotels .hotel-row{grid-template-columns:1fr;gap:6px}.hotel-name-badges{margin-top:5px}.hotel-rich-grid{grid-template-columns:1fr}.hotel-rich-group:last-child{grid-column:auto}}
  `;document.head.appendChild(s);
 }
 
@@ -79,6 +85,7 @@ function hotelBadge(tag,h){
  const x=map[tag]||['grey',tag];return '<span class="label label-'+x[0]+'">'+esc(x[1])+'</span>';
 }
 function hotelLine(icon,label,val){return val?'<div class="hotel-rich-line">'+icon+' <strong>'+esc(label)+'：</strong>'+esc(val)+'</div>':'';}
+function group(title,html){return html?'<div class="hotel-rich-group"><div class="hotel-rich-group-title">'+title+'</div>'+html+'</div>':'';}
 function renderHotels(obj){
  if(!obj)return;setHead('hotels',obj);const b=body('hotels');if(!b)return;ensureStyles();
  const rows=(obj.stays||[]).map(s=>{
@@ -86,21 +93,20 @@ function renderHotels(obj){
   const tags=[...new Set(h.badges||[])];
   const badges=tags.map(x=>hotelBadge(x,h)).join('');
   let arrivalClass='';if(tags.includes('arrival-pay'))arrivalClass=' pay';else if(tags.includes('arrival-tax'))arrivalClass=' tax';
-  const detail='<div class="hotel-rich">'
-   +(badges?'<div class="hotel-rich-badges">'+badges+'</div>':'')
-   +hotelLine('💰','總價',h.totalPrice)
-   +hotelLine('💳','已付／付款狀態',h.paidAmount)
-   +(h.arrivalPayment?'<div class="hotel-arrival'+arrivalClass+'">'+esc(h.arrivalPayment)+'</div>':'')
-   +hotelLine('🛏️','房型',h.room)
+  const payment=hotelLine('💰','總價',h.totalPrice)
+   +hotelLine('💳','已付／狀態',h.paidAmount)
+   +(h.arrivalPayment?'<div class="hotel-arrival'+arrivalClass+'">'+esc(h.arrivalPayment)+'</div>':'');
+  const stay=hotelLine('🛏️','房型',h.room)
    +hotelLine('🍽️','餐飲',h.meals)
-   +hotelLine('🕒','入住／退房',(h.checkIn||h.checkOut)?((h.checkIn||'—')+' → '+(h.checkOut||'—')):'')
-   +hotelLine('📍','地址',h.address)
+   +hotelLine('🕒','入住／退房',(h.checkIn||h.checkOut)?((h.checkIn||'—')+' → '+(h.checkOut||'—')):'');
+  const practical=hotelLine('📍','地址',h.address)
    +hotelLine('☎️','電話',h.phone)
    +hotelLine('🚗','停車',h.parking)
-   +hotelLine('↩️','取消條款',h.cancellation)
-   +((s.note||h.note)?'<div class="hotel-extra-note">'+esc(s.note||h.note)+'</div>':'')
-   +'</div>';
-  return '<div class="hotel-row"><div class="hotel-day">'+esc(s.day)+(s.date?'・'+esc(s.date):'')+'</div><div class="hotel-name"'+mapAttrs({map:h.map||h.name})+'>'+esc(s.icon||'🏨')+' '+esc(h.name||h.en||s.hotelId)+'</div>'+detail+'</div>';
+   +hotelLine('↩️','取消',h.cancellation)
+   +((s.note||h.note)?'<div class="hotel-extra-note">'+esc(s.note||h.note)+'</div>':'');
+  const name='<div class="hotel-name-wrap"><div class="hotel-name"'+mapAttrs({map:h.map||h.name})+'>'+esc(s.icon||'🏨')+' '+esc(h.name||h.en||s.hotelId)+'</div>'+(badges?'<div class="hotel-name-badges">'+badges+'</div>':'')+'</div>';
+  const detail='<div class="hotel-rich"><div class="hotel-rich-grid">'+group('付款',payment)+group('住宿',stay)+group('實用資料',practical)+'</div></div>';
+  return '<div class="hotel-row"><div class="hotel-day">'+esc(s.day)+(s.date?'・'+esc(s.date):'')+'</div>'+name+detail+'</div>';
  }).join('');
  b.innerHTML='<div class="hotel-list">'+rows+'</div>';
 }
