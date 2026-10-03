@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 8,
+  "schemaVersion": 9,
   "id": "shirakawago-shinhotaka-2027",
   "name": "白川鄉・新穗高之旅 2027",
   "shortName": "白川鄉・新穗高 2027",
@@ -9,58 +9,18 @@
   "timezone": "Asia/Tokyo",
   "language": "zh-HK",
   "country": "日本",
-  "features": {
-    "itinerary": true,
-    "tripInfo": true,
-    "attractions": true,
-    "liveCam": true,
-    "todayMode": true,
-    "drivingMode": true,
-    "weather": true,
-    "weatherScore": true,
-    "weatherActivityProfiles": true,
-    "packingChecklist": true,
-    "bilingual": true,
-    "winterDriving": true,
-    "shinhotakaPlanner": true
-  },
-  "modules": [
-    {
-      "id": "shinhotaka-weather-day-selector",
-      "type": "weather-day-selector",
-      "enabled": true,
-      "candidateDays": [6, 7, 8],
-      "destination": "shinhotaka",
-      "pairedDestination": "shirakawago"
-    }
-  ],
-  "pages": {
-    "itinerary": "itinerary.html",
-    "tripInfo": "trip-info.html",
-    "attractions": "attractions.html",
-    "liveCam": "live.html"
-  },
-  "dataFiles": {
-    "itinerary": "itinerary.json",
-    "tripInfo": "trip-info.json",
-    "hotels": "hotels.json",
-    "attractions": "attractions.json",
-    "liveCams": "live-cams.json",
-    "weather": "weather.json"
-  },
+  "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":true,"todayMode":true,"drivingMode":true,"weather":true,"weatherScore":true,"weatherActivityProfiles":true,"packingChecklist":true,"bilingual":true,"winterDriving":true,"shinhotakaPlanner":true},
+  "modules": [{"id":"shinhotaka-weather-day-selector","type":"weather-day-selector","enabled":true,"candidateDays":[6,7,8],"destination":"shinhotaka","pairedDestination":"shirakawago"}],
+  "pages": {"itinerary":"itinerary.html","tripInfo":"trip-info.html","attractions":"attractions.html","liveCam":"live.html"},
+  "dataFiles": {"itinerary":"itinerary.json","tripInfo":"trip-info.json","hotels":"hotels.json","attractions":"attractions.json","liveCams":"live-cams.json","weather":"weather.json"},
   "renderers": {
-    "itinerary": {"mode":"hydrate","source":"itinerary","preserveLegacyDetails":true},
-    "tripInfo": {"mode":"hydrate","source":"tripInfo","preserveLegacyShell":true},
-    "attractions": {"mode":"hydrate","source":"attractions","preserveLegacyDetails":true},
-    "liveCam": {"mode":"hydrate","source":"liveCams","preserveLegacyMediaTemplates":true},
-    "weather": {"mode":"generate","source":"weather","profileStandard":"v1","preserveLegacyDecisionModules":true},
-    "todayMode": {"mode":"hydrate","source":"itinerary","useActivityProfiles":true},
-    "drivingMode": {"mode":"hydrate","source":"itinerary","useActivityProfiles":true}
+    "itinerary":{"mode":"hydrate","source":"itinerary","preserveLegacyDetails":true},
+    "tripInfo":{"mode":"hydrate","source":"tripInfo","preserveLegacyShell":true},
+    "attractions":{"mode":"hydrate","source":"attractions","preserveLegacyDetails":true},
+    "liveCam":{"mode":"hydrate","source":"liveCams","preserveLegacyMediaTemplates":true},
+    "weather":{"mode":"generate","source":"weather","profileStandard":"v1","preserveLegacyDecisionModules":true},
+    "todayMode":{"mode":"hydrate","source":"itinerary","useActivityProfiles":true},
+    "drivingMode":{"mode":"hydrate","source":"itinerary","useActivityProfiles":true}
   },
-  "legacy": {
-    "core": "assets/trip-core-v1.js",
-    "dataMode": "hybrid-data-v8",
-    "migrationStage": 9,
-    "note": "v10.8 migration: Today Mode and Driving Mode share Multi Trip itinerary, timezone, weather and Weather Activity Profile data. Japan 2027 keeps the tested rich overlays in hydrate mode while profile scores are bridged into them; future trips use shared generated modes directly from itinerary.json."
-  }
+  "legacy": {"core":"assets/trip-core-v1.js","dataMode":"hybrid-data-v8","migrationStage":9,"note":"v10.8 migration: Today Mode and Driving Mode share Multi Trip itinerary, timezone, weather and Weather Activity Profile data. Japan 2027 keeps the tested rich overlays in hydrate mode while profile scores are bridged into them; future trips use shared generated modes directly from itinerary.json."}
 }
