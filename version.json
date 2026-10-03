@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.5",
-  "build": "2026-10-04.54",
-  "updated": "2026-10-04T11:20:00+08:00",
-  "notes": "Replace Bangkok D1-D8 PDF-derived gallery collages with new web-sourced high-resolution Wikimedia Commons photos while preserving the one-large-plus-two-small daily composition. Add Travel Center cover images for Bangkok and Okinawa. Travel Center now sorts trips by start date descending, so the newest trip appears first. Shared app version bumped for rollout detection."
+  "version": "v10.10.6",
+  "build": "2026-10-04.55",
+  "updated": "2026-10-04T11:45:00+08:00",
+  "notes": "Multi Trip maturity QA and architecture cleanup. Service worker no longer hardcodes Okinawa or Bangkok trip data/assets: it now reads the trip registry and each trip config during install, then pre-caches each trip's declared data files and same-origin config assets generically. Bangkok day-gallery rules are consolidated into the single config-declared gallery CSS asset, so future trips can add their own gallery asset without core service-worker edits. Routing remains URL-driven with the Japan trip as the safe default, and existing Live Cam feature gating, trip-scoped checklist sync, Travel Center date sorting and generic renderers are retained."
 }
