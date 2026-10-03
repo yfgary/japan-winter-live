@@ -1,4 +1,4 @@
-const CACHE_NAME = "multi-trip-v10.1.0-data-layer-20261003";
+const CACHE_NAME = "multi-trip-v10.2.0-itinerary-renderer-20261003";
 
 const CORE_FILES = [
     "./",
@@ -17,6 +17,7 @@ const CORE_FILES = [
     "./trips/shirakawago-shinhotaka-2027/weather.json",
     "./assets/multi-trip-context-v1.js",
     "./assets/multi-trip-data-v1.js",
+    "./assets/multi-trip-itinerary-renderer-v1.js",
     "./assets/attraction-info.css",
     "./assets/attraction-info.js",
     "./assets/attractions-catalog.js",
