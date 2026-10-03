@@ -24,6 +24,23 @@ function hideMissing(ids,present){ids.forEach(id=>{const s=section(id);if(s)s.hi
 function mapAttrs(item){return item&&item.map?' data-map="'+esc(item.map)+'"'+(item.mapLabel?' data-map-label="'+esc(item.mapLabel)+'"':''):'';}
 function noteBox(text){return text?'<div class="note-box">'+nl(text)+'</div>':'';}
 
+function ensureStyles(){
+ if(document.getElementById('multiTripTripInfoStyles'))return;
+ const s=document.createElement('style');s.id='multiTripTripInfoStyles';s.textContent=`
+ #hotels .hotel-row{grid-template-columns:86px minmax(180px,.9fr) minmax(0,1.7fr);align-items:start}
+ .hotel-rich{font-size:12px;line-height:1.55;color:#56656f}
+ .hotel-rich-badges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+ .hotel-rich-line{margin:3px 0}
+ .hotel-rich-line strong{color:#263f52}
+ .hotel-arrival{margin:7px 0;padding:7px 9px;border-radius:7px;background:#eef7ef;border:1px solid #cfe2d2;color:#285f38;font-weight:700}
+ .hotel-arrival.pay{background:#fff1ef;border-color:#edcbc5;color:#9a342b}
+ .hotel-arrival.tax{background:#fff7df;border-color:#ead99d;color:#785b00}
+ .hotel-address{margin-top:6px;color:#66747e}
+ .hotel-extra-note{margin-top:7px;padding-top:7px;border-top:1px dashed #d6dee5;color:#66747e}
+ @media(max-width:720px){#hotels .hotel-row{grid-template-columns:1fr}.hotel-rich{margin-top:2px}}
+ `;document.head.appendChild(s);
+}
+
 function renderOverview(d){
  const o=d.overview;if(!o)return;
  const root=document.querySelector('.intro');if(!root)return;
@@ -49,11 +66,41 @@ function renderCards(id,obj){
  }).join('');
  b.innerHTML='<div class="card-grid">'+cards+'</div>'+noteBox(obj.note);
 }
+function hotelBadge(tag,h){
+ const map={
+  booked:['green',h.statusLabel||'✅ 已訂'],
+  onsen:['blue','♨️ 溫泉'],
+  'arrival-pay':['red','🏨 到店要付房費'],
+  'arrival-tax':['yellow','⚠️ 到店只付稅／費用'],
+  'arrival-clear':['green','✅ 到店唔使付房費'],
+  breakfast:['green','🍳 包早餐'],
+  pending:['yellow','📝 待確認']
+ };
+ const x=map[tag]||['grey',tag];return '<span class="label label-'+x[0]+'">'+esc(x[1])+'</span>';
+}
+function hotelLine(icon,label,val){return val?'<div class="hotel-rich-line">'+icon+' <strong>'+esc(label)+'：</strong>'+esc(val)+'</div>':'';}
 function renderHotels(obj){
- if(!obj)return;setHead('hotels',obj);const b=body('hotels');if(!b)return;
+ if(!obj)return;setHead('hotels',obj);const b=body('hotels');if(!b)return;ensureStyles();
  const rows=(obj.stays||[]).map(s=>{
   const h=window.MultiTripData&&window.MultiTripData.hotel(s.hotelId);if(!h)return'';
-  return '<div class="hotel-row"><div class="hotel-day">'+esc(s.day)+(s.date?'・'+esc(s.date):'')+'</div><div class="hotel-name"'+mapAttrs({map:h.map||h.name})+'>'+esc(s.icon||'🏨')+' '+esc(h.name||h.en||s.hotelId)+'</div><div class="hotel-note">'+esc(s.note||h.note||'')+'</div></div>';
+  const tags=[...new Set(h.badges||[])];
+  const badges=tags.map(x=>hotelBadge(x,h)).join('');
+  let arrivalClass='';if(tags.includes('arrival-pay'))arrivalClass=' pay';else if(tags.includes('arrival-tax'))arrivalClass=' tax';
+  const detail='<div class="hotel-rich">'
+   +(badges?'<div class="hotel-rich-badges">'+badges+'</div>':'')
+   +hotelLine('💰','總價',h.totalPrice)
+   +hotelLine('💳','已付／付款狀態',h.paidAmount)
+   +(h.arrivalPayment?'<div class="hotel-arrival'+arrivalClass+'">'+esc(h.arrivalPayment)+'</div>':'')
+   +hotelLine('🛏️','房型',h.room)
+   +hotelLine('🍽️','餐飲',h.meals)
+   +hotelLine('🕒','入住／退房',(h.checkIn||h.checkOut)?((h.checkIn||'—')+' → '+(h.checkOut||'—')):'')
+   +hotelLine('📍','地址',h.address)
+   +hotelLine('☎️','電話',h.phone)
+   +hotelLine('🚗','停車',h.parking)
+   +hotelLine('↩️','取消條款',h.cancellation)
+   +((s.note||h.note)?'<div class="hotel-extra-note">'+esc(s.note||h.note)+'</div>':'')
+   +'</div>';
+  return '<div class="hotel-row"><div class="hotel-day">'+esc(s.day)+(s.date?'・'+esc(s.date):'')+'</div><div class="hotel-name"'+mapAttrs({map:h.map||h.name})+'>'+esc(s.icon||'🏨')+' '+esc(h.name||h.en||s.hotelId)+'</div>'+detail+'</div>';
  }).join('');
  b.innerHTML='<div class="hotel-list">'+rows+'</div>';
 }
@@ -110,7 +157,7 @@ function refreshMapPins(){[0,80,250,600].forEach(t=>setTimeout(()=>{if(typeof wi
 function render(){
  if(!/(?:^|\/)trip-info\.html$/.test(location.pathname))return 0;
  const d=data();if(!d)return 0;
- renderOverview(d);renderNav(d);
+ ensureStyles();renderOverview(d);renderNav(d);
  renderCards('transport',d.transport);renderCards('car',d.car);renderHotels(d.hotelStays);renderParking(d.parking);renderHardCuts(d.hardCuts);renderWeather(d.weather);renderChecklist(d.checklist);renderEmergency(d.emergency);
  const present=new Set(['transport','car','hotels','parking','hardcuts','weather','checklist','emergency'].filter(id=>({transport:d.transport,car:d.car,hotels:d.hotelStays,parking:d.parking,hardcuts:d.hardCuts,weather:d.weather,checklist:d.checklist,emergency:d.emergency})[id]));
  hideMissing(['transport','car','hotels','parking','hardcuts','weather','checklist','emergency'],present);
