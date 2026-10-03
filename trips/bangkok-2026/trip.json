@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 9,
+  "schemaVersion": 10,
   "id": "bangkok-2026",
   "name": "曼谷 8日7夜 2026",
   "shortName": "曼谷 2026・8日7夜",
@@ -24,6 +24,9 @@
     "winterDriving": false
   },
   "modules": [],
+  "assets": {
+    "dayGalleryCss": "assets/bangkok-day-galleries-v1.css"
+  },
   "pages": {
     "itinerary": "itinerary.html",
     "tripInfo": "trip-info.html",
@@ -49,7 +52,7 @@
   },
   "legacy": {
     "dataMode": "generic-only",
-    "migrationStage": 10,
-    "note": "Real completed Bangkok trip used as the third-trip validation case. Itinerary content follows the user's 2026 8-day source plan; shared generic renderers should handle it without Bangkok-specific core code."
+    "migrationStage": 11,
+    "note": "Real completed Bangkok trip used as the third-trip validation case. Itinerary content follows the user's 2026 8-day source plan; shared generic renderers handle it without Bangkok-specific core routing."
   }
 }
