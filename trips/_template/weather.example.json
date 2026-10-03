@@ -1,6 +1,7 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "tripId": "new-trip-id",
+  "profileStandardVersion": "v1",
   "regions": {
     "city-a": {
       "name": "城市 A",
@@ -9,7 +10,11 @@
       "type": "city",
       "lat": 35.0000,
       "lon": 135.0000,
-      "scoreNote": "落雨／大風時留意交通安排"
+      "scoreNote": "落雨／大風時留意交通安排",
+      "activityProfiles": [
+        {"id":"city_walk","weight":0.6},
+        {"id":"indoor","weight":0.4}
+      ]
     },
     "mountain-a": {
       "name": "山區 A",
@@ -18,12 +23,31 @@
       "type": "mountain",
       "lat": 36.0000,
       "lon": 137.0000,
-      "scoreNote": "最後仍要配合 Live Cam／官方運行狀況"
+      "scoreNote": "最後仍要配合 Live Cam／官方運行狀況",
+      "activityProfiles": [
+        {"id":"ropeway_mountain","weight":0.5},
+        {"id":"mountain_view","weight":0.3},
+        {"id":"road_trip","weight":0.2}
+      ]
+    },
+    "coast-a": {
+      "name": "海岸 A",
+      "en": "Coast A",
+      "label": "海岸／出海活動",
+      "type": "coast",
+      "lat": 26.0000,
+      "lon": 127.0000,
+      "scoreNote": "海上活動一定要再確認浪高、swell、船公司運航狀態",
+      "activityProfiles": [
+        {"id":"beach","weight":0.4},
+        {"id":"open_sea","weight":0.6}
+      ]
     }
   },
   "dayRegions": {
     "d1": "city-a",
-    "d2": "mountain-a"
+    "d2": "mountain-a",
+    "d3": "coast-a"
   },
   "dynamicRegionRules": {},
   "scoreProfiles": {
