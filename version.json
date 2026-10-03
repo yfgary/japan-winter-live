@@ -1,6 +1,6 @@
 {
-  "version": "v10.3.1",
-  "build": "2026-10-03.30",
-  "updated": "2026-10-03T23:18:00+08:00",
-  "notes": "Restore rich hotel information lost during the Trip Info JSON migration. Hotel cards again show booking status, total price, paid amount, what still needs to be paid at the hotel, room type, meals, check-in/check-out, address, phone, parking and cancellation details when available. Update Japan 2027 hotel data with the latest confirmed Residence and Iroha bookings."
+  "version": "v10.3.2",
+  "build": "2026-10-03.31",
+  "updated": "2026-10-03T23:48:00+08:00",
+  "notes": "Compact the rich hotel section after the v10.3.1 detail restore. Desktop hotel rows now use the original compact multi-column feel: day and hotel name stay on the left while booking/payment, stay details and practical information are split into three columns. Tablet collapses to two detail columns and mobile to one, reducing unused whitespace and page height without removing any hotel information."
 }
