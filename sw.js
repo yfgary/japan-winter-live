@@ -1,4 +1,4 @@
-const CACHE_NAME = "multi-trip-v10.9.6-pwa-update-20261004";
+const CACHE_NAME = "multi-trip-v10.9.7-attractions-update-ui-20261004";
 const DEFAULT_TRIP = "shirakawago-shinhotaka-2027";
 const CORE_FILES = [
 "./","./index.html","./live.html","./itinerary.html","./trip-info.html","./attractions.html","./manifest.webmanifest","./trips/registry.json",
