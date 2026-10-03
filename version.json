@@ -1,6 +1,6 @@
 {
-  "version": "v10.9.6",
-  "build": "2026-10-04.44",
-  "updated": "2026-10-04T06:02:00+08:00",
-  "notes": "Harden installed-PWA updates. When a newer version is detected, show a clear update prompt instead of relying on the small version badge. Wait for the new service worker to take control before reloading, support SKIP_WAITING explicitly, and fetch navigation documents with no-store so reopening the installed app does not fall back to an older cached app shell."
+  "version": "v10.9.7",
+  "build": "2026-10-04.45",
+  "updated": "2026-10-04T06:24:00+08:00",
+  "notes": "Fix duplicate version/back-to-top controls on Attractions by removing the legacy catalog controls once the shared Multi Trip UI is present. Improve manual version checking so tapping the version badge clearly shows checking status and confirms when the app is already up to date. This release also exercises the visible update prompt from v10.9.6 to v10.9.7."
 }
