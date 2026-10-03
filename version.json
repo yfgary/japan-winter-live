@@ -1,6 +1,6 @@
 {
-  "version": "v10.4.0",
-  "build": "2026-10-04.33",
-  "updated": "2026-10-04T00:52:00+08:00",
-  "notes": "Multi Trip phase 5: Attractions Catalog is now connected to attractions.json. The Japan 2027 trip runs in safe hydrate mode so JSON controls day/status/score/map metadata while preserving all existing rich attraction cards and full ⓘ descriptions. Future trips can use generate mode to build grouped attraction cards and optional shared info modals from JSON without another attractions.html page."
+  "version": "v10.5.0",
+  "build": "2026-10-04.34",
+  "updated": "2026-10-04T00:58:00+08:00",
+  "notes": "Multi Trip phase 6: Live Cam is now connected to live-cams.json. Japan 2027 stays in safe hydrate mode so D2 and D6-D8 camera-group bindings come from JSON while preserving the existing tested media templates, route text and Shinhotaka chooser. Future trips can use generate mode to build day sections, cameras, map buttons and official links from JSON without loading Japan-only Live logic."
 }
