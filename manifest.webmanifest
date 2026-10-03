@@ -1,8 +1,8 @@
 {
-  "name": "Japan Winter 2027",
-  "short_name": "Japan 2027",
-  "description": "Japan Winter 2027 Detailed Itinerary, Live Camera and Trip Dashboard",
-  "start_url": "./itinerary.html",
+  "name": "My Trips・旅行中心",
+  "short_name": "My Trips",
+  "description": "Multi Trip travel planner with shared itinerary, weather, driving, Live Cam and trip-specific modules",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#eef2f6",
