@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.0",
-  "build": "2026-10-04.49",
-  "updated": "2026-10-04T08:20:00+08:00",
-  "notes": "Add Bangkok 2026 as the third Multi Trip validation case using a completed real 8-day itinerary. New generic-only Trip Data covers D1-D8 itinerary, accommodation, attractions with info content, trip-info/checklists, weather region and disabled Live Cam. Image-plan metadata is included for one hero plus two supporting images per day; actual image assets are the next visual pass."
+  "version": "v10.10.1",
+  "build": "2026-10-04.50",
+  "updated": "2026-10-04T09:05:00+08:00",
+  "notes": "Fix endless update prompt caused by server version v10.10.0 while the running shared context still identified itself as v10.9.10. Bangkok attractions are expanded with richer info/history/tips, Thai names, and geographic-only grouping. Correct D1 seafood buffet to Mungkorn Seafood @ Sukhumvit and D6 crocodile venue to Samut Prakan Crocodile Farm & Zoo; unresolved venue names are explicitly marked for user confirmation instead of being guessed."
 }
