@@ -1,6 +1,6 @@
 {
-  "version": "v10.9.4",
-  "build": "2026-10-04.42",
-  "updated": "2026-10-04T05:24:00+08:00",
-  "notes": "Make Multi Trip the single source of truth for version display and update detection. Remove the legacy v10.9.1 rewrite loop, compare the running app version against version.json, show an update-available state when they differ, and let the version badge trigger the service-worker refresh/reload flow."
+  "version": "v10.9.5",
+  "build": "2026-10-04.43",
+  "updated": "2026-10-04T05:40:00+08:00",
+  "notes": "Fix generic itinerary intro leakage. Generated trips now replace the legacy Japan 2027 intro card with trip-specific name, subtitle, dates, country and driving-day summary from the active Trip Data. Okinawa Demo no longer shows Japan Chubu winter self-drive details on its itinerary page."
 }
