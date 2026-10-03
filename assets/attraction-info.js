@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 
-if (window.__japan2027EnhancementLoaderV19) return;
-window.__japan2027EnhancementLoaderV19 = true;
+if (window.__japan2027EnhancementLoaderV20) return;
+window.__japan2027EnhancementLoaderV20 = true;
 
 function addCss(href){
     if (document.querySelector('link[href="' + href + '"]')) return;
@@ -18,6 +18,10 @@ addCss('assets/site-shell-v7.css?v=913');
 addCss('assets/trip-v8.css?v=913');
 addCss('assets/trip-v8-1.css?v=913');
 
+const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
+const params=new URLSearchParams(location.search);
+const selectedTrip=(params.get('trip')||localStorage.getItem('multiTrip.activeTrip')||DEFAULT_TRIP).trim();
+const isJapanLegacy=selectedTrip===DEFAULT_TRIP;
 const isTripInfo = /(?:^|\/)trip-info\.html$/.test(location.pathname);
 
 const itineraryScripts = [
@@ -81,7 +85,21 @@ const tripInfoScripts = [
     'assets/i18n-polish-en-v1.js?v=1'
 ];
 
-const scripts = isTripInfo ? tripInfoScripts : itineraryScripts;
+const genericItineraryScripts=[
+    'assets/multi-trip-context-v1.js?v=3',
+    'assets/multi-trip-data-v1.js?v=1',
+    'assets/version-v901-fix.js?v=12',
+    'assets/multi-trip-itinerary-renderer-v1.js?v=1'
+];
+const genericTripInfoScripts=[
+    'assets/multi-trip-context-v1.js?v=3',
+    'assets/multi-trip-data-v1.js?v=1',
+    'assets/version-v901-fix.js?v=12'
+];
+
+const scripts = isJapanLegacy
+    ? (isTripInfo ? tripInfoScripts : itineraryScripts)
+    : (isTripInfo ? genericTripInfoScripts : genericItineraryScripts);
 
 if (document.readyState === 'loading') {
     scripts.forEach(function(src){
