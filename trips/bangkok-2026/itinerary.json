@@ -1,89 +1,61 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "tripId": "bangkok-2026",
   "days": [
     {
-      "id": "d1",
-      "day": 1,
-      "date": "2026-08-29",
-      "title": "抵達曼谷・On Nut + 流水蝦",
-      "route": "BKK → On Nut → Lotus’s Sukhumvit 50 → 入住／游水 → Kodtalay Seafood Buffet → On Nut",
-      "weatherRegion": "bangkok",
-      "driving": false,
-      "hotelId": "president-sukhumvit-81",
-      "imagePlan": {
-        "hero": "Kodtalay 流水蝦／海鮮 Buffet",
-        "small": ["Lotus’s Sukhumvit 50", "Condo 泳池／On Nut 休息"]
-      },
-      "items": [
+      "id":"d1","day":1,"date":"2026-08-29",
+      "title":"抵達曼谷・On Nut + 流水蝦",
+      "route":"BKK → On Nut → Lotus’s Sukhumvit 50 → 入住／游水 → Mungkorn Seafood @ Sukhumvit → On Nut",
+      "weatherRegion":"bangkok","driving":false,"hotelId":"president-sukhumvit-81",
+      "imagePlan":{"hero":"Mungkorn Seafood 流水蝦／燒海鮮 Buffet","small":["Lotus’s Sukhumvit 50","Condo 泳池／On Nut 休息"]},
+      "items":[
         {"time":"09:25","type":"flight","title":"抵達 BKK","note":"UO704；HKG 07:25 → BKK 09:25","map":"Suvarnabhumi Airport"},
         {"time":"09:45","type":"transport","title":"Grab / Taxi → On Nut","map":"On Nut Bangkok"},
         {"time":"11:30–14:30","type":"shopping","title":"Lotus’s Sukhumvit 50：午餐＋超市補給","map":"Lotus's Sukhumvit 50","attractionId":"lotus-sukhumvit-50","durationMinutes":180},
         {"time":"15:00","type":"hotel","title":"Airbnb Check-in：Building B・3樓・Room 2081/27"},
         {"time":"15:30–17:00","type":"activity","title":"游水／休息","durationMinutes":90},
-        {"time":"17:30","type":"transport","title":"出發去 Kodtalay Seafood Buffet"},
-        {"time":"18:00–20:30","type":"meal","title":"流水蝦＋燒海鮮 Buffet","attractionId":"kodtalay-seafood-buffet","durationMinutes":150},
-        {"time":"21:00","type":"activity","title":"返 On Nut・按摩／休息（可選）","attractionId":"on-nut-massage"}
+        {"time":"17:30","type":"transport","title":"出發去 Mungkorn Seafood @ Sukhumvit"},
+        {"time":"18:00–20:30","type":"meal","title":"Mungkorn Seafood：流水蝦＋燒海鮮 Buffet","map":"Mungkorn Seafood Bangkok","attractionId":"mungkorn-seafood","durationMinutes":150},
+        {"time":"21:00","type":"activity","title":"返 On Nut・按摩／休息（可選）","note":"按摩店名待確認"}
       ]
     },
     {
-      "id": "d2",
-      "day": 2,
-      "date": "2026-08-30",
-      "title": "Chatuchak + Or Tor Kor + Union Mall + Liabduan",
-      "route": "On Nut → Chatuchak Weekend Market → Or Tor Kor Market → Union Mall → Liabduan DanNeramit Night Market → On Nut",
-      "weatherRegion": "bangkok",
-      "driving": false,
-      "hotelId": "president-sukhumvit-81",
-      "imagePlan": {
-        "hero": "Chatuchak Weekend Market",
-        "small": ["Or Tor Kor Market", "Liabduan DanNeramit Night Market"]
-      },
-      "items": [
+      "id":"d2","day":2,"date":"2026-08-30",
+      "title":"Chatuchak + Or Tor Kor + Union Mall + Liabduan",
+      "route":"On Nut → Chatuchak Weekend Market → Or Tor Kor Market → Union Mall → Liabduan Danneramit Night Market → On Nut",
+      "weatherRegion":"bangkok","driving":false,"hotelId":"president-sukhumvit-81",
+      "imagePlan":{"hero":"Chatuchak Weekend Market","small":["Or Tor Kor Market","Liabduan Danneramit Night Market"]},
+      "items":[
         {"time":"09:30","type":"transport","title":"On Nut 出發"},
         {"time":"10:15–13:00","type":"shopping","title":"Chatuchak Weekend Market：衫鞋、小物、手信","map":"Chatuchak Weekend Market","attractionId":"chatuchak-weekend-market","durationMinutes":165},
         {"time":"13:00–14:15","type":"meal","title":"Or Tor Kor Market：午餐＋榴槤／水果","map":"Or Tor Kor Market","attractionId":"or-tor-kor-market","durationMinutes":75},
         {"time":"14:45–17:15","type":"shopping","title":"Union Mall：平價 Fashion／男裝鞋","map":"Union Mall Bangkok","attractionId":"union-mall","durationMinutes":150},
-        {"time":"17:30–21:00","type":"shopping","title":"Liabduan DanNeramit Night Market：夜市購物＋晚餐","map":"Liabduan DanNeramit Night Market","attractionId":"liabduan-night-market","durationMinutes":210},
+        {"time":"17:30–21:00","type":"shopping","title":"Liabduan Danneramit Night Market：夜市購物＋晚餐","map":"Liabduan Danneramit Night Market","attractionId":"liabduan-night-market","durationMinutes":210},
         {"time":"21:30","type":"transport","title":"返 On Nut"}
       ]
     },
     {
-      "id": "d3",
-      "day": 3,
-      "date": "2026-08-31",
-      "title": "Wang Lang → Chinatown → Yaowarat",
-      "route": "On Nut → Wang Lang Market → 船往 Chinatown → Coffee／冷氣休息 → Yaowarat → On Nut",
-      "weatherRegion": "bangkok",
-      "driving": false,
-      "hotelId": "president-sukhumvit-81",
-      "imagePlan": {
-        "hero": "Yaowarat 唐人街夜景",
-        "small": ["Wang Lang Market", "昭披耶河渡船／河景"]
-      },
-      "items": [
+      "id":"d3","day":3,"date":"2026-08-31",
+      "title":"Wang Lang → Chinatown → Yaowarat",
+      "route":"On Nut → Wang Lang Market → 船往 Chinatown → Coffee／冷氣休息 → Yaowarat → On Nut",
+      "weatherRegion":"bangkok","driving":false,"hotelId":"president-sukhumvit-81",
+      "imagePlan":{"hero":"Yaowarat 唐人街夜景","small":["Wang Lang Market","昭披耶河渡船／河景"]},
+      "items":[
         {"time":"09:30","type":"transport","title":"On Nut 出發・BTS＋船"},
         {"time":"10:45–14:00","type":"shopping","title":"Wang Lang Market：本地市場＋午餐街","map":"Wang Lang Market Bangkok","attractionId":"wang-lang-market","durationMinutes":195},
         {"time":"14:00–15:30","type":"ferry","title":"坐船前往 Chinatown","attractionId":"chao-phraya-river-ferry","durationMinutes":90},
-        {"time":"15:30–17:00","type":"activity","title":"Coffee／冷氣休息","durationMinutes":90},
+        {"time":"15:30–17:00","type":"activity","title":"Coffee／冷氣休息","note":"實際店名待確認","durationMinutes":90},
         {"time":"17:30–21:00","type":"meal","title":"Yaowarat：晚餐＋掃街","map":"Yaowarat Road Bangkok","attractionId":"yaowarat","durationMinutes":210},
         {"time":"22:00 左右","type":"transport","title":"返 On Nut"}
       ]
     },
     {
-      "id": "d4",
-      "day": 4,
-      "date": "2026-09-01",
-      "title": "MBK + 冬陰公 + Platinum + 雞飯",
-      "route": "On Nut → MBK Center → Pe Aor Tom Yum Kung Noodle → Platinum / Pratunam → Go-Ang Pratunam Chicken Rice → On Nut",
-      "weatherRegion": "bangkok",
-      "driving": false,
-      "hotelId": "president-sukhumvit-81",
-      "imagePlan": {
-        "hero": "Platinum Fashion Mall／Pratunam",
-        "small": ["MBK Center", "Go-Ang Pratunam Chicken Rice／雞飯"]
-      },
-      "items": [
+      "id":"d4","day":4,"date":"2026-09-01",
+      "title":"MBK + 冬陰公 + Platinum + 雞飯",
+      "route":"On Nut → MBK Center → Pe Aor Tom Yum Kung Noodle → Platinum / Pratunam → Go-Ang Pratunam Chicken Rice → On Nut",
+      "weatherRegion":"bangkok","driving":false,"hotelId":"president-sukhumvit-81",
+      "imagePlan":{"hero":"Platinum Fashion Mall／Pratunam","small":["MBK Center","Go-Ang Pratunam Chicken Rice／雞飯"]},
+      "items":[
         {"time":"09:30","type":"transport","title":"On Nut 出發"},
         {"time":"10:15–12:30","type":"shopping","title":"MBK Center：平價購物／電話配件／小物","map":"MBK Center Bangkok","attractionId":"mbk-center","durationMinutes":135},
         {"time":"12:45–14:00","type":"meal","title":"Pe Aor Tom Yum Kung Noodle：午餐（冬陰公）","map":"Pe Aor Tom Yum Kung Noodle Bangkok","attractionId":"pe-aor-tom-yum","durationMinutes":75},
@@ -93,19 +65,12 @@
       ]
     },
     {
-      "id": "d5",
-      "day": 5,
-      "date": "2026-09-02",
-      "title": "Terminal 21 Asok + Mungkorn Seafood",
-      "route": "On Nut → Terminal 21 Asok → Pier 21 → On Nut 休息／游水 → Mungkorn Seafood → On Nut",
-      "weatherRegion": "bangkok",
-      "driving": false,
-      "hotelId": "president-sukhumvit-81",
-      "imagePlan": {
-        "hero": "Terminal 21 Asok",
-        "small": ["Pier 21 午餐", "Mungkorn Seafood 海鮮"]
-      },
-      "items": [
+      "id":"d5","day":5,"date":"2026-09-02",
+      "title":"Terminal 21 Asok + Mungkorn Seafood",
+      "route":"On Nut → Terminal 21 Asok → Pier 21 → On Nut 休息／游水 → Mungkorn Seafood → On Nut",
+      "weatherRegion":"bangkok","driving":false,"hotelId":"president-sukhumvit-81",
+      "imagePlan":{"hero":"Terminal 21 Asok","small":["Pier 21 午餐","Mungkorn Seafood 海鮮"]},
+      "items":[
         {"time":"09:30","type":"meal","title":"早餐"},
         {"time":"10:15","type":"transport","title":"On Nut 出發・BTS → Asok"},
         {"time":"10:30–12:30","type":"shopping","title":"Terminal 21 Asok：平價 Fashion／小店","map":"Terminal 21 Asok","attractionId":"terminal-21-asok","durationMinutes":120},
@@ -113,27 +78,20 @@
         {"time":"13:30–14:00","type":"transport","title":"BTS 返 On Nut"},
         {"time":"14:00–17:00","type":"activity","title":"Airbnb 休息／游水／洗衫","durationMinutes":180},
         {"time":"18:30–21:00","type":"meal","title":"Mungkorn Seafood @ Sukhumvit：海鮮晚餐","map":"Mungkorn Seafood Bangkok","attractionId":"mungkorn-seafood","durationMinutes":150},
-        {"time":"21:15","type":"activity","title":"On Nut 按摩（可選）","attractionId":"on-nut-massage"}
+        {"time":"21:15","type":"activity","title":"On Nut 按摩（可選）","note":"按摩店名待確認"}
       ]
     },
     {
-      "id": "d6",
-      "day": 6,
-      "date": "2026-09-03",
-      "title": "鱷魚園／動物表演 → Outlet → Srinagarindra Night Market",
-      "route": "On Nut → 巴士 511 去動物園／鱷魚園 → Crocodile Show → Elephant Show → Siam Premium Outlets → Srinagarindra Train Night Market → On Nut",
-      "weatherRegion": "bangkok",
-      "driving": false,
-      "hotelId": "president-sukhumvit-81",
-      "imagePlan": {
-        "hero": "鱷魚表演／動物園",
-        "small": ["Siam Premium Outlets Bangkok", "Srinagarindra Train Night Market"]
-      },
-      "items": [
-        {"time":"09:30","type":"transport","title":"On Nut 出發・搭 511 去動物園／鱷魚園"},
-        {"time":"11:15–12:40","type":"attraction","title":"園內參觀：鱷魚、老虎、其他動物","attractionId":"crocodile-animal-park","durationMinutes":85},
-        {"time":"13:00","type":"activity","title":"必睇：Crocodile Show","attractionId":"crocodile-show"},
-        {"time":"13:30","type":"activity","title":"必睇：Elephant Show","attractionId":"elephant-show"},
+      "id":"d6","day":6,"date":"2026-09-03",
+      "title":"Samut Prakan Crocodile Farm & Zoo → Outlet → Srinagarindra Night Market",
+      "route":"On Nut → 巴士 511 → Samut Prakan Crocodile Farm & Zoo → Crocodile Show → Elephant Show → Siam Premium Outlets → Srinagarindra Train Night Market → On Nut",
+      "weatherRegion":"bangkok","driving":false,"hotelId":"president-sukhumvit-81",
+      "imagePlan":{"hero":"Samut Prakan Crocodile Farm & Zoo／Crocodile Show","small":["Siam Premium Outlets Bangkok","Srinagarindra Train Night Market"]},
+      "items":[
+        {"time":"09:30","type":"transport","title":"On Nut 出發・搭 511 去 Samut Prakan Crocodile Farm & Zoo","map":"Samut Prakan Crocodile Farm and Zoo"},
+        {"time":"11:15–12:40","type":"attraction","title":"Samut Prakan Crocodile Farm & Zoo：園內參觀","map":"Samut Prakan Crocodile Farm and Zoo","attractionId":"samut-prakan-crocodile-farm","durationMinutes":85},
+        {"time":"13:00","type":"activity","title":"必睇：Crocodile Show","map":"Samut Prakan Crocodile Farm and Zoo","attractionId":"crocodile-show"},
+        {"time":"13:30","type":"activity","title":"必睇：Elephant Show","attractionId":"elephant-show","note":"實際場地請再確認"},
         {"time":"14:30","type":"transport","title":"Grab 去 Siam Premium Outlets"},
         {"time":"15:30–18:30","type":"shopping","title":"Siam Premium Outlets：Outlet Shopping（約3小時）","map":"Siam Premium Outlets Bangkok","attractionId":"siam-premium-outlets","durationMinutes":180},
         {"time":"19:15–22:30","type":"shopping","title":"Srinagarindra Train Night Market：晚飯＋古著／舊物／小物","map":"Srinagarindra Train Night Market Bangkok","attractionId":"srinagarindra-night-market","durationMinutes":195},
@@ -141,23 +99,13 @@
       ]
     },
     {
-      "id": "d7",
-      "day": 7,
-      "date": "2026-09-04",
-      "title": "CentralWorld + 水門寺 + ICONSIAM + Dinner Cruise",
-      "route": "On Nut → CentralWorld → Go-Ang 水門雞飯 → Wat Paknam → Wat Khun Chan → ICONSIAM → Chao Phraya Princess Dinner Cruise",
-      "weatherRegion": "bangkok",
-      "driving": false,
-      "hotelId": "president-sukhumvit-81",
-      "hardCuts": [
-        {"time":"18:00–19:00","label":"Dinner Cruise 晚餐 Check-in 時段"},
-        {"time":"19:30–21:30","label":"Chao Phraya Princess Dinner Cruise 航程"}
-      ],
-      "imagePlan": {
-        "hero": "Wat Paknam 水門寺／大金佛",
-        "small": ["ICONSIAM 河邊", "Chao Phraya Princess Dinner Cruise 夜景"]
-      },
-      "items": [
+      "id":"d7","day":7,"date":"2026-09-04",
+      "title":"CentralWorld + 水門寺 + ICONSIAM + Dinner Cruise",
+      "route":"On Nut → CentralWorld → Go-Ang 水門雞飯 → Wat Paknam → Wat Khun Chan → ICONSIAM → Chao Phraya Princess Dinner Cruise",
+      "weatherRegion":"bangkok","driving":false,"hotelId":"president-sukhumvit-81",
+      "hardCuts":[{"time":"18:00–19:00","label":"Dinner Cruise Check-in 時段"},{"time":"19:30–21:30","label":"Chao Phraya Princess Dinner Cruise 航程"}],
+      "imagePlan":{"hero":"Wat Paknam 水門寺／大金佛","small":["ICONSIAM 河邊","Chao Phraya Princess Dinner Cruise 夜景"]},
+      "items":[
         {"time":"09:30","type":"meal","title":"早餐"},
         {"time":"10:00","type":"transport","title":"On Nut 出發・BTS → Chit Lom"},
         {"time":"10:30–12:00","type":"shopping","title":"CentralWorld：再行一次＋主要買個／中價店","map":"CentralWorld Bangkok","attractionId":"centralworld","durationMinutes":90},
@@ -168,34 +116,25 @@
         {"time":"15:50–17:00","type":"transport","title":"BTS / Gold Line → ICONSIAM"},
         {"time":"17:00–18:00","type":"shopping","title":"ICONSIAM：SookSiam＋河邊","map":"ICONSIAM Bangkok","attractionId":"iconsiam","durationMinutes":60},
         {"time":"18:00–19:00","type":"meal","title":"昭披耶公主號 Check-in／取票","attractionId":"chao-phraya-princess-cruise"},
-        {"time":"19:30–21:30","type":"activity","title":"Chao Phraya Princess Dinner Cruise","map":"Chao Phraya Princess Cruise ICONSIAM","attractionId":"chao-phraya-princess-cruise","durationMinutes":120,"hardCut":true}
+        {"time":"19:30–21:30","type":"activity","title":"Chao Phraya Princess Dinner Cruise","map":"Chao Phraya Princess Cruise ICONSIAM","attractionId":"chao-phraya-princess-cruise","durationMinutes":120}
       ]
     },
     {
-      "id": "d8",
-      "day": 8,
-      "date": "2026-09-05",
-      "title": "最後掃貨・返香港",
-      "route": "On Nut → Check-out → Lotus’s / Big C 最後補貨 → 最後午餐 → BKK → UO703 返香港",
-      "weatherRegion": "bangkok",
-      "driving": false,
-      "imagePlan": {
-        "hero": "Lotus’s／Big C 最後補貨",
-        "small": ["行李／收拾", "BKK 機場／回程"]
-      },
-      "hardCuts": [
-        {"time":"15:15–15:30","label":"出發去 BKK"},
-        {"time":"19:40","label":"UO703 航班起飛"}
-      ],
-      "items": [
+      "id":"d8","day":8,"date":"2026-09-05",
+      "title":"最後掃貨・返回香港",
+      "route":"On Nut → Check-out → Lotus’s / Big C 最後補貨 → 最後午餐 → BKK → HKG",
+      "weatherRegion":"bangkok","driving":false,"hotelId":"president-sukhumvit-81",
+      "hardCuts":[{"time":"15:15–15:30","label":"最遲出發去 BKK"},{"time":"19:40","label":"UO703 起飛返香港"}],
+      "imagePlan":{"hero":"Lotus’s / Big C 最後補貨","small":["行李／Check-out","Suvarnabhumi Airport"]},
+      "items":[
         {"time":"08:30","type":"activity","title":"起身"},
         {"time":"09:30","type":"meal","title":"早餐＋執行李"},
         {"time":"11:00","type":"hotel","title":"Check-out"},
-        {"time":"11:15–13:30","type":"shopping","title":"Lotus’s / Big C：最後補貨（如可寄存行李）","attractionId":"last-minute-supermarket","durationMinutes":135},
-        {"time":"13:30–14:30","type":"meal","title":"最後午餐","durationMinutes":60},
-        {"time":"15:15–15:30","type":"transport","title":"出發去 BKK","map":"Suvarnabhumi Airport","hardCut":true},
-        {"time":"16:30 左右","type":"transport","title":"到機場"},
-        {"time":"19:40","type":"flight","title":"UO703 BKK → HKG","note":"BKK 19:40 → HKG 23:40","map":"Suvarnabhumi Airport","hardCut":true}
+        {"time":"11:15–13:30","type":"shopping","title":"Lotus’s / Big C 最後補貨","note":"實際分店待確認；如可寄存行李","durationMinutes":135},
+        {"time":"13:30–14:30","type":"meal","title":"最後午餐"},
+        {"time":"15:15–15:30","type":"transport","title":"出發去 BKK","map":"Suvarnabhumi Airport"},
+        {"time":"16:30 左右","type":"flight","title":"到機場・辦理登機"},
+        {"time":"19:40","type":"flight","title":"UO703 BKK → HKG","note":"返香港"}
       ]
     }
   ]
