@@ -1,6 +1,6 @@
 {
-  "version": "v10.3.3",
-  "build": "2026-10-03.32",
-  "updated": "2026-10-04T00:02:00+08:00",
-  "notes": "Restore rich hotel booking and practical information inside each itinerary day. D1-D8 now read the same hotels.json used by Trip Info and show compact responsive payment, stay and practical columns, including total/paid/arrival payment, room/meals/check-in/out, address/phone/parking/cancellation. Bounded retries only; no permanent observer."
+  "version": "v10.4.0",
+  "build": "2026-10-04.33",
+  "updated": "2026-10-04T00:52:00+08:00",
+  "notes": "Multi Trip phase 5: Attractions Catalog is now connected to attractions.json. The Japan 2027 trip runs in safe hydrate mode so JSON controls day/status/score/map metadata while preserving all existing rich attraction cards and full ⓘ descriptions. Future trips can use generate mode to build grouped attraction cards and optional shared info modals from JSON without another attractions.html page."
 }
