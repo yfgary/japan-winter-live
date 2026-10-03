@@ -1,6 +1,6 @@
 {
-  "version": "v10.9.5",
-  "build": "2026-10-04.43",
-  "updated": "2026-10-04T05:40:00+08:00",
-  "notes": "Fix generic itinerary intro leakage. Generated trips now replace the legacy Japan 2027 intro card with trip-specific name, subtitle, dates, country and driving-day summary from the active Trip Data. Okinawa Demo no longer shows Japan Chubu winter self-drive details on its itinerary page."
+  "version": "v10.9.6",
+  "build": "2026-10-04.44",
+  "updated": "2026-10-04T06:02:00+08:00",
+  "notes": "Harden installed-PWA updates. When a newer version is detected, show a clear update prompt instead of relying on the small version badge. Wait for the new service worker to take control before reloading, support SKIP_WAITING explicitly, and fetch navigation documents with no-store so reopening the installed app does not fall back to an older cached app shell."
 }
