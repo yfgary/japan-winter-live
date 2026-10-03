@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 5,
   "id": "shirakawago-shinhotaka-2027",
   "name": "白川鄉・新穗高之旅 2027",
   "shortName": "白川鄉・新穗高 2027",
@@ -57,12 +57,17 @@
       "mode": "hydrate",
       "source": "tripInfo",
       "preserveLegacyShell": true
+    },
+    "attractions": {
+      "mode": "hydrate",
+      "source": "attractions",
+      "preserveLegacyDetails": true
     }
   },
   "legacy": {
     "core": "assets/trip-core-v1.js",
-    "dataMode": "hybrid-data-v3",
-    "migrationStage": 4,
-    "note": "v10.3 migration: itinerary.json drives itinerary summaries and trip-info.json now drives the Trip Info content. Existing Japan-specific shell, rich itinerary details and D6-D8 modules remain preserved while shared renderers are used for future trips."
+    "dataMode": "hybrid-data-v4",
+    "migrationStage": 5,
+    "note": "v10.4 migration: attractions.json now drives attraction day/status/score/map metadata while the existing rich Japan attraction cards and full ⓘ descriptions are preserved. Future trips use the shared generate renderer without another attractions HTML page."
   }
 }
