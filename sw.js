@@ -1,4 +1,4 @@
-const CACHE_NAME = "multi-trip-v10.6.0-weather-json-20261004";
+const CACHE_NAME = "multi-trip-v10.7.0-weather-profiles-20261004";
 
 const CORE_FILES = [
     "./",
@@ -22,6 +22,7 @@ const CORE_FILES = [
     "./assets/multi-trip-attractions-renderer-v1.js",
     "./assets/multi-trip-live-renderer-v1.js",
     "./assets/multi-trip-weather-v1.js",
+    "./assets/weather-profile-standard-v1.js",
     "./assets/itinerary-hotel-detail-v1.js",
     "./assets/multi-trip-trip-info-renderer-v1.js",
     "./assets/info-icon-repair-v1.js",
