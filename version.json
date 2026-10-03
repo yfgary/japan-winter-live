@@ -1,6 +1,6 @@
 {
-  "version": "v10.9.3",
-  "build": "2026-10-04.41",
-  "updated": "2026-10-04T05:10:00+08:00",
-  "notes": "Restore the floating version badge as a shared Multi Trip UI control. Generic trips such as Okinawa now create and style the bottom-left version badge independently of the Japan 2027 legacy site shell, while preserving the shared back-to-top and weather UI introduced in v10.9.2."
+  "version": "v10.9.4",
+  "build": "2026-10-04.42",
+  "updated": "2026-10-04T05:24:00+08:00",
+  "notes": "Make Multi Trip the single source of truth for version display and update detection. Remove the legacy v10.9.1 rewrite loop, compare the running app version against version.json, show an update-available state when they differ, and let the version badge trigger the service-worker refresh/reload flow."
 }
