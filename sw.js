@@ -1,4 +1,4 @@
-const CACHE_NAME = "multi-trip-v10.2.1-info-icon-repair-20261003";
+const CACHE_NAME = "multi-trip-v10.3.0-trip-info-json-20261003";
 
 const CORE_FILES = [
     "./",
@@ -11,6 +11,7 @@ const CORE_FILES = [
     "./trips/registry.json",
     "./trips/shirakawago-shinhotaka-2027/trip.json",
     "./trips/shirakawago-shinhotaka-2027/itinerary.json",
+    "./trips/shirakawago-shinhotaka-2027/trip-info.json",
     "./trips/shirakawago-shinhotaka-2027/hotels.json",
     "./trips/shirakawago-shinhotaka-2027/attractions.json",
     "./trips/shirakawago-shinhotaka-2027/live-cams.json",
@@ -18,6 +19,7 @@ const CORE_FILES = [
     "./assets/multi-trip-context-v1.js",
     "./assets/multi-trip-data-v1.js",
     "./assets/multi-trip-itinerary-renderer-v1.js",
+    "./assets/multi-trip-trip-info-renderer-v1.js",
     "./assets/info-icon-repair-v1.js",
     "./assets/attraction-info.css",
     "./assets/attraction-info.js",
