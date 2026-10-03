@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "hokkaido-2025",
   "name": "北海道道南・札幌自駕 8日 2025",
   "shortName": "北海道 2025・8日",
@@ -22,6 +22,10 @@
     "packingChecklist": true,
     "bilingual": false,
     "winterDriving": false
+  },
+  "modules": [],
+  "assets": {
+    "dayGalleryCss": "assets/hokkaido-2025-day-galleries-v1.css"
   },
   "pages": {
     "itinerary": "itinerary.html",
@@ -48,7 +52,7 @@
   },
   "legacy": {
     "dataMode": "generic-only",
-    "migrationStage": 1,
-    "note": "Fourth real Trip validation. Source itinerary imported from uploaded Hokkaido workbook and booking confirmations; unknown items are explicitly marked instead of guessed."
+    "migrationStage": 2,
+    "note": "Fourth real Trip validation. Source itinerary imported from uploaded Hokkaido workbook and booking confirmations; trip-specific day galleries and researched attraction content are data/assets only, with no Hokkaido core branching."
   }
 }
