@@ -73,6 +73,22 @@ The shared `live.html` page can then generate D1–Dn Live Cam sections from JSO
 
 For the 2027 Japan trip, Live Cam runs in `hydrate` mode. Existing tested media templates are kept, but D2 and D6–D8 camera-group selection now comes from `live-cams.json` and follows the same flexible Shinhotaka-day rules as `itinerary.json`. A future trip in `generate` mode does not load the Japan-only Shinhotaka logic.
 
+## Weather
+
+Set `renderers.weather.mode` to `generate` and add `weather: "weather.json"` under `dataFiles`.
+
+The shared weather engine reads `weather.json` and builds the same 5-day forecast panel for every trip. Core fields:
+
+- `regions`: region id → name, label, type, latitude and longitude
+- `dayRegions`: D1–Dn → region id
+- `dynamicRegionRules`: optional mapping for flexible-day modules
+- `scoreProfiles`: optional visibility/cloud/gust/precipitation/snow weights by region type
+- `scoreNote`: optional per-region practical note shown under the /10 score
+
+Weather selection is stored per trip, so changing the selected region in one trip does not affect another trip. The engine uses the trip's own timezone and dates instead of Japan-specific hard-coded dates.
+
+For the 2027 Japan trip, `weather.json` now owns all nine regions, D1–D9 mapping, D6–D8 dynamic region mapping, coordinates and suitability weights. The Shinhotaka D6–D8 decision module remains a Japan-only optional module layered on top of the shared weather engine.
+
 ## Trip-specific modules
 
-Trip-specific modules remain optional and belong in that trip's own `trip.json`. They are not copied into every trip automatically. For example, the 2027 Japan trip keeps its Shinhotaka D6–D8 weather-day selector as a trip-specific module while still using the shared itinerary, Trip Info, Attractions and Live Cam engines.
+Trip-specific modules remain optional and belong in that trip's own `trip.json`. They are not copied into every trip automatically. For example, the 2027 Japan trip keeps its Shinhotaka D6–D8 weather-day selector as a trip-specific module while still using the shared itinerary, Trip Info, Attractions, Live Cam and Weather engines.
