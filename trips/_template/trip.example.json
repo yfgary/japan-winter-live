@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 6,
+  "schemaVersion": 7,
   "id": "new-trip-id",
   "name": "新旅行名稱",
   "shortName": "短名稱",
@@ -57,6 +57,11 @@
       "mode": "generate",
       "source": "liveCams",
       "preserveLegacyMediaTemplates": false
+    },
+    "weather": {
+      "mode": "generate",
+      "source": "weather",
+      "preserveLegacyDecisionModules": false
     }
   }
 }
