@@ -1,6 +1,6 @@
 {
-  "version": "v10.3.0",
-  "build": "2026-10-03.29",
-  "updated": "2026-10-03T22:58:00+08:00",
-  "notes": "Multi Trip phase 4: Trip Info is now data-driven. Add trip-info.json for 白川鄉・新穗高之旅 2027 and a shared Trip Info renderer covering overview, transport, rental car, hotels, parking, hard cuts, D6-D8 weather decisions, checklist and emergency data. Future trips can reuse the same trip-info.html with renderers.tripInfo.mode=generate."
+  "version": "v10.3.1",
+  "build": "2026-10-03.30",
+  "updated": "2026-10-03T23:18:00+08:00",
+  "notes": "Restore rich hotel information lost during the Trip Info JSON migration. Hotel cards again show booking status, total price, paid amount, what still needs to be paid at the hotel, room type, meals, check-in/check-out, address, phone, parking and cancellation details when available. Update Japan 2027 hotel data with the latest confirmed Residence and Iroha bookings."
 }
