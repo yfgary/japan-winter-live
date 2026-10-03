@@ -1,4 +1,4 @@
-const CACHE_NAME = "japan-winter-2027-v9.1.2-content-i18n2-20261003";
+const CACHE_NAME = "multi-trip-v10.0.0-20261003";
 
 const CORE_FILES = [
     "./",
@@ -8,6 +8,10 @@ const CORE_FILES = [
     "./trip-info.html",
     "./attractions.html",
     "./manifest.webmanifest",
+    "./version.json",
+    "./trips/registry.json",
+    "./trips/shirakawago-shinhotaka-2027/trip.json",
+    "./assets/multi-trip-context-v1.js",
     "./assets/attraction-info.css",
     "./assets/attraction-info.js",
     "./assets/attractions-catalog.js",
@@ -94,7 +98,7 @@ async function patchLiveDocument(response, url) {
         if (text.includes("assets/live-v9-2-sync.js")) {
             return new Response(text, {status: response.status, statusText: response.statusText, headers: response.headers});
         }
-        const injected = text.replace(/<\/body>/i,'<script src="assets/live-v9-2-sync.js?v=7"><\/script>\n</body>');
+        const injected = text.replace(/<\/body>/i,'<script src="assets/live-v9-2-sync.js?v=8"><\/script>\n</body>');
         const headers = new Headers(response.headers);
         headers.delete("content-length");headers.delete("content-encoding");
         return new Response(injected,{status:response.status,statusText:response.statusText,headers});
@@ -108,7 +112,7 @@ self.addEventListener("fetch", event => {
     if (url.origin !== self.location.origin) return;
 
     if (url.pathname.endsWith("/version.json")) {
-        event.respondWith(fetch(request,{cache:"no-store"}).catch(()=>new Response(JSON.stringify({version:null,offline:true}),{headers:{"Content-Type":"application/json"}})));
+        event.respondWith(fetch(request,{cache:"no-store"}).catch(()=>caches.match("./version.json")).then(r=>r||new Response(JSON.stringify({version:"v10.0.0",offline:true}),{headers:{"Content-Type":"application/json"}})));
         return;
     }
 
@@ -120,9 +124,9 @@ self.addEventListener("fetch", event => {
                 const copy=delivered.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));
                 return delivered;
             } catch(e) {
-                const cached=await caches.match(request);
+                const cached=await caches.match(request,{ignoreSearch:true});
                 if(cached)return patchLiveDocument(cached,url);
-                return caches.match("./itinerary.html");
+                return caches.match("./index.html");
             }
         })());
         return;
