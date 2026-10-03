@@ -2,5 +2,5 @@
   "version": "v10.8.0",
   "build": "2026-10-04.37",
   "updated": "2026-10-04T02:42:00+08:00",
-  "notes": "Multi Trip phase 8: Today Mode and Driving Mode now share a reusable per-trip mode core for trip timezone/day detection, itinerary items, map routing, weather regions and Weather Activity Profile scoring. Future trips get generated Today/Driving modes directly from itinerary.json; Japan 2027 preserves its tested legacy overlays and bridges destination/road suitability scores into them."
+  "notes": "Multi Trip phase 9: Today Mode and Driving Mode now share a reusable per-trip mode core for trip timezone/day detection, itinerary items, map routing, weather regions and Weather Activity Profile scoring. Future trips get generated Today/Driving modes directly from itinerary.json; Japan 2027 preserves its tested legacy overlays and bridges destination/road suitability scores into them."
 }
