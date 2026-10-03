@@ -2,6 +2,7 @@
 'use strict';
 if(window.MultiTrip&&window.MultiTrip.__v1)return;
 
+const APP_VERSION='v10.0.0';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const STORAGE_KEY='multiTrip.activeTrip';
 const params=new URLSearchParams(location.search);
@@ -61,13 +62,13 @@ function syncLinks(){
  document.querySelectorAll('.page-switch').forEach(sw=>{
   let home=sw.querySelector('a[data-multi-trip-home]');
   if(!home){
-   home=document.createElement('a');
-   home.href='index.html';
-   home.dataset.multiTripHome='1';
-   home.textContent='🏠 旅程';
-   sw.insertBefore(home,sw.firstChild);
+   home=document.createElement('a');home.href='index.html';home.dataset.multiTripHome='1';home.textContent='🏠 旅程';sw.insertBefore(home,sw.firstChild);
   }
  });
+}
+function syncVersion(){
+ const ids=['siteVersionBadge','catalogVersion'];
+ ids.forEach(id=>{const b=document.getElementById(id);if(!b)return;const offline=/離線|Offline/.test(b.textContent||'');b.classList.remove('outdated');b.classList.add(offline?'offline':'current');const en=document.documentElement.lang==='en';b.textContent=(en?'Version ':'版本 ')+APP_VERSION+(offline?(en?' · Offline':'・離線'):'');b.title=(offline?(en?'Offline; local version ':'目前離線；本機版本 '):(en?'Latest version ':'已係最新版本 '))+APP_VERSION;});
 }
 function syncBrand(){
  const type=currentPageType(),label=pageLabel(type),name=config.name||fallback.name,shortName=config.shortName||name;
@@ -80,39 +81,25 @@ function syncBrand(){
   h.textContent=(icon?icon+' ':'')+shortName+(type==='attractions'?'・景點總覽':'');
  }
  document.querySelectorAll('footer').forEach(f=>{if(/Japan Winter|Japan Winter Trip|Japan 2027/i.test(f.textContent||''))f.textContent=shortName+(label?'｜'+label:'');});
- syncLinks();
+ syncLinks();syncVersion();
 }
-function setActive(id){
- if(!id)return;
- localStorage.setItem(STORAGE_KEY,id);
-}
-function switchTrip(id,target){
- if(!id)return;
- setActive(id);
- const file=target||'itinerary.html';
- location.href=file+'?trip='+encodeURIComponent(id);
-}
+function setActive(id){if(id)localStorage.setItem(STORAGE_KEY,id);}
+function switchTrip(id,target){if(!id)return;setActive(id);const file=target||'itinerary.html';location.href=file+'?trip='+encodeURIComponent(id);}
 
 window.MultiTrip={
  __v1:true,
+ version:APP_VERSION,
  get id(){return config.id||tripId;},
  get config(){return config;},
- ready,
- feature,
- withTrip,
- setActive,
- switchTrip,
- refresh:syncBrand,
- defaultTrip:DEFAULT_TRIP
+ ready,feature,withTrip,setActive,switchTrip,refresh:syncBrand,defaultTrip:DEFAULT_TRIP
 };
 
 setActive(tripId);
-
 fetch('trips/'+encodeURIComponent(tripId)+'/trip.json?t='+Date.now(),{cache:'no-store'})
  .then(r=>{if(!r.ok)throw new Error('trip config');return r.json();})
  .then(c=>{config=Object.assign({},fallback,c||{});setActive(config.id||tripId);syncBrand();resolveReady(config);})
  .catch(()=>{config=Object.assign({},fallback,{id:tripId||DEFAULT_TRIP});syncBrand();resolveReady(config);});
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',syncBrand,{once:true});else syncBrand();
-[350,1200,2600].forEach(t=>setTimeout(syncBrand,t));
+[350,1200,2600,5200].forEach(t=>setTimeout(syncBrand,t));
 })();
