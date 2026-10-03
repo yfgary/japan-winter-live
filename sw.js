@@ -1,4 +1,4 @@
-const CACHE_NAME = "multi-trip-v10.4.0-attractions-json-20261004";
+const CACHE_NAME = "multi-trip-v10.5.0-livecam-json-20261004";
 
 const CORE_FILES = [
     "./",
@@ -20,6 +20,7 @@ const CORE_FILES = [
     "./assets/multi-trip-data-v1.js",
     "./assets/multi-trip-itinerary-renderer-v1.js",
     "./assets/multi-trip-attractions-renderer-v1.js",
+    "./assets/multi-trip-live-renderer-v1.js",
     "./assets/itinerary-hotel-detail-v1.js",
     "./assets/multi-trip-trip-info-renderer-v1.js",
     "./assets/info-icon-repair-v1.js",
@@ -109,7 +110,7 @@ async function patchLiveDocument(response, url) {
         if (text.includes("assets/live-v9-2-sync.js")) {
             return new Response(text, {status: response.status, statusText: response.statusText, headers: response.headers});
         }
-        const injected = text.replace(/<\/body>/i,'<script src="assets/live-v9-2-sync.js?v=7"><\/script>\n</body>');
+        const injected = text.replace(/<\/body>/i,'<script src="assets/live-v9-2-sync.js?v=8"><\/script>\n</body>');
         const headers = new Headers(response.headers);
         headers.delete("content-length");headers.delete("content-encoding");
         return new Response(injected,{status:response.status,statusText:response.statusText,headers});
