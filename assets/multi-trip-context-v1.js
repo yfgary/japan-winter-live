@@ -2,7 +2,7 @@
 'use strict';
 if(window.MultiTrip&&window.MultiTrip.__v1)return;
 
-const APP_VERSION='v10.6.0';
+const APP_VERSION='v10.7.0';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const STORAGE_KEY='multiTrip.activeTrip';
 const params=new URLSearchParams(location.search);
@@ -18,7 +18,7 @@ const fallback={
  startDate:'2027-01-09',
  endDate:'2027-01-17',
  timezone:'Asia/Tokyo',
- features:{itinerary:true,tripInfo:true,attractions:true,liveCam:true,todayMode:true,drivingMode:true,weather:true,weatherScore:true,packingChecklist:true,bilingual:true,winterDriving:true,shinhotakaPlanner:true},
+ features:{itinerary:true,tripInfo:true,attractions:true,liveCam:true,todayMode:true,drivingMode:true,weather:true,weatherScore:true,weatherActivityProfiles:true,packingChecklist:true,bilingual:true,winterDriving:true,shinhotakaPlanner:true},
  pages:{itinerary:'itinerary.html',tripInfo:'trip-info.html',attractions:'attractions.html',liveCam:'live.html'}
 };
 
