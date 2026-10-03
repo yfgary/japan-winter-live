@@ -1,6 +1,6 @@
 {
-  "version": "v10.6.0",
-  "build": "2026-10-04.35",
-  "updated": "2026-10-04T01:18:00+08:00",
-  "notes": "Multi Trip phase 7: Weather is now data-driven. weather.json owns region names, coordinates, day-to-region mapping, D6-D8 dynamic region mapping, score notes and scoring weights. Add a shared 5-day weather engine with per-trip region/cache storage and trip-specific timezone/date handling, while preserving the Japan-only Shinhotaka decision module."
+  "version": "v10.7.0",
+  "build": "2026-10-04.36",
+  "updated": "2026-10-04T02:20:00+08:00",
+  "notes": "Weather Activity Profile Standard v1: suitability is now split into Experience and Access/Safety, then combined with a safety cap. Add reusable activity profiles for indoor, city, mountain, snow, road, coastal, beach, boat, open-sea, ferry, snorkeling/diving, water sports and more. Map Japan 2027 regions and attractions to profile-specific standards while preserving Shinhotaka's Japan-only decision module."
 }
