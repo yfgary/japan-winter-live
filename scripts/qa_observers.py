@@ -103,13 +103,10 @@ def main() -> int:
             error(f"Unexpected global MutationObserver replacement: assets/{path.name}")
 
     # Stage 3 debt audit. i18n deliberately needs one persistent observer so
-    # Today/Driving UI inserted long after startup can be translated. The other
-    # two observers are legacy itinerary debt and stay bounded by the guard.
+    # Today/Driving UI inserted long after startup can be translated. Only one
+    # legacy itinerary observer should remain now.
     intentional = {"assets/i18n-v1.js"}
-    legacy_remaining = {
-        "assets/trip-enhancements-v3.js",
-        "assets/trip-v8-9-user-fixes.js",
-    }
+    legacy_remaining = {"assets/trip-enhancements-v3.js"}
     expected = intentional | legacy_remaining
     found: dict[str, int] = {}
     for rel in itinerary_asset_paths(blocks["itineraryScripts"]):
@@ -127,6 +124,12 @@ def main() -> int:
     for rel in intentional:
         if found.get(rel) != 1:
             error(f"Intentional observer count changed for {rel}: {found.get(rel, 0)}")
+
+    v89 = read("assets/trip-v8-9-user-fixes.js")
+    if direct_observer_count(v89):
+        error("trip-v8-9-user-fixes.js must stay observer-free")
+    if "[300,700,1200,2200]" not in v89 or "refreshLateUi" not in v89:
+        error("trip-v8-9-user-fixes.js lost its bounded late-refresh strategy")
 
     i18n = read("assets/i18n-v1.js")
     if "observer.observe(document.documentElement,{subtree:true,childList:true})" not in i18n:
