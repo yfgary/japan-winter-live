@@ -1,5 +1,4 @@
 const CACHE_NAME='travelpilot-v10.12.0-20261004';
-const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const CORE=[
   './',
   './index.html',
@@ -47,15 +46,17 @@ self.addEventListener('activate',event=>{
   })());
 });
 
+/* live.html is still a legacy Japan page. Inject only the shared multi-trip
+   entry shim so non-Japan trips can replace/disable that legacy content. The
+   Japan-specific live-v9-2 sync is already loaded by site-shell-v7 and must not
+   be injected here a second time. */
 async function patchLive(response,url){
   if(!response||!url.pathname.endsWith('/live.html'))return response;
   try{
     let text=await response.text();
-    const id=url.searchParams.get('trip')||DEFAULT_TRIP;
-    const add=[];
-    if(!text.includes('assets/multi-trip-live-entry-v1.js'))add.push('<script src="assets/multi-trip-live-entry-v1.js?v=2"><\/script>');
-    if(id===DEFAULT_TRIP&&!text.includes('assets/live-v9-2-sync.js'))add.push('<script src="assets/live-v9-2-sync.js?v=8"><\/script>');
-    if(add.length)text=text.replace(/<\/body>/i,add.join('\n')+'\n</body>');
+    if(!text.includes('assets/multi-trip-live-entry-v1.js')){
+      text=text.replace(/<\/body>/i,'<script src="assets/multi-trip-live-entry-v1.js?v=10.12.0"><\/script>\n</body>');
+    }
     const headers=new Headers(response.headers);
     headers.delete('content-length');
     headers.delete('content-encoding');
