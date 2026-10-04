@@ -23,7 +23,7 @@ const isJapanLegacy=selectedTrip===DEFAULT_TRIP;
 const isTripInfo=/(?:^|\/)trip-info\.html$/.test(location.pathname);
 
 const commonHead=[
-  'assets/multi-trip-context-v1.js?v=10.12.0',
+  'assets/multi-trip-context-v1.js?v=10.12.1',
   'assets/multi-trip-data-v1.js?v=2',
   'assets/multi-trip-nav-v1.js?v=2'
 ];
@@ -86,8 +86,8 @@ const tripInfoScripts=commonHead.concat([
   'assets/trip-v9-hotfix.js?v=10.12.0',
   'assets/catalog-link.js?v=2',
   'assets/multi-trip-trip-info-renderer-v1.js?v=3',
-  'assets/multi-trip-departure-checklist-v1.js?v=3',
-  'assets/multi-trip-checklist-sync-v1.js?v=2',
+  'assets/multi-trip-departure-checklist-v1.js?v=4',
+  'assets/multi-trip-checklist-sync-v1.js?v=3',
   'assets/multi-trip-weather-v1.js?v=2',
   'assets/weather-profile-standard-v1.js?v=1',
   'assets/i18n-v1.js?v=3',
@@ -107,8 +107,8 @@ const genericItineraryScripts=commonHead.concat([
 
 const genericTripInfoScripts=commonHead.concat([
   'assets/multi-trip-trip-info-renderer-v1.js?v=3',
-  'assets/multi-trip-departure-checklist-v1.js?v=3',
-  'assets/multi-trip-checklist-sync-v1.js?v=2',
+  'assets/multi-trip-departure-checklist-v1.js?v=4',
+  'assets/multi-trip-checklist-sync-v1.js?v=3',
   'assets/multi-trip-weather-v1.js?v=2',
   'assets/weather-profile-standard-v1.js?v=1'
 ]);
