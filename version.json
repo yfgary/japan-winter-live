@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.14",
-  "build": "2026-10-04.63",
-  "updated": "2026-10-04T18:36:00+08:00",
-  "notes": "Force-refresh release for installed PWA clients. Homepage now explicitly re-registers sw.js with updateViaCache=none, activates waiting service workers immediately, reloads once on controller change, and cache-busts the approved TravelPilot banner and shared context assets."
+  "version": "v10.10.15",
+  "build": "2026-10-04.64",
+  "updated": "2026-10-04T19:10:00+08:00",
+  "notes": "Fix mobile hero rendering and stop update prompt flicker. TravelPilot hero is rendered responsively instead of relying on the low-resolution raster banner, and the version bridge now runs legacy MultiTrip logic as v10.10.15."
 }
