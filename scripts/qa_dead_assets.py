@@ -16,6 +16,10 @@ RETIRED = (
 
 TEXT_SUFFIXES = {".html", ".js", ".css", ".json", ".md", ".py", ".yml", ".yaml", ".webmanifest"}
 SKIP_DIRS = {".git", "node_modules"}
+ALLOWED_DOC_REFERENCES = {
+    "scripts/qa_dead_assets.py",
+    "docs/legacy-loader-inventory.md",
+}
 
 
 def error(message: str) -> None:
@@ -32,7 +36,7 @@ for path in ROOT.rglob("*"):
     if any(part in SKIP_DIRS for part in path.parts):
         continue
     rel = path.relative_to(ROOT).as_posix()
-    if rel == "scripts/qa_dead_assets.py":
+    if rel in ALLOWED_DOC_REFERENCES:
         continue
     try:
         text = path.read_text(encoding="utf-8")
