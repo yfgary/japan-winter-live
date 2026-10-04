@@ -1,6 +1,6 @@
 {
-  "version": "v10.11.1",
-  "build": "2026-10-04.66",
-  "updated": "2026-10-04T20:28:00+08:00",
-  "notes": "Hotfix homepage after v10.11.0: restore a reliable hero banner using an existing high-resolution travel image, remove the unrequested Quick Access panel, and stop the service-worker controllerchange reload loop."
+  "version": "v10.11.2",
+  "build": "2026-10-04.67",
+  "updated": "2026-10-04T21:18:00+08:00",
+  "notes": "Fix stale version reporting on trip pages and make the in-page update action reliably move to the current runtime version."
 }
