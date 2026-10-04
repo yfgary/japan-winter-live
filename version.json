@@ -1,6 +1,6 @@
 {
-  "version": "v10.11.0",
-  "build": "2026-10-04.59",
-  "updated": "2026-10-04T10:05:00+08:00",
-  "notes": "TravelPilot homepage redesign. Rename the PWA to TravelPilot・旅程管家, add responsive desktop/mobile navigation, branded hero area, quick function cards, richer journey cards, quick links, and updated responsive styling while keeping the existing multi-trip data and links."
+  "version": "v10.11.1",
+  "build": "2026-10-04.60",
+  "updated": "2026-10-04T10:20:00+08:00",
+  "notes": "TravelPilot visual refresh based on the approved mockup. Add a new TravelPilot route-plane-map icon, update the light scenic hero, responsive desktop/mobile homepage, quick function cards, journey panel, quick links and destination cards, and point the PWA manifest to the new branded icon."
 }
