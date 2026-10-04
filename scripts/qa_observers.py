@@ -102,12 +102,10 @@ def main() -> int:
         if "window.MutationObserver=" in text and path.name != "trip-performance-guard.js":
             error(f"Unexpected global MutationObserver replacement: assets/{path.name}")
 
-    # Stage 3 debt audit. i18n deliberately needs one persistent observer so
-    # Today/Driving UI inserted long after startup can be translated. Only one
-    # legacy itinerary observer should remain now.
+    # Stage 3 debt audit. i18n deliberately keeps one persistent observer so
+    # Today/Driving UI inserted long after startup can be translated. All
+    # itinerary decoration observers should now be gone.
     intentional = {"assets/i18n-v1.js"}
-    legacy_remaining = {"assets/trip-enhancements-v3.js"}
-    expected = intentional | legacy_remaining
     found: dict[str, int] = {}
     for rel in itinerary_asset_paths(blocks["itineraryScripts"]):
         text = read(rel)
@@ -115,15 +113,21 @@ def main() -> int:
         if count:
             found[rel] = count
 
-    unexpected = set(found) - expected
+    unexpected = set(found) - intentional
     if unexpected:
         error("Unexpected itinerary MutationObserver users: " + ", ".join(sorted(unexpected)))
-    missing_known = expected - set(found)
+    missing_known = intentional - set(found)
     if missing_known:
-        error("Observer debt audit is stale; expected observer no longer present: " + ", ".join(sorted(missing_known)))
+        error("Intentional observer missing: " + ", ".join(sorted(missing_known)))
     for rel in intentional:
         if found.get(rel) != 1:
             error(f"Intentional observer count changed for {rel}: {found.get(rel, 0)}")
+
+    v3 = read("assets/trip-enhancements-v3.js")
+    if direct_observer_count(v3):
+        error("trip-enhancements-v3.js must stay observer-free")
+    if "[120,350,800,1600,2600]" not in v3:
+        error("trip-enhancements-v3.js lost its bounded startup refresh strategy")
 
     v89 = read("assets/trip-v8-9-user-fixes.js")
     if direct_observer_count(v89):
@@ -147,9 +151,7 @@ def main() -> int:
     print("Intentional persistent observers:")
     for rel in sorted(intentional):
         print(f"  {rel}: {found.get(rel, 0)}")
-    print("Remaining bounded legacy observers:")
-    for rel in sorted(legacy_remaining):
-        print(f"  {rel}: {found.get(rel, 0)}")
+    print("Remaining legacy itinerary observers: 0")
     print(f"Errors: {len(ERRORS)}")
     for item in ERRORS:
         print(f"ERROR: {item}")
