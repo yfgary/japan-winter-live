@@ -8,57 +8,34 @@ if(!/(?:^|\/)itinerary\.html$/.test(location.pathname))return;
 const active=(new URLSearchParams(location.search).get('trip')||localStorage.getItem('multiTrip.activeTrip')||TRIP).trim();
 if(active!==TRIP)return;
 
-function norm(v){
- return String(v||'')
-  .replace(/ⓘ|📍/g,' ')
-  .replace(/[\uFE0F]/g,'')
-  .replace(/\s+/g,' ')
-  .trim();
-}
-function strippedTitle(v){
- return String(v||'').replace(/^\s*[\p{Extended_Pictographic}\uFE0F]+\s*/u,'').trim();
-}
+const CORE=window.Japan2027AttractionCore||null;
+if(!CORE)return;
+const REPAIR_NORM={iconSpace:true,stripVariationSelectors:true};
+
 function eligible(card){
- const type=norm(card&&card.querySelector('.event-type')&&card.querySelector('.event-type').textContent);
+ const type=CORE.norm(card&&card.querySelector('.event-type')&&card.querySelector('.event-type').textContent,REPAIR_NORM);
  if(!type)return true;
  return !/(🚗|CHECK|HARD CUT|🍳|🍜|✈️|🚆|名鐵|入境|轉車|還車|入油|休息|溫泉\s*\/\s*休息|Gondola|步行|接駁|Check-out|CHECK-OUT|HOTEL|酒店|取車|租車)/i.test(type);
 }
 function bestMatch(h3){
- const data=window.Japan2027EnhancementData;
- if(!data||!Array.isArray(data.attractions))return null;
  const card=h3.closest('.timeline-card');
- const hay=norm([
+ const hay=[
   h3.textContent,
   h3.getAttribute('data-map'),
   h3.getAttribute('data-map-label'),
   card&&card.getAttribute('data-map'),
   card&&card.textContent
- ].filter(Boolean).join(' | '));
- let best=null,bestLen=0;
- data.attractions.forEach(a=>{
-  const keys=[...(a.aliases||[]),strippedTitle(a.title)];
-  keys.forEach(k=>{
-   const n=norm(k);
-   if(n&&hay.includes(n)&&n.length>bestLen){best=a;bestLen=n.length;}
-  });
- });
- return best;
+ ].filter(Boolean).join(' | ');
+ return CORE.findBest(hay,{includeTitle:true,normalizeKeys:true,normOptions:REPAIR_NORM});
 }
 function ensureButton(h3,info){
- let b=h3.querySelector('.attraction-info-btn,.enhance-info-btn,.backup-info-btn,.v90-shrine-info-btn');
- if(b){
-  if(!b.dataset.deepInfoId)b.dataset.deepInfoId=info.id;
-  return false;
- }
- b=document.createElement('button');
- b.type='button';
- b.className='enhance-info-btn';
- b.textContent='ⓘ';
- b.dataset.deepInfoId=info.id;
- b.title='詳盡介紹：歷史、重要性、現場睇乜';
- b.setAttribute('aria-label','詳盡景點介紹：'+(info.title||info.id));
- h3.appendChild(b);
- return true;
+ const existed=!!h3.querySelector(CORE.BUTTON_SELECTOR);
+ const button=CORE.ensureInfoButton(h3,info,{
+  title:'詳盡介紹：歷史、重要性、現場睇乜',
+  ariaLabel:'詳盡景點介紹：'+(info.title||info.id),
+  setExistingIdIfMissing:true
+ });
+ return !existed&&!!button;
 }
 function repair(){
  let added=0,matched=0;
