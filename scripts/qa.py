@@ -3,7 +3,8 @@
 
 No third-party packages are required. The goal is to catch the regressions that
 have hurt this project before: split version ownership, missing assets, stale
-legacy references, invalid trip JSON and registry/config mismatches.
+legacy references, invalid trip JSON, registry/config mismatches, and cross-trip
+routing/feature leakage.
 """
 from __future__ import annotations
 
@@ -183,12 +184,17 @@ def check_trip_registry() -> None:
             error(f"{label}: trip dates differ between registry and trip.json")
 
         pages = config.get("pages") or {}
+        features = config.get("features") or {}
         for page_key, page_path in pages.items():
             if isinstance(page_path, str) and not local_target_exists(ROOT, page_path):
                 error(f"{label}: missing page for {page_key}: {page_path}")
+        for page_key in ("itinerary", "tripInfo", "attractions", "liveCam"):
+            if features.get(page_key) is True and not pages.get(page_key):
+                error(f"{label}: feature {page_key} is enabled but no page is configured")
 
         data_files = config.get("dataFiles") or {}
         trip_dir = config_path.parent
+        loaded_data: dict[str, object] = {}
         for data_key, data_path in data_files.items():
             if not isinstance(data_path, str):
                 error(f"{label}: dataFiles.{data_key} is not a string")
@@ -197,7 +203,31 @@ def check_trip_registry() -> None:
             if not target.is_file():
                 error(f"{label}: missing data file {target.relative_to(ROOT)}")
             else:
-                load_json(target)
+                loaded_data[data_key] = load_json(target)
+
+        legacy = config.get("legacy") or {}
+        if trip_id != default_trip and legacy.get("dataMode") == "generic-only":
+            renderers = config.get("renderers") or {}
+            for renderer in ("itinerary", "tripInfo", "attractions"):
+                mode = (renderers.get(renderer) or {}).get("mode")
+                if mode != "generate":
+                    error(f"{label}: generic trip renderer {renderer} must use generate mode")
+            if not features.get("shinhotakaPlanner", False):
+                for module in config.get("modules") or []:
+                    if isinstance(module, dict) and (
+                        module.get("type") == "weather-day-selector"
+                        or module.get("destination") == "shinhotaka"
+                    ):
+                        error(f"{label}: Japan-only Shinhotaka module leaked into generic trip")
+            trip_info = loaded_data.get("tripInfo")
+            if isinstance(trip_info, dict):
+                if trip_info.get("tripId") != trip_id:
+                    error(f"{label}: trip-info.json tripId mismatch")
+                title = ((trip_info.get("overview") or {}).get("title") or "").strip()
+                if title not in {str(config.get("name") or "").strip(), str(config.get("shortName") or "").strip()}:
+                    error(f"{label}: Trip Info overview title must identify the active trip")
+                if features.get("packingChecklist") is True and not trip_info.get("departureChecklist"):
+                    error(f"{label}: packingChecklist enabled but departureChecklist data is missing")
 
         for registry_key in ("cover", "entry"):
             raw = trip.get(registry_key)
@@ -211,6 +241,57 @@ def check_trip_registry() -> None:
     index = read("index.html")
     if "String(b.startDate||'').localeCompare(String(a.startDate||''))" not in index:
         error("Homepage trip sorting is no longer startDate newest-to-oldest")
+
+
+def check_runtime_routing() -> None:
+    """Guard the exact cross-trip failures seen during the multi-trip rollout."""
+    context = read("assets/multi-trip-context-v1.js")
+    nav = read("assets/multi-trip-nav-v1.js")
+    loader = read("assets/attraction-info.js")
+    generic_fix = read("assets/multi-trip-generic-qa-fix-v1.js")
+    travel_fix = read("assets/travel-mode-nav-fix-v1.js")
+    live_entry = read("assets/multi-trip-live-entry-v1.js")
+
+    if "u.searchParams.set('trip'" not in context:
+        error("Internal trip links no longer preserve the active trip query parameter")
+    for feature_name in ("itinerary", "tripInfo", "attractions", "liveCam", "todayMode", "drivingMode"):
+        if f"enabled('{feature_name}')" not in nav:
+            error(f"Shared navigation no longer feature-gates {feature_name}")
+
+    generic_itinerary = re.search(
+        r"const genericItineraryScripts=commonHead\.concat\(\[(.*?)\]\);", loader, re.S
+    )
+    if not generic_itinerary:
+        error("Cannot locate generic itinerary loader block")
+    else:
+        block = generic_itinerary.group(1)
+        for banned in (
+            "assets/trip-core-v1.js",
+            "assets/site-shell-v7.js",
+            "assets/d6-d8-weather-decision-v1.js",
+        ):
+            if banned in block:
+                error(f"Generic itinerary must not load Japan-only runtime: {banned}")
+        for required in (
+            "assets/multi-trip-today-mode-v1.js",
+            "assets/multi-trip-driving-mode-v1.js",
+            "assets/multi-trip-generic-qa-fix-v1.js",
+        ):
+            if required not in block:
+                error(f"Generic itinerary is missing shared runtime: {required}")
+
+    generic_trip_info = re.search(
+        r"const genericTripInfoScripts=commonHead\.concat\(\[(.*?)\]\);", loader, re.S
+    )
+    if not generic_trip_info or "assets/multi-trip-departure-checklist-v1.js" not in generic_trip_info.group(1):
+        error("Generic Trip Info no longer loads the departure checklist renderer")
+
+    if "tripv2WeatherSelect" not in generic_fix:
+        error("Generic runtime no longer removes the Japan-only D6-D8 selector")
+    if "MultiTripNav.render" not in generic_fix or "MultiTripNav.render" not in travel_fix:
+        error("Mode close/return paths no longer resync the canonical page navigation")
+    if "feature('liveCam')" not in live_entry or "details.region" not in live_entry:
+        error("Live Cam entry no longer blocks disabled trips from showing another trip's cameras")
 
 
 def check_all_json() -> None:
@@ -231,6 +312,7 @@ def main() -> int:
     check_retired_runtime_references()
     check_html_static_assets()
     check_trip_registry()
+    check_runtime_routing()
     check_all_json()
     check_home_css_asset()
 
