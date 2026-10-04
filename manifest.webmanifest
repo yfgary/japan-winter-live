@@ -5,19 +5,19 @@
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#eef5fb",
-  "theme_color": "#1977d4",
+  "background_color": "#eef8ff",
+  "theme_color": "#eef8ff",
   "orientation": "any",
   "lang": "zh-HK",
   "icons": [
     {
-      "src": "assets/images/travel-hub-icon-v2.svg",
+      "src": "assets/images/travelpilot-icon-v3.svg?v=1",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "assets/images/travel-hub-icon-v2.svg",
+      "src": "assets/images/travelpilot-icon-v3.svg?v=1",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "maskable"
