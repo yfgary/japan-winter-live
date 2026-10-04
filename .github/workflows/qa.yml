@@ -30,6 +30,8 @@ jobs:
         run: python scripts/qa_observers.py
       - name: Run legacy update cleanup QA
         run: python scripts/qa_legacy_update.py
+      - name: Run loader dependency QA
+        run: python scripts/qa_loader.py
       - name: Check JavaScript syntax
         run: |
           node --check sw.js
