@@ -46,6 +46,9 @@ def load_json(path: Path):
 def local_target_exists(base: Path, raw: str) -> bool:
     if not raw or raw.startswith(("#", "data:", "javascript:", "mailto:", "tel:")):
         return True
+    # HTML template literals are runtime values rather than static assets.
+    if "${" in raw or "{{" in raw or "<%" in raw:
+        return True
     parsed = urlsplit(raw)
     if parsed.scheme or parsed.netloc:
         return True
@@ -76,7 +79,8 @@ def check_version_ownership() -> None:
         error("multi-trip-context-v1.js APP_VERSION does not match version.json")
     if "XMLHttpRequest" in context or "eval)(" in context or "eval(" in context:
         error("multi-trip-context-v1.js must not use sync XHR/eval legacy loading")
-    if "controllerchange" in context:
+    # Comments may mention controllerchange; only executable listeners are banned.
+    if re.search(r"(?:addEventListener|on)\s*\(\s*['\"]controllerchange['\"]", context):
         error("multi-trip-context-v1.js must not auto-reload on controllerchange")
 
     sw = read("sw.js")
@@ -141,7 +145,6 @@ def check_trip_registry() -> None:
         return
 
     seen: set[str] = set()
-    dates: list[tuple[date, str]] = []
     default_trip = registry.get("defaultTrip")
 
     for idx, trip in enumerate(trips):
@@ -163,7 +166,6 @@ def check_trip_registry() -> None:
             end = date.fromisoformat(str(trip.get("endDate", "")))
             if end < start:
                 error(f"{label}: endDate is before startDate")
-            dates.append((start, trip_id))
         except ValueError:
             error(f"{label}: invalid startDate/endDate")
 
@@ -205,7 +207,7 @@ def check_trip_registry() -> None:
     if default_trip not in seen:
         error(f"defaultTrip is not present in registry: {default_trip}")
 
-    # Informational guard: homepage code is intentionally newest-to-oldest.
+    # Regression guard: homepage ordering is deliberately newest-to-oldest.
     index = read("index.html")
     if "String(b.startDate||'').localeCompare(String(a.startDate||''))" not in index:
         error("Homepage trip sorting is no longer startDate newest-to-oldest")
