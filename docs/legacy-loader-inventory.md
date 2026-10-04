@@ -1,6 +1,6 @@
 # TravelPilot legacy loader inventory
 
-Stage 5A records what `assets/attraction-info.js` currently owns. Stage 5B/5C add repository-wide dead/orphan-asset guards and remove only assets with no remaining runtime references. This inventory is not permission to delete active legacy files without runtime-equivalence checks.
+Stage 5A records what `assets/attraction-info.js` currently owns. Stage 5B/5C add repository-wide dead/orphan-asset guards and remove only assets with no remaining runtime references. Stage 5D maps the active v9 patch surface before any runtime consolidation. This inventory is not permission to delete active legacy files without runtime-equivalence checks.
 
 ## Canonical shared layer
 
@@ -43,16 +43,28 @@ A repository-wide JS/CSS orphan scan found only eight additional unreferenced as
 
 Stage 5C removes the eight per-day duplicates, extends the retired-asset regression guard, and adds `scripts/qa_orphan_assets.py` so a new top-level JS/CSS file cannot remain silently unreferenced.
 
-## Active consolidation candidates for later review
+## Stage 5D active v9 patch audit
 
-These names reflect patch-era layering and are good candidates to inspect next, but they are **not declared dead code**:
+Stage 5D does **not** delete active v9 files. It maps the overlapping ownership of:
+
+- `trip-v9-final-fixes.js`
+- `trip-v9-hotfix.js`
+- `trip-v9-1-visit-fix.js`
+
+The audit confirms that the three scripts still own distinct live behavior while sharing the same attraction-info / D6–D8 DOM surface. `scripts/qa_v9_patch_surface.py` now guards the current loader ownership and the key behavior markers so a later consolidation cannot silently drop required functionality.
+
+The detailed ownership map and safe consolidation order are recorded in `docs/stage5d-v9-patch-audit.md`.
+
+## Remaining consolidation candidates
+
+The following remain active and require runtime-equivalence work before removal or merging:
 
 - `trip-v9-hotfix.js`
 - `trip-v9-1-visit-fix.js`
+- `trip-v9-final-fixes.js`
 - `trip-v8-9-user-fixes.js`
 - `trip-user-overrides.js`
 - `nav-enhancements-v1.js`
 - `site-shell-v7.js`
-- `trip-v9-final-fixes.js`
 
-For each candidate, a later stage should map exported globals / DOM mutations / storage keys / event listeners to the current canonical modules, add a regression test, and only then remove or merge it.
+The next runtime-change stage should start with the narrow shared attraction resolver / info-button normalization surface instead of attempting a wholesale legacy deletion.
