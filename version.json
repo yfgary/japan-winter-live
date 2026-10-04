@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.10",
-  "build": "2026-10-04.59",
-  "updated": "2026-10-04T16:50:00+08:00",
-  "notes": "TravelPilot branding release. Keep the stable v10.10.9 multi-trip dashboard structure and functionality, while replacing Travel Hub branding with TravelPilot・旅程管家, refreshing the homepage hero/banner styling, reusing the selected TravelPilot icon, and updating PWA metadata and cache version."
+  "version": "v10.10.11",
+  "build": "2026-10-04.60",
+  "updated": "2026-10-04T17:21:00+08:00",
+  "notes": "TravelPilot homepage rollout. Browser and installed PWA now use the same homepage implementation, branding, navigation, quick functions, trip cards and destination layout, with a new service-worker cache version to prevent old homepage assets from persisting."
 }
