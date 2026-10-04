@@ -1,9 +1,28 @@
 (function(){
 'use strict';
-if(window.MultiTripDepartureChecklist&&window.MultiTripDepartureChecklist.__v2)return;
+if(window.MultiTripDepartureChecklist&&window.MultiTripDepartureChecklist.__v3)return;
 
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const LEGACY_LOCAL='japanWinter2027DepartureChecklistV1';
+const LEGACY_SPLIT_MAP={
+  pack_cards:['pack_visa','pack_master','pack_unionpay'],
+  pack_gloves:['pack_ski_gloves','pack_decathlon_gloves'],
+  pack_hat_scarf:['pack_hats','pack_scarves'],
+  pack_socks:['pack_regular_socks','pack_thick_socks'],
+  pack_clothes:['pack_outfits_min','pack_base_layers','pack_windy_thermal','pack_long_sleeves','pack_snow_pants','pack_gary_jeans','pack_windy_skirt'],
+  pack_toothbrush:['pack_electric_toothbrush','pack_sensitive_toothpaste','pack_disposable_toothpaste','pack_disposable_toothbrush'],
+  pack_haircare:['pack_conditioner','pack_shampoo'],
+  pack_hangers:['pack_hangers','pack_clothesline'],
+  pack_skincare:['pack_skincare_set','pack_handcream','pack_bodylotion','pack_vaseline','pack_eczema_cream'],
+  pack_makeup:['pack_makeup','pack_makeup_wipes'],
+  pack_dental:['pack_toothpicks','pack_floss'],
+  pack_lunchbox:['pack_lunchbox','pack_forks'],
+  pack_medicines:['pack_panadol','pack_trumpet','pack_cold_drink','pack_plasters','pack_antiseptic_wipes','pack_antiseptic_liquid'],
+  pack_selfiestick:['pack_selfiestick','pack_tripod'],
+  pack_kettle:['pack_kettle','pack_stove'],
+  pack_cctv:['pack_cctv','pack_memorycard'],
+  pack_dashcam:['pack_dashcam','pack_dashcam_mount']
+};
 const $=(s,r)=>(r||document).querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function id(){return window.MultiTrip&&window.MultiTrip.id||'trip';}
@@ -17,15 +36,27 @@ function data(){
 function key(){return'multiTrip.departureChecklist.'+id();}
 function parse(raw){try{const v=JSON.parse(raw||'{}');return v&&typeof v==='object'?v:{};}catch(e){return{};}}
 function write(s){try{localStorage.setItem(key(),JSON.stringify(s||{}));}catch(e){}}
+function expandLegacyState(source){
+  const out=Object.assign({},source||{});
+  Object.keys(LEGACY_SPLIT_MAP).forEach(oldId=>{
+    if(out[oldId]!==true)return;
+    LEGACY_SPLIT_MAP[oldId].forEach(newId=>{if(out[newId]===undefined)out[newId]=true;});
+  });
+  return out;
+}
 function migrateLegacyLocal(){
   if(id()!==DEFAULT_TRIP)return;
   try{
-    if(localStorage.getItem(key())!==null)return;
-    const old=parse(localStorage.getItem(LEGACY_LOCAL));
-    if(Object.keys(old).length)write(old);
+    const current=expandLegacyState(parse(localStorage.getItem(key())));
+    const legacy=expandLegacyState(parse(localStorage.getItem(LEGACY_LOCAL)));
+    let changed=false;
+    Object.keys(legacy).forEach(k=>{if(current[k]===undefined){current[k]=legacy[k];changed=true;}});
+    const stored=parse(localStorage.getItem(key()));
+    Object.keys(current).forEach(k=>{if(stored[k]!==current[k])changed=true;});
+    if(changed||localStorage.getItem(key())===null)write(current);
   }catch(e){}
 }
-function read(){migrateLegacyLocal();try{return parse(localStorage.getItem(key()));}catch(e){return{};}}
+function read(){migrateLegacyLocal();try{return expandLegacyState(parse(localStorage.getItem(key())));}catch(e){return{};}}
 function groups(obj){
   if(Array.isArray(obj&&obj.groups))return obj.groups;
   if(Array.isArray(obj&&obj.items))return[{title:obj.title||'Checklist',items:obj.items}];
@@ -80,6 +111,7 @@ function render(){
   const nav=$('.quick-nav-inner');if(nav&&!nav.querySelector('a[href="#departure-checklist"]')){const a=document.createElement('a');a.href='#departure-checklist';a.textContent='🧳 出發前';const ref=nav.querySelector('a[href="#checklist"]');nav.insertBefore(a,ref||null);}
   refreshProgress(sec);
   const count=gs.reduce((n,g)=>n+(g.items||[]).length,0);
+  document.documentElement.dataset.departureChecklistCount=String(count);
   document.dispatchEvent(new CustomEvent('multitrip:departurerendered',{detail:{tripId:id(),count,source:sec.dataset.tripInfoSource}}));
   return count;
 }
@@ -87,5 +119,5 @@ function boot(){
   Promise.all([window.MultiTrip&&window.MultiTrip.ready||Promise.resolve(),window.MultiTripData&&window.MultiTripData.ready||Promise.resolve()]).then(()=>[40,320,1000].forEach(t=>setTimeout(render,t)));
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
-window.MultiTripDepartureChecklist={__v2:true,render,read,migrateLegacyLocal};
+window.MultiTripDepartureChecklist={__v3:true,render,read,migrateLegacyLocal,expandLegacyState};
 })();
