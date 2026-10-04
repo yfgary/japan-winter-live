@@ -3,7 +3,7 @@
 if(window.__japan2027LiveV1050Sync)return;
 window.__japan2027LiveV1050Sync=true;
 
-const RELEASE='v10.5.0';
+const RELEASE='v10.10.8';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const HAKUBA47_LIVE='https://www.vill.hakuba.nagano.jp/livecamera/';
 const tpl=new Map();
