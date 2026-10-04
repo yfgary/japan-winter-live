@@ -4,17 +4,11 @@
 if(window.__japan2027V901Hotfix)return;
 window.__japan2027V901Hotfix=true;
 
-const DATA=window.Japan2027EnhancementData||null;
+const CORE=window.Japan2027AttractionCore||null;
+if(!CORE)return;
 let modal=null;
 
 function isTripInfo(){return /(?:^|\/)trip-info\.html$/.test(location.pathname);}
-function norm(t){return String(t||'').replace(/📍|ⓘ/g,'').replace(/\s+/g,' ').trim();}
-function bestInfo(text){
-  const n=norm(text);let best=null,bestLen=-1;
-  (DATA?.attractions||[]).forEach(x=>(x.aliases||[]).forEach(a=>{if(a&&n.includes(a)&&a.length>bestLen){best=x;bestLen=a.length;}}));
-  return best;
-}
-function byId(id){return (DATA?.attractions||[]).find(x=>x.id===id)||null;}
 function paras(v){if(!v)return'';if(!Array.isArray(v))v=[v];return v.filter(Boolean).map(x=>'<p>'+x+'</p>').join('');}
 function bullets(v){if(!v)return'';if(!Array.isArray(v))v=[v];return '<ul>'+v.filter(Boolean).map(x=>'<li>'+x+'</li>').join('')+'</ul>';}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -50,15 +44,6 @@ function openInfo(info){
   modal.classList.add('show');document.body.style.overflow='hidden';
 }
 
-function removeDuplicateInfoButtons(root){
-  (root||document).querySelectorAll('.timeline-card h3').forEach(h=>{
-    const generics=[...h.querySelectorAll('.attraction-info-btn,.enhance-info-btn,.backup-info-btn')];
-    const customs=[...h.querySelectorAll('.v90-shrine-info-btn')];
-    if(generics.length){customs.forEach(b=>b.remove());generics.slice(1).forEach(b=>b.remove());}
-    else if(customs.length>1){customs.slice(1).forEach(b=>b.remove());}
-  });
-}
-
 function ensureTripInfoNav(){
   if(!isTripInfo())return;
   const nav=document.querySelector('.quick-nav-inner');if(!nav)return;
@@ -72,27 +57,27 @@ function ensureTripInfoNav(){
   }
 }
 
+const tripInfoButtonSelector=CORE.buttonSelector({includeBackup:false});
 function wireTripInfoButtons(){
   if(!isTripInfo())return;
   document.querySelectorAll('#winter-shrines .parking-main h3').forEach(h=>{
-    let b=h.querySelector('.enhance-info-btn,.v90-shrine-info-btn,.attraction-info-btn');
-    const info=bestInfo(h.textContent);if(!info)return;
-    if(!b){b=document.createElement('button');b.type='button';b.className='enhance-info-btn';b.textContent='ⓘ';h.appendChild(b);}
-    b.dataset.deepInfoId=info.id;
+    const info=CORE.findBest(h.textContent,{includeTitle:false});if(!info)return;
+    CORE.ensureInfoButton(h,info,{existingSelector:tripInfoButtonSelector,setExistingId:true});
   });
 }
 
 function run(){
-  removeDuplicateInfoButtons(document);
+  CORE.dedupeInfoButtons(document);
   ensureTripInfoNav();
   wireTripInfoButtons();
 }
 
+const scopedTripInfoButtonSelector=tripInfoButtonSelector.split(',').map(selector=>'#winter-shrines '+selector).join(',');
 document.addEventListener('click',e=>{
   if(!isTripInfo())return;
-  const b=e.target.closest('#winter-shrines .enhance-info-btn,#winter-shrines .v90-shrine-info-btn,#winter-shrines .attraction-info-btn');
+  const b=e.target.closest(scopedTripInfoButtonSelector);
   if(!b)return;
-  const h=b.closest('h3');const info=(b.dataset.deepInfoId&&byId(b.dataset.deepInfoId))||bestInfo(h?.textContent||'');
+  const h=b.closest('h3');const info=(b.dataset.deepInfoId&&CORE.byId(b.dataset.deepInfoId))||CORE.findBest(h?.textContent||'',{includeTitle:false});
   if(!info)return;
   e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();openInfo(info);
 },true);
