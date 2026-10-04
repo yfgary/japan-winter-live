@@ -4,6 +4,10 @@
 if(window.__japan2027TripPerformanceGuard)return;
 window.__japan2027TripPerformanceGuard=true;
 
+const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
+const selectedTrip=(new URLSearchParams(location.search).get('trip')||DEFAULT_TRIP).trim();
+if(!/(?:^|\/)itinerary\.html$/.test(location.pathname)||selectedTrip!==DEFAULT_TRIP)return;
+
 const NativeMutationObserver=window.MutationObserver;
 if(!NativeMutationObserver)return;
 
@@ -55,11 +59,11 @@ class GuardedMutationObserver{
 window.MutationObserver=GuardedMutationObserver;
 
 /*
-  The itinerary scripts only need observers during the first few seconds while
-  delayed patches finish building the page. Keeping several whole-page observers
-  alive forever makes every later DOM/class change rescan the complete itinerary,
-  which can eventually stall Safari/Chrome. Stop those startup observers, then
-  restore the browser's native constructor for anything created later.
+  Japan 2027 still has several legacy whole-page observers that only need the
+  startup window while delayed patches finish rendering. Keep those observers
+  functional, but batch callbacks and stop them after startup. Then restore the
+  browser-native constructor so newer UI (Today/Driving modes and shared code)
+  is not globally disabled or permanently wrapped.
 */
 setTimeout(()=>{
   [...active].forEach(o=>o.disconnect());
@@ -67,5 +71,12 @@ setTimeout(()=>{
     window.MutationObserver=NativeMutationObserver;
   }
 },7500);
+
+window.addEventListener('pagehide',()=>{
+  [...active].forEach(o=>o.disconnect());
+  if(window.MutationObserver===GuardedMutationObserver){
+    window.MutationObserver=NativeMutationObserver;
+  }
+},{once:true});
 
 })();
