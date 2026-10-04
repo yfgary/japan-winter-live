@@ -19,6 +19,7 @@ class GuardedMutationObserver{
     this._pending=false;
     this._records=[];
     this._stopped=false;
+    this._persistent=false;
     this._native=new NativeMutationObserver((records)=>{
       if(this._stopped)return;
       this._records.push(...records);
@@ -36,8 +37,14 @@ class GuardedMutationObserver{
   }
   observe(target,options){
     if(this._stopped)return;
+    /* i18n-v1 intentionally watches documentElement for nodes inserted later by
+       Today/Driving mode. Keep that one observer alive; legacy itinerary
+       observers watch body/.container and remain startup-bounded. */
+    const isI18nRoot=typeof document!=='undefined'&&target===document.documentElement&&
+      !!options&&options.childList===true&&options.subtree===true&&!options.attributes;
+    if(isI18nRoot)this._persistent=true;
     this._native.observe(target,options);
-    if(!this._autoStop){
+    if(!this._persistent&&!this._autoStop){
       this._autoStop=setTimeout(()=>this.disconnect(),6500);
     }
   }
@@ -59,14 +66,14 @@ class GuardedMutationObserver{
 window.MutationObserver=GuardedMutationObserver;
 
 /*
-  Japan 2027 still has several legacy whole-page observers that only need the
-  startup window while delayed patches finish rendering. Keep those observers
-  functional, but batch callbacks and stop them after startup. Then restore the
-  browser-native constructor so newer UI (Today/Driving modes and shared code)
-  is not globally disabled or permanently wrapped.
+  Japan 2027 still has two legacy whole-page observers that only need the
+  startup window while delayed patches finish rendering. Keep those functional,
+  but stop them after startup. The intentional i18n documentElement observer is
+  left running so UI created later can still be translated. Then restore the
+  browser-native constructor for every observer created after startup.
 */
 setTimeout(()=>{
-  [...active].forEach(o=>o.disconnect());
+  [...active].filter(o=>!o._persistent).forEach(o=>o.disconnect());
   if(window.MutationObserver===GuardedMutationObserver){
     window.MutationObserver=NativeMutationObserver;
   }
