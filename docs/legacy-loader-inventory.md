@@ -1,6 +1,6 @@
 # TravelPilot legacy loader inventory
 
-Stage 5A records what `assets/attraction-info.js` currently owns. Stage 5B adds a repository-wide dead-asset guard and removes only assets with no remaining references. This inventory is not permission to delete active legacy files without runtime-equivalence checks.
+Stage 5A records what `assets/attraction-info.js` currently owns. Stage 5B/5C add repository-wide dead/orphan-asset guards and remove only assets with no remaining runtime references. This inventory is not permission to delete active legacy files without runtime-equivalence checks.
 
 ## Canonical shared layer
 
@@ -36,6 +36,12 @@ Repository-wide filename/reference checks found no live references to these old 
 - `trip-enhancements-v2.js`
 
 Note: `trip-enhancements-v2.css` is **not** retired. It remains intentionally loaded by `attraction-info.js` and is separate from the deleted JavaScript file.
+
+## Stage 5C duplicate Bangkok gallery CSS
+
+A repository-wide JS/CSS orphan scan found only eight additional unreferenced assets: `bangkok-gallery-d1.css` through `bangkok-gallery-d8.css`. Each file contained one gallery rule that is already present **exactly** in `bangkok-day-galleries-v1.css`. The aggregate stylesheet remains the live source and is referenced by `trips/bangkok-2026/trip.json`.
+
+Stage 5C removes the eight per-day duplicates, extends the retired-asset regression guard, and adds `scripts/qa_orphan_assets.py` so a new top-level JS/CSS file cannot remain silently unreferenced.
 
 ## Active consolidation candidates for later review
 
