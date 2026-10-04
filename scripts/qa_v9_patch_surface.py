@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for Stage 5D-5L Japan-2027 patch ownership."""
+"""Regression guard for Stage 5D-5M Japan-2027 patch ownership."""
 from __future__ import annotations
 
 import re
@@ -57,7 +57,6 @@ REQUIRED = {
         "multitrip:itineraryrendered",
         "japan2027:finalpatch",
         "onFinalPatch",
-        "setTimeout(decorate,2300)",
     ),
     "repair": (
         "__japan2027InfoIconRepairV1",
@@ -80,7 +79,7 @@ REQUIRED = {
 texts: dict[str, str] = {}
 for key, path in FILES.items():
     if not path.exists():
-        ERRORS.append(f"Missing active Stage 5D-5L file: {path.relative_to(ROOT)}")
+        ERRORS.append(f"Missing active Stage 5D-5M file: {path.relative_to(ROOT)}")
         texts[key] = ""
         continue
     text = path.read_text(encoding="utf-8")
@@ -96,6 +95,10 @@ for key in ("hotfix", "visit"):
     for forbidden in ("function norm(", "function bestInfo(", "function findAttraction(", "function removeDuplicateInfoButtons("):
         if forbidden in text:
             ERRORS.append(f"{FILES[key].name} reintroduced duplicated attraction helper: {forbidden}")
+
+visit = texts.get("visit", "")
+if "setTimeout" in visit or "2300" in visit or "scheduleFallback" in visit:
+    ERRORS.append("Stage 5M requires visit-fix to remain event-driven with no startup fallback timer")
 
 repair = texts.get("repair", "")
 for forbidden in (
@@ -124,8 +127,8 @@ if loader.count("japan2027-attraction-core-v1.js?v=2") != 2:
     ERRORS.append("Both Japan loader chains must use attraction core module pin v2")
 if loader.count("trip-v9-final-fixes.js?v=914") != 2:
     ERRORS.append("Stage 5L requires both Japan loader chains to use final-fixes module pin v914")
-if loader.count("trip-v9-1-visit-fix.js?v=4") != 1:
-    ERRORS.append("Stage 5L requires itinerary visit-fix module pin v4")
+if loader.count("trip-v9-1-visit-fix.js?v=5") != 1:
+    ERRORS.append("Stage 5M requires itinerary visit-fix module pin v5")
 if loader.count("info-icon-repair-v1.js?v=3") != 1:
     ERRORS.append("Stage 5H requires itinerary info icon repair module pin v3")
 
@@ -146,7 +149,7 @@ for array_name in ("itineraryScripts", "tripInfoScripts"):
         if visit_pos < 0 or core_pos > visit_pos:
             ERRORS.append("itineraryScripts: shared attraction core must load before trip-v9-1-visit-fix.js")
         if renderer_pos < 0 or visit_pos > renderer_pos:
-            ERRORS.append("itineraryScripts: visit-fix must load before itinerary renderer for Stage 5J event ownership")
+            ERRORS.append("itineraryScripts: visit-fix must load before itinerary renderer for event ownership")
         if repair_pos < 0 or core_pos > repair_pos:
             ERRORS.append("itineraryScripts: shared attraction core must load before info-icon-repair-v1.js")
     elif "info-icon-repair-v1.js" in block:
@@ -158,7 +161,7 @@ button_tokens = (
     "backup-info-btn",
     "v90-shrine-info-btn",
 )
-print("TravelPilot Stage 5D-5L patch surface QA")
+print("TravelPilot Stage 5D-5M patch surface QA")
 for key, text in texts.items():
     present = [token for token in button_tokens if token in text]
     print(f"{FILES[key].name}: {len(text)} bytes; info-button tokens={','.join(present) or 'none'}; setTimeout={text.count('setTimeout')}")
@@ -169,6 +172,7 @@ print("Visit owns D6-D8 metadata cards:", "visit-meta-card" in texts.get("visit"
 print("Visit consumes itinerary-rendered event:", "multitrip:itineraryrendered" in texts.get("visit", ""))
 print("Final emits finalpatch event:", "japan2027:finalpatch" in texts.get("final", ""))
 print("Visit consumes finalpatch event:", "japan2027:finalpatch" in texts.get("visit", ""))
+print("Visit fixed startup timer removed:", "setTimeout" not in texts.get("visit", ""))
 print("Hotfix owns Trip Info modal:", "v901TripInfoModal" in texts.get("hotfix", ""))
 print("Info icon repair uses shared core:", "CORE.findBest" in texts.get("repair", ""))
 print(f"Errors: {len(ERRORS)}")
