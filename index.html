@@ -7,10 +7,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="TravelPilot">
-<link rel="manifest" href="manifest.webmanifest?v=10.11.0">
-<link rel="icon" type="image/jpeg" href="assets/images/travelpilot-icon-exact.jpg?v=10.11.0">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/images/travelpilot-icon-exact.jpg?v=10.11.0">
-<link rel="stylesheet" href="assets/travelpilot-home-v10.11.0.css?v=10.11.0">
+<link rel="manifest" href="manifest.webmanifest?v=10.11.1">
+<link rel="icon" type="image/jpeg" href="assets/images/travelpilot-icon-exact.jpg?v=10.11.1">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/images/travelpilot-icon-exact.jpg?v=10.11.1">
+<link rel="stylesheet" href="assets/travelpilot-home-v10.11.1.css?v=10.11.1">
 <meta name="description" content="TravelPilot 旅程管家：集中管理所有旅程、行程、景點、天氣、自駕、Live Cam、旅遊資料與出發 Checklist。">
 <title>TravelPilot｜旅程管家</title>
 </head>
@@ -18,53 +18,40 @@
 <header class="tp-sitebar">
   <div class="tp-sitebar-inner">
     <a class="tp-brand" href="index.html" aria-label="TravelPilot 旅程管家首頁">
-      <img src="assets/images/travelpilot-icon-exact.jpg?v=10.11.0" alt="">
+      <img src="assets/images/travelpilot-icon-exact.jpg?v=10.11.1" alt="">
       <span class="tp-brand-text"><strong>TravelPilot</strong><small>旅程管家</small></span>
     </a>
   </div>
 </header>
 
 <section class="tp-hero" aria-label="TravelPilot 旅程管家">
-  <img src="assets/images/travelpilot-hero.jpg?v=10.11.0" alt="TravelPilot 旅程管家：所有旅程，一個地方管理">
+  <div class="tp-flight-line" aria-hidden="true"></div>
+  <div class="tp-hero-inner">
+    <div class="tp-hero-copy">
+      <div class="tp-hero-title">Travel<span>Pilot</span></div>
+      <div class="tp-hero-cn">旅程管家</div>
+      <div class="tp-hero-sub">所有旅程，一個地方管理<br>行程・景點・天氣・自駕・Live Cam</div>
+    </div>
+  </div>
 </section>
 
 <main class="tp-shell">
-  <section class="tp-dashboard">
-    <div class="tp-trips-panel" id="trips">
-      <div class="tp-section-head">
-        <div>
-          <p class="tp-kicker">MY TRIPS</p>
-          <h1>我的旅程</h1>
-        </div>
-        <span class="tp-count" id="tripCount">載入中…</span>
+  <section class="tp-trips-panel" id="trips">
+    <div class="tp-section-head">
+      <div>
+        <p class="tp-kicker">MY TRIPS</p>
+        <h1>我的旅程</h1>
       </div>
-      <div class="tp-trip-grid" id="tripGrid"></div>
-      <div class="tp-status" id="tripStatus">正在載入旅程資料…</div>
+      <span class="tp-count" id="tripCount">載入中…</span>
     </div>
-
-    <aside class="tp-tools-panel" aria-label="快速功能">
-      <div class="tp-section-head tp-tools-head">
-        <div>
-          <p class="tp-kicker">QUICK ACCESS</p>
-          <h2>快速功能</h2>
-        </div>
-      </div>
-      <div class="tp-tools-grid">
-        <a class="tp-tool" data-file="itinerary.html" href="itinerary.html"><span class="tp-tool-icon">🗓️</span><span><strong>行程</strong><small>每日計劃與安排</small></span></a>
-        <a class="tp-tool" data-file="attractions.html" href="attractions.html"><span class="tp-tool-icon">📍</span><span><strong>景點</strong><small>景點資料與地圖</small></span></a>
-        <a class="tp-tool" data-file="itinerary.html#weather" href="itinerary.html#weather"><span class="tp-tool-icon">🌦️</span><span><strong>天氣</strong><small>旅程天氣與判斷</small></span></a>
-        <a class="tp-tool" data-file="itinerary.html" href="itinerary.html"><span class="tp-tool-icon">🚗</span><span><strong>自駕</strong><small>路線與駕駛資料</small></span></a>
-        <a class="tp-tool" data-file="live.html" href="live.html"><span class="tp-tool-icon">📷</span><span><strong>Live Cam</strong><small>即時影像</small></span></a>
-        <a class="tp-tool" data-file="trip-info.html" href="trip-info.html"><span class="tp-tool-icon">🧳</span><span><strong>旅遊資料</strong><small>住宿、交通與 Checklist</small></span></a>
-      </div>
-      <p class="tp-tools-note">快速功能會自動跟隨你最近開啟嘅旅程。</p>
-    </aside>
+    <div class="tp-trip-grid" id="tripGrid"></div>
+    <div class="tp-status" id="tripStatus">正在載入旅程資料…</div>
   </section>
 </main>
 
 <footer class="tp-footer">TravelPilot｜旅程管家・所有旅程，一個地方管理</footer>
 
-<script src="assets/multi-trip-context-v1.js?v=10.11.0"></script>
+<script src="assets/multi-trip-context-v1.js?v=10.11.1"></script>
 <script>
 (function(){
   const fallback={id:'shirakawago-shinhotaka-2027',name:'白川鄉・新穗高之旅 2027',shortName:'白川鄉・新穗高 2027',subtitle:'日本中部冬季自駕・9日8夜',startDate:'2027-01-09',endDate:'2027-01-17',country:'日本',emoji:'🇯🇵',cover:'assets/images/d7-shirakawago-view.jpg',entry:'itinerary.html',status:'active',badge:'正式旅程',features:{itinerary:true,tripInfo:true,attractions:true,liveCam:true}};
@@ -73,33 +60,15 @@
   const status=document.getElementById('tripStatus');
   let active='';
   try{active=localStorage.getItem('multiTrip.activeTrip')||''}catch(e){}
-
   function esc(s){return String(s||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]||c))}
   function fmt(s){if(!s)return'';const p=s.split('-');return p.length===3?p[0]+'/'+p[1]+'/'+p[2]:s}
-  function url(file,id){
-    const hash=file.includes('#')?file.slice(file.indexOf('#')):'';
-    const clean=hash?file.slice(0,file.indexOf('#')):file;
-    return clean+'?trip='+encodeURIComponent(id)+hash;
-  }
-  function remember(id){
-    active=id;
-    try{localStorage.setItem('multiTrip.activeTrip',id)}catch(e){}
-    syncTools();
-  }
-  function syncTools(){
-    document.querySelectorAll('[data-file]').forEach(a=>{
-      const f=a.getAttribute('data-file');
-      a.href=active?url(f,active):f;
-    });
-  }
+  function url(file,id){const hash=file.includes('#')?file.slice(file.indexOf('#')):'';const clean=hash?file.slice(0,file.indexOf('#')):file;return clean+'?trip='+encodeURIComponent(id)+hash}
+  function remember(id){active=id;try{localStorage.setItem('multiTrip.activeTrip',id)}catch(e){}}
   function link(label,file,t,secondary){return '<a class="tp-btn'+(secondary?' tp-btn-secondary':'')+'" href="'+url(file,t.id)+'" data-trip="'+esc(t.id)+'">'+label+'</a>'}
   function displayName(t){return t.status==='test'?(t.displayName||t.shortName||'測試旅程'):(t.displayName||t.name||t.shortName||'未命名旅程')}
   function displaySub(t){return t.status==='test'?(t.displaySubtitle||'功能驗證用旅程'):(t.displaySubtitle||t.subtitle||'')}
   function card(t){
-    const f=t.features||{};
-    const isTest=t.status==='test';
-    const isCurrent=active===t.id;
-    const el=document.createElement('article');
+    const f=t.features||{},isTest=t.status==='test',isCurrent=active===t.id,el=document.createElement('article');
     el.className='tp-trip-card'+(isCurrent?' is-current':'')+(isTest?' is-test':'');
     const cover=t.cover?"background-image:url('"+esc(t.cover)+"')":'';
     let actions='';
@@ -112,41 +81,18 @@
     return el;
   }
   function render(trips){
-    trips=[...trips].sort((a,b)=>{
-      const at=a.status==='test'?1:0,bt=b.status==='test'?1:0;
-      if(at!==bt)return at-bt;
-      return String(b.startDate||'').localeCompare(String(a.startDate||''));
-    });
+    trips=[...trips].sort((a,b)=>{const at=a.status==='test'?1:0,bt=b.status==='test'?1:0;if(at!==bt)return at-bt;return String(b.startDate||'').localeCompare(String(a.startDate||''))});
     if(!active){const first=trips.find(t=>t.status!=='test')||trips[0];if(first)active=first.id}
-    grid.innerHTML='';
-    trips.forEach(t=>grid.appendChild(card(t)));
-    count.textContent=trips.length+' 個旅程';
-    status.textContent=trips.length?'選擇旅程開始，快速功能會跟隨最近使用嘅旅程。':'暫時未有旅程。';
-    syncTools();
+    grid.innerHTML='';trips.forEach(t=>grid.appendChild(card(t)));count.textContent=trips.length+' 個旅程';status.textContent=trips.length?'選擇一個旅程開始。':'暫時未有旅程。';
   }
-  fetch('trips/registry.json?t='+Date.now(),{cache:'no-store'})
-    .then(r=>{if(!r.ok)throw 0;return r.json()})
-    .then(x=>render((x.trips||[]).filter(t=>t.status!=='hidden')))
-    .catch(()=>{render([fallback]);status.textContent='目前離線，顯示已內置旅程。'});
+  fetch('trips/registry.json?t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(x=>render((x.trips||[]).filter(t=>t.status!=='hidden'))).catch(()=>{render([fallback]);status.textContent='目前離線，顯示已內置旅程。'});
 })();
 </script>
 <script>
 (function(){
   if(!('serviceWorker' in navigator))return;
-  let reloaded=false;
-  navigator.serviceWorker.addEventListener('controllerchange',()=>{
-    if(reloaded||sessionStorage.getItem('travelpilot-sw-reloaded')==='10.11.0')return;
-    reloaded=true;
-    sessionStorage.setItem('travelpilot-sw-reloaded','10.11.0');
-    location.reload();
-  });
-  window.addEventListener('load',async()=>{
-    try{
-      const reg=await navigator.serviceWorker.register('./sw.js?release=10.11.0',{updateViaCache:'none'});
-      if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});
-      reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)w.postMessage({type:'SKIP_WAITING'})})});
-      reg.update();
-    }catch(e){}
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js?release=10.11.1',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
   });
 })();
 </script>
