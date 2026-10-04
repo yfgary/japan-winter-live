@@ -1,6 +1,6 @@
 {
-  "version": "v10.13.2",
-  "build": "2026-10-05.72",
-  "updated": "2026-10-05T02:03:00+08:00",
-  "notes": "Stage 5A loader audit: remove the duplicate direct trip-v9-final-fixes load, add dependency/duplicate/reference QA, document the current legacy loader inventory, and keep Japan legacy vs generic-trip dependency boundaries explicit."
+  "version": "v10.13.3",
+  "build": "2026-10-05.73",
+  "updated": "2026-10-05T02:18:00+08:00",
+  "notes": "Hotfix Live Cam reload prompt: remove the retired update/reload UI and Service Worker update listener from live.html, preserve Online/Offline status, align the Live Cam entry runtime pin, and extend regression QA to cover Live Cam."
 }

@@ -48,6 +48,7 @@ def main() -> int:
     manifest = read("manifest.webmanifest")
     sw = read("sw.js")
     loader = read("assets/attraction-info.js")
+    live_entry = read("assets/multi-trip-live-entry-v1.js")
 
     if plain:
         expected = {
@@ -59,6 +60,7 @@ def main() -> int:
             "manifest icon pin": f"assets/images/travelpilot-icon-exact.jpg?v={plain}",
             "legacy loader runtime pin": f"assets/multi-trip-context-v1.js?v={plain}",
             "Live Cam injected shim pin": f"assets/multi-trip-live-entry-v1.js?v={plain}",
+            "Live Cam entry runtime pin": f"assets/multi-trip-context-v1.js?v={plain}",
         }
         checks = {
             "runtime APP_VERSION": context,
@@ -69,6 +71,7 @@ def main() -> int:
             "manifest icon pin": manifest,
             "legacy loader runtime pin": loader,
             "Live Cam injected shim pin": sw,
+            "Live Cam entry runtime pin": live_entry,
         }
         for label, marker in expected.items():
             if marker not in checks[label]:
@@ -86,12 +89,13 @@ def main() -> int:
 
     # Guard against accidentally shipping the immediately previous production pin
     # in files whose cache-busters are release-owned rather than module-owned.
-    previous = "10.13.1"
+    previous = "10.13.2"
     for path, text in (
         ("index.html", index),
         ("manifest.webmanifest", manifest),
         ("sw.js", sw),
         ("assets/multi-trip-context-v1.js", context),
+        ("assets/multi-trip-live-entry-v1.js", live_entry),
     ):
         if previous in text:
             error(f"Stale production release pin {previous} remains in {path}")

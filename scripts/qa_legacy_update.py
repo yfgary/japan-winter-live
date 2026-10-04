@@ -27,6 +27,7 @@ retired_tokens = (
 runtime_files = [
     ROOT / "itinerary.html",
     ROOT / "trip-info.html",
+    ROOT / "live.html",
     ROOT / "assets" / "multi-trip-context-v1.js",
 ]
 
@@ -36,7 +37,7 @@ for path in runtime_files:
         if token in text:
             error(f"Retired updater token remains in {path.relative_to(ROOT)}: {token}")
 
-for page in ("itinerary.html", "trip-info.html"):
+for page in ("itinerary.html", "trip-info.html", "live.html"):
     text = (ROOT / page).read_text(encoding="utf-8")
     if "tripv2NetworkStatus" not in text or "function ensureNetworkStatus" not in text:
         error(f"{page}: online/offline status indicator was removed with the updater")
