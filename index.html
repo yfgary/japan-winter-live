@@ -81,7 +81,7 @@
     return el;
   }
   function render(trips){
-    trips=[...trips].sort((a,b)=>{const at=a.status==='test'?1:0,bt=b.status==='test'?1:0;if(at!==bt)return at-bt;return String(b.startDate||'').localeCompare(String(a.startDate||''))});
+    trips=[...trips].sort((a,b)=>String(b.startDate||'').localeCompare(String(a.startDate||'')));
     if(!active){const first=trips.find(t=>t.status!=='test')||trips[0];if(first)active=first.id}
     grid.innerHTML='';trips.forEach(t=>grid.appendChild(card(t)));count.textContent=trips.length+' 個旅程';status.textContent=trips.length?'選擇一個旅程開始。':'暫時未有旅程。';
   }
