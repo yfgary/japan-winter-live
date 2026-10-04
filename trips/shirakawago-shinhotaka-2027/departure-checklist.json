@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "title": "🧳 香港出發前・已帶物品 Checklist",
+  "desc": "呢份係離開香港前執行李用，唔同每日出車 Checklist。Tick 狀態會保留喺目前裝置；登入同步後可跨裝置使用。",
+  "groups": [
+    {
+      "title": "🪪 證件／訂單",
+      "items": [
+        {"id":"passport","label":"護照＋有效期確認"},
+        {"id":"flight","label":"HK Express 去回程訂單／Boarding資料離線保存"},
+        {"id":"vjw","label":"Visit Japan Web（如出發時仍適用）"},
+        {"id":"idp","label":"香港國際駕駛許可證 IDP"},
+        {"id":"hklic","label":"香港正式駕駛執照"},
+        {"id":"rental","label":"Times 租車確認＋4WD／雪軚資料"},
+        {"id":"hotels","label":"全部酒店確認信／收據離線保存"},
+        {"id":"insurance","label":"旅遊保險保單＋緊急電話"}
+      ]
+    },
+    {
+      "title": "💳 金錢／上網",
+      "items": [
+        {"id":"cards","label":"最少2張信用卡，分開存放"},
+        {"id":"cash","label":"日圓現金；TABINO 到店需付 ¥13,668"},
+        {"id":"sim","label":"日本 eSIM／SIM 已設定"},
+        {"id":"maps","label":"Google Maps 主要區域 Offline Map 已下載"},
+        {"id":"ic","label":"IC卡／交通支付安排確認"}
+      ]
+    },
+    {
+      "title": "❄️ 冬季衣物",
+      "items": [
+        {"id":"coat","label":"防風防水外套"},
+        {"id":"layers","label":"保暖底層＋中層"},
+        {"id":"gloves","label":"防水保暖手套"},
+        {"id":"hat","label":"冷帽／頸巾"},
+        {"id":"boots","label":"防水、防滑冬季鞋"},
+        {"id":"traction","label":"鞋底冰爪／防滑套"},
+        {"id":"socks","label":"厚襪＋後備襪"},
+        {"id":"sunglasses","label":"太陽眼鏡／雪地反光用"}
+      ]
+    },
+    {
+      "title": "🔋 電子用品",
+      "items": [
+        {"id":"phone","label":"主手機＋後備手機（如有）"},
+        {"id":"charger","label":"USB-C充電器＋所需線材"},
+        {"id":"powerbank","label":"Power Bank 放手提行李，唔寄艙"},
+        {"id":"adapter","label":"日本 Type-A 插頭／轉插"},
+        {"id":"carcharger","label":"車用 USB-C 充電器＋線"},
+        {"id":"camera","label":"相機／記憶卡／充電池（如帶）"},
+        {"id":"drone","label":"Drone＋Remote ID／所需文件（如帶）；鋰電池手提上機"}
+      ]
+    },
+    {
+      "title": "🚗 雪地自駕",
+      "items": [
+        {"id":"rentaldocs","label":"Times 取車文件／店舖位置 Offline 保存"},
+        {"id":"snowbrush","label":"Snow brush 由 Times 提供，毋須香港自備"},
+        {"id":"livecam","label":"Live Cam 網站／道路Cam Bookmark 可開"},
+        {"id":"fuel","label":"D9 入滿油再還車；出發前確認還車附近油站"},
+        {"id":"emergency","label":"110／119＋租車公司事故聯絡方法 Offline 保存"}
+      ]
+    },
+    {
+      "title": "🧴 實用用品",
+      "items": [
+        {"id":"medicine","label":"日常藥物／止痛藥／腸胃藥"},
+        {"id":"skin","label":"潤唇膏＋手／身體保濕用品"},
+        {"id":"tissue","label":"紙巾／濕紙巾"},
+        {"id":"bottle","label":"細水樽"},
+        {"id":"daybag","label":"細背囊／斜孭袋"},
+        {"id":"zipbags","label":"密實袋／濕物袋"},
+        {"id":"tags","label":"行李牌／行李識別"}
+      ]
+    }
+  ]
+}

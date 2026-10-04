@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 9,
+  "schemaVersion": 10,
   "id": "shirakawago-shinhotaka-2027",
   "name": "白川鄉・新穗高之旅 2027",
   "shortName": "白川鄉・新穗高 2027",
@@ -12,7 +12,7 @@
   "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":true,"todayMode":true,"drivingMode":true,"weather":true,"weatherScore":true,"weatherActivityProfiles":true,"packingChecklist":true,"bilingual":true,"winterDriving":true,"shinhotakaPlanner":true},
   "modules": [{"id":"shinhotaka-weather-day-selector","type":"weather-day-selector","enabled":true,"candidateDays":[6,7,8],"destination":"shinhotaka","pairedDestination":"shirakawago"}],
   "pages": {"itinerary":"itinerary.html","tripInfo":"trip-info.html","attractions":"attractions.html","liveCam":"live.html"},
-  "dataFiles": {"itinerary":"itinerary.json","tripInfo":"trip-info.json","hotels":"hotels.json","attractions":"attractions.json","liveCams":"live-cams.json","weather":"weather.json"},
+  "dataFiles": {"itinerary":"itinerary.json","tripInfo":"trip-info.json","hotels":"hotels.json","attractions":"attractions.json","liveCams":"live-cams.json","weather":"weather.json","departureChecklist":"departure-checklist.json"},
   "renderers": {
     "itinerary":{"mode":"hydrate","source":"itinerary","preserveLegacyDetails":true},
     "tripInfo":{"mode":"hydrate","source":"tripInfo","preserveLegacyShell":true},
@@ -22,5 +22,5 @@
     "todayMode":{"mode":"hydrate","source":"itinerary","useActivityProfiles":true},
     "drivingMode":{"mode":"hydrate","source":"itinerary","useActivityProfiles":true}
   },
-  "legacy": {"core":"assets/trip-core-v1.js","dataMode":"hybrid-data-v8","migrationStage":9,"note":"v10.8 migration: Today Mode and Driving Mode share Multi Trip itinerary, timezone, weather and Weather Activity Profile data. Japan 2027 keeps the tested rich overlays in hydrate mode while profile scores are bridged into them; future trips use shared generated modes directly from itinerary.json."}
+  "legacy": {"core":"assets/trip-core-v1.js","dataMode":"hybrid-data-v8","migrationStage":10,"note":"v10.12 Stage 2: Japan departure checklist is now canonical Trip JSON rendered by shared multi-trip modules. Rich itinerary/trip overlays remain in hydrate mode while legacy presentation code is retired incrementally."}
 }

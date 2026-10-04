@@ -12,6 +12,12 @@ function currentTravelDay(){
   return /^d[1-9]$/.test(saved)?saved:'d1';
 }
 
+function syncCanonicalNav(){
+  setTimeout(()=>{
+    if(window.MultiTripNav&&typeof window.MultiTripNav.render==='function')window.MultiTripNav.render();
+  },0);
+}
+
 function syncWeatherRegionToTravelDay(){
   const core=window.Japan2027Core;
   if(!core||typeof core.weatherRegionForDay!=='function')return null;
@@ -31,14 +37,11 @@ function leaveTravelMode(hash,weatherSync){
   if(overlay)overlay.hidden=true;
   document.body.style.overflow='';
 
-  document.querySelectorAll('.page-switch a[data-travel-mode-link]').forEach(a=>a.classList.remove('active'));
-  const normal=document.querySelector('.page-switch a[href="itinerary.html"],.page-switch a[href$="/itinerary.html"]');
-  if(normal)normal.classList.add('active');
-
   const u=new URL(location.href);
   u.searchParams.delete('travel');
   u.hash=hash||'';
   history.replaceState({},'',u.pathname+(u.search||'')+(u.hash||''));
+  syncCanonicalNav();
 
   const id=(hash||'').replace(/^#/,'');
   if(/^d[1-9]$/.test(id)){
@@ -57,6 +60,9 @@ function leaveTravelMode(hash,weatherSync){
 }
 
 document.addEventListener('click',function(e){
+  const close=e.target.closest&&e.target.closest('#travelModeOverlay #tmClose');
+  if(close){syncCanonicalNav();return;}
+
   const a=e.target.closest&&e.target.closest('#travelModeOverlay a[href]');
   if(!a)return;
   let url;
@@ -72,5 +78,5 @@ document.addEventListener('click',function(e){
   leaveTravelMode(url.hash,weatherSync);
 },true);
 
-window.Japan2027TravelModeNavFix={leaveTravelMode,syncWeatherRegionToTravelDay,currentTravelDay};
+window.Japan2027TravelModeNavFix={leaveTravelMode,syncWeatherRegionToTravelDay,currentTravelDay,syncCanonicalNav};
 })();
