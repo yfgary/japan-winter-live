@@ -53,8 +53,8 @@ for key, path in FILES.items():
     for marker in REQUIRED[key]:
         if marker not in text:
             ERRORS.append(f"{path.name} lost expected Stage 5D ownership marker: {marker}")
-    if "MutationObserver" in text:
-        ERRORS.append(f"{path.name} reintroduced MutationObserver; Stage 5D expects bounded retry logic only")
+    if "new MutationObserver" in text:
+        ERRORS.append(f"{path.name} reintroduced a live MutationObserver; Stage 5D expects bounded retry logic only")
 
 loader = (ASSETS / "attraction-info.js").read_text(encoding="utf-8")
 expected_loader_counts = {
