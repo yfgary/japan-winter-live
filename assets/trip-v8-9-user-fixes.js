@@ -107,7 +107,7 @@ function addCityShrinesToD6(){
   let tail=san;
   const a=makeItem('v89-shrine','11:45–12:15','⛩️ 神社','日枝神社・高山祭山王祭之神社','飛騨山王宮 日枝神社（ひえじんじゃ）','已正式放入主線，唔再寫「如有時間」。由三町一帶短程移動；重點睇杉林參道、千年大杉，同理解春之高山祭「山王祭」嘅源頭。','日枝神社 高山市','30分鐘');insertAfter(tail,a);tail=a;
   const b=makeItem('v89-shrine','12:15–12:30','🚗 市內短程','日枝神社 → 豐川城山稻荷','日枝神社 → 豊川城山稲荷','短程移動去城山一帶。','豊川城山稲荷','15分鐘');insertAfter(tail,b);tail=b;
-  const c=makeItem('v89-shrine','12:30–12:50','⛩️ 神社','豐川城山稻荷・朱紅鳥居','豊川城山稲荷（とよかわしろやまいなり）','固定短停。重點係城山樹林＋朱紅鳥居；冬季有雪時攝影效果最好。','豊川城山稲荷','20分鐘');insertAfter(tail,c);tail=c;
+  const c=makeItem('v89-shrine','12:30–12:50','⛩️ 神社','豐川城山稻荷・朱紅鳥居','豊川城山稲荷（とよかわしろyamaいなり）','固定短停。重點係城山樹林＋朱紅鳥居；冬季有雪時攝影效果最好。','豊川城山稲荷','20分鐘');insertAfter(tail,c);tail=c;
   const d=makeItem('v89-shrine','12:50–13:00','🚗 市內短程','豐川城山稻荷 → 飛驒東照宮','豊川城山稲荷 → 飛騨東照宮','同屬高山市內短程，唔需要取消其他景點。','飛騨東照宮','10分鐘');insertAfter(tail,d);tail=d;
   const f=makeItem('v89-shrine','13:00–13:20','⛩️ 神社','飛驒東照宮・德川家康與飛驒匠人','飛騨東照宮（ひだとうしょうぐう）','固定加入。重點睇本殿、唐門、透塀，將高山陣屋嘅幕府行政背景同德川信仰、飛驒匠人工藝串連。','飛騨東照宮','20分鐘');insertAfter(tail,f);
 }
@@ -189,11 +189,12 @@ function addDayPhotoCredit(){
 }
 
 function apply(){patchD2();patchShrines();ensureTripTopics();rewriteMaps(document);addDayPhotoCredit();}
+function refreshLateUi(){rewriteMaps(document);ensureTripTopics();}
 function boot(){
   setupD2Zoom();
-  apply();setTimeout(apply,300);setTimeout(apply,1200);
-  document.addEventListener('click',e=>{if(e.target.closest?.('.tripv2-choice'))setTimeout(apply,250);});
-  new MutationObserver(ms=>{if(ms.some(m=>m.addedNodes?.length))setTimeout(()=>{rewriteMaps(document);ensureTripTopics();},60);}).observe(document.body,{childList:true,subtree:true});
+  apply();
+  [300,700,1200,2200].forEach(t=>setTimeout(()=>{apply();refreshLateUi();},t));
+  document.addEventListener('click',e=>{if(e.target.closest?.('.tripv2-choice'))setTimeout(()=>{apply();refreshLateUi();},250);});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
