@@ -1,0 +1,180 @@
+name: Stage 5L patch
+
+on:
+  push:
+    branches:
+      - stage5l-finalpatch-event
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: stage5l-finalpatch-event
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply Stage 5L changes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new):
+              p=Path(path)
+              s=p.read_text(encoding='utf-8')
+              if old not in s:
+                  raise SystemExit(f'missing replacement target in {path}: {old[:100]!r}')
+              if s.count(old)!=1:
+                  raise SystemExit(f'expected one replacement target in {path}, found {s.count(old)}')
+              p.write_text(s.replace(old,new,1),encoding='utf-8')
+
+          # Runtime: emit a bounded Japan-final-patch completion contract after each applyAll pass.
+          replace_once('assets/trip-v9-final-fixes.js',
+          """function applyAll(){
+           injectStyles();
+           patchShrineData();
+           patchD2Photos();
+           patchFlexiblePhotos();
+           scheduleShrines();
+           addRestNotes();
+           attachShrineInfo();
+           rewriteMapLinks();
+           updateChoiceState();
+           setupZoom();
+          }
+          function start(){
+           installChoiceFix();
+           applyAll();
+           /* Older enhancement scripts finish a few delayed DOM updates after DOMContentLoaded.
+              Use a few bounded retries instead of a permanent MutationObserver.  The old observer
+              could retrigger itself through the shrine info buttons and cause high CPU/RAM usage. */
+           [250,700,1500].forEach(t=>setTimeout(applyAll,t));
+          }
+          """,
+          """function applyAll(){
+           injectStyles();
+           patchShrineData();
+           patchD2Photos();
+           patchFlexiblePhotos();
+           scheduleShrines();
+           addRestNotes();
+           attachShrineInfo();
+           rewriteMapLinks();
+           updateChoiceState();
+           setupZoom();
+          }
+          function emitFinalPatch(pass,delay,final){
+           document.dispatchEvent(new CustomEvent('japan2027:finalpatch',{detail:{pass,delay,final}}));
+          }
+          function runFinalPatch(pass,delay,final){
+           applyAll();
+           emitFinalPatch(pass,delay,final);
+          }
+          function start(){
+           installChoiceFix();
+           runFinalPatch(0,0,false);
+           /* Older enhancement scripts finish a few delayed DOM updates after DOMContentLoaded.
+              Use a few bounded retries instead of a permanent MutationObserver.  The old observer
+              could retrigger itself through the shrine info buttons and cause high CPU/RAM usage. */
+           [250,700,1500].forEach((t,i)=>setTimeout(()=>runFinalPatch(i+1,t,t===1500),t));
+          }
+          """)
+
+          # Visit metadata consumes only the final legacy-patch completion signal; keep Stage 5J fallback.
+          replace_once('assets/trip-v9-1-visit-fix.js',
+          """function scheduleFallback(){setTimeout(decorate,2300);}
+          document.addEventListener('multitrip:itineraryrendered',decorate);
+          """,
+          """function scheduleFallback(){setTimeout(decorate,2300);}
+          function onFinalPatch(e){if(e.detail&&e.detail.final===true)decorate();}
+          document.addEventListener('japan2027:finalpatch',onFinalPatch);
+          document.addEventListener('multitrip:itineraryrendered',decorate);
+          """)
+
+          # Cache pins only for modules whose runtime changed.
+          p=Path('assets/attraction-info.js')
+          s=p.read_text(encoding='utf-8')
+          if s.count("assets/trip-v9-final-fixes.js?v=913")!=2:
+              raise SystemExit('expected two final-fixes v913 loader pins')
+          if s.count("assets/trip-v9-1-visit-fix.js?v=3")!=1:
+              raise SystemExit('expected one visit-fix v3 loader pin')
+          s=s.replace("assets/trip-v9-final-fixes.js?v=913","assets/trip-v9-final-fixes.js?v=914")
+          s=s.replace("assets/trip-v9-1-visit-fix.js?v=3","assets/trip-v9-1-visit-fix.js?v=4")
+          p.write_text(s,encoding='utf-8')
+
+          # Timer/retry QA: same bounded timings, plus finalpatch ownership and listener.
+          p=Path('scripts/qa_timer_retry_surface.py')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('Stage 5G-5J bounded timer/retry surface','Stage 5G-5L bounded timer/retry surface')
+          s=s.replace('"[250,700,1500].forEach(t=>setTimeout(applyAll,t))",','"[250,700,1500].forEach((t,i)=>setTimeout(()=>runFinalPatch(i+1,t,t===1500),t))",\n        "japan2027:finalpatch",\n        "function runFinalPatch(pass,delay,final)",')
+          s=s.replace('"document.addEventListener(\'multitrip:itineraryrendered\',decorate)",','"document.addEventListener(\'multitrip:itineraryrendered\',decorate)",\n        "document.addEventListener(\'japan2027:finalpatch\',onFinalPatch)",')
+          s=s.replace('Missing Stage 5G-5J timer surface file','Missing Stage 5G-5L timer surface file')
+          s=s.replace('TravelPilot Stage 5G-5J timer/retry surface QA','TravelPilot Stage 5G-5L timer/retry surface QA')
+          s=s.replace('final/hotfix=keep pending targeted runtime proof; visit=renderer-event driven with one 2300 ms fallback; info-icon startup tail trimmed to 2800 ms','final=bounded retries with finalpatch completion signal; hotfix=keep pending targeted runtime proof; visit=renderer/finalpatch driven with one 2300 ms fallback; info-icon startup tail trimmed to 2800 ms')
+          p.write_text(s,encoding='utf-8')
+
+          # Patch-surface QA: lock event ownership and new module pins.
+          p=Path('scripts/qa_v9_patch_surface.py')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('Stage 5D-5J Japan-2027 patch ownership','Stage 5D-5L Japan-2027 patch ownership')
+          s=s.replace('"#tripv2WeatherSelect [data-sh]",\n    ),','"#tripv2WeatherSelect [data-sh]",\n        "japan2027:finalpatch",\n        "function runFinalPatch(pass,delay,final)",\n    ),')
+          s=s.replace('"multitrip:itineraryrendered",\n        "setTimeout(decorate,2300)",','"multitrip:itineraryrendered",\n        "japan2027:finalpatch",\n        "onFinalPatch",\n        "setTimeout(decorate,2300)",')
+          s=s.replace('Missing active Stage 5D-5J file','Missing active Stage 5D-5L file')
+          s=s.replace('if loader.count("trip-v9-1-visit-fix.js?v=3") != 1:\n    ERRORS.append("Stage 5J requires itinerary visit-fix module pin v3")','if loader.count("trip-v9-final-fixes.js?v=914") != 2:\n    ERRORS.append("Stage 5L requires both Japan loader chains to use final-fixes module pin v914")\nif loader.count("trip-v9-1-visit-fix.js?v=4") != 1:\n    ERRORS.append("Stage 5L requires itinerary visit-fix module pin v4")')
+          s=s.replace('TravelPilot Stage 5D-5J patch surface QA','TravelPilot Stage 5D-5L patch surface QA')
+          s=s.replace('print("Visit consumes itinerary-rendered event:", "multitrip:itineraryrendered" in texts.get("visit", ""))','print("Visit consumes itinerary-rendered event:", "multitrip:itineraryrendered" in texts.get("visit", ""))\nprint("Final emits finalpatch event:", "japan2027:finalpatch" in texts.get("final", ""))\nprint("Visit consumes finalpatch event:", "japan2027:finalpatch" in texts.get("visit", ""))')
+          p.write_text(s,encoding='utf-8')
+
+          # Renderer-event QA: keep renderer contract and add finalpatch listener/pin checks.
+          p=Path('scripts/qa_visit_render_event.py')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('Stage 5I/5J guard for visit metadata renderer-event ownership','Stage 5I/5J/5L guard for visit metadata event ownership')
+          s=s.replace('trip-v9-1-visit-fix.js?v=3','trip-v9-1-visit-fix.js?v=4')
+          s=s.replace('Stage 5J requires the Japan itinerary loader to use visit-fix module pin v3 exactly once','Stage 5L requires the Japan itinerary loader to use visit-fix module pin v4 exactly once')
+          s=s.replace('"document.addEventListener(\'multitrip:itineraryrendered\',decorate)",\n    "function scheduleFallback(){setTimeout(decorate,2300);}",','"document.addEventListener(\'multitrip:itineraryrendered\',decorate)",\n    "document.addEventListener(\'japan2027:finalpatch\',onFinalPatch)",\n    "function onFinalPatch(e){if(e.detail&&e.detail.final===true)decorate();}",\n    "function scheduleFallback(){setTimeout(decorate,2300);}",')
+          s=s.replace('TravelPilot Stage 5I/5J visit/render event QA','TravelPilot Stage 5I/5J/5L visit event QA')
+          s=s.replace('print("Visit consumes renderer event:", "document.addEventListener(\'multitrip:itineraryrendered\',decorate)" in visit)','print("Visit consumes renderer event:", "document.addEventListener(\'multitrip:itineraryrendered\',decorate)" in visit)\nprint("Visit consumes finalpatch event:", "document.addEventListener(\'japan2027:finalpatch\',onFinalPatch)" in visit)')
+          p.write_text(s,encoding='utf-8')
+
+          # Stage 5K fallback audit becomes the Stage 5L contract guard: signal exists, fallback remains.
+          p=Path('scripts/qa_visit_fallback_audit.py')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('Stage 5K audit guard for the remaining visit-decoration startup fallback','Stage 5K/5L guard for finalpatch completion and the retained visit fallback')
+          s=s.replace('# Stage 5K is audit-only: keep the current Stage 5J runtime contract intact.','# Stage 5L adds an explicit finalpatch completion path but intentionally keeps the 2300 ms fallback.')
+          s=s.replace('"document.addEventListener(\'multitrip:itineraryrendered\',decorate)",\n    "function scheduleFallback(){setTimeout(decorate,2300);}",','"document.addEventListener(\'multitrip:itineraryrendered\',decorate)",\n    "document.addEventListener(\'japan2027:finalpatch\',onFinalPatch)",\n    "function onFinalPatch(e){if(e.detail&&e.detail.final===true)decorate();}",\n    "function scheduleFallback(){setTimeout(decorate,2300);}",')
+          s=s.replace('"[250,700,1500].forEach(t=>setTimeout(applyAll,t))",','"[250,700,1500].forEach((t,i)=>setTimeout(()=>runFinalPatch(i+1,t,t===1500),t))",\n    "new CustomEvent(\'japan2027:finalpatch\'",\n    "detail:{pass,delay,final}",\n    "function runFinalPatch(pass,delay,final)",')
+          old='''# There is not yet an explicit legacy-final completion event. That is the prerequisite\n# for a later safe removal of the 2300 ms degraded-path fallback.\nif "japan2027:finalpatch" in final:\n    ERRORS.append("Stage 5K is audit-only; final-patch completion event must be introduced in a separate runtime stage")\n'''
+          new='''# Stage 5L now has a bounded legacy-final completion event, but fallback removal is deferred.\nif "japan2027:finalpatch" not in final:\n    ERRORS.append("Stage 5L requires trip-v9-final-fixes.js to emit japan2027:finalpatch")\nif "japan2027:finalpatch" not in visit:\n    ERRORS.append("Stage 5L requires visit-fix to consume japan2027:finalpatch")\n'''
+          if old not in s:
+              raise SystemExit('qa_visit_fallback_audit old no-event block not found')
+          s=s.replace(old,new)
+          s=s.replace('TravelPilot Stage 5K visit fallback audit QA','TravelPilot Stage 5K/5L visit fallback contract QA')
+          s=s.replace('print("Legacy final completion event exists:", "japan2027:finalpatch" in final)\nprint("Audit conclusion: keep 2300 ms fallback until an explicit legacy-final completion signal exists")','print("Legacy final completion event exists:", "japan2027:finalpatch" in final)\nprint("Visit consumes final completion event:", "japan2027:finalpatch" in visit)\nprint("Stage 5L conclusion: finalpatch path exists; keep 2300 ms fallback until runtime parity is proven")')
+          p.write_text(s,encoding='utf-8')
+
+          Path('docs/stage5l-finalpatch-event.md').write_text('''# Stage 5L — explicit final-patch completion event\n\nStage 5L adds the bounded completion contract proposed by the Stage 5K audit. It does not remove the remaining `2300 ms` visit fallback yet.\n\n## Runtime contract\n\n`assets/trip-v9-final-fixes.js` still performs the same initial pass plus bounded retries at `250 / 700 / 1500 ms`. Each pass now runs through `runFinalPatch(pass, delay, final)` and dispatches `japan2027:finalpatch` after `applyAll()` completes. The event detail carries `pass`, `delay`, and `final`; only the `1500 ms` pass has `final: true`.\n\n`assets/trip-v9-1-visit-fix.js` keeps its existing `multitrip:itineraryrendered` listener and adds a `japan2027:finalpatch` listener. It calls `decorate()` only when `detail.final === true`, giving the degraded renderer-failure path an explicit late completion trigger.\n\nThe Stage 5J `2300 ms` startup fallback remains unchanged as a temporary safety net. Its removal is deferred until this new event path has runtime parity evidence.\n\n## Cache pins\n\n- `trip-v9-final-fixes.js`: `v=913` → `v=914` in both Japan loader chains\n- `trip-v9-1-visit-fix.js`: `v=3` → `v=4` in the Japan itinerary chain\n- application release remains `v10.13.3`\n\n## Explicitly unchanged\n\n- D6–D8 Shinhotaka selection, localStorage key and 60 ms reload\n- D6–D8 visit metadata content and formatting\n- renderer hydrate schedule `0 / 350 / 900 / 1800 ms`\n- final-fixes retry timing `250 / 700 / 1500 ms`\n- `trip-v9-hotfix.js` retry timing\n- info-icon repair schedules\n- 96-item departure checklist\n- Today Mode / Driving Mode\n- Live Cam\n- generic trips\n- homepage/banner\n- itinerary content and itinerary timing\n\n## Next safe step\n\nAfter manual/runtime parity confirms the finalpatch listener covers the degraded path, a later stage can consider removing the remaining `2300 ms` visit fallback.\n''',encoding='utf-8')
+          PY
+      - name: Run targeted QA
+        shell: bash
+        run: |
+          python scripts/qa_timer_retry_surface.py
+          python scripts/qa_v9_patch_surface.py
+          python scripts/qa_visit_render_event.py
+          python scripts/qa_visit_fallback_audit.py
+          node --check assets/trip-v9-final-fixes.js
+          node --check assets/trip-v9-1-visit-fix.js
+      - name: Commit Stage 5L changes
+        shell: bash
+        run: |
+          rm .github/workflows/stage5l-patch.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets scripts docs .github/workflows/stage5l-patch.yml
+          git commit -m "Stage 5L: add bounded final-patch completion event"
+          git push origin HEAD:stage5l-finalpatch-event
