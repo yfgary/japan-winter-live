@@ -32,6 +32,8 @@ jobs:
         run: python scripts/qa_legacy_update.py
       - name: Run loader dependency QA
         run: python scripts/qa_loader.py
+      - name: Run dead asset QA
+        run: python scripts/qa_dead_assets.py
       - name: Check JavaScript syntax
         run: |
           node --check sw.js

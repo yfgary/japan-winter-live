@@ -1,6 +1,6 @@
 # TravelPilot legacy loader inventory
 
-Stage 5A records what `assets/attraction-info.js` currently owns. This is an audit map, not permission to delete files without runtime equivalence checks.
+Stage 5A records what `assets/attraction-info.js` currently owns. Stage 5B adds a repository-wide dead-asset guard and removes only assets with no remaining references. This inventory is not permission to delete active legacy files without runtime-equivalence checks.
 
 ## Canonical shared layer
 
@@ -10,7 +10,7 @@ Loaded for both Japan 2027 and generic trips:
 - `multi-trip-data-v1.js`
 - `multi-trip-nav-v1.js`
 
-Generic trips then stay on the `multi-trip-*` renderers/modes/weather/checklist stack. Stage 5A QA blocks Japan-only v8/v9 dependencies from leaking into generic trips.
+Generic trips then stay on the `multi-trip-*` renderers/modes/weather/checklist stack. Loader QA blocks Japan-only v8/v9 dependencies from leaking into generic trips.
 
 ## Japan 2027 legacy-active layer
 
@@ -27,7 +27,17 @@ These are still intentionally loaded for the Shirakawago / Shinhotaka 2027 itine
 
 `itinerary.html` previously loaded `trip-v9-final-fixes.js` directly **and** `attraction-info.js` loaded the same file again. The JS file has an execution guard, but the second request and dual ownership were unnecessary. Stage 5A removes the direct HTML load; `attraction-info.js` is now the single owner.
 
-## Stage 5B candidates for consolidation audit
+## Stage 5B confirmed dead assets
+
+Repository-wide filename/reference checks found no live references to these old JavaScript assets, and they are not part of the current loader arrays. Stage 5B removes them and `scripts/qa_dead_assets.py` prevents them or references to them from silently returning:
+
+- `app-v8-7-data.js`
+- `app-v8-7-ui.js`
+- `trip-enhancements-v2.js`
+
+Note: `trip-enhancements-v2.css` is **not** retired. It remains intentionally loaded by `attraction-info.js` and is separate from the deleted JavaScript file.
+
+## Active consolidation candidates for later review
 
 These names reflect patch-era layering and are good candidates to inspect next, but they are **not declared dead code**:
 
@@ -39,8 +49,4 @@ These names reflect patch-era layering and are good candidates to inspect next, 
 - `site-shell-v7.js`
 - `trip-v9-final-fixes.js`
 
-For each candidate, Stage 5B should map exported globals / DOM mutations / storage keys / event listeners to the current canonical modules, add a regression test, and only then remove or merge it.
-
-## Assets not loaded by the current `attraction-info.js` chain
-
-Files such as `app-v8-7-data.js`, `app-v8-7-ui.js`, and `trip-enhancements-v2.js` exist in `assets/` but are not part of the current loader arrays. That alone does **not** prove they are repo-wide dead; a repository-wide reference check is required before deletion.
+For each candidate, a later stage should map exported globals / DOM mutations / storage keys / event listeners to the current canonical modules, add a regression test, and only then remove or merge it.
