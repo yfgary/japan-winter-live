@@ -138,10 +138,24 @@ function ensureVersionBadge(){
     badge.setAttribute('aria-label','網站版本');
     document.body.appendChild(badge);
   }
+
+  /* site-shell-v7 is legacy and still attaches its old v9 version handler.
+     Once that shell has loaded, replace the DOM node once so its listeners keep
+     pointing at a detached node. The visible badge is then owned only here. */
+  if(window.__japan2027SiteShellV7&&badge.dataset.multiTripExclusive!=='1'){
+    const clean=badge.cloneNode(true);
+    clean.disabled=false;
+    clean.dataset.multiTripExclusive='1';
+    delete clean.dataset.multiTripBound;
+    badge.replaceWith(clean);
+    badge=clean;
+  }
+
   badge.dataset.multiTripVersionOwner='1';
   if(!badge.dataset.multiTripBound){
     badge.dataset.multiTripBound='1';
-    badge.addEventListener('click',()=>{
+    badge.addEventListener('click',event=>{
+      event.stopImmediatePropagation();
       if(latestVersion&&latestVersion!==APP_VERSION)beginUpdate();
       else checkVersion(true);
     });
@@ -301,9 +315,9 @@ fetch('trips/'+encodeURIComponent(tripId)+'/trip.json?t='+Date.now(),{cache:'no-
     resolveReady(config);
   });
 
-window.addEventListener('online',()=>{paintVersion('current');checkVersion(false);});
+window.addEventListener('online',()=>{paintVersion('current');setTimeout(()=>checkVersion(false),50);});
 window.addEventListener('offline',()=>paintVersion('offline'));
-window.addEventListener('pageshow',()=>setTimeout(()=>{suppressRetiredUpdateUi();checkVersion(false);},250));
+window.addEventListener('pageshow',()=>setTimeout(()=>{suppressRetiredUpdateUi();ensureVersionBadge();checkVersion(false);},250));
 
 if(document.readyState==='loading'){
   document.addEventListener('DOMContentLoaded',()=>{syncBrand();suppressRetiredUpdateUi();},{once:true});
