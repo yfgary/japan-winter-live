@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "hokkaido-2025",
   "name": "北海道道南・札幌自駕 8日 2025",
   "shortName": "北海道 2025・8日",
@@ -78,9 +78,32 @@
     "mt-moiwa": {"score":8.8,"reason":"能見度好時札幌平原夜景好有比較價值，但D6只應作天氣同體力許可時嘅Backup。"},
     "otaru-tenguyama": {"score":8.6,"reason":"天氣清時小樽市區、港口同石狩灣大景值得睇，但行程後段體力同時間決定是否值得加。"}
   },
+  "photoCredits": [
+    {"label":"五稜郭櫻花（Hokkaido - Cherry blossoms are fully bloomed in Goryokaku park）","url":"https://commons.wikimedia.org/wiki/File:Hokkaido-Cherry_blossoms_are_fully_bloomed_in_Goryokaku_park-xl.jpg"},
+    {"label":"五稜郭櫻花（Cherry of Goryokaku）","url":"https://commons.wikimedia.org/wiki/File:Cherry_of_Goryokaku_%E4%BA%94%E7%A8%9C%E9%83%AD%E3%81%AE%E6%A1%9C_(2497592882).jpg"},
+    {"label":"函館夜景（Night View Hakodate）","url":"https://commons.wikimedia.org/wiki/File:Night_View_Hakodate.jpg"},
+    {"label":"五稜郭櫻花全景（Hokkaido-Goryokaku Fort in Cherry blossom）","url":"https://commons.wikimedia.org/wiki/File:Hokkaido-Goryokaku_Fort_in_Cherry_blossom-xl.jpg"},
+    {"label":"五稜郭公園櫻花（Hakodate Goryokaku Park Sakura）","url":"https://commons.wikimedia.org/wiki/File:Hakodate_Gory%C5%8Dkaku_Park_Sakura_May_2016_6.jpg"},
+    {"label":"函館山夜景（Mount-Hakodate Night-view）","url":"https://commons.wikimedia.org/wiki/File:Mount-Hakodate_Night-view.jpg"},
+    {"label":"洞爺湖（Lake Tōya）","url":"https://commons.wikimedia.org/wiki/File:Lake_T%C5%8Dya.JPG"},
+    {"label":"洞爺湖・浮見堂公園","url":"https://commons.wikimedia.org/wiki/File:Lake-toya%E3%80%81%E6%B4%9E%E7%88%BA%E6%B9%96_%E6%B5%AE%E8%A6%8B%E5%A0%82%E5%85%AC%E5%9C%92.jpg"},
+    {"label":"登別地獄谷（Noboribetsu-jigokudani）","url":"https://commons.wikimedia.org/wiki/File:Noboribetsu-jigokudani.JPG"},
+    {"label":"三井 Outlet Park 札幌北廣島","url":"https://commons.wikimedia.org/wiki/File:MITSUI_OUTLET_PARK_Sapporo_Kitahiroshima.jpg"},
+    {"label":"三井 Outlet Park 札幌北廣島・室內","url":"https://commons.wikimedia.org/wiki/File:Mitsui_outlet_park_sapporo_interior.jpg"},
+    {"label":"三井 Outlet Park","url":"https://commons.wikimedia.org/wiki/File:Mitsui-outlet-park.png"},
+    {"label":"莫埃來沼公園","url":"https://commons.wikimedia.org/wiki/File:%E3%83%A2%E3%82%A8%E3%83%AC%E6%B2%BC%E5%85%AC%E5%9C%92%EF%BC%88Moerenuma_Park%EF%BC%89_-_panoramio.jpg"},
+    {"label":"莫埃來沼公園・玻璃金字塔","url":"https://commons.wikimedia.org/wiki/File:In_the_glass_pyramid,_Moerenuma_Park_20260703a.jpg"},
+    {"label":"北海道神宮","url":"https://commons.wikimedia.org/wiki/File:Hokkaido_Jingu,_Hokkaido_Shrine,_Sapporo,_Hokkaido,_Japan,_%E5%8C%97%E6%B5%B7%E9%81%93%E7%A5%9E%E5%AE%AE,_%E6%9C%AD%E5%B9%8C,_%E5%8C%97%E6%B5%B7%E9%81%93,_%E6%97%A5%E6%9C%AC,_%E3%81%BB%E3%81%A3%E3%81%8B%E3%81%84%E3%81%A9%E3%81%86%E3%81%98%E3%82%93%E3%81%90%E3%81%86,_%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E3%81%97,_%E3%81%BB%E3%81%A3%E3%81%8b%E3%81%84%E3%81%A9%E3%81%86,_%E3%81%AB%E3%81%A3%E3%81%bd%E3%82%93,_%E3%81%AB%E3%81%BB%E3%82%93_(16578027820).jpg"},
+    {"label":"小樽運河","url":"https://commons.wikimedia.org/wiki/File:Otaru_canal.jpg"},
+    {"label":"白い恋人パーク","url":"https://commons.wikimedia.org/wiki/File:Shiroi_Koibito_Park_20260703i.jpg"},
+    {"label":"小樽音樂盒堂・室內","url":"https://commons.wikimedia.org/wiki/File:Otaru_Music_Box_Museum_interior.jpg"},
+    {"label":"Sapporo Beer Museum","url":"https://commons.wikimedia.org/wiki/File:Sapporo_Beer_Museum.jpg"},
+    {"label":"Sapporo Beer Museum（另一角度）","url":"https://commons.wikimedia.org/wiki/File:Sapporo_Beer_Museum.JPG"},
+    {"label":"新千歲機場 Terminal","url":"https://commons.wikimedia.org/wiki/File:New_CHITOSE_Airport_terminal.jpg"}
+  ],
   "legacy": {
     "dataMode": "generic-only",
-    "migrationStage": 3,
-    "note": "Fourth real Trip validation. Attraction scores are trip data, not renderer hardcodes; gallery and attraction content remain trip-scoped assets/data."
+    "migrationStage": 4,
+    "note": "Fourth real Trip validation. Attraction scores and photo credits are trip data; gallery and attraction content remain trip-scoped with no Hokkaido core branching."
   }
 }
