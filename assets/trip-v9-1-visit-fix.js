@@ -20,9 +20,7 @@ function decorate(){
  });
  if(typeof window.addMapPins==='function')try{window.addMapPins();}catch(e){}
 }
-function scheduleFallback(){setTimeout(decorate,2300);}
 function onFinalPatch(e){if(e.detail&&e.detail.final===true)decorate();}
 document.addEventListener('japan2027:finalpatch',onFinalPatch);
 document.addEventListener('multitrip:itineraryrendered',decorate);
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scheduleFallback,{once:true});else scheduleFallback();
 })();
