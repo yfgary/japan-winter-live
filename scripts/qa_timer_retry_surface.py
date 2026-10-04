@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for the Stage 5G-5L bounded timer/retry surface."""
+"""Regression guard for the Stage 5G-5M bounded timer/retry surface."""
 from __future__ import annotations
 
 import sys
@@ -34,7 +34,7 @@ REQUIRED = {
     "visit": (
         "document.addEventListener('multitrip:itineraryrendered',decorate)",
         "document.addEventListener('japan2027:finalpatch',onFinalPatch)",
-        "setTimeout(decorate,2300)",
+        "function onFinalPatch(e){if(e.detail&&e.detail.final===true)decorate();}",
         "function decorate()",
         "['d6','d7','d8']",
         "visit-meta-card",
@@ -55,7 +55,7 @@ REQUIRED = {
 texts: dict[str, str] = {}
 for key, path in FILES.items():
     if not path.is_file():
-        ERRORS.append(f"Missing Stage 5G-5L timer surface file: {path.relative_to(ROOT)}")
+        ERRORS.append(f"Missing Stage 5G-5M timer surface file: {path.relative_to(ROOT)}")
         texts[key] = ""
         continue
     text = path.read_text(encoding="utf-8")
@@ -72,17 +72,18 @@ for removed_tail in ("4800", "7000"):
         ERRORS.append(f"info-icon-repair-v1.js reintroduced removed Stage 5H startup retry: {removed_tail} ms")
 
 visit = texts.get("visit", "")
-if "[1650,2300]" in visit or "setTimeout(decorate,1650)" in visit:
-    ERRORS.append("trip-v9-1-visit-fix.js reintroduced removed Stage 5J 1650 ms fixed retry")
-if visit.count("setTimeout") != 1:
-    ERRORS.append(f"trip-v9-1-visit-fix.js should keep exactly one 2300 ms startup fallback; found {visit.count('setTimeout')} setTimeout token(s)")
+for removed_timer in ("1650", "2300"):
+    if removed_timer in visit:
+        ERRORS.append(f"trip-v9-1-visit-fix.js reintroduced removed fixed retry: {removed_timer} ms")
+if visit.count("setTimeout") != 0:
+    ERRORS.append(f"trip-v9-1-visit-fix.js should be event-driven with no setTimeout; found {visit.count('setTimeout')} token(s)")
 
-print("TravelPilot Stage 5G-5L timer/retry surface QA")
+print("TravelPilot Stage 5G-5M timer/retry surface QA")
 for key, path in FILES.items():
     text = texts.get(key, "")
     print(f"{path.name}: setTimeout={text.count('setTimeout')}; MutationObserver={text.count('MutationObserver')}")
 
-print("Classification: D6-D8 reload=state transition; final=bounded retries with finalpatch completion signal; hotfix=keep pending targeted runtime proof; visit=renderer/finalpatch driven with one 2300 ms fallback; info-icon startup tail trimmed to 2800 ms")
+print("Classification: D6-D8 reload=state transition; final=bounded retries with finalpatch completion signal; hotfix=keep pending targeted runtime proof; visit=renderer/finalpatch event-driven with no startup timer; info-icon startup tail trimmed to 2800 ms")
 print(f"Errors: {len(ERRORS)}")
 for item in ERRORS:
     print("ERROR:", item)
