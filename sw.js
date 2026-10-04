@@ -1,4 +1,4 @@
-const CACHE_NAME = "multi-trip-v10.10.13-travelpilot-mobile-banner-20261004";
+const CACHE_NAME = "multi-trip-v10.10.14-force-refresh-20261004";
 const DEFAULT_TRIP = "shirakawago-shinhotaka-2027";
 const SHELL_FILES = [
 "./","./index.html","./live.html","./itinerary.html","./trip-info.html","./attractions.html","./manifest.webmanifest","./assets/images/travel-hub-icon.svg","./assets/images/travelpilot-icon-exact.jpg","./assets/images/travelpilot-banner-v10.10.13.jpg",
