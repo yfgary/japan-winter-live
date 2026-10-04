@@ -88,13 +88,6 @@ function buildWeatherPanel(){
  p.querySelector('#weather3dRefresh').onclick=()=>load(REGIONS.find(r=>r.id===active)||REGIONS[0],true);mark();load(REGIONS.find(r=>r.id===active)||REGIONS[0],false);
 }
 
-function ensureCatalogLink(){
- document.querySelectorAll('.page-switch').forEach(sw=>{
-  const live=sw.querySelector('a[href="index.html"]');if(live&&/(?:^|\/)live\.html$/.test(location.pathname))live.href='live.html';
-  if(sw.querySelector('a[href="attractions.html"],a[href$="/attractions.html"]'))return;
-  const a=document.createElement('a');a.href='attractions.html';a.textContent='🗾 景點總覽';if(/(?:^|\/)attractions\.html$/.test(location.pathname))a.classList.add('active');sw.appendChild(a);
- });
-}
 function requestedTrip(){return(new URLSearchParams(location.search).get('trip')||'').trim();}
 function loadScriptOnce(id,src){
  if(document.getElementById(id))return;
@@ -110,7 +103,6 @@ function loadLiveSync(){
 function init(){
  const trip=requestedTrip();
  if(!trip||trip===DEFAULT_TRIP)buildWeatherPanel();
- ensureCatalogLink();
  loadLiveSync();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
