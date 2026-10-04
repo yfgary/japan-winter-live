@@ -1,6 +1,6 @@
 {
-  "version": "v10.11.0",
-  "build": "2026-10-04.65",
-  "updated": "2026-10-04T20:12:00+08:00",
-  "notes": "TravelPilot homepage full visual refresh. Replace the old top navigation and fake search control with a clean brand bar, use the approved mountain/lake/flight hero artwork, introduce a responsive desktop/mobile dashboard with Chinese quick-access topics, keep multi-trip registry routing intact, and visually de-emphasize test trips."
+  "version": "v10.11.1",
+  "build": "2026-10-04.66",
+  "updated": "2026-10-04T20:28:00+08:00",
+  "notes": "Hotfix homepage after v10.11.0: restore a reliable hero banner using an existing high-resolution travel image, remove the unrequested Quick Access panel, and stop the service-worker controllerchange reload loop."
 }
