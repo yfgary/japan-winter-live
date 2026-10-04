@@ -23,7 +23,7 @@ const isJapanLegacy=selectedTrip===DEFAULT_TRIP;
 const isTripInfo=/(?:^|\/)trip-info\.html$/.test(location.pathname);
 
 const commonHead=[
-  'assets/multi-trip-context-v1.js?v=10.13.2',
+  'assets/multi-trip-context-v1.js?v=10.13.3',
   'assets/multi-trip-data-v1.js?v=2',
   'assets/multi-trip-nav-v1.js?v=2'
 ];
