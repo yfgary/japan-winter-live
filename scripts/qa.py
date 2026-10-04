@@ -83,10 +83,25 @@ def check_version_ownership() -> None:
     # Comments may mention controllerchange; only executable listeners are banned.
     if re.search(r"(?:addEventListener|on)\s*\(\s*['\"]controllerchange['\"]", context):
         error("multi-trip-context-v1.js must not auto-reload on controllerchange")
+    if "VERSION_CHECK_TTL" not in context:
+        error("Version checks are no longer throttled")
+    if "multiTripExclusive" in context:
+        error("Obsolete version-badge listener-cloning workaround has returned")
+
+    site_shell = read("assets/site-shell-v7.js")
+    if "INSTALLED_VERSION" in site_shell or "function setupVersion" in site_shell:
+        error("site-shell-v7.js must not own website version state")
+    hotfix = read("assets/trip-v9-hotfix.js")
+    if "HOTFIX_VERSION" in hotfix or "fixVersionBadge" in hotfix:
+        error("trip-v9-hotfix.js must not own website version state")
 
     sw = read("sw.js")
     if f"travelpilot-{version}-" not in sw:
         error("sw.js CACHE_NAME does not match version.json")
+    if "live-v9-2-sync.js" in sw:
+        error("Service worker must not inject Japan Live sync a second time")
+    if f"assets/multi-trip-live-entry-v1.js?v={plain}" not in sw:
+        error("Service worker Live Cam shim is not pinned to the current release")
 
     index = read("index.html")
     for expected in (
@@ -254,6 +269,8 @@ def check_runtime_routing() -> None:
 
     if "u.searchParams.set('trip'" not in context:
         error("Internal trip links no longer preserve the active trip query parameter")
+    if "loadError:true" not in context or "itinerary:false,tripInfo:false,attractions:false,liveCam:false" not in context:
+        error("Non-default trip config failures must fail closed instead of exposing fallback Japan features")
     for feature_name in ("itinerary", "tripInfo", "attractions", "liveCam", "todayMode", "drivingMode"):
         if f"enabled('{feature_name}')" not in nav:
             error(f"Shared navigation no longer feature-gates {feature_name}")
@@ -292,6 +309,8 @@ def check_runtime_routing() -> None:
         error("Mode close/return paths no longer resync the canonical page navigation")
     if "feature('liveCam')" not in live_entry or "details.region" not in live_entry:
         error("Live Cam entry no longer blocks disabled trips from showing another trip's cameras")
+    if "mt.config&&mt.config.loadError" not in live_entry:
+        error("Live Cam entry no longer preserves fail-closed trip load errors")
 
 
 def check_all_json() -> None:
