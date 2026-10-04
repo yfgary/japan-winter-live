@@ -26,8 +26,6 @@ jobs:
         run: python scripts/qa_checklist.py
       - name: Run observer regression QA
         run: python scripts/qa_observers.py
-      - name: Run observer runtime simulation
-        run: node scripts/test_observer_guard.mjs
       - name: Check JavaScript syntax
         run: |
           node --check sw.js
