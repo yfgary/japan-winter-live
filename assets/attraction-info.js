@@ -29,7 +29,7 @@ const commonHead=[
 ];
 
 const itineraryScripts=commonHead.concat([
-  'assets/trip-no-observers-v2.js?v=1',
+  'assets/trip-performance-guard.js?v=2',
   'assets/trip-core-v1.js?v=8',
   'assets/site-shell-v7.js?v=10.12.0',
   'assets/weather-suitability-v1.js?v=6',
