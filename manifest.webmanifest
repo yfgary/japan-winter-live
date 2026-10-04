@@ -5,22 +5,12 @@
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#eef4f9",
+  "background_color": "#edf4f8",
   "theme_color": "#0b5fa8",
   "orientation": "any",
   "lang": "zh-HK",
   "icons": [
-    {
-      "src": "assets/images/travelpilot-icon-exact.jpg?v=10.10.10",
-      "sizes": "192x192",
-      "type": "image/jpeg",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/images/travelpilot-icon-exact.jpg?v=10.10.10",
-      "sizes": "192x192",
-      "type": "image/jpeg",
-      "purpose": "maskable"
-    }
+    {"src":"assets/images/travelpilot-icon-exact.jpg?v=10.11.0","sizes":"192x192","type":"image/jpeg","purpose":"any"},
+    {"src":"assets/images/travelpilot-icon-exact.jpg?v=10.11.0","sizes":"192x192","type":"image/jpeg","purpose":"maskable"}
   ]
 }
