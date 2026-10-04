@@ -64,7 +64,7 @@ const itineraryScripts=commonHead.concat([
   'assets/multi-trip-mode-weather-bridge-v1.js?v=1',
   'assets/i18n-v1.js?v=3',
   'assets/i18n-polish-en-v1.js?v=1',
-  'assets/info-icon-repair-v1.js?v=2'
+  'assets/info-icon-repair-v1.js?v=3'
 ]);
 
 const tripInfoScripts=commonHead.concat([
