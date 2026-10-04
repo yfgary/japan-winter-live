@@ -259,13 +259,20 @@ function applyAll(){
  updateChoiceState();
  setupZoom();
 }
+function emitFinalPatch(pass,delay,final){
+ document.dispatchEvent(new CustomEvent('japan2027:finalpatch',{detail:{pass,delay,final}}));
+}
+function runFinalPatch(pass,delay,final){
+ applyAll();
+ emitFinalPatch(pass,delay,final);
+}
 function start(){
  installChoiceFix();
- applyAll();
+ runFinalPatch(0,0,false);
  /* Older enhancement scripts finish a few delayed DOM updates after DOMContentLoaded.
     Use a few bounded retries instead of a permanent MutationObserver.  The old observer
     could retrigger itself through the shrine info buttons and cause high CPU/RAM usage. */
- [250,700,1500].forEach(t=>setTimeout(applyAll,t));
+ [250,700,1500].forEach((t,i)=>setTimeout(()=>runFinalPatch(i+1,t,t===1500),t));
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
