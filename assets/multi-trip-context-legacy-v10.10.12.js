@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 if(window.MultiTrip&&window.MultiTrip.__v1)return;
-const APP_VERSION='v10.10.12',DEFAULT_TRIP='shirakawago-shinhotaka-2027',STORAGE_KEY='multiTrip.activeTrip';
+const APP_VERSION='v10.11.2',DEFAULT_TRIP='shirakawago-shinhotaka-2027',STORAGE_KEY='multiTrip.activeTrip';
 const params=new URLSearchParams(location.search),requested=(params.get('trip')||'').trim(),tripId=requested||DEFAULT_TRIP;
 const fallback={id:DEFAULT_TRIP,name:'白川鄉・新穗高之旅 2027',shortName:'白川鄉・新穗高 2027',subtitle:'日本中部冬季自駕・9日8夜',startDate:'2027-01-09',endDate:'2027-01-17',timezone:'Asia/Tokyo',features:{itinerary:true,tripInfo:true,attractions:true,liveCam:true,todayMode:true,drivingMode:true,weather:true,weatherScore:true,weatherActivityProfiles:true,packingChecklist:true,bilingual:true,winterDriving:true,shinhotakaPlanner:true},pages:{itinerary:'itinerary.html',tripInfo:'trip-info.html',attractions:'attractions.html',liveCam:'live.html'}};
 let config=fallback,resolveReady,latestVersion=null,versionChecking=false,updating=false;const ready=new Promise(r=>resolveReady=r);
@@ -21,7 +21,7 @@ function beginUpdate(){if(updating)return;updating=true;const box=ensureUpdatePr
  if(!('serviceWorker' in navigator)){reload();return;}
  let changed=false;const onChange=()=>{if(changed)return;changed=true;navigator.serviceWorker.removeEventListener('controllerchange',onChange);reload();};navigator.serviceWorker.addEventListener('controllerchange',onChange);
  navigator.serviceWorker.getRegistration().then(reg=>{if(!reg){reload();return;}if(reg.waiting)try{reg.waiting.postMessage({type:'SKIP_WAITING'});}catch(e){}return reg.update().then(()=>{const w=reg.waiting||reg.installing;if(w&&w.state==='installed')try{w.postMessage({type:'SKIP_WAITING'});}catch(e){}if(w&&w.state!=='installed')w.addEventListener('statechange',()=>{if(w.state==='installed')try{w.postMessage({type:'SKIP_WAITING'});}catch(e){};});});}).catch(()=>reload());
- setTimeout(()=>{if(!changed)reload();},8000);
+ setTimeout(()=>{if(!changed)reload();},3000);
 }
 function ensureVersionBadge(){let b=document.getElementById('siteVersionBadge');if(!b){b=document.createElement('button');b.type='button';b.id='siteVersionBadge';b.className='site-version-badge';b.setAttribute('aria-label','網站版本');document.body.appendChild(b);}b.dataset.multiTripVersionOwner='1';if(!b.dataset.multiTripBound){b.dataset.multiTripBound='1';b.addEventListener('click',()=>{if(latestVersion&&latestVersion!==APP_VERSION)beginUpdate();else checkVersion(true);});}paintVersion(navigator.onLine?'current':'offline');checkVersion(false);}
 function cleanupLegacySharedUi(){const shared=document.getElementById('siteVersionBadge'),legacy=document.getElementById('catalogVersion');if(shared&&legacy&&legacy!==shared)legacy.remove();document.querySelectorAll('.floating-top').forEach(el=>el.remove());}
