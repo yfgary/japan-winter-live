@@ -95,6 +95,7 @@ legacy_markers = (
     "assets/driving-mode-v1.js",
     "assets/nav-enhancements-v1.js",
     "assets/d6-d8-weather-decision-v1.js",
+    "assets/japan2027-",
 )
 for label in ("Generic itinerary", "Generic trip info"):
     for src in sets[label]:
