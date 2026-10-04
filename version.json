@@ -1,6 +1,6 @@
 {
-  "version": "v10.13.0",
-  "build": "2026-10-05.70",
-  "updated": "2026-10-05T01:13:00+08:00",
-  "notes": "Stage 4A release normalization: align runtime version ownership, homepage and manifest cache-busters, legacy loader pin, Service Worker cache name, and Live Cam shim to v10.13.0; add dedicated release-version QA."
+  "version": "v10.13.1",
+  "build": "2026-10-05.71",
+  "updated": "2026-10-05T01:20:00+08:00",
+  "notes": "Stage 4B legacy updater cleanup: remove the retired trip-page update popup code and CSS, remove the temporary runtime suppression shim, preserve the online/offline status indicator, and add regression QA so the retired updater cannot return."
 }
