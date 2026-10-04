@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 5,
   "id": "hokkaido-2025",
   "name": "北海道道南・札幌自駕 8日 2025",
   "shortName": "北海道 2025・8日",
@@ -13,7 +13,7 @@
     "itinerary": true,
     "tripInfo": true,
     "attractions": true,
-    "liveCam": false,
+    "liveCam": true,
     "todayMode": true,
     "drivingMode": true,
     "weather": true,
@@ -93,7 +93,7 @@
     {"label":"三井 Outlet Park","url":"https://commons.wikimedia.org/wiki/File:Mitsui-outlet-park.png"},
     {"label":"莫埃來沼公園","url":"https://commons.wikimedia.org/wiki/File:%E3%83%A2%E3%82%A8%E3%83%AC%E6%B2%BC%E5%85%AC%E5%9C%92%EF%BC%88Moerenuma_Park%EF%BC%89_-_panoramio.jpg"},
     {"label":"莫埃來沼公園・玻璃金字塔","url":"https://commons.wikimedia.org/wiki/File:In_the_glass_pyramid,_Moerenuma_Park_20260703a.jpg"},
-    {"label":"北海道神宮","url":"https://commons.wikimedia.org/wiki/File:Hokkaido_Jingu,_Hokkaido_Shrine,_Sapporo,_Hokkaido,_Japan,_%E5%8C%97%E6%B5%B7%E9%81%93%E7%A5%9E%E5%AE%AE,_%E6%9C%AD%E5%B9%8C,_%E5%8C%97%E6%B5%B7%E9%81%93,_%E6%97%A5%E6%9C%AC,_%E3%81%BB%E3%81%A3%E3%81%8B%E3%81%84%E3%81%A9%E3%81%86%E3%81%98%E3%82%93%E3%81%90%E3%81%86,_%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E3%81%97,_%E3%81%BB%E3%81%A3%E3%81%8b%E3%81%84%E3%81%A9%E3%81%86,_%E3%81%AB%E3%81%A3%E3%81%bd%E3%82%93,_%E3%81%AB%E3%81%BB%E3%82%93_(16578027820).jpg"},
+    {"label":"北海道神宮","url":"https://commons.wikimedia.org/wiki/File:Hokkaido_Jingu,_Hokkaido_Shrine,_Sapporo,_Hokkaido,_Japan,_%E5%8C%97%E6%B5%B7%E9%81%93%E7%A5%9E%E5%AE%AE,_%E6%9C%AD%E5%B9%8C,_%E5%8C%97%E6%B5%B7%E9%81%93,_%E6%97%A5%E6%9C%AC,_%E3%81%BB%E3%81%A3%E3%81%8B%E3%81%84%E3%81%A9%E3%81%86%E3%81%98%E3%82%93%E3%81%90%E3%81%86,_%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E3%81%97,_%E3%81%BB%E3%81%A3%E3%81%8B%E3%81%84%E3%81%A9%E3%81%86,_%E3%81%AB%E3%81%A3%E3%81%BD%E3%82%93,_%E3%81%AB%E3%81%BB%E3%82%93_(16578027820).jpg"},
     {"label":"小樽運河","url":"https://commons.wikimedia.org/wiki/File:Otaru_canal.jpg"},
     {"label":"白い恋人パーク","url":"https://commons.wikimedia.org/wiki/File:Shiroi_Koibito_Park_20260703i.jpg"},
     {"label":"小樽音樂盒堂・室內","url":"https://commons.wikimedia.org/wiki/File:Otaru_Music_Box_Museum_interior.jpg"},
@@ -103,7 +103,7 @@
   ],
   "legacy": {
     "dataMode": "generic-only",
-    "migrationStage": 4,
-    "note": "Fourth real Trip validation. Attraction scores and photo credits are trip data; gallery and attraction content remain trip-scoped with no Hokkaido core branching."
+    "migrationStage": 5,
+    "note": "Fourth real Trip validation. Attraction scores, photo credits and Live Cam definitions are trip data; gallery, attraction and camera content remain trip-scoped with no Hokkaido core branching."
   }
 }
