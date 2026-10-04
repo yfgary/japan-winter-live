@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.6",
-  "build": "2026-10-04.55",
-  "updated": "2026-10-04T11:45:00+08:00",
-  "notes": "Multi Trip maturity QA and architecture cleanup. Service worker no longer hardcodes Okinawa or Bangkok trip data/assets: it now reads the trip registry and each trip config during install, then pre-caches each trip's declared data files and same-origin config assets generically. Bangkok day-gallery rules are consolidated into the single config-declared gallery CSS asset, so future trips can add their own gallery asset without core service-worker edits. Routing remains URL-driven with the Japan trip as the safe default, and existing Live Cam feature gating, trip-scoped checklist sync, Travel Center date sorting and generic renderers are retained."
+  "version": "v10.10.7",
+  "build": "2026-10-04.56",
+  "updated": "2026-10-04T12:20:00+08:00",
+  "notes": "Fix generic itinerary UI persistence and styling. Hokkaido day navigation labels remain data-driven and now survive normal page navigation without requiring Shift+F5 once the new release is activated. Generic Photo Credits now use the same compact paragraph typography and spacing as the original Japan itinerary credits instead of oversized custom rows. The shared update prompt is re-enabled by advancing the release version so existing v10.10.6 clients can detect and activate this build."
 }
