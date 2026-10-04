@@ -1,6 +1,6 @@
 {
-  "version": "v10.13.1",
-  "build": "2026-10-05.71",
-  "updated": "2026-10-05T01:20:00+08:00",
-  "notes": "Stage 4B legacy updater cleanup: remove the retired trip-page update popup code and CSS, remove the temporary runtime suppression shim, preserve the online/offline status indicator, and add regression QA so the retired updater cannot return."
+  "version": "v10.13.2",
+  "build": "2026-10-05.72",
+  "updated": "2026-10-05T02:03:00+08:00",
+  "notes": "Stage 5A loader audit: remove the duplicate direct trip-v9-final-fixes load, add dependency/duplicate/reference QA, document the current legacy loader inventory, and keep Japan legacy vs generic-trip dependency boundaries explicit."
 }

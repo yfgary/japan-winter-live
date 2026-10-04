@@ -86,7 +86,7 @@ def main() -> int:
 
     # Guard against accidentally shipping the immediately previous production pin
     # in files whose cache-busters are release-owned rather than module-owned.
-    previous = "10.13.0"
+    previous = "10.13.1"
     for path, text in (
         ("index.html", index),
         ("manifest.webmanifest", manifest),
