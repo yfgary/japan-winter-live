@@ -18,7 +18,18 @@ const CORE=[
   './assets/multi-trip-attractions-renderer-v1.js',
   './assets/multi-trip-live-renderer-v1.js',
   './assets/multi-trip-live-entry-v1.js',
-  './assets/multi-trip-trip-info-renderer-v1.js'
+  './assets/multi-trip-trip-info-renderer-v1.js',
+  './assets/multi-trip-departure-checklist-v1.js',
+  './assets/multi-trip-checklist-sync-v1.js',
+  './trips/registry.json',
+  './trips/shirakawago-shinhotaka-2027/trip.json',
+  './trips/shirakawago-shinhotaka-2027/itinerary.json',
+  './trips/shirakawago-shinhotaka-2027/trip-info.json',
+  './trips/shirakawago-shinhotaka-2027/hotels.json',
+  './trips/shirakawago-shinhotaka-2027/attractions.json',
+  './trips/shirakawago-shinhotaka-2027/live-cams.json',
+  './trips/shirakawago-shinhotaka-2027/weather.json',
+  './trips/shirakawago-shinhotaka-2027/departure-checklist.json'
 ];
 
 async function put(cache,request,response){
