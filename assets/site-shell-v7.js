@@ -4,6 +4,7 @@
 if(window.__japan2027SiteShellV7)return;
 window.__japan2027SiteShellV7=true;
 
+const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const WEATHER_CACHE_KEY='japan2027_weather_cache_v2';
 const WEATHER_REGION_KEY='japan2027_weather_region';
 const WEATHER_TTL=10*60*1000;
@@ -94,11 +95,23 @@ function ensureCatalogLink(){
   const a=document.createElement('a');a.href='attractions.html';a.textContent='🗾 景點總覽';if(/(?:^|\/)attractions\.html$/.test(location.pathname))a.classList.add('active');sw.appendChild(a);
  });
 }
+function requestedTrip(){return(new URLSearchParams(location.search).get('trip')||'').trim();}
+function loadScriptOnce(id,src){
+ if(document.getElementById(id))return;
+ const s=document.createElement('script');s.id=id;s.src=src;s.async=false;document.body.appendChild(s);
+}
 function loadLiveSync(){
  if(!/(?:^|\/)live\.html$/.test(location.pathname))return;
- if(document.getElementById('liveV92SyncScript'))return;
- const s=document.createElement('script');s.id='liveV92SyncScript';s.src='assets/live-v9-2-sync.js?v=2';s.async=false;document.body.appendChild(s);
+ if(!window.MultiTripLiveEntry)loadScriptOnce('multiTripLiveEntryScript','assets/multi-trip-live-entry-v1.js?v=10.12.0');
+ const trip=requestedTrip();
+ if(trip&&trip!==DEFAULT_TRIP)return;
+ if(!window.__japan2027LiveV1050Sync)loadScriptOnce('liveV92SyncScript','assets/live-v9-2-sync.js?v=10.12.0');
 }
-function init(){buildWeatherPanel();ensureCatalogLink();loadLiveSync();}
+function init(){
+ const trip=requestedTrip();
+ if(!trip||trip===DEFAULT_TRIP)buildWeatherPanel();
+ ensureCatalogLink();
+ loadLiveSync();
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
