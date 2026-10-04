@@ -72,67 +72,6 @@ function ensureTripInfoNav(){
   }
 }
 
-function ensureDepartureChecklist(){
-  if(!isTripInfo())return;
-  const existing=document.getElementById('checklist');
-  if(!existing||!DATA||!Array.isArray(DATA.departureChecklist))return;
-
-  let section=document.getElementById('departure-checklist');
-  if(!section){
-    section=document.createElement('section');
-    section.className='section';
-    section.id='departure-checklist';
-    section.innerHTML='<div class="section-header"><h2 class="section-title">🧳 香港出發前・已帶物品 Checklist</h2><div class="section-desc">呢份係離開香港前執行李用，唔同每日出車 Checklist。Tick 狀態會保留喺呢部 iPhone／PWA。</div><div class="departure-progress" id="departureProgress"></div></div><div class="section-body"><div id="departureChecklistGroups"></div><div class="departure-actions"><button type="button" id="resetDepartureChecklist">↺ 全部重設</button></div></div>';
-    existing.parentNode.insertBefore(section,existing);
-
-    const key='japanWinter2027DepartureChecklistV1';
-    let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');}catch(e){}
-    const box=section.querySelector('#departureChecklistGroups');
-
-    DATA.departureChecklist.forEach(group=>{
-      const g=document.createElement('div');g.className='departure-group';
-      const h=document.createElement('h3');h.textContent=group.group;g.appendChild(h);
-      const grid=document.createElement('div');grid.className='departure-grid';
-      group.items.forEach(([id,label])=>{
-        const item=document.createElement('label');item.className='departure-item'+(saved[id]?' checked':'');
-        const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!saved[id];
-        const span=document.createElement('span');span.textContent=label;
-        item.append(cb,span);
-        cb.addEventListener('change',()=>{
-          saved[id]=cb.checked;
-          item.classList.toggle('checked',cb.checked);
-          localStorage.setItem(key,JSON.stringify(saved));
-          updateProgress();
-        });
-        grid.appendChild(item);
-      });
-      g.appendChild(grid);box.appendChild(g);
-    });
-
-    function updateProgress(){
-      const all=section.querySelectorAll('input[type="checkbox"]');
-      const done=section.querySelectorAll('input[type="checkbox"]:checked');
-      const p=section.querySelector('#departureProgress');
-      if(p)p.textContent='完成 '+done.length+' / '+all.length+(done.length===all.length&&all.length?'　✅ 可以出發':'');
-    }
-    updateProgress();
-
-    const reset=section.querySelector('#resetDepartureChecklist');
-    if(reset)reset.addEventListener('click',()=>{
-      localStorage.removeItem(key);
-      saved={};
-      section.querySelectorAll('input[type="checkbox"]').forEach(cb=>{cb.checked=false;cb.closest('.departure-item')?.classList.remove('checked');});
-      updateProgress();
-    });
-  }
-
-  const nav=document.querySelector('.quick-nav-inner');
-  if(nav&&!nav.querySelector('a[href="#departure-checklist"]')){
-    const a=document.createElement('a');a.href='#departure-checklist';a.textContent='🧳 出發前';
-    const before=nav.querySelector('a[href="#checklist"]');before?nav.insertBefore(a,before):nav.appendChild(a);
-  }
-}
-
 function wireTripInfoButtons(){
   if(!isTripInfo())return;
   document.querySelectorAll('#winter-shrines .parking-main h3').forEach(h=>{
@@ -146,7 +85,6 @@ function wireTripInfoButtons(){
 function run(){
   removeDuplicateInfoButtons(document);
   ensureTripInfoNav();
-  ensureDepartureChecklist();
   wireTripInfoButtons();
 }
 
