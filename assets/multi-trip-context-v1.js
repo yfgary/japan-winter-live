@@ -5,6 +5,7 @@ if(window.MultiTrip&&window.MultiTrip.__v1)return;
 const APP_VERSION='v10.12.0';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const STORAGE_KEY='multiTrip.activeTrip';
+const VERSION_CHECK_TTL=30*1000;
 const params=new URLSearchParams(location.search);
 const requested=(params.get('trip')||'').trim();
 const tripId=requested||DEFAULT_TRIP;
@@ -30,6 +31,7 @@ let config=fallback;
 let resolveReady;
 let latestVersion=null;
 let versionChecking=false;
+let lastVersionCheckAt=0;
 const ready=new Promise(resolve=>{resolveReady=resolve;});
 
 function currentPageType(){
@@ -98,9 +100,15 @@ function checkVersion(force){
   if(versionChecking)return Promise.resolve(latestVersion);
   const badge=document.getElementById('siteVersionBadge');
   if(!navigator.onLine){paintVersion('offline');return Promise.resolve(null);}
+  const now=Date.now();
+  if(!force&&lastVersionCheckAt&&now-lastVersionCheckAt<VERSION_CHECK_TTL){
+    paintVersion(latestVersion&&latestVersion!==APP_VERSION?'outdated':'current');
+    return Promise.resolve(latestVersion);
+  }
   versionChecking=true;
+  lastVersionCheckAt=now;
   if(force&&badge){badge.textContent='檢查版本…';badge.disabled=true;}
-  return fetch('version.json?t='+Date.now(),{cache:'no-store'})
+  return fetch('version.json?t='+now,{cache:'no-store'})
     .then(r=>{if(!r.ok)throw new Error('version');return r.json();})
     .then(v=>{
       latestVersion=v&&v.version||null;
@@ -138,19 +146,6 @@ function ensureVersionBadge(){
     badge.setAttribute('aria-label','網站版本');
     document.body.appendChild(badge);
   }
-
-  /* site-shell-v7 is legacy and still attaches its old v9 version handler.
-     Once that shell has loaded, replace the DOM node once so its listeners keep
-     pointing at a detached node. The visible badge is then owned only here. */
-  if(window.__japan2027SiteShellV7&&badge.dataset.multiTripExclusive!=='1'){
-    const clean=badge.cloneNode(true);
-    clean.disabled=false;
-    clean.dataset.multiTripExclusive='1';
-    delete clean.dataset.multiTripBound;
-    badge.replaceWith(clean);
-    badge=clean;
-  }
-
   badge.dataset.multiTripVersionOwner='1';
   if(!badge.dataset.multiTripBound){
     badge.dataset.multiTripBound='1';
@@ -276,6 +271,39 @@ function switchTrip(id,target){
   location.href=(target||'itinerary.html')+'?trip='+encodeURIComponent(id);
 }
 
+function failedConfig(id){
+  return{
+    id:id||DEFAULT_TRIP,
+    name:'旅程資料載入失敗',
+    shortName:'旅程資料載入失敗',
+    subtitle:'無法載入所選旅程資料，已停止顯示其他旅程內容。',
+    timezone:'Asia/Tokyo',
+    loadError:true,
+    features:{
+      itinerary:false,tripInfo:false,attractions:false,liveCam:false,
+      todayMode:false,drivingMode:false,weather:false,weatherScore:false,
+      weatherActivityProfiles:false,packingChecklist:false,bilingual:false,
+      winterDriving:false,shinhotakaPlanner:false
+    },
+    pages:{itinerary:'itinerary.html',tripInfo:'trip-info.html',attractions:'attractions.html',liveCam:'live.html'},
+    dataFiles:{},
+    renderers:{}
+  };
+}
+
+function showTripLoadError(){
+  const render=()=>{
+    if(!config.loadError)return;
+    const host=document.querySelector('main.container')||document.querySelector('.container')||document.getElementById('app')||document.querySelector('main');
+    if(!host||host.dataset.tripLoadError==='1')return;
+    host.dataset.tripLoadError='1';
+    host.innerHTML='<section style="background:#fff;border:1px solid #e0e7ec;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.07)"><h2 style="margin:0 0 8px;color:#1f4e79">⚠️ 旅程資料載入失敗</h2><p style="line-height:1.6;color:#596b77">未能載入 <strong>'+String(tripId).replace(/[&<>"']/g,'')+'</strong>。為避免顯示錯誤旅程內容，呢頁已停止載入其他 Trip 資料。</p><p><a href="index.html" style="display:inline-block;text-decoration:none;background:#1f4e79;color:#fff;border-radius:8px;padding:9px 12px;font-weight:800">返回我的旅程</a> <button type="button" id="multiTripRetryLoad" style="border:1px solid #cad7df;background:#fff;color:#1f4e79;border-radius:8px;padding:9px 12px;font-weight:800">重新載入</button></p></section>';
+    const retry=document.getElementById('multiTripRetryLoad');
+    if(retry)retry.addEventListener('click',()=>location.reload());
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render,{once:true});else render();
+}
+
 function registerServiceWorker(){
   if(!('serviceWorker' in navigator)||window.__travelPilotSwRequested)return;
   window.__travelPilotSwRequested=true;
@@ -310,12 +338,18 @@ fetch('trips/'+encodeURIComponent(tripId)+'/trip.json?t='+Date.now(),{cache:'no-
     resolveReady(config);
   })
   .catch(()=>{
-    config=Object.assign({},fallback,{id:tripId||DEFAULT_TRIP});
-    syncBrand();
+    if(requested&&tripId!==DEFAULT_TRIP){
+      config=failedConfig(tripId);
+      syncBrand();
+      showTripLoadError();
+    }else{
+      config=Object.assign({},fallback);
+      syncBrand();
+    }
     resolveReady(config);
   });
 
-window.addEventListener('online',()=>{paintVersion('current');setTimeout(()=>checkVersion(false),50);});
+window.addEventListener('online',()=>{lastVersionCheckAt=0;paintVersion('current');setTimeout(()=>checkVersion(false),50);});
 window.addEventListener('offline',()=>paintVersion('offline'));
 window.addEventListener('pageshow',()=>setTimeout(()=>{suppressRetiredUpdateUi();ensureVersionBadge();checkVersion(false);},250));
 
