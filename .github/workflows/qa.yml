@@ -22,6 +22,8 @@ jobs:
           python-version: '3.12'
       - name: Run static QA
         run: python scripts/qa.py
+      - name: Run checklist migration QA
+        run: python scripts/qa_checklist.py
       - name: Check JavaScript syntax
         run: |
           node --check sw.js
