@@ -11,13 +11,13 @@
   "lang": "zh-HK",
   "icons": [
     {
-      "src": "assets/images/travel-hub-icon.svg",
+      "src": "assets/images/travel-hub-icon-v2.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "assets/images/travel-hub-icon.svg",
+      "src": "assets/images/travel-hub-icon-v2.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "maskable"
