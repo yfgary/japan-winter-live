@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "hokkaido-2025",
   "name": "北海道道南・札幌自駕 8日 2025",
   "shortName": "北海道 2025・8日",
@@ -50,9 +50,37 @@
     "todayMode": {"mode":"generate","source":"itinerary"},
     "drivingMode": {"mode":"generate","source":"itinerary"}
   },
+  "attractionScores": {
+    "goryokaku": {"score":9.7,"reason":"今次4月底櫻花季非常吻合，而且同一景點有夜櫻、日間星形城郭、幕末歷史三層體驗，係全程最不可取代景點之一。"},
+    "mount-hakodate": {"score":9.4,"reason":"函館兩側海灣夾住市街嘅夜景輪廓辨識度極高，亦同日間市區景點形成完整城市視角。"},
+    "hakodate-morning-market": {"score":8.8,"reason":"早餐、海產、本地市場文化一次完成，而且位置方便，時間成本低。"},
+    "hakodate-park": {"score":8.2,"reason":"作為五稜郭之後嘅在地賞櫻補充幾好，但可取代性比五稜郭高。"},
+    "lake-toya": {"score":9.2,"reason":"大型火山口湖、溫泉酒店同有珠山地質背景結合，景觀同旅程節奏都非常完整。"},
+    "noboribetsu-jigokudani": {"score":9.4,"reason":"可以直接理解登別溫泉源頭同火山地熱系統，之後住溫泉酒店時整個體驗會更有層次。"},
+    "oyunuma": {"score":8.8,"reason":"將地獄谷嘅地熱系統具體化成高溫沼澤，連接天然足湯後價值更高。"},
+    "oyunuma-footbath": {"score":8.7,"reason":"由『睇火山』變成親身浸天然溪流足湯，體驗感強，而且係D4自然收尾。"},
+    "noboribetsu-date-jidaimura": {"score":7.6,"reason":"表演時間配合先真正值得；以今次45分鐘短停計，完整度有限。"},
+    "mitsui-outlet-kitahiroshima": {"score":8.2,"reason":"文化價值唔高，但由登別入札幌途中順路，對今次Shopping需求非常實用。"},
+    "moerenuma-park": {"score":9.0,"reason":"Isamu Noguchi 將整個公園當成雕塑嘅概念非常獨特，花況普通時仍然值得睇。"},
+    "royce-cacao-town": {"score":8.4,"reason":"如果本身會買ROYCE'，工場、可可知識同購物結合，比純手信店完整好多。"},
+    "toda-memorial-park": {"score":8.9,"reason":"滿開時數千棵成熟櫻花形成長距離花道，非常震撼；但分數高度依賴即時花況。"},
+    "hokkaido-jingu": {"score":8.8,"reason":"有明治北海道開拓歷史、森林參道同春季花景，內容唔會同其他賞櫻點重複。"},
+    "shiroi-koibito-park": {"score":8.3,"reason":"品牌工場、甜點同園區一次過玩，順住札幌去小樽路線亦方便。"},
+    "otaru-sankaku-market": {"score":8.2,"reason":"規模唔大但小樽站旁極方便，一小時已可完成海鮮午餐同市場體驗。"},
+    "otaru-canal": {"score":9.1,"reason":"唔只係打卡位，仲可以由港口物流歷史一路理解小樽點樣轉型成今日觀光城市。"},
+    "temiya-park": {"score":8.8,"reason":"花況好時櫻花、坡地同海港城市感覺非常靚；花況差時價值會明顯下降。"},
+    "sapporo-beer-museum": {"score":8.7,"reason":"將明治北海道開拓、工業化、紅磚建築同品牌歷史串埋一齊，內容比一般品牌館深。"},
+    "daimon-yokocho": {"score":7.8,"reason":"D1長途駕車後作為彈性晚餐非常實用，但本身唔屬必去級景點。"},
+    "hakodate-jiyu-market": {"score":8.0,"reason":"比函館朝市更有傳統鮮魚市場感，但你已經有多個市場行程，所以獨特性稍低。"},
+    "sakuragaoka-dori": {"score":8.5,"reason":"滿開時住宅街櫻花隧道非常有生活感，但完全依賴花況，而且要尊重居民環境。"},
+    "noboribetsu-bear-park": {"score":6.8,"reason":"有北海道棕熊主題，但需要纜車同較多時間；以今次D5密集行程計只適合Backup。"},
+    "nijo-market": {"score":8.0,"reason":"札幌市中心早餐非常方便，但你前面已去過函館兩個市場，因此新鮮感較低。"},
+    "mt-moiwa": {"score":8.8,"reason":"能見度好時札幌平原夜景好有比較價值，但D6只應作天氣同體力許可時嘅Backup。"},
+    "otaru-tenguyama": {"score":8.6,"reason":"天氣清時小樽市區、港口同石狩灣大景值得睇，但行程後段體力同時間決定是否值得加。"}
+  },
   "legacy": {
     "dataMode": "generic-only",
-    "migrationStage": 2,
-    "note": "Fourth real Trip validation. Source itinerary imported from uploaded Hokkaido workbook and booking confirmations; trip-specific day galleries and researched attraction content are data/assets only, with no Hokkaido core branching."
+    "migrationStage": 3,
+    "note": "Fourth real Trip validation. Attraction scores are trip data, not renderer hardcodes; gallery and attraction content remain trip-scoped assets/data."
   }
 }
