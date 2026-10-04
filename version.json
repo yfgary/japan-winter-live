@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.11",
-  "build": "2026-10-04.60",
-  "updated": "2026-10-04T17:21:00+08:00",
-  "notes": "TravelPilot homepage rollout. Browser and installed PWA now use the same homepage implementation, branding, navigation, quick functions, trip cards and destination layout, with a new service-worker cache version to prevent old homepage assets from persisting."
+  "version": "v10.10.12",
+  "build": "2026-10-04.61",
+  "updated": "2026-10-04T17:28:00+08:00",
+  "notes": "TravelPilot exact-banner correction. Homepage now uses the approved TravelPilot banner artwork itself instead of recreating the design with separate HTML/CSS elements. Removed the unrequested quick-function icon grid and featured-destinations section. Shared version badge and PWA cache are updated to v10.10.12."
 }
