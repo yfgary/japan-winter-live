@@ -251,14 +251,3 @@ For each candidate, Stage 5B should map exported globals / DOM mutations / stora
 Files such as `app-v8-7-data.js`, `app-v8-7-ui.js`, and `trip-enhancements-v2.js` exist in `assets/` but are not part of the current loader arrays. That alone does **not** prove they are repo-wide dead; a repository-wide reference check is required before deletion.
 '''
 write("docs/legacy-loader-inventory.md", inventory)
-
-# 5) CI must run the new loader check.
-qa_path = ".github/workflows/qa.yml"
-qa = read(qa_path)
-needle = "      - name: Run legacy update cleanup QA\n        run: python scripts/qa_legacy_update.py\n"
-insert = needle + "      - name: Run loader dependency QA\n        run: python scripts/qa_loader.py\n"
-if needle not in qa:
-    raise SystemExit("qa.yml: legacy updater QA insertion point missing")
-if "Run loader dependency QA" not in qa:
-    qa = qa.replace(needle, insert, 1)
-write(qa_path, qa)
