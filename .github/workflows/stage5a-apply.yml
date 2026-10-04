@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add itinerary.html assets/multi-trip-context-v1.js assets/attraction-info.js index.html manifest.webmanifest sw.js version.json scripts/qa_release.py scripts/qa_loader.py docs/legacy-loader-inventory.md .github/workflows/qa.yml
+          git add itinerary.html assets/multi-trip-context-v1.js assets/attraction-info.js index.html manifest.webmanifest sw.js version.json scripts/qa_release.py scripts/qa_loader.py docs/legacy-loader-inventory.md
           git diff --cached --quiet && exit 0
           git commit -m 'cleanup: audit loader dependencies and remove duplicate script load [stage5a-applied]'
           git push origin HEAD:stage5a-loader-audit-v10.13.2
