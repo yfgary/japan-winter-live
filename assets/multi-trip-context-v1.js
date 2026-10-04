@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 if(window.MultiTrip&&window.MultiTrip.__v1)return;
-const APP_VERSION='v10.10.9',DEFAULT_TRIP='shirakawago-shinhotaka-2027',STORAGE_KEY='multiTrip.activeTrip';
+const APP_VERSION='v10.10.12',DEFAULT_TRIP='shirakawago-shinhotaka-2027',STORAGE_KEY='multiTrip.activeTrip';
 const params=new URLSearchParams(location.search),requested=(params.get('trip')||'').trim(),tripId=requested||DEFAULT_TRIP;
 const fallback={id:DEFAULT_TRIP,name:'白川鄉・新穗高之旅 2027',shortName:'白川鄉・新穗高 2027',subtitle:'日本中部冬季自駕・9日8夜',startDate:'2027-01-09',endDate:'2027-01-17',timezone:'Asia/Tokyo',features:{itinerary:true,tripInfo:true,attractions:true,liveCam:true,todayMode:true,drivingMode:true,weather:true,weatherScore:true,weatherActivityProfiles:true,packingChecklist:true,bilingual:true,winterDriving:true,shinhotakaPlanner:true},pages:{itinerary:'itinerary.html',tripInfo:'trip-info.html',attractions:'attractions.html',liveCam:'live.html'}};
 let config=fallback,resolveReady,latestVersion=null,versionChecking=false,updating=false;const ready=new Promise(r=>resolveReady=r);
