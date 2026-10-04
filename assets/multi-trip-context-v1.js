@@ -2,7 +2,7 @@
 'use strict';
 if(window.MultiTrip&&window.MultiTrip.__v1)return;
 
-const APP_VERSION='v10.12.0';
+const APP_VERSION='v10.12.1';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const STORAGE_KEY='multiTrip.activeTrip';
 const VERSION_CHECK_TTL=30*1000;
