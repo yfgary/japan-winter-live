@@ -10,22 +10,29 @@ function buttonSelector(options){
 const BUTTON_SELECTOR=buttonSelector();
 
 function data(){return window.Japan2027EnhancementData||null;}
-function norm(value){
-  return String(value||'').replace(/ⓘ|📍/g,'').replace(/\s+/g,' ').trim();
+function norm(value,options){
+  const iconReplacement=options&&options.iconSpace?' ':'';
+  let text=String(value||'').replace(/ⓘ|📍/g,iconReplacement);
+  if(options&&options.stripVariationSelectors)text=text.replace(/[\uFE0F]/g,'');
+  return text.replace(/\s+/g,' ').trim();
 }
 function strippedTitle(value){
   return String(value||'').replace(/^\s*[\p{Extended_Pictographic}\uFE0F]+\s*/u,'').trim();
 }
 function findBest(text,options){
-  const n=norm(text);
   const includeTitle=!options||options.includeTitle!==false;
+  const normalizeKeys=!!(options&&options.normalizeKeys);
+  const normOptions=options&&options.normOptions;
+  const n=norm(text,normOptions);
   let best=null,bestLen=0;
   ((data()||{}).attractions||[]).forEach(item=>{
     (item.aliases||[]).forEach(alias=>{
-      if(alias&&n.includes(alias)&&alias.length>bestLen){best=item;bestLen=alias.length;}
+      const key=normalizeKeys?norm(alias,normOptions):alias;
+      if(key&&n.includes(key)&&key.length>bestLen){best=item;bestLen=key.length;}
     });
     if(includeTitle){
-      const title=strippedTitle(item.title);
+      const rawTitle=strippedTitle(item.title);
+      const title=normalizeKeys?norm(rawTitle,normOptions):rawTitle;
       if(title&&n.includes(title)&&title.length>bestLen){best=item;bestLen=title.length;}
     }
   });
@@ -38,6 +45,7 @@ function ensureInfoButton(heading,info,options){
   let button=heading.querySelector(existingSelector);
   if(button){
     if(options&&options.setExistingId)button.dataset.deepInfoId=info.id;
+    else if(options&&options.setExistingIdIfMissing&&!button.dataset.deepInfoId)button.dataset.deepInfoId=info.id;
     return button;
   }
   button=document.createElement('button');
