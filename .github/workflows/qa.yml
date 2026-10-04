@@ -24,6 +24,8 @@ jobs:
         run: python scripts/qa.py
       - name: Run checklist migration QA
         run: python scripts/qa_checklist.py
+      - name: Run observer regression QA
+        run: python scripts/qa_observers.py
       - name: Check JavaScript syntax
         run: |
           node --check sw.js
