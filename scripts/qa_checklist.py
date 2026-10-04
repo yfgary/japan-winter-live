@@ -10,13 +10,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ERRORS: list[str] = []
 DEFAULT_TRIP = "shirakawago-shinhotaka-2027"
+EXPECTED_JAPAN_COUNT = 96
 EXPECTED_JAPAN_IDS = {
-    "passport", "flight", "vjw", "idp", "hklic", "rental", "hotels", "insurance",
-    "cards", "cash", "sim", "maps", "ic",
-    "coat", "layers", "gloves", "hat", "boots", "traction", "socks", "sunglasses",
-    "phone", "charger", "powerbank", "adapter", "carcharger", "camera", "drone",
-    "rentaldocs", "snowbrush", "livecam", "fuel", "emergency",
-    "medicine", "skin", "tissue", "bottle", "daybag", "zipbags", "tags",
+    "pack_docs", "pack_cash", "pack_sim", "pack_pen", "pack_wallet", "pack_visa", "pack_master", "pack_unionpay",
+    "pack_ski_gloves", "pack_decathlon_gloves", "pack_hats", "pack_scarves", "pack_regular_socks", "pack_thick_socks", "pack_coat", "pack_sleepwear", "pack_underwear", "pack_outfits_min", "pack_base_layers", "pack_windy_thermal", "pack_long_sleeves", "pack_snow_pants", "pack_gary_jeans", "pack_windy_skirt",
+    "pack_electric_toothbrush", "pack_sensitive_toothpaste", "pack_disposable_toothpaste", "pack_disposable_toothbrush", "pack_cups", "pack_conditioner", "pack_shampoo", "pack_comb", "pack_hairclip",
+    "pack_hangers", "pack_clothesline", "pack_laundrypods", "pack_bathtowels", "pack_hairtowel", "pack_slippers", "pack_garbagebags",
+    "pack_masks", "pack_earplugs", "pack_disposable_gloves", "pack_wetwipes", "pack_tissues", "pack_boxtissue", "pack_toiletroll", "pack_disinfectspray", "pack_sanitizer",
+    "pack_sunglasses", "pack_lipbalm", "pack_skincare_set", "pack_handcream", "pack_bodylotion", "pack_vaseline", "pack_eczema_cream", "pack_deodorant", "pack_eyebrow", "pack_makeup", "pack_makeup_wipes", "pack_warmers", "pack_nailclipper", "pack_sewing", "pack_toothpicks", "pack_floss", "pack_sunscreen", "pack_umbrellas", "pack_lunchbox", "pack_forks", "pack_fruitknife", "pack_thermos",
+    "pack_thermalbags", "pack_luggagescale", "pack_sleepmed", "pack_panadol", "pack_trumpet", "pack_cold_drink", "pack_plasters", "pack_antiseptic_wipes", "pack_antiseptic_liquid", "pack_qingreku", "pack_baoanxin", "pack_ecobag",
+    "pack_batteries", "pack_selfiestick", "pack_tripod", "pack_camera", "pack_adapters", "pack_kettle", "pack_stove", "pack_powerbanks", "pack_cctv", "pack_memorycard", "pack_dashcam", "pack_dashcam_mount", "pack_cables",
 }
 
 
@@ -110,10 +113,14 @@ def check_trip_data() -> None:
         if trip_id == DEFAULT_TRIP:
             if dedicated != "departure-checklist.json":
                 error("Japan 2027 must use canonical departure-checklist.json")
+            if not isinstance(obj, dict) or obj.get("expectedCount") != EXPECTED_JAPAN_COUNT:
+                error("Japan 2027 departure-checklist.json must declare expectedCount=96")
+            if len(ids) != EXPECTED_JAPAN_COUNT:
+                error(f"Japan 2027 checklist must contain exactly {EXPECTED_JAPAN_COUNT} items; found {len(ids)}")
             missing = EXPECTED_JAPAN_IDS - ids
             extra = ids - EXPECTED_JAPAN_IDS
             if missing:
-                error("Japan 2027 checklist lost migrated ids: " + ", ".join(sorted(missing)))
+                error("Japan 2027 checklist lost canonical 96-item ids: " + ", ".join(sorted(missing)))
             if extra:
                 error("Japan 2027 checklist has unexpected ids: " + ", ".join(sorted(extra)))
 
@@ -139,7 +146,14 @@ def check_runtime() -> None:
                 if required not in block:
                     error(f"Trip Info loader block #{idx} is missing {required}")
 
-    for required in ("all('departureChecklist')", "LEGACY_LOCAL='japanWinter2027DepartureChecklistV1'", "multitrip:departurerendered"):
+    for required in (
+        "all('departureChecklist')",
+        "LEGACY_LOCAL='japanWinter2027DepartureChecklistV1'",
+        "LEGACY_SPLIT_MAP",
+        "expandLegacyState",
+        "multitrip:departurerendered",
+        "departureChecklistCount",
+    ):
         if required not in renderer:
             error(f"Shared checklist renderer is missing migration/runtime guard: {required}")
     if "ensureDepartureChecklist" in hotfix or "DATA.departureChecklist" in hotfix:
@@ -147,9 +161,12 @@ def check_runtime() -> None:
 
     for required in (
         "LEGACY_LOCAL='japanWinter2027DepartureChecklistV1'",
+        "LEGACY_SPLIT_MAP",
+        "expandLegacyState",
         "legacyJapanRemote",
         "remoteId=id=>`${tid()}::${id}`",
-        ".in('item_id',keys)",
+        ".in('item_id',lookup)",
+        "mergeMissing(remote,legacy.state,keys)",
     ):
         if required not in sync:
             error(f"Shared checklist sync is missing legacy-state migration guard: {required}")
