@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.8",
-  "build": "2026-10-04.57",
-  "updated": "2026-10-04T13:05:00+08:00",
-  "notes": "Live Camera update. Japan 2027 no longer presents the stale Hakuba47 YouTube recording as live; the Hakuba47 card now points to the Hakuba Village official live-camera source. Hokkaido 2025 enables the generic Live Cam page with trip-scoped D1-D8 camera data for Hakodate, Lake Toya area, Noboribetsu Jigokudani, Kitahiroshima/Sapporo, Mt. Moiwa, Otaru and New Chitose Airport. Direct current streams are embedded where appropriate; official sources with rotating or non-embeddable feeds remain official-source links rather than being misrepresented as live video."
+  "version": "v10.10.9",
+  "build": "2026-10-04.58",
+  "updated": "2026-10-04T09:10:00+08:00",
+  "notes": "Travel Hub branding refresh. Rename the installed PWA and Travel Center from My Trips to Travel Hub・旅程中心, replace the Japan-specific app icon with a neutral route/airplane Travel Hub icon, and rewrite the home description so it explains the user-facing purpose instead of internal App Engine architecture."
 }
