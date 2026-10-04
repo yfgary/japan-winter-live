@@ -1,6 +1,6 @@
 {
-  "version": "v10.11.2",
-  "build": "2026-10-04.61",
-  "updated": "2026-10-04T10:45:00+08:00",
-  "notes": "TravelPilot visual refresh finalized. Use the approved TravelPilot icon artwork on the homepage and PWA, refresh the service-worker cache, and keep the responsive desktop/mobile homepage layout with quick functions, next trip, quick links and destination cards."
+  "version": "v10.11.3",
+  "build": "2026-10-04.62",
+  "updated": "2026-10-04T15:18:00+08:00",
+  "notes": "Fix the TravelPilot home after iPhone validation: use the approved icon JPG directly so Safari/PWA renders it, make the default 2027 Japan trip the Next Trip instead of the 2028 architecture test, and tighten the responsive homepage to match the approved mobile/desktop mockup."
 }
