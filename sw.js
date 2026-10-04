@@ -1,8 +1,107 @@
-const CACHE_NAME='travelpilot-v10.11.2-20261004';
+const CACHE_NAME='travelpilot-v10.12.0-20261004';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
-const CORE=['./','./index.html','./itinerary.html','./trip-info.html','./attractions.html','./live.html','./manifest.webmanifest','./assets/travelpilot-home-v10.11.1.css','./assets/images/travelpilot-icon-exact.jpg','./assets/images/d5-mountain-harbor.jpg','./assets/multi-trip-context-v1.js','./assets/multi-trip-shared-ui-v1.css','./assets/multi-trip-nav-v1.js','./assets/multi-trip-data-v1.js','./assets/multi-trip-itinerary-renderer-v1.js','./assets/multi-trip-attractions-renderer-v1.js','./assets/multi-trip-live-renderer-v1.js','./assets/multi-trip-live-entry-v1.js','./assets/multi-trip-trip-info-renderer-v1.js'];
-async function put(cache,request,response){try{if(response&&response.ok)await cache.put(request,response.clone())}catch(e){}return response}
-self.addEventListener('install',e=>{e.waitUntil((async()=>{const c=await caches.open(CACHE_NAME);await Promise.allSettled(CORE.map(async p=>{try{const r=await fetch(p,{cache:'no-store'});if(r.ok)await c.put(p,r)}catch(e){}}))})())});
-self.addEventListener('activate',e=>{e.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));await self.clients.claim()})())});
-async function patchLive(response,url){if(!response||!url.pathname.endsWith('/live.html'))return response;try{let text=await response.text();const id=url.searchParams.get('trip')||DEFAULT_TRIP,add=[];if(!text.includes('assets/multi-trip-live-entry-v1.js'))add.push('<script src="assets/multi-trip-live-entry-v1.js?v=2"><\/script>');if(id===DEFAULT_TRIP&&!text.includes('assets/live-v9-2-sync.js'))add.push('<script src="assets/live-v9-2-sync.js?v=8"><\/script>');if(add.length)text=text.replace(/<\/body>/i,add.join('\n')+'\n</body>');const h=new Headers(response.headers);h.delete('content-length');h.delete('content-encoding');return new Response(text,{status:response.status,statusText:response.statusText,headers:h})}catch(e){return response}}
-self.addEventListener('fetch',e=>{const req=e.request;if(req.method!=='GET')return;const u=new URL(req.url);if(u.origin!==location.origin)return;const networkFirst=async()=>{try{const r=await fetch(req,{cache:'no-store'});const out=await patchLive(r,u);put(await caches.open(CACHE_NAME),req,out.clone());return out}catch(err){const c=await caches.match(req,{ignoreSearch:true});if(c)return patchLive(c,u);if(req.mode==='navigate')return caches.match('./index.html');throw err}};if(u.pathname.endsWith('/version.json')||u.pathname.endsWith('/trips/registry.json')||/\/trips\/.*\.json$/.test(u.pathname)||req.mode==='navigate'||req.destination==='document'||req.destination==='script'||req.destination==='style'){e.respondWith(networkFirst());return}e.respondWith(caches.match(req,{ignoreSearch:true}).then(async c=>{if(c)return c;const r=await fetch(req);return put(await caches.open(CACHE_NAME),req,r)}))});
+const CORE=[
+  './',
+  './index.html',
+  './itinerary.html',
+  './trip-info.html',
+  './attractions.html',
+  './live.html',
+  './manifest.webmanifest',
+  './assets/travelpilot-home.css',
+  './assets/images/travelpilot-icon-exact.jpg',
+  './assets/images/d5-mountain-harbor.jpg',
+  './assets/multi-trip-context-v1.js',
+  './assets/multi-trip-shared-ui-v1.css',
+  './assets/multi-trip-nav-v1.js',
+  './assets/multi-trip-data-v1.js',
+  './assets/multi-trip-itinerary-renderer-v1.js',
+  './assets/multi-trip-attractions-renderer-v1.js',
+  './assets/multi-trip-live-renderer-v1.js',
+  './assets/multi-trip-live-entry-v1.js',
+  './assets/multi-trip-trip-info-renderer-v1.js'
+];
+
+async function put(cache,request,response){
+  try{if(response&&response.ok)await cache.put(request,response.clone());}catch(e){}
+  return response;
+}
+
+self.addEventListener('install',event=>{
+  event.waitUntil((async()=>{
+    const cache=await caches.open(CACHE_NAME);
+    await Promise.allSettled(CORE.map(async path=>{
+      try{
+        const response=await fetch(path,{cache:'no-store'});
+        if(response.ok)await cache.put(path,response);
+      }catch(e){}
+    }));
+  })());
+});
+
+self.addEventListener('activate',event=>{
+  event.waitUntil((async()=>{
+    const keys=await caches.keys();
+    await Promise.all(keys.filter(key=>key!==CACHE_NAME).map(key=>caches.delete(key)));
+    await self.clients.claim();
+  })());
+});
+
+async function patchLive(response,url){
+  if(!response||!url.pathname.endsWith('/live.html'))return response;
+  try{
+    let text=await response.text();
+    const id=url.searchParams.get('trip')||DEFAULT_TRIP;
+    const add=[];
+    if(!text.includes('assets/multi-trip-live-entry-v1.js'))add.push('<script src="assets/multi-trip-live-entry-v1.js?v=2"><\/script>');
+    if(id===DEFAULT_TRIP&&!text.includes('assets/live-v9-2-sync.js'))add.push('<script src="assets/live-v9-2-sync.js?v=8"><\/script>');
+    if(add.length)text=text.replace(/<\/body>/i,add.join('\n')+'\n</body>');
+    const headers=new Headers(response.headers);
+    headers.delete('content-length');
+    headers.delete('content-encoding');
+    return new Response(text,{status:response.status,statusText:response.statusText,headers});
+  }catch(e){return response;}
+}
+
+self.addEventListener('fetch',event=>{
+  const request=event.request;
+  if(request.method!=='GET')return;
+  const url=new URL(request.url);
+  if(url.origin!==location.origin)return;
+
+  const networkFirst=async()=>{
+    try{
+      const response=await fetch(request,{cache:'no-store'});
+      const output=await patchLive(response,url);
+      put(await caches.open(CACHE_NAME),request,output.clone());
+      return output;
+    }catch(error){
+      const cached=await caches.match(request,{ignoreSearch:true});
+      if(cached)return patchLive(cached,url);
+      if(request.mode==='navigate')return caches.match('./index.html');
+      throw error;
+    }
+  };
+
+  const dynamic=
+    url.pathname.endsWith('/version.json')||
+    url.pathname.endsWith('/trips/registry.json')||
+    /\/trips\/.*\.json$/.test(url.pathname)||
+    request.mode==='navigate'||
+    request.destination==='document'||
+    request.destination==='script'||
+    request.destination==='style';
+
+  if(dynamic){
+    event.respondWith(networkFirst());
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request,{ignoreSearch:true}).then(async cached=>{
+      if(cached)return cached;
+      const response=await fetch(request);
+      return put(await caches.open(CACHE_NAME),request,response);
+    })
+  );
+});
