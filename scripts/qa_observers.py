@@ -44,13 +44,16 @@ def direct_observer_count(text: str) -> int:
 
 
 def main() -> int:
-    retired = ROOT / "assets" / "trip-no-observers-v2.js"
-    if retired.exists():
-        error("Retired global no-op MutationObserver shim still exists")
+    retired_files = (
+        ROOT / "assets" / "trip-no-observers-v2.js",
+        ROOT / "assets" / "trip-performance-guard.js",
+        ROOT / "scripts" / "test_observer_guard.mjs",
+    )
+    for path in retired_files:
+        if path.exists():
+            error(f"Retired observer cleanup file still exists: {path.relative_to(ROOT)}")
 
     loader = read("assets/attraction-info.js")
-    guard = read("assets/trip-performance-guard.js")
-
     blocks = {
         name: loader_block(loader, name)
         for name in (
@@ -61,50 +64,19 @@ def main() -> int:
         )
     }
 
-    guard_ref = "assets/trip-performance-guard.js"
-    if guard_ref not in blocks["itineraryScripts"]:
-        error("Japan itinerary no longer loads the bounded observer guard")
-    for name in ("tripInfoScripts", "genericItineraryScripts", "genericTripInfoScripts"):
-        if guard_ref in blocks[name]:
-            error(f"Observer guard leaked into {name}")
+    for retired_ref in ("trip-no-observers-v2.js", "trip-performance-guard.js"):
+        if retired_ref in loader:
+            error(f"Loader still references retired observer code: {retired_ref}")
 
-    if "trip-no-observers-v2.js" in loader:
-        error("Loader still references the retired no-op observer shim")
-
-    required = (
-        "const NativeMutationObserver=window.MutationObserver",
-        "window.MutationObserver=GuardedMutationObserver",
-        "window.MutationObserver=NativeMutationObserver",
-        "setTimeout(()=>this.disconnect(),6500)",
-        "selectedTrip!==DEFAULT_TRIP",
-        "itinerary\\.html",
-        "pagehide",
-        "target===document.documentElement",
-        "this._persistent=true",
-        "filter(o=>!o._persistent)",
-    )
-    for marker in required:
-        if marker not in guard:
-            error(f"Observer guard is missing safety marker: {marker}")
-
-    banned = (
-        "NoopMutationObserver",
-        "observe(){/* intentionally disabled */}",
-        "observe(){}",
-    )
-    for marker in banned:
-        if marker in guard:
-            error(f"Observer guard contains retired no-op behavior: {marker}")
-
-    # Only the dedicated guard may replace window.MutationObserver.
+    # No script may globally replace the browser MutationObserver constructor.
     for path in sorted((ROOT / "assets").glob("*.js")):
         text = path.read_text(encoding="utf-8")
-        if "window.MutationObserver=" in text and path.name != "trip-performance-guard.js":
+        if "window.MutationObserver=" in text:
             error(f"Unexpected global MutationObserver replacement: assets/{path.name}")
 
-    # Stage 3 debt audit. i18n deliberately keeps one persistent observer so
-    # Today/Driving UI inserted long after startup can be translated. All
-    # itinerary decoration observers should now be gone.
+    # Only i18n deliberately keeps one observer. It watches child additions so
+    # Today/Driving UI created later can still be translated. All itinerary
+    # decoration observers must remain removed.
     intentional = {"assets/i18n-v1.js"}
     found: dict[str, int] = {}
     for rel in itinerary_asset_paths(blocks["itineraryScripts"]):
@@ -135,23 +107,36 @@ def main() -> int:
     if "[300,700,1200,2200]" not in v89 or "refreshLateUi" not in v89:
         error("trip-v8-9-user-fixes.js lost its bounded late-refresh strategy")
 
-    i18n = read("assets/i18n-v1.js")
-    if "observer.observe(document.documentElement,{subtree:true,childList:true})" not in i18n:
-        error("i18n observer must stay scoped to documentElement child additions only")
-    if "attributes:true" in i18n[i18n.find("function boot()"):] and direct_observer_count(i18n):
-        error("i18n observer unexpectedly watches attributes")
-
     v8_ui = read("assets/trip-v8-ui.js")
     if direct_observer_count(v8_ui):
         error("trip-v8-ui.js must stay observer-free; use bounded startup passes + click events")
     if "[120,350,800,1600,2600]" not in v8_ui or "setTimeout(enrichModal,0)" not in v8_ui:
         error("trip-v8-ui.js lost its bounded startup/click refresh strategy")
 
+    i18n = read("assets/i18n-v1.js")
+    if "observer.observe(document.documentElement,{subtree:true,childList:true})" not in i18n:
+        error("i18n observer must stay scoped to documentElement child additions only")
+    if "attributes:true" in i18n[i18n.find("function boot()"):] and direct_observer_count(i18n):
+        error("i18n observer unexpectedly watches attributes")
+
+    # Generic trips and Trip Info must not gain itinerary-only observers either.
+    for name in ("tripInfoScripts", "genericItineraryScripts", "genericTripInfoScripts"):
+        observed = {}
+        for rel in itinerary_asset_paths(blocks[name]):
+            count = direct_observer_count(read(rel))
+            if count:
+                observed[rel] = count
+        allowed = intentional if name == "tripInfoScripts" else set()
+        extra = set(observed) - allowed
+        if extra:
+            error(f"Unexpected observer users in {name}: " + ", ".join(sorted(extra)))
+
     print("TravelPilot observer QA")
     print("Intentional persistent observers:")
     for rel in sorted(intentional):
         print(f"  {rel}: {found.get(rel, 0)}")
     print("Remaining legacy itinerary observers: 0")
+    print("Global MutationObserver overrides: 0")
     print(f"Errors: {len(ERRORS)}")
     for item in ERRORS:
         print(f"ERROR: {item}")
