@@ -1,6 +1,6 @@
 {
-  "version": "v10.12.1",
-  "build": "2026-10-04.69",
-  "updated": "2026-10-04T23:50:00+08:00",
-  "notes": "Hotfix Japan 2027 departure checklist migration: restore the verified historical 96-item packing list, preserve legacy local/cloud checklist state, and add an exact 96-item regression guard."
+  "version": "v10.13.0",
+  "build": "2026-10-05.70",
+  "updated": "2026-10-05T01:13:00+08:00",
+  "notes": "Stage 4A release normalization: align runtime version ownership, homepage and manifest cache-busters, legacy loader pin, Service Worker cache name, and Live Cam shim to v10.13.0; add dedicated release-version QA."
 }
