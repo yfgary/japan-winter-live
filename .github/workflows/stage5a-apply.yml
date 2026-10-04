@@ -1,0 +1,45 @@
+name: Stage 5A Apply
+
+on:
+  push:
+    branches:
+      - stage5a-loader-audit-v10.13.2
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: stage5a-loader-audit-v10.13.2
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply Stage 5A cleanup
+        run: python scripts/stage5a_apply.py
+      - name: Verify patch
+        run: |
+          git diff --check
+          python scripts/qa_release.py
+          python scripts/qa.py
+          python scripts/qa_checklist.py
+          python scripts/qa_observers.py
+          python scripts/qa_legacy_update.py
+          python scripts/qa_loader.py
+          node --check sw.js
+          find assets -maxdepth 1 -type f -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Commit Stage 5A cleanup
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add itinerary.html assets/multi-trip-context-v1.js assets/attraction-info.js index.html manifest.webmanifest sw.js version.json scripts/qa_release.py scripts/qa_loader.py docs/legacy-loader-inventory.md .github/workflows/qa.yml
+          git diff --cached --quiet && exit 0
+          git commit -m 'cleanup: audit loader dependencies and remove duplicate script load [stage5a-applied]'
+          git push origin HEAD:stage5a-loader-audit-v10.13.2
