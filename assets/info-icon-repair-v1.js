@@ -51,7 +51,7 @@ function repair(){
  document.documentElement.dataset.infoIconAdded=String(added);
  return {matched,added};
 }
-function schedule(){[0,180,450,900,1600,2800,4800,7000].forEach(t=>setTimeout(repair,t));}
+function schedule(){[0,180,450,900,1600,2800].forEach(t=>setTimeout(repair,t));}
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
 document.addEventListener('multitrip:itineraryrendered',()=>{[0,120,500].forEach(t=>setTimeout(repair,t));});
