@@ -34,6 +34,15 @@ def loader_block(loader: str, name: str) -> str:
     return match.group(1)
 
 
+def itinerary_asset_paths(block: str) -> list[str]:
+    return re.findall(r"['\"](assets/[^'\"]+?\.js)(?:\?[^'\"]*)?['\"]", block)
+
+
+def direct_observer_count(text: str) -> int:
+    # Count actual constructor calls, not comments mentioning MutationObserver.
+    return len(re.findall(r"\bnew\s+MutationObserver\s*\(", text))
+
+
 def main() -> int:
     retired = ROOT / "assets" / "trip-no-observers-v2.js"
     if retired.exists():
@@ -90,7 +99,36 @@ def main() -> int:
         if "window.MutationObserver=" in text and path.name != "trip-performance-guard.js":
             error(f"Unexpected global MutationObserver replacement: assets/{path.name}")
 
+    # Stage 3 debt audit: lock the remaining direct whole-page legacy observers
+    # to the two files already identified. New observers must not silently grow.
+    allowed_remaining = {
+        "assets/trip-enhancements-v3.js",
+        "assets/trip-v8-9-user-fixes.js",
+    }
+    found: dict[str, int] = {}
+    for rel in itinerary_asset_paths(blocks["itineraryScripts"]):
+        text = read(rel)
+        count = direct_observer_count(text)
+        if count:
+            found[rel] = count
+
+    unexpected = set(found) - allowed_remaining
+    if unexpected:
+        error("Unexpected itinerary MutationObserver users: " + ", ".join(sorted(unexpected)))
+    missing_known = allowed_remaining - set(found)
+    if missing_known:
+        error("Observer debt audit is stale; expected observer no longer present: " + ", ".join(sorted(missing_known)))
+
+    v8_ui = read("assets/trip-v8-ui.js")
+    if direct_observer_count(v8_ui):
+        error("trip-v8-ui.js must stay observer-free; use bounded startup passes + click events")
+    if "[120,350,800,1600,2600]" not in v8_ui or "setTimeout(enrichModal,0)" not in v8_ui:
+        error("trip-v8-ui.js lost its bounded startup/click refresh strategy")
+
     print("TravelPilot observer QA")
+    print("Remaining direct Japan itinerary observers:")
+    for rel, count in sorted(found.items()):
+        print(f"  {rel}: {count}")
     print(f"Errors: {len(ERRORS)}")
     for item in ERRORS:
         print(f"ERROR: {item}")
