@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.12",
-  "build": "2026-10-04.61",
-  "updated": "2026-10-04T17:28:00+08:00",
-  "notes": "TravelPilot exact-banner correction. Homepage now uses the approved TravelPilot banner artwork itself instead of recreating the design with separate HTML/CSS elements. Removed the unrequested quick-function icon grid and featured-destinations section. Shared version badge and PWA cache are updated to v10.10.12."
+  "version": "v10.10.13",
+  "build": "2026-10-04.62",
+  "updated": "2026-10-04T18:32:00+08:00",
+  "notes": "TravelPilot mobile banner fix. Homepage hero now uses a high-resolution approved TravelPilot banner with intrinsic 16:9 sizing, no fixed mobile height and no grey gap. PWA cache now points to the new v10.10.13 banner asset."
 }
