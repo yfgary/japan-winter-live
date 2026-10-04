@@ -20,5 +20,7 @@ function decorate(){
  });
  if(typeof window.addMapPins==='function')try{window.addMapPins();}catch(e){}
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{[1650,2300].forEach(t=>setTimeout(decorate,t));},{once:true});else [1650,2300].forEach(t=>setTimeout(decorate,t));
+function scheduleFallback(){setTimeout(decorate,2300);}
+document.addEventListener('multitrip:itineraryrendered',decorate);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scheduleFallback,{once:true});else scheduleFallback();
 })();
