@@ -1,4 +1,4 @@
-const CACHE_NAME='travelpilot-v10.11.1-20261004';
+const CACHE_NAME='travelpilot-v10.11.2-20261004';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const CORE=['./','./index.html','./itinerary.html','./trip-info.html','./attractions.html','./live.html','./manifest.webmanifest','./assets/travelpilot-home-v10.11.1.css','./assets/images/travelpilot-icon-exact.jpg','./assets/images/d5-mountain-harbor.jpg','./assets/multi-trip-context-v1.js','./assets/multi-trip-shared-ui-v1.css','./assets/multi-trip-nav-v1.js','./assets/multi-trip-data-v1.js','./assets/multi-trip-itinerary-renderer-v1.js','./assets/multi-trip-attractions-renderer-v1.js','./assets/multi-trip-live-renderer-v1.js','./assets/multi-trip-live-entry-v1.js','./assets/multi-trip-trip-info-renderer-v1.js'];
 async function put(cache,request,response){try{if(response&&response.ok)await cache.put(request,response.clone())}catch(e){}return response}
