@@ -35,7 +35,7 @@ const itineraryScripts=commonHead.concat([
   'assets/d6-d8-weather-decision-v1.js?v=1',
   'assets/nav-enhancements-v1.js?v=3',
   'assets/trip-enhancement-data.js?v=913',
-  'assets/japan2027-attraction-core-v1.js?v=1',
+  'assets/japan2027-attraction-core-v1.js?v=2',
   'assets/trip-user-overrides.js?v=913',
   'assets/trip-deep-info-d1-d4.js?v=913',
   'assets/trip-deep-info-d5-d9.js?v=913',
@@ -64,7 +64,7 @@ const itineraryScripts=commonHead.concat([
   'assets/multi-trip-mode-weather-bridge-v1.js?v=1',
   'assets/i18n-v1.js?v=3',
   'assets/i18n-polish-en-v1.js?v=1',
-  'assets/info-icon-repair-v1.js?v=1'
+  'assets/info-icon-repair-v1.js?v=2'
 ]);
 
 const tripInfoScripts=commonHead.concat([
@@ -74,7 +74,7 @@ const tripInfoScripts=commonHead.concat([
   'assets/d6-d8-weather-decision-v1.js?v=1',
   'assets/nav-enhancements-v1.js?v=3',
   'assets/trip-enhancement-data.js?v=913',
-  'assets/japan2027-attraction-core-v1.js?v=1',
+  'assets/japan2027-attraction-core-v1.js?v=2',
   'assets/trip-user-overrides.js?v=913',
   'assets/trip-deep-info-d1-d4.js?v=913',
   'assets/trip-deep-info-d5-d9.js?v=913',
