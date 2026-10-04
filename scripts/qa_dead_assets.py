@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for Stage 5B retired/unreferenced assets."""
+"""Regression guard for retired/unreferenced assets removed in Stage 5B/5C."""
 from __future__ import annotations
 
 import sys
@@ -12,6 +12,14 @@ RETIRED = (
     "assets/app-v8-7-data.js",
     "assets/app-v8-7-ui.js",
     "assets/trip-enhancements-v2.js",
+    "assets/bangkok-gallery-d1.css",
+    "assets/bangkok-gallery-d2.css",
+    "assets/bangkok-gallery-d3.css",
+    "assets/bangkok-gallery-d4.css",
+    "assets/bangkok-gallery-d5.css",
+    "assets/bangkok-gallery-d6.css",
+    "assets/bangkok-gallery-d7.css",
+    "assets/bangkok-gallery-d8.css",
 )
 
 TEXT_SUFFIXES = {".html", ".js", ".css", ".json", ".md", ".py", ".yml", ".yaml", ".webmanifest"}
