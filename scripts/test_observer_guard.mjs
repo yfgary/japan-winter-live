@@ -11,10 +11,11 @@ function makeSandbox(search='?trip=shirakawago-shinhotaka-2027',pathname='/itine
   const timers=[];
   const listeners={};
   const nativeInstances=[];
+  const documentElement={nodeName:'HTML'};
 
   class FakeNativeMutationObserver{
-    constructor(callback){this.callback=callback;this.observed=false;this.disconnected=false;nativeInstances.push(this);}
-    observe(){this.observed=true;}
+    constructor(callback){this.callback=callback;this.observed=false;this.disconnected=false;this.target=null;this.options=null;nativeInstances.push(this);}
+    observe(target,options){this.observed=true;this.target=target;this.options=options;}
     disconnect(){this.disconnected=true;}
     takeRecords(){return [];}
   }
@@ -25,6 +26,7 @@ function makeSandbox(search='?trip=shirakawago-shinhotaka-2027',pathname='/itine
   };
   const sandbox={
     window,
+    document:{documentElement},
     location:{search,pathname},
     URLSearchParams,
     console,
@@ -33,7 +35,7 @@ function makeSandbox(search='?trip=shirakawago-shinhotaka-2027',pathname='/itine
   };
   vm.createContext(sandbox);
   vm.runInContext(code,sandbox,{filename:'trip-performance-guard.js'});
-  return{window,timers,listeners,nativeInstances,FakeNativeMutationObserver};
+  return{window,documentElement,timers,listeners,nativeInstances,FakeNativeMutationObserver};
 }
 
 function fireTimer(env,ms){
@@ -58,6 +60,19 @@ function fireTimer(env,ms){
   fireTimer(env,7500);
   assert(env.window.MutationObserver===env.FakeNativeMutationObserver,'native MutationObserver was not restored');
   assert(typeof env.listeners.pagehide==='function','pagehide cleanup listener missing');
+}
+
+{
+  const env=makeSandbox();
+  const observer=new env.window.MutationObserver(()=>{});
+  observer.observe(env.documentElement,{childList:true,subtree:true});
+  const startupTimer=env.timers.find(t=>t.ms===6500&&!t.cancelled);
+  assert(!startupTimer,'intentional i18n observer must not get the legacy auto-stop timer');
+  fireTimer(env,7500);
+  assert(!env.nativeInstances[0].disconnected,'intentional i18n observer was disconnected at startup restore');
+  assert(env.window.MutationObserver===env.FakeNativeMutationObserver,'native constructor was not restored with persistent observer alive');
+  env.listeners.pagehide();
+  assert(env.nativeInstances[0].disconnected,'persistent i18n observer was not cleaned up on pagehide');
 }
 
 {
