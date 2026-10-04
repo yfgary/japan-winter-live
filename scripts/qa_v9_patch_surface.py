@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for Stage 5D/5E/5F Japan-2027 patch ownership."""
+"""Regression guard for Stage 5D-5H Japan-2027 patch ownership."""
 from __future__ import annotations
 
 import re
@@ -75,7 +75,7 @@ REQUIRED = {
 texts: dict[str, str] = {}
 for key, path in FILES.items():
     if not path.exists():
-        ERRORS.append(f"Missing active Stage 5D/5E/5F file: {path.relative_to(ROOT)}")
+        ERRORS.append(f"Missing active Stage 5D-5H file: {path.relative_to(ROOT)}")
         texts[key] = ""
         continue
     text = path.read_text(encoding="utf-8")
@@ -116,9 +116,9 @@ for name, expected in expected_loader_counts.items():
         ERRORS.append(f"Loader ownership changed for {name}: expected {expected} reference(s), found {actual}")
 
 if loader.count("japan2027-attraction-core-v1.js?v=2") != 2:
-    ERRORS.append("Stage 5F requires both Japan loader chains to use attraction core module pin v2")
-if loader.count("info-icon-repair-v1.js?v=2") != 1:
-    ERRORS.append("Stage 5F requires itinerary info icon repair module pin v2")
+    ERRORS.append("Both Japan loader chains must use attraction core module pin v2")
+if loader.count("info-icon-repair-v1.js?v=3") != 1:
+    ERRORS.append("Stage 5H requires itinerary info icon repair module pin v3")
 
 for array_name in ("itineraryScripts", "tripInfoScripts"):
     match = re.search(rf"const\s+{array_name}\s*=\s*commonHead\.concat\(\[(.*?)\]\);", loader, flags=re.S)
@@ -146,7 +146,7 @@ button_tokens = (
     "backup-info-btn",
     "v90-shrine-info-btn",
 )
-print("TravelPilot Stage 5D/5E/5F patch surface QA")
+print("TravelPilot Stage 5D-5H patch surface QA")
 for key, text in texts.items():
     present = [token for token in button_tokens if token in text]
     print(f"{FILES[key].name}: {len(text)} bytes; info-button tokens={','.join(present) or 'none'}; setTimeout={text.count('setTimeout')}")
