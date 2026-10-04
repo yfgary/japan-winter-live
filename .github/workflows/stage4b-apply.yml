@@ -38,7 +38,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add itinerary.html trip-info.html assets/multi-trip-context-v1.js assets/attraction-info.js index.html manifest.webmanifest sw.js version.json scripts/qa_release.py scripts/qa_legacy_update.py .github/workflows/qa.yml
+          git add itinerary.html trip-info.html assets/multi-trip-context-v1.js assets/attraction-info.js index.html manifest.webmanifest sw.js version.json scripts/qa_release.py scripts/qa_legacy_update.py
           git diff --cached --quiet && exit 0
           git commit -m 'cleanup: remove retired trip-page update popup [stage4b-applied]'
           git push origin HEAD:stage4b-retired-update-cleanup-v10.13.1
