@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for Stage 5D-5J Japan-2027 patch ownership."""
+"""Regression guard for Stage 5D-5L Japan-2027 patch ownership."""
 from __future__ import annotations
 
 import re
@@ -34,6 +34,8 @@ REQUIRED = {
         "japanWinter2027_shinhotakaDay",
         "v90-shrine-info-btn",
         "#tripv2WeatherSelect [data-sh]",
+        "japan2027:finalpatch",
+        "function runFinalPatch(pass,delay,final)",
     ),
     "hotfix": (
         "__japan2027V901Hotfix",
@@ -53,6 +55,8 @@ REQUIRED = {
         "['d6','d7','d8']",
         "addMapPins",
         "multitrip:itineraryrendered",
+        "japan2027:finalpatch",
+        "onFinalPatch",
         "setTimeout(decorate,2300)",
     ),
     "repair": (
@@ -76,7 +80,7 @@ REQUIRED = {
 texts: dict[str, str] = {}
 for key, path in FILES.items():
     if not path.exists():
-        ERRORS.append(f"Missing active Stage 5D-5J file: {path.relative_to(ROOT)}")
+        ERRORS.append(f"Missing active Stage 5D-5L file: {path.relative_to(ROOT)}")
         texts[key] = ""
         continue
     text = path.read_text(encoding="utf-8")
@@ -118,8 +122,10 @@ for name, expected in expected_loader_counts.items():
 
 if loader.count("japan2027-attraction-core-v1.js?v=2") != 2:
     ERRORS.append("Both Japan loader chains must use attraction core module pin v2")
-if loader.count("trip-v9-1-visit-fix.js?v=3") != 1:
-    ERRORS.append("Stage 5J requires itinerary visit-fix module pin v3")
+if loader.count("trip-v9-final-fixes.js?v=914") != 2:
+    ERRORS.append("Stage 5L requires both Japan loader chains to use final-fixes module pin v914")
+if loader.count("trip-v9-1-visit-fix.js?v=4") != 1:
+    ERRORS.append("Stage 5L requires itinerary visit-fix module pin v4")
 if loader.count("info-icon-repair-v1.js?v=3") != 1:
     ERRORS.append("Stage 5H requires itinerary info icon repair module pin v3")
 
@@ -152,7 +158,7 @@ button_tokens = (
     "backup-info-btn",
     "v90-shrine-info-btn",
 )
-print("TravelPilot Stage 5D-5J patch surface QA")
+print("TravelPilot Stage 5D-5L patch surface QA")
 for key, text in texts.items():
     present = [token for token in button_tokens if token in text]
     print(f"{FILES[key].name}: {len(text)} bytes; info-button tokens={','.join(present) or 'none'}; setTimeout={text.count('setTimeout')}")
@@ -161,6 +167,8 @@ print("Shared attraction core active:", "Japan2027AttractionCore" in texts.get("
 print("Final owns D6-D8 Shinhotaka storage:", "japanWinter2027_shinhotakaDay" in texts.get("final", ""))
 print("Visit owns D6-D8 metadata cards:", "visit-meta-card" in texts.get("visit", ""))
 print("Visit consumes itinerary-rendered event:", "multitrip:itineraryrendered" in texts.get("visit", ""))
+print("Final emits finalpatch event:", "japan2027:finalpatch" in texts.get("final", ""))
+print("Visit consumes finalpatch event:", "japan2027:finalpatch" in texts.get("visit", ""))
 print("Hotfix owns Trip Info modal:", "v901TripInfoModal" in texts.get("hotfix", ""))
 print("Info icon repair uses shared core:", "CORE.findBest" in texts.get("repair", ""))
 print(f"Errors: {len(ERRORS)}")

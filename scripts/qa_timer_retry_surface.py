@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for the Stage 5G-5J bounded timer/retry surface."""
+"""Regression guard for the Stage 5G-5L bounded timer/retry surface."""
 from __future__ import annotations
 
 import sys
@@ -19,7 +19,9 @@ FILES = {
 REQUIRED = {
     "final": (
         "setTimeout(()=>location.reload(),60)",
-        "[250,700,1500].forEach(t=>setTimeout(applyAll,t))",
+        "[250,700,1500].forEach((t,i)=>setTimeout(()=>runFinalPatch(i+1,t,t===1500),t))",
+        "japan2027:finalpatch",
+        "function runFinalPatch(pass,delay,final)",
         "function applyAll()",
         "japanWinter2027_shinhotakaDay",
     ),
@@ -31,6 +33,7 @@ REQUIRED = {
     ),
     "visit": (
         "document.addEventListener('multitrip:itineraryrendered',decorate)",
+        "document.addEventListener('japan2027:finalpatch',onFinalPatch)",
         "setTimeout(decorate,2300)",
         "function decorate()",
         "['d6','d7','d8']",
@@ -52,7 +55,7 @@ REQUIRED = {
 texts: dict[str, str] = {}
 for key, path in FILES.items():
     if not path.is_file():
-        ERRORS.append(f"Missing Stage 5G-5J timer surface file: {path.relative_to(ROOT)}")
+        ERRORS.append(f"Missing Stage 5G-5L timer surface file: {path.relative_to(ROOT)}")
         texts[key] = ""
         continue
     text = path.read_text(encoding="utf-8")
@@ -74,12 +77,12 @@ if "[1650,2300]" in visit or "setTimeout(decorate,1650)" in visit:
 if visit.count("setTimeout") != 1:
     ERRORS.append(f"trip-v9-1-visit-fix.js should keep exactly one 2300 ms startup fallback; found {visit.count('setTimeout')} setTimeout token(s)")
 
-print("TravelPilot Stage 5G-5J timer/retry surface QA")
+print("TravelPilot Stage 5G-5L timer/retry surface QA")
 for key, path in FILES.items():
     text = texts.get(key, "")
     print(f"{path.name}: setTimeout={text.count('setTimeout')}; MutationObserver={text.count('MutationObserver')}")
 
-print("Classification: D6-D8 reload=state transition; final/hotfix=keep pending targeted runtime proof; visit=renderer-event driven with one 2300 ms fallback; info-icon startup tail trimmed to 2800 ms")
+print("Classification: D6-D8 reload=state transition; final=bounded retries with finalpatch completion signal; hotfix=keep pending targeted runtime proof; visit=renderer/finalpatch driven with one 2300 ms fallback; info-icon startup tail trimmed to 2800 ms")
 print(f"Errors: {len(ERRORS)}")
 for item in ERRORS:
     print("ERROR:", item)
