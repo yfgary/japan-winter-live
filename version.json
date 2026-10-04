@@ -1,6 +1,6 @@
 {
-  "version": "v10.11.3",
-  "build": "2026-10-04.62",
-  "updated": "2026-10-04T15:18:00+08:00",
-  "notes": "Fix the TravelPilot home after iPhone validation: use the approved icon JPG directly so Safari/PWA renders it, make the default 2027 Japan trip the Next Trip instead of the 2028 architecture test, and tighten the responsive homepage to match the approved mobile/desktop mockup."
+  "version": "v10.11.4",
+  "build": "2026-10-04.63",
+  "updated": "2026-10-04T15:35:00+08:00",
+  "notes": "Rebuild TravelPilot home to follow the approved mockups instead of shrinking one desktop layout: dedicated desktop and iPhone structures, Hakuba-style scenic hero, correct TravelPilot branding, 8 desktop quick functions, My Trips-first mobile flow, 3x2 mobile quick functions, default 2027 Japan trip first, quick links and destination cards."
 }
