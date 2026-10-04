@@ -5,9 +5,7 @@ if(window.__japan2027V901Hotfix)return;
 window.__japan2027V901Hotfix=true;
 
 const DATA=window.Japan2027EnhancementData||null;
-const HOTFIX_VERSION='v9.0.1';
 let modal=null;
-let versionObserver=null;
 
 function isTripInfo(){return /(?:^|\/)trip-info\.html$/.test(location.pathname);}
 function norm(t){return String(t||'').replace(/📍|ⓘ/g,'').replace(/\s+/g,' ').trim();}
@@ -145,47 +143,14 @@ function wireTripInfoButtons(){
   });
 }
 
-function setBadgeCurrent(badge){
-  if(!badge)return;
-  badge.classList.remove('offline','outdated');
-  badge.classList.add('current');
-  badge.textContent='版本 '+HOTFIX_VERSION;
-  badge.title='已係最新版本 '+HOTFIX_VERSION;
-  badge.dataset.v901Current='1';
-}
-function fixVersionBadge(){
-  const badge=document.getElementById('siteVersionBadge');if(!badge)return;
-  fetch('version.json?t='+Date.now(),{cache:'no-store'})
-    .then(r=>r.ok?r.json():Promise.reject())
-    .then(v=>{
-      if(v&&v.version===HOTFIX_VERSION){
-        setBadgeCurrent(badge);
-        if(!versionObserver){
-          versionObserver=new MutationObserver(()=>{
-            if(badge.dataset.v901Current==='1'&&badge.textContent!=='版本 '+HOTFIX_VERSION)setBadgeCurrent(badge);
-          });
-          versionObserver.observe(badge,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:['class']});
-        }
-      }else{
-        badge.dataset.v901Current='';
-        if(versionObserver){versionObserver.disconnect();versionObserver=null;}
-      }
-    }).catch(()=>{});
-}
-
 function run(){
   removeDuplicateInfoButtons(document);
   ensureTripInfoNav();
   ensureDepartureChecklist();
   wireTripInfoButtons();
-  fixVersionBadge();
 }
 
 document.addEventListener('click',e=>{
-  const badge=e.target.closest?.('#siteVersionBadge');
-  if(badge&&badge.dataset.v901Current==='1'){
-    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();return;
-  }
   if(!isTripInfo())return;
   const b=e.target.closest('#winter-shrines .enhance-info-btn,#winter-shrines .v90-shrine-info-btn,#winter-shrines .attraction-info-btn');
   if(!b)return;
