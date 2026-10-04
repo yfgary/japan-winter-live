@@ -1,6 +1,6 @@
 {
-  "version": "v10.11.1",
-  "build": "2026-10-04.60",
-  "updated": "2026-10-04T10:20:00+08:00",
-  "notes": "TravelPilot visual refresh based on the approved mockup. Add a new TravelPilot route-plane-map icon, update the light scenic hero, responsive desktop/mobile homepage, quick function cards, journey panel, quick links and destination cards, and point the PWA manifest to the new branded icon."
+  "version": "v10.11.2",
+  "build": "2026-10-04.61",
+  "updated": "2026-10-04T10:45:00+08:00",
+  "notes": "TravelPilot visual refresh finalized. Use the approved TravelPilot icon artwork on the homepage and PWA, refresh the service-worker cache, and keep the responsive desktop/mobile homepage layout with quick functions, next trip, quick links and destination cards."
 }
