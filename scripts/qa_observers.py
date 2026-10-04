@@ -74,10 +74,10 @@ def main() -> int:
         if "window.MutationObserver=" in text:
             error(f"Unexpected global MutationObserver replacement: assets/{path.name}")
 
-    # Only i18n deliberately keeps one observer. It watches child additions so
-    # Today/Driving UI created later can still be translated. All itinerary
-    # decoration observers must remain removed.
-    intentional = {"assets/i18n-v1.js"}
+    # The Japan itinerary itself now has only the intentional i18n observer.
+    # It watches child additions so Today/Driving UI created later can still be
+    # translated. All itinerary decoration observers are gone.
+    intentional_itinerary = {"assets/i18n-v1.js"}
     found: dict[str, int] = {}
     for rel in itinerary_asset_paths(blocks["itineraryScripts"]):
         text = read(rel)
@@ -85,15 +85,14 @@ def main() -> int:
         if count:
             found[rel] = count
 
-    unexpected = set(found) - intentional
+    unexpected = set(found) - intentional_itinerary
     if unexpected:
         error("Unexpected itinerary MutationObserver users: " + ", ".join(sorted(unexpected)))
-    missing_known = intentional - set(found)
+    missing_known = intentional_itinerary - set(found)
     if missing_known:
         error("Intentional observer missing: " + ", ".join(sorted(missing_known)))
-    for rel in intentional:
-        if found.get(rel) != 1:
-            error(f"Intentional observer count changed for {rel}: {found.get(rel, 0)}")
+    if found.get("assets/i18n-v1.js") != 1:
+        error(f"Intentional observer count changed for assets/i18n-v1.js: {found.get('assets/i18n-v1.js', 0)}")
 
     v3 = read("assets/trip-enhancements-v3.js")
     if direct_observer_count(v3):
@@ -119,24 +118,39 @@ def main() -> int:
     if "attributes:true" in i18n[i18n.find("function boot()"):] and direct_observer_count(i18n):
         error("i18n observer unexpectedly watches attributes")
 
-    # Generic trips and Trip Info must not gain itinerary-only observers either.
-    for name in ("tripInfoScripts", "genericItineraryScripts", "genericTripInfoScripts"):
+    # Trip Info checklist sync legitimately uses two scoped observers: one
+    # temporary waiter for the checklist section and one observer limited to
+    # the rendered checklist body so cloud-sync state stays accurate.
+    checklist = read("assets/multi-trip-checklist-sync-v1.js")
+    if direct_observer_count(checklist) != 2:
+        error(f"Checklist sync observer count changed: {direct_observer_count(checklist)}")
+    if "o.disconnect();resolve(s)" not in checklist:
+        error("Checklist wait observer no longer disconnects after the section appears")
+    if "observer.observe(section.querySelector('.section-body')||section,{childList:true,subtree:true})" not in checklist:
+        error("Checklist sync observer is no longer scoped to the checklist section")
+
+    # Other page types may only use their explicitly scoped observers.
+    page_allowed = {
+        "tripInfoScripts": {"assets/i18n-v1.js", "assets/multi-trip-checklist-sync-v1.js"},
+        "genericItineraryScripts": set(),
+        "genericTripInfoScripts": {"assets/multi-trip-checklist-sync-v1.js"},
+    }
+    for name, allowed in page_allowed.items():
         observed = {}
         for rel in itinerary_asset_paths(blocks[name]):
             count = direct_observer_count(read(rel))
             if count:
                 observed[rel] = count
-        allowed = intentional if name == "tripInfoScripts" else set()
         extra = set(observed) - allowed
         if extra:
             error(f"Unexpected observer users in {name}: " + ", ".join(sorted(extra)))
 
     print("TravelPilot observer QA")
-    print("Intentional persistent observers:")
-    for rel in sorted(intentional):
-        print(f"  {rel}: {found.get(rel, 0)}")
+    print("Japan itinerary persistent observer:")
+    print(f"  assets/i18n-v1.js: {found.get('assets/i18n-v1.js', 0)}")
     print("Remaining legacy itinerary observers: 0")
     print("Global MutationObserver overrides: 0")
+    print("Trip Info checklist observers: scoped/intentional")
     print(f"Errors: {len(ERRORS)}")
     for item in ERRORS:
         print(f"ERROR: {item}")
