@@ -4,8 +4,6 @@
 if(window.__japan2027SiteShellV7)return;
 window.__japan2027SiteShellV7=true;
 
-const INSTALLED_VERSION='v9.1.1';
-const VERSION_URL='version.json';
 const WEATHER_CACHE_KEY='japan2027_weather_cache_v2';
 const WEATHER_REGION_KEY='japan2027_weather_region';
 const WEATHER_TTL=10*60*1000;
@@ -32,37 +30,6 @@ function japanDateKey(){
 function japanTimeLabel(date){
  try{return new Intl.DateTimeFormat('zh-HK',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',hour12:false}).format(date||new Date());}
  catch(e){return '';}
-}
-
-function setupVersion(){
- let badge=document.getElementById('siteVersionBadge');
- if(!badge){
-  badge=document.createElement('button');badge.type='button';badge.id='siteVersionBadge';badge.className='site-version-badge';badge.setAttribute('aria-label','網站版本');document.body.appendChild(badge);
- }
- let latestVersion=null;
- function current(){badge.classList.remove('offline','outdated');badge.classList.add('current');badge.textContent='版本 '+INSTALLED_VERSION;badge.title='已係最新版本 '+INSTALLED_VERSION;}
- function offline(){badge.classList.remove('current','outdated');badge.classList.add('offline');badge.textContent='版本 '+INSTALLED_VERSION+'・離線';badge.title='目前離線；本機版本 '+INSTALLED_VERSION;}
- function check(){
-  if(!navigator.onLine){offline();return;}
-  fetch(VERSION_URL+'?t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('version');return r.json();}).then(v=>{
-   latestVersion=v.version||null;
-   if(latestVersion&&latestVersion!==INSTALLED_VERSION){badge.classList.remove('offline','current');badge.classList.add('outdated');badge.textContent='⚠️ '+INSTALLED_VERSION+' → '+latestVersion;badge.title='本機 '+INSTALLED_VERSION+'；最新 '+latestVersion+'。撳一下檢查更新。';}
-   else current();
-  }).catch(offline);
- }
- badge.addEventListener('click',()=>{
-  if(!latestVersion||latestVersion===INSTALLED_VERSION)return;
-  if('serviceWorker' in navigator){navigator.serviceWorker.getRegistration().then(reg=>reg&&reg.update()).catch(()=>{}).finally(()=>location.reload());}
-  else location.reload();
- });
- window.addEventListener('online',check);window.addEventListener('offline',offline);current();check();
-}
-
-function setupBackToTop(){
- let b=document.getElementById('backToTopBtn');
- if(!b){b=document.createElement('button');b.type='button';b.id='backToTopBtn';b.className='back-to-top-btn';b.textContent='↑';b.title='返頁頂';b.setAttribute('aria-label','返頁頂');document.body.appendChild(b);}
- const refresh=()=>b.classList.toggle('show',window.scrollY>500);
- window.addEventListener('scroll',refresh,{passive:true});b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));refresh();
 }
 
 function getDefaultRegion(){
@@ -132,6 +99,6 @@ function loadLiveSync(){
  if(document.getElementById('liveV92SyncScript'))return;
  const s=document.createElement('script');s.id='liveV92SyncScript';s.src='assets/live-v9-2-sync.js?v=2';s.async=false;document.body.appendChild(s);
 }
-function init(){setupVersion();setupBackToTop();buildWeatherPanel();ensureCatalogLink();loadLiveSync();}
+function init(){buildWeatherPanel();ensureCatalogLink();loadLiveSync();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
