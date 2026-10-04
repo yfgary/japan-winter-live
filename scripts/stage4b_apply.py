@@ -196,12 +196,15 @@ def bump_release_files() -> None:
     write("assets/attraction-info.js", loader)
 
     release_qa = read("scripts/qa_release.py")
-    release_qa = replace_once(
-        release_qa,
-        f'previous = "{PREVIOUS}"',
-        f'previous = "{PLAIN}"',
-        "release QA previous pin",
-    )
+    if 'previous = "10.12.1"' in release_qa:
+        release_qa = replace_once(
+            release_qa,
+            'previous = "10.12.1"',
+            f'previous = "{PREVIOUS}"',
+            "release QA previous pin",
+        )
+    elif f'previous = "{PREVIOUS}"' not in release_qa:
+        raise RuntimeError("release QA previous pin: expected 10.12.1 or 10.13.0")
     write("scripts/qa_release.py", release_qa)
 
 
