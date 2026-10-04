@@ -2,7 +2,7 @@
 'use strict';
 if(window.MultiTrip&&window.MultiTrip.__v1)return;
 
-const APP_VERSION='v10.13.0';
+const APP_VERSION='v10.13.1';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const STORAGE_KEY='multiTrip.activeTrip';
 const VERSION_CHECK_TTL=30*1000;
@@ -60,18 +60,6 @@ function withTrip(url,id){
     u.searchParams.set('trip',id||config.id||tripId);
     return file+(u.search||'')+(u.hash||'');
   }catch(e){return url;}
-}
-
-/* Compatibility only: old trip pages still contain a retired update banner.
-   Keep it visually disabled until those large legacy HTML files are migrated. */
-function suppressRetiredUpdateUi(){
-  if(!document.getElementById('multiTripRetiredUpdateUi')){
-    const style=document.createElement('style');
-    style.id='multiTripRetiredUpdateUi';
-    style.textContent='#multiTripUpdatePrompt,#tripv2UpdatePrompt,.tripv2-update{display:none!important;visibility:hidden!important;pointer-events:none!important}';
-    (document.head||document.documentElement).appendChild(style);
-  }
-  document.querySelectorAll('#multiTripUpdatePrompt,#tripv2UpdatePrompt').forEach(el=>el.remove());
 }
 
 function versionText(state){
@@ -164,7 +152,6 @@ function cleanupLegacySharedUi(){
   const legacy=document.getElementById('catalogVersion');
   if(shared&&legacy&&legacy!==shared)legacy.remove();
   document.querySelectorAll('.floating-top').forEach(el=>el.remove());
-  suppressRetiredUpdateUi();
 }
 
 function ensureSharedUi(){
@@ -326,7 +313,6 @@ window.MultiTrip={
   defaultTrip:DEFAULT_TRIP
 };
 
-suppressRetiredUpdateUi();
 if(shouldPersistActive())setActive(tripId);
 
 fetch('trips/'+encodeURIComponent(tripId)+'/trip.json?t='+Date.now(),{cache:'no-store'})
@@ -351,14 +337,14 @@ fetch('trips/'+encodeURIComponent(tripId)+'/trip.json?t='+Date.now(),{cache:'no-
 
 window.addEventListener('online',()=>{lastVersionCheckAt=0;paintVersion('current');setTimeout(()=>checkVersion(false),50);});
 window.addEventListener('offline',()=>paintVersion('offline'));
-window.addEventListener('pageshow',()=>setTimeout(()=>{suppressRetiredUpdateUi();ensureVersionBadge();checkVersion(false);},250));
+window.addEventListener('pageshow',()=>setTimeout(()=>{ensureVersionBadge();checkVersion(false);},250));
 
 if(document.readyState==='loading'){
-  document.addEventListener('DOMContentLoaded',()=>{syncBrand();suppressRetiredUpdateUi();},{once:true});
+  document.addEventListener('DOMContentLoaded',()=>{syncBrand();},{once:true});
   window.addEventListener('load',registerServiceWorker,{once:true});
 }else{
   syncBrand();
   registerServiceWorker();
 }
-[350,1200,2600].forEach(t=>setTimeout(()=>{syncBrand();suppressRetiredUpdateUi();},t));
+[350,1200,2600].forEach(t=>setTimeout(()=>{syncBrand();},t));
 })();

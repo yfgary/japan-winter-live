@@ -963,37 +963,8 @@ footer {
     color: #795700;
     border-color: #ebcf92;
 }
-.tripv2-update {
-    position: fixed;
-    left: 50%;
-    bottom: 14px;
-    transform: translateX(-50%);
-    z-index: 4600;
-    display: none;
-    align-items: center;
-    gap: 8px;
-    max-width: calc(100vw - 30px);
-    background: #1f4e79;
-    color: #fff;
-    padding: 9px 12px;
-    border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.22);
-    font-size: 12px;
-    font-weight: 700;
-}
-.tripv2-update.show { display: flex; }
-.tripv2-update button {
-    border: 0;
-    border-radius: 7px;
-    background: #fff;
-    color: #1f4e79;
-    padding: 6px 9px;
-    font-weight: 800;
-    cursor: pointer;
-}
 @media (max-width: 720px) {
     .tripv2-status { right: 8px; bottom: 8px; }
-    .tripv2-update { bottom: 52px; }
 }
 /* ===== /TRIP V2 COMMON ===== */
 
@@ -2697,48 +2668,8 @@ if (
         refresh();
     }
 
-    function ensureUpdatePrompt(){
-        if (!('serviceWorker' in navigator)) return;
-
-        let box = document.getElementById('tripv2UpdatePrompt');
-        if (!box) {
-  box = document.createElement('div');
-  box.id = 'tripv2UpdatePrompt';
-  box.className = 'tripv2-update';
-  box.innerHTML = '<span id="tripv2UpdateText">🔄 有新版網站</span><button type="button" id="tripv2ReloadBtn">重新載入</button>';
-  document.body.appendChild(box);
-  document.getElementById('tripv2ReloadBtn').addEventListener('click', function(){ location.reload(); });
-        }
-
-        function show(text){
-  const t = document.getElementById('tripv2UpdateText');
-  if (t) t.textContent = text;
-  box.classList.add('show');
-        }
-
-        navigator.serviceWorker.getRegistration().then(function(reg){
-  if (!reg) return;
-  if (reg.waiting) show('🔄 有新版網站');
-  reg.addEventListener('updatefound', function(){
-      const worker = reg.installing;
-      if (!worker) return;
-      worker.addEventListener('statechange', function(){
-          if (worker.state === 'installed' && navigator.serviceWorker.controller) {
-              show('🔄 有新版網站');
-          }
-      });
-  });
-  reg.update().catch(function(){});
-        }).catch(function(){});
-
-        navigator.serviceWorker.addEventListener('controllerchange', function(){
-  show('✅ 新版已準備好');
-        });
-    }
-
     document.addEventListener('DOMContentLoaded', function(){
         ensureNetworkStatus();
-        ensureUpdatePrompt();
     });
 })();
 </script>
