@@ -399,16 +399,14 @@ function syncSelectedTimelines(){
 }
 
 /* -----------------------------------------------------
-   Boot / mutation
+   Boot / bounded startup refresh
 ----------------------------------------------------- */
-let observer=null,booted=false;
+let booted=false;
 function runDecorators(root){localizeTimeline(root);decorateInfo(root);decorateHotels(root);localizeHotelRows();}
 function boot(){
  if(booted)return;booted=true;ensureModal();injectHotelRoute();normalizeFixedDayStarts();decorateFixedDurations();ensureFixedHotelEnds();injectBackups();injectDepartureChecklist();syncSelectedTimelines();runDecorators(document);
  document.addEventListener('click',e=>{if(e.target.closest('.tripv2-choice'))setTimeout(()=>{syncSelectedTimelines();injectHotelRoute();runDecorators(document);},80);});
- const target=document.querySelector('.container')||document.body;
- observer=new MutationObserver(ms=>{let yes=false;ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)yes=true;}));if(yes)setTimeout(()=>runDecorators(document),0);});
- observer.observe(target,{childList:true,subtree:true});
+ [120,350,800,1600,2600].forEach(t=>setTimeout(()=>runDecorators(document),t));
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 

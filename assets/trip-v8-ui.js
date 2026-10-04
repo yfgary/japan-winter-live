@@ -145,14 +145,12 @@ function decorateAll(root){
 
 function start(){
   decorateAll(document);
-  const observer=new MutationObserver(function(mutations){
-    let needs=false;
-    mutations.forEach(function(m){
-      if(m.type==='attributes' || m.addedNodes.length) needs=true;
-    });
-    if(needs) requestAnimationFrame(function(){decorateAll(document);});
+  /* Legacy itinerary builders finish a few DOM writes shortly after startup.
+     This renderer is idempotent, so bounded startup passes cover those writes
+     without leaving an attributes/subtree observer alive for the whole trip. */
+  [120,350,800,1600,2600].forEach(function(delay){
+    setTimeout(function(){decorateAll(document);},delay);
   });
-  observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
   document.addEventListener('click',function(){setTimeout(enrichModal,0);},false);
 }
 

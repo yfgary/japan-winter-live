@@ -189,11 +189,12 @@ function addDayPhotoCredit(){
 }
 
 function apply(){patchD2();patchShrines();ensureTripTopics();rewriteMaps(document);addDayPhotoCredit();}
+function refreshLateUi(){rewriteMaps(document);ensureTripTopics();}
 function boot(){
   setupD2Zoom();
-  apply();setTimeout(apply,300);setTimeout(apply,1200);
-  document.addEventListener('click',e=>{if(e.target.closest?.('.tripv2-choice'))setTimeout(apply,250);});
-  new MutationObserver(ms=>{if(ms.some(m=>m.addedNodes?.length))setTimeout(()=>{rewriteMaps(document);ensureTripTopics();},60);}).observe(document.body,{childList:true,subtree:true});
+  apply();
+  [300,700,1200,2200].forEach(t=>setTimeout(()=>{apply();refreshLateUi();},t));
+  document.addEventListener('click',e=>{if(e.target.closest?.('.tripv2-choice'))setTimeout(()=>{apply();refreshLateUi();},250);});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
