@@ -1,6 +1,6 @@
 {
-  "version": "v10.10.7",
-  "build": "2026-10-04.56",
-  "updated": "2026-10-04T12:20:00+08:00",
-  "notes": "Fix generic itinerary UI persistence and styling. Hokkaido day navigation labels remain data-driven and now survive normal page navigation without requiring Shift+F5 once the new release is activated. Generic Photo Credits now use the same compact paragraph typography and spacing as the original Japan itinerary credits instead of oversized custom rows. The shared update prompt is re-enabled by advancing the release version so existing v10.10.6 clients can detect and activate this build."
+  "version": "v10.10.8",
+  "build": "2026-10-04.57",
+  "updated": "2026-10-04T13:05:00+08:00",
+  "notes": "Live Camera update. Japan 2027 no longer presents the stale Hakuba47 YouTube recording as live; the Hakuba47 card now points to the Hakuba Village official live-camera source. Hokkaido 2025 enables the generic Live Cam page with trip-scoped D1-D8 camera data for Hakodate, Lake Toya area, Noboribetsu Jigokudani, Kitahiroshima/Sapporo, Mt. Moiwa, Otaru and New Chitose Airport. Direct current streams are embedded where appropriate; official sources with rotating or non-embeddable feeds remain official-source links rather than being misrepresented as live video."
 }
