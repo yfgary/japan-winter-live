@@ -1,6 +1,6 @@
 {
-  "version": "v10.11.2",
-  "build": "2026-10-04.67",
-  "updated": "2026-10-04T21:18:00+08:00",
-  "notes": "Fix stale version reporting on trip pages and make the in-page update action reliably move to the current runtime version."
+  "version": "v10.12.0",
+  "build": "2026-10-04.68",
+  "updated": "2026-10-04T22:10:00+08:00",
+  "notes": "QA cleanup: replace legacy eval-based multi-trip runtime with a canonical runtime, remove obsolete version bridges, normalize service-worker registration, and consolidate homepage CSS without changing trip content or the current homepage design."
 }
