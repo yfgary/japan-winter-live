@@ -52,6 +52,7 @@ const itineraryScripts=commonHead.concat([
   'assets/trip-v9-hotfix.js?v=4',
   'assets/trip-v9-1-routing.js?v=2',
   'assets/trip-v9-1-visit-fix.js?v=5',
+  'assets/info-icon-repair-v1.js?v=4',
   'assets/multi-trip-itinerary-renderer-v1.js?v=4',
   'assets/itinerary-hotel-detail-v1.js?v=1',
   'assets/multi-trip-weather-v1.js?v=2',
@@ -63,8 +64,7 @@ const itineraryScripts=commonHead.concat([
   'assets/driving-mode-v1.js?v=1',
   'assets/multi-trip-mode-weather-bridge-v1.js?v=1',
   'assets/i18n-v1.js?v=3',
-  'assets/i18n-polish-en-v1.js?v=1',
-  'assets/info-icon-repair-v1.js?v=3'
+  'assets/i18n-polish-en-v1.js?v=1'
 ]);
 
 const tripInfoScripts=commonHead.concat([
