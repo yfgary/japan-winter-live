@@ -1,6 +1,6 @@
 {
-  "version": "v10.13.3",
-  "build": "2026-10-05.73",
-  "updated": "2026-10-05T02:18:00+08:00",
-  "notes": "Hotfix Live Cam reload prompt: remove the retired update/reload UI and Service Worker update listener from live.html, preserve Online/Offline status, align the Live Cam entry runtime pin, and extend regression QA to cover Live Cam."
+  "version": "v10.14.0",
+  "build": "2026-10-05.74",
+  "updated": "2026-10-05T20:45:00+08:00",
+  "notes": "Stable baseline release after the Stage 5 multi-trip, Trip Info, checklist, visit and info-icon event-migration cleanup. No itinerary content or UI behavior changes; refresh release-owned cache-busters and Service Worker cache identity for the new baseline."
 }
