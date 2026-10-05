@@ -44,6 +44,8 @@ jobs:
         run: python scripts/qa_visit_render_event.py
       - name: Run visit fallback audit QA
         run: python scripts/qa_visit_fallback_audit.py
+      - name: Run Trip Info event audit QA
+        run: python scripts/qa_trip_info_event_audit.py
       - name: Check JavaScript syntax
         run: |
           node --check sw.js
