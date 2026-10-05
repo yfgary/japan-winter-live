@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for Stage 5D-5S Japan-2027 patch ownership."""
+"""Regression guard for Stage 5D-5T Japan-2027 patch ownership."""
 from __future__ import annotations
 
 import re
@@ -84,7 +84,7 @@ REQUIRED = {
 texts: dict[str, str] = {}
 for key, path in FILES.items():
     if not path.exists():
-        ERRORS.append(f"Missing active Stage 5D-5S file: {path.relative_to(ROOT)}")
+        ERRORS.append(f"Missing active Stage 5D-5T file: {path.relative_to(ROOT)}")
         texts[key] = ""
         continue
     text = path.read_text(encoding="utf-8")
@@ -124,6 +124,10 @@ for forbidden in (
 ):
     if forbidden in repair:
         ERRORS.append(f"info-icon-repair-v1.js reintroduced shared attraction primitive: {forbidden}")
+if "function schedule(){[0,2800].forEach(t=>setTimeout(repair,t));}" not in repair:
+    ERRORS.append("Stage 5T requires info-icon startup safety schedule to remain exactly 0/2800 ms")
+if "[0,900,2800].forEach(t=>setTimeout(repair,t))" in repair:
+    ERRORS.append("Stage 5T must not restore the removed 900 ms info-icon startup pass")
 
 loader = (ASSETS / "attraction-info.js").read_text(encoding="utf-8")
 expected_loader_counts = {
@@ -146,8 +150,8 @@ if loader.count("trip-v9-hotfix.js?v=4") != 2:
     ERRORS.append("Stage 5P requires both Japan loader chains to use hotfix module pin v4")
 if loader.count("trip-v9-1-visit-fix.js?v=5") != 1:
     ERRORS.append("Stage 5M requires itinerary visit-fix module pin v5")
-if loader.count("info-icon-repair-v1.js?v=5") != 1:
-    ERRORS.append("Stage 5S requires itinerary info icon repair module pin v5")
+if loader.count("info-icon-repair-v1.js?v=6") != 1:
+    ERRORS.append("Stage 5T requires itinerary info icon repair module pin v6")
 
 for array_name in ("itineraryScripts", "tripInfoScripts"):
     match = re.search(rf"const\s+{array_name}\s*=\s*commonHead\.concat\(\[(.*?)\]\);", loader, flags=re.S)
@@ -189,7 +193,7 @@ button_tokens = (
     "backup-info-btn",
     "v90-shrine-info-btn",
 )
-print("TravelPilot Stage 5D-5S patch surface QA")
+print("TravelPilot Stage 5D-5T patch surface QA")
 for key, text in texts.items():
     present = [token for token in button_tokens if token in text]
     print(f"{FILES[key].name}: {len(text)} bytes; info-button tokens={','.join(present) or 'none'}; setTimeout={text.count('setTimeout')}")
@@ -207,6 +211,7 @@ print("Hotfix consumes finalpatch event:", "japan2027:finalpatch" in texts.get("
 print("Hotfix startup timer removed:", "setTimeout" not in texts.get("hotfix", ""))
 print("Info icon repair uses shared core:", "CORE.findBest" in texts.get("repair", ""))
 print("Info icon repair deterministic catch-up active:", "dataset.itineraryRenderer" in texts.get("repair", ""))
+print("Info icon startup schedule 0/2800:", "[0,2800]" in texts.get("repair", ""))
 print(f"Errors: {len(ERRORS)}")
 for item in ERRORS:
     print("ERROR:", item)
