@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for the Stage 5G-5S bounded timer/retry surface."""
+"""Regression guard for the Stage 5G-5T bounded timer/retry surface."""
 from __future__ import annotations
 
 import sys
@@ -43,7 +43,7 @@ REQUIRED = {
         "addMapPins",
     ),
     "repair": (
-        "[0,900,2800].forEach(t=>setTimeout(repair,t))",
+        "[0,2800].forEach(t=>setTimeout(repair,t))",
         "multitrip:itineraryrendered",
         "[0,120,500].forEach(t=>setTimeout(repair,t))",
         "japan2027:languagechange",
@@ -58,7 +58,7 @@ REQUIRED = {
 texts: dict[str, str] = {}
 for key, path in FILES.items():
     if not path.is_file():
-        ERRORS.append(f"Missing Stage 5G-5S timer surface file: {path.relative_to(ROOT)}")
+        ERRORS.append(f"Missing Stage 5G-5T timer surface file: {path.relative_to(ROOT)}")
         texts[key] = ""
         continue
     text = path.read_text(encoding="utf-8")
@@ -73,10 +73,14 @@ repair = texts.get("repair", "")
 for removed_tail in ("4800", "7000"):
     if removed_tail in repair:
         ERRORS.append(f"info-icon-repair-v1.js reintroduced removed Stage 5H startup retry: {removed_tail} ms")
-if "[0,180,450,900,1600,2800].forEach(t=>setTimeout(repair,t))" in repair:
-    ERRORS.append("Stage 5S reintroduced the old six-pass info-icon startup schedule")
+for old_schedule in (
+    "[0,180,450,900,1600,2800].forEach(t=>setTimeout(repair,t))",
+    "[0,900,2800].forEach(t=>setTimeout(repair,t))",
+):
+    if old_schedule in repair:
+        ERRORS.append(f"Stage 5T reintroduced an older info-icon startup schedule: {old_schedule}")
 if repair.count("setTimeout") != 4:
-    ERRORS.append(f"Stage 5S must keep four info-icon retry surfaces while trimming startup timings; found {repair.count('setTimeout')} setTimeout token(s)")
+    ERRORS.append(f"Stage 5T must keep four info-icon retry surfaces while trimming startup timings; found {repair.count('setTimeout')} setTimeout token(s)")
 
 visit = texts.get("visit", "")
 for removed_timer in ("1650", "2300"):
@@ -95,12 +99,12 @@ for removed in (
 if hotfix.count("setTimeout") != 0:
     ERRORS.append(f"trip-v9-hotfix.js should be event-driven with no setTimeout after Stage 5P; found {hotfix.count('setTimeout')} token(s)")
 
-print("TravelPilot Stage 5G-5S timer/retry surface QA")
+print("TravelPilot Stage 5G-5T timer/retry surface QA")
 for key, path in FILES.items():
     text = texts.get(key, "")
     print(f"{path.name}: setTimeout={text.count('setTimeout')}; MutationObserver={text.count('MutationObserver')}")
 
-print("Classification: D6-D8 reload=state transition; final=bounded retries with finalpatch completion signal; hotfix=Trip Info renderer/finalpatch event-driven with no startup timer; visit=renderer/finalpatch event-driven with no startup timer; info-icon=pre-render subscription + deterministic catch-up + startup safety schedule trimmed to 0/900/2800")
+print("Classification: D6-D8 reload=state transition; final=bounded retries with finalpatch completion signal; hotfix=Trip Info renderer/finalpatch event-driven with no startup timer; visit=renderer/finalpatch event-driven with no startup timer; info-icon=pre-render subscription + deterministic catch-up + startup safety schedule trimmed to 0/2800")
 print(f"Errors: {len(ERRORS)}")
 for item in ERRORS:
     print("ERROR:", item)
