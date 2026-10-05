@@ -71,6 +71,11 @@ function run(){
   ensureTripInfoNav();
   wireTripInfoButtons();
 }
+function onTripInfoRendered(){if(isTripInfo())run();}
+function onFinalPatch(e){if(isTripInfo()&&e.detail&&e.detail.final===true)run();}
+
+document.addEventListener('multitrip:tripinforendered',onTripInfoRendered);
+document.addEventListener('japan2027:finalpatch',onFinalPatch);
 
 const scopedTripInfoButtonSelector=tripInfoButtonSelector.split(',').map(selector=>'#winter-shrines '+selector).join(',');
 document.addEventListener('click',e=>{
@@ -83,5 +88,5 @@ document.addEventListener('click',e=>{
 },true);
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
-[120,350,800,1600,2600].forEach(t=>setTimeout(run,t));
+setTimeout(run,2600);
 })();
