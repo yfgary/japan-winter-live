@@ -52,11 +52,14 @@ function repair(){
  return {matched,added};
 }
 function schedule(){[0,180,450,900,1600,2800].forEach(t=>setTimeout(repair,t));}
+function catchUp(){if(document.documentElement.dataset.itineraryRenderer)repair();}
 
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
 document.addEventListener('multitrip:itineraryrendered',()=>{[0,120,500].forEach(t=>setTimeout(repair,t));});
 document.addEventListener('japan2027:languagechange',()=>{[0,250,800].forEach(t=>setTimeout(repair,t));});
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('.tripv2-choice'))[100,400,1000].forEach(t=>setTimeout(repair,t));},true);
+
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
+catchUp();
 
 window.Japan2027InfoIconRepair={repair};
 })();
