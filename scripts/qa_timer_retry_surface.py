@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for the Stage 5G-5M bounded timer/retry surface."""
+"""Regression guard for the Stage 5G-5O bounded timer/retry surface."""
 from __future__ import annotations
 
 import sys
@@ -26,7 +26,10 @@ REQUIRED = {
         "japanWinter2027_shinhotakaDay",
     ),
     "hotfix": (
-        "[120,350,800,1600,2600].forEach(t=>setTimeout(run,t))",
+        "document.addEventListener('multitrip:tripinforendered',onTripInfoRendered);",
+        "document.addEventListener('japan2027:finalpatch',onFinalPatch);",
+        "function onFinalPatch(e){if(isTripInfo()&&e.detail&&e.detail.final===true)run();}",
+        "setTimeout(run,2600);",
         "function run()",
         "#winter-shrines",
         "v901TripInfoModal",
@@ -55,7 +58,7 @@ REQUIRED = {
 texts: dict[str, str] = {}
 for key, path in FILES.items():
     if not path.is_file():
-        ERRORS.append(f"Missing Stage 5G-5M timer surface file: {path.relative_to(ROOT)}")
+        ERRORS.append(f"Missing Stage 5G-5O timer surface file: {path.relative_to(ROOT)}")
         texts[key] = ""
         continue
     text = path.read_text(encoding="utf-8")
@@ -78,12 +81,18 @@ for removed_timer in ("1650", "2300"):
 if visit.count("setTimeout") != 0:
     ERRORS.append(f"trip-v9-1-visit-fix.js should be event-driven with no setTimeout; found {visit.count('setTimeout')} token(s)")
 
-print("TravelPilot Stage 5G-5M timer/retry surface QA")
+hotfix = texts.get("hotfix", "")
+if "[120,350,800,1600,2600].forEach(t=>setTimeout(run,t));" in hotfix:
+    ERRORS.append("trip-v9-hotfix.js reintroduced the removed Stage 5O five-pass retry schedule")
+if hotfix.count("setTimeout") != 1:
+    ERRORS.append(f"trip-v9-hotfix.js should retain exactly one 2600 ms fallback; found {hotfix.count('setTimeout')} setTimeout token(s)")
+
+print("TravelPilot Stage 5G-5O timer/retry surface QA")
 for key, path in FILES.items():
     text = texts.get(key, "")
     print(f"{path.name}: setTimeout={text.count('setTimeout')}; MutationObserver={text.count('MutationObserver')}")
 
-print("Classification: D6-D8 reload=state transition; final=bounded retries with finalpatch completion signal; hotfix=keep pending targeted runtime proof; visit=renderer/finalpatch event-driven with no startup timer; info-icon startup tail trimmed to 2800 ms")
+print("Classification: D6-D8 reload=state transition; final=bounded retries with finalpatch completion signal; hotfix=Trip Info renderer/finalpatch event-driven plus one 2600 ms fallback; visit=renderer/finalpatch event-driven with no startup timer; info-icon startup tail trimmed to 2800 ms")
 print(f"Errors: {len(ERRORS)}")
 for item in ERRORS:
     print("ERROR:", item)
