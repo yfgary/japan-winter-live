@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage 5N-5O guard for Trip Info retry/event migration."""
+"""Stage 5N-5P guard for Trip Info retry/event migration."""
 from __future__ import annotations
 
 import re
@@ -15,7 +15,7 @@ hotfix = (ASSETS / "trip-v9-hotfix.js").read_text(encoding="utf-8")
 renderer = (ASSETS / "multi-trip-trip-info-renderer-v1.js").read_text(encoding="utf-8")
 final = (ASSETS / "trip-v9-final-fixes.js").read_text(encoding="utf-8")
 
-# Stage 5O moves normal Trip Info reconciliation onto explicit events while retaining one bounded fallback.
+# Stage 5P removes the last Trip Info startup fallback after Stage 5O runtime parity passed.
 for marker in (
     "function ensureTripInfoNav()",
     "function wireTripInfoButtons()",
@@ -27,16 +27,19 @@ for marker in (
     "document.addEventListener('multitrip:tripinforendered',onTripInfoRendered);",
     "document.addEventListener('japan2027:finalpatch',onFinalPatch);",
     "if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();",
-    "setTimeout(run,2600);",
 ):
     if marker not in hotfix:
-        ERRORS.append(f"Trip Info Stage 5O runtime contract changed: missing {marker}")
+        ERRORS.append(f"Trip Info Stage 5P runtime contract changed: missing {marker}")
 
-if "[120,350,800,1600,2600].forEach(t=>setTimeout(run,t));" in hotfix:
-    ERRORS.append("Stage 5O must not restore the old five-pass Trip Info retry schedule")
-if hotfix.count("setTimeout") != 1:
+for forbidden in (
+    "[120,350,800,1600,2600].forEach(t=>setTimeout(run,t));",
+    "setTimeout(run,2600);",
+):
+    if forbidden in hotfix:
+        ERRORS.append(f"Stage 5P removed Trip Info startup fallback marker: {forbidden}")
+if hotfix.count("setTimeout") != 0:
     ERRORS.append(
-        f"Stage 5O expects exactly one bounded Trip Info fallback; "
+        f"Stage 5P expects Trip Info hotfix to have no startup timers; "
         f"found {hotfix.count('setTimeout')} setTimeout token(s)"
     )
 
@@ -73,14 +76,14 @@ else:
         "renderer": block.find("multi-trip-trip-info-renderer-v1.js"),
     }
     if min(positions.values()) < 0:
-        ERRORS.append(f"Stage 5O Trip Info loader evidence incomplete: {positions}")
+        ERRORS.append(f"Stage 5P Trip Info loader evidence incomplete: {positions}")
     elif not (positions["final"] < positions["hotfix"] < positions["renderer"]):
         ERRORS.append(
             f"Expected final-fixes < hotfix < Trip Info renderer loader order; found {positions}"
         )
 
-if loader.count("trip-v9-hotfix.js?v=3") != 2:
-    ERRORS.append("Stage 5O requires both Japan loader chains to use trip-v9-hotfix.js module pin v3")
+if loader.count("trip-v9-hotfix.js?v=4") != 2:
+    ERRORS.append("Stage 5P requires both Japan loader chains to use trip-v9-hotfix.js module pin v4")
 
 # Japan-specific legacy patches must remain out of generic Trip Info chains.
 generic_match = re.search(
@@ -100,11 +103,12 @@ else:
         if forbidden in generic:
             ERRORS.append(f"Generic Trip Info chain must not load Japan legacy patch: {forbidden}")
 
-print("TravelPilot Stage 5N-5O Trip Info event migration QA")
+print("TravelPilot Stage 5N-5P Trip Info event migration QA")
 print("Trip Info renderer listener active:", "multitrip:tripinforendered" in hotfix)
 print("Final-only legacy completion listener active:", "japan2027:finalpatch" in hotfix and "final===true" in hotfix)
 print("Old five-pass hotfix retry removed:", "[120,350,800,1600,2600]" not in hotfix)
-print("Single 2600 ms startup fallback retained:", "setTimeout(run,2600)" in hotfix and hotfix.count("setTimeout") == 1)
+print("2600 ms startup fallback removed:", "setTimeout(run,2600)" not in hotfix)
+print("Hotfix startup timer count:", hotfix.count("setTimeout"))
 print("Trip Info renderer emits render event:", "multitrip:tripinforendered" in renderer)
 print("Trip Info renderer bounded rerenders include 250/900 ms:", "[250,900]" in renderer)
 print("Final legacy completion event exists:", "japan2027:finalpatch" in final)
@@ -116,7 +120,7 @@ print(
         < trip_info_match.group(1).find("multi-trip-trip-info-renderer-v1.js")
     ),
 )
-print("Stage 5O conclusion: Trip Info reconciliation is event-driven with one bounded fallback retained for parity proof")
+print("Stage 5P conclusion: Trip Info reconciliation is fully event-driven with no fixed startup fallback")
 print(f"Errors: {len(ERRORS)}")
 for item in ERRORS:
     print("ERROR:", item)
