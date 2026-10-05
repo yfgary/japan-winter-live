@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression guard for Stage 5D-5P Japan-2027 patch ownership."""
+"""Regression guard for Stage 5D-5R Japan-2027 patch ownership."""
 from __future__ import annotations
 
 import re
@@ -75,6 +75,8 @@ REQUIRED = {
         "multitrip:itineraryrendered",
         "japan2027:languagechange",
         ".tripv2-choice",
+        "function catchUp()",
+        "dataset.itineraryRenderer",
         "setTimeout",
     ),
 }
@@ -82,7 +84,7 @@ REQUIRED = {
 texts: dict[str, str] = {}
 for key, path in FILES.items():
     if not path.exists():
-        ERRORS.append(f"Missing active Stage 5D-5P file: {path.relative_to(ROOT)}")
+        ERRORS.append(f"Missing active Stage 5D-5R file: {path.relative_to(ROOT)}")
         texts[key] = ""
         continue
     text = path.read_text(encoding="utf-8")
@@ -144,8 +146,8 @@ if loader.count("trip-v9-hotfix.js?v=4") != 2:
     ERRORS.append("Stage 5P requires both Japan loader chains to use hotfix module pin v4")
 if loader.count("trip-v9-1-visit-fix.js?v=5") != 1:
     ERRORS.append("Stage 5M requires itinerary visit-fix module pin v5")
-if loader.count("info-icon-repair-v1.js?v=3") != 1:
-    ERRORS.append("Stage 5H requires itinerary info icon repair module pin v3")
+if loader.count("info-icon-repair-v1.js?v=4") != 1:
+    ERRORS.append("Stage 5R requires itinerary info icon repair module pin v4")
 
 for array_name in ("itineraryScripts", "tripInfoScripts"):
     match = re.search(rf"const\s+{array_name}\s*=\s*commonHead\.concat\(\[(.*?)\]\);", loader, flags=re.S)
@@ -170,6 +172,10 @@ for array_name in ("itineraryScripts", "tripInfoScripts"):
             ERRORS.append("itineraryScripts: visit-fix must load before itinerary renderer for event ownership")
         if repair_pos < 0 or core_pos > repair_pos:
             ERRORS.append("itineraryScripts: shared attraction core must load before info-icon-repair-v1.js")
+        if visit_pos < 0 or repair_pos < 0 or visit_pos > repair_pos:
+            ERRORS.append("itineraryScripts: visit-fix must remain before info-icon-repair-v1.js")
+        if repair_pos < 0 or renderer_pos < 0 or repair_pos > renderer_pos:
+            ERRORS.append("Stage 5R requires info-icon-repair-v1.js to load before itinerary renderer for event subscription")
     else:
         renderer_pos = block.find("multi-trip-trip-info-renderer-v1.js")
         if renderer_pos < 0 or hotfix_pos > renderer_pos:
@@ -183,7 +189,7 @@ button_tokens = (
     "backup-info-btn",
     "v90-shrine-info-btn",
 )
-print("TravelPilot Stage 5D-5P patch surface QA")
+print("TravelPilot Stage 5D-5R patch surface QA")
 for key, text in texts.items():
     present = [token for token in button_tokens if token in text]
     print(f"{FILES[key].name}: {len(text)} bytes; info-button tokens={','.join(present) or 'none'}; setTimeout={text.count('setTimeout')}")
@@ -200,6 +206,7 @@ print("Hotfix consumes Trip Info renderer event:", "multitrip:tripinforendered" 
 print("Hotfix consumes finalpatch event:", "japan2027:finalpatch" in texts.get("hotfix", ""))
 print("Hotfix startup timer removed:", "setTimeout" not in texts.get("hotfix", ""))
 print("Info icon repair uses shared core:", "CORE.findBest" in texts.get("repair", ""))
+print("Info icon repair deterministic catch-up active:", "dataset.itineraryRenderer" in texts.get("repair", ""))
 print(f"Errors: {len(ERRORS)}")
 for item in ERRORS:
     print("ERROR:", item)
