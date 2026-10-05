@@ -88,5 +88,4 @@ document.addEventListener('click',e=>{
 },true);
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
-setTimeout(run,2600);
 })();
