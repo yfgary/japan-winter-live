@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage 5Q-5R guard for itinerary info-icon retry/event ownership."""
+"""Stage 5Q-5S guard for itinerary info-icon retry/event ownership."""
 from __future__ import annotations
 
 import re
@@ -16,10 +16,10 @@ renderer = (ASSETS / "multi-trip-itinerary-renderer-v1.js").read_text(encoding="
 i18n = (ASSETS / "i18n-v1.js").read_text(encoding="utf-8")
 final = (ASSETS / "trip-v9-final-fixes.js").read_text(encoding="utf-8")
 
-# Stage 5R keeps every existing retry surface but makes renderer-event subscription deterministic.
+# Stage 5S trims only the startup schedule after Stage 5R made renderer-event subscription deterministic.
 for marker in (
     "function repair()",
-    "function schedule(){[0,180,450,900,1600,2800].forEach(t=>setTimeout(repair,t));}",
+    "function schedule(){[0,900,2800].forEach(t=>setTimeout(repair,t));}",
     "function catchUp(){if(document.documentElement.dataset.itineraryRenderer)repair();}",
     "document.addEventListener('multitrip:itineraryrendered',()=>{[0,120,500].forEach(t=>setTimeout(repair,t));});",
     "document.addEventListener('japan2027:languagechange',()=>{[0,250,800].forEach(t=>setTimeout(repair,t));});",
@@ -29,11 +29,16 @@ for marker in (
     "window.Japan2027InfoIconRepair={repair};",
 ):
     if marker not in repair:
-        ERRORS.append(f"Stage 5R info-icon runtime contract changed: missing {marker}")
+        ERRORS.append(f"Stage 5S info-icon runtime contract changed: missing {marker}")
 
+if "[0,180,450,900,1600,2800].forEach(t=>setTimeout(repair,t))" in repair:
+    ERRORS.append("Stage 5S must not restore the six-pass startup schedule")
+for removed in ("180", "450", "1600"):
+    if f"[0,{removed}," in repair:
+        ERRORS.append(f"Stage 5S startup retry unexpectedly restored: {removed} ms")
 if repair.count("setTimeout") != 4:
     ERRORS.append(
-        f"Stage 5R must retain all four existing retry surfaces while subscriber timing is proven; "
+        f"Stage 5S must keep four retry surfaces while trimming only startup timings; "
         f"found {repair.count('setTimeout')} setTimeout token(s)"
     )
 if "new MutationObserver" in repair:
@@ -48,15 +53,15 @@ for marker in (
     if marker not in renderer:
         ERRORS.append(f"Itinerary renderer evidence changed: missing {marker}")
 
-# Current i18n changes language by reload; no active languagechange custom-event contract is confirmed.
+# Current i18n changes language by reload, but the reserved languagechange repair hook must remain future-compatible.
 for marker in (
     "localStorage.setItem(KEY,lang==='en'?'zh':'en');location.reload();",
     "setLang:n=>{localStorage.setItem(KEY,n==='en'?'en':'zh');location.reload();}",
 ):
     if marker not in i18n:
         ERRORS.append(f"i18n reload contract changed: missing {marker}")
-if "japan2027:languagechange" in i18n:
-    ERRORS.append("Stage 5R assumption changed: i18n-v1.js now contains japan2027:languagechange; re-audit producer/consumer ownership")
+if "japan2027:languagechange" not in repair:
+    ERRORS.append("Reserved japan2027:languagechange info-icon repair hook was removed")
 
 # Known D6-D8 choice handling reloads before the repair click retries would run.
 for marker in (
@@ -67,7 +72,7 @@ for marker in (
     if marker not in final:
         ERRORS.append(f"D6-D8 choice/reload evidence changed: missing {marker}")
 
-# Stage 5R loads repair before the itinerary renderer so it cannot miss normal renderer completion events.
+# Stage 5R loader order remains required so normal renderer completion events cannot be missed.
 match = re.search(r"const\s+itineraryScripts\s*=\s*commonHead\.concat\(\[(.*?)\]\);", loader, flags=re.S)
 if not match:
     ERRORS.append("itineraryScripts loader block missing")
@@ -82,7 +87,7 @@ else:
         "polish": block.find("i18n-polish-en-v1.js"),
     }
     if min(positions.values()) < 0:
-        ERRORS.append(f"Stage 5R itinerary loader evidence incomplete: {positions}")
+        ERRORS.append(f"Stage 5S itinerary loader evidence incomplete: {positions}")
     elif not (
         positions["core"] < positions["visit"] < positions["repair"] < positions["renderer"]
         < positions["i18n"] < positions["polish"]
@@ -92,8 +97,8 @@ else:
             f"found {positions}"
         )
 
-if loader.count("info-icon-repair-v1.js?v=4") != 1:
-    ERRORS.append("Stage 5R requires the Japan itinerary chain to use info-icon-repair module pin v4 exactly once")
+if loader.count("info-icon-repair-v1.js?v=5") != 1:
+    ERRORS.append("Stage 5S requires the Japan itinerary chain to use info-icon-repair module pin v5 exactly once")
 
 # Repair remains Japan-itinerary-only and must not leak into generic itinerary chains.
 generic = re.search(r"const\s+genericItineraryScripts\s*=\s*commonHead\.concat\(\[(.*?)\]\);", loader, flags=re.S)
@@ -102,16 +107,17 @@ if not generic:
 elif "info-icon-repair-v1.js" in generic.group(1):
     ERRORS.append("Generic itinerary chain must not load Japan info-icon repair")
 
-print("TravelPilot Stage 5Q-5R info-icon event migration QA")
-print("Repair startup schedule intact:", "[0,180,450,900,1600,2800]" in repair)
+print("TravelPilot Stage 5Q-5S info-icon event migration QA")
+print("Repair startup schedule trimmed to 0/900/2800:", "[0,900,2800]" in repair)
 print("Repair consumes itinerary-rendered event:", "multitrip:itineraryrendered" in repair)
 print("Renderer emits itinerary-rendered event:", "multitrip:itineraryrendered" in renderer)
 print("Repair loads before renderer:", bool(match and match.group(1).find("info-icon-repair-v1.js") < match.group(1).find("multi-trip-itinerary-renderer-v1.js")))
 print("Deterministic catch-up present:", "dataset.itineraryRenderer" in repair and "catchUp();" in repair)
-print("Language switch uses reload:", "location.reload()" in i18n)
-print("Confirmed languagechange producer in i18n-v1.js:", "japan2027:languagechange" in i18n)
+print("Language switch currently uses reload:", "location.reload()" in i18n)
+print("Reserved languagechange repair hook retained:", "japan2027:languagechange" in repair)
+print("Current languagechange producer present:", "japan2027:languagechange" in i18n)
 print("D6-D8 selection reloads at 60 ms:", "setTimeout(()=>location.reload(),60)" in final)
-print("Stage 5R conclusion: normal renderer events now have deterministic subscription; keep retries until live parity is proven")
+print("Stage 5S conclusion: startup retries reduced from six to three while event, language and choice coverage remain intact")
 print(f"Errors: {len(ERRORS)}")
 for item in ERRORS:
     print("ERROR:", item)
