@@ -9,7 +9,7 @@
   "timezone": "Asia/Tokyo",
   "language": "zh-HK",
   "country": "日本",
-  "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":true,"todayMode":true,"drivingMode":true,"weather":true,"weatherScore":true,"weatherActivityProfiles":true,"packingChecklist":true,"bilingual":true,"winterDriving":true,"shinhotakaPlanner":true},
+  "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":true,"todayMode":true,"drivingMode":true,"weather":true,"weatherScore":true,"weatherActivityProfiles":true,"packingChecklist":true,"winterDriving":true,"shinhotakaPlanner":true},
   "modules": [{"id":"shinhotaka-weather-day-selector","type":"weather-day-selector","enabled":true,"candidateDays":[6,7,8],"destination":"shinhotaka","pairedDestination":"shirakawago"}],
   "pages": {"itinerary":"itinerary.html","tripInfo":"trip-info.html","attractions":"attractions.html","liveCam":"live.html"},
   "dataFiles": {"itinerary":"itinerary.json","tripInfo":"trip-info.json","hotels":"hotels.json","attractions":"attractions.json","liveCams":"live-cams.json","weather":"weather.json","departureChecklist":"departure-checklist.json"},
