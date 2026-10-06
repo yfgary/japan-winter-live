@@ -1,0 +1,62 @@
+name: Round 6 Sync Standard Golden Reference
+
+on:
+  push:
+    branches:
+      - round6-standard-cutover-test
+    paths:
+      - .github/workflows/round6-sync-standard.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production cutover branch
+        uses: actions/checkout@v4
+        with:
+          ref: round6-standard-cutover-test
+          fetch-depth: 0
+
+      - name: Checkout Standard POC
+        uses: actions/checkout@v4
+        with:
+          repository: yfgary/travelpilot-poc
+          ref: main
+          path: poc-source
+
+      - name: Copy Golden Reference Standard data
+        run: |
+          set -euo pipefail
+          src="poc-source/trips/shirakawago-shinhotaka-2027"
+          dst="trips/shirakawago-shinhotaka-2027"
+          for f in trip.json itinerary.json trip-info.json hotels.json attractions.json live-cams.json weather.json departure-checklist.json migration-report.json; do
+            cp "$src/$f" "$dst/$f"
+          done
+
+      - name: Verify copied JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("trips/shirakawago-shinhotaka-2027")
+          for p in root.glob("*.json"):
+              json.loads(p.read_text(encoding="utf-8"))
+          print("Golden Reference JSON copy PASS")
+          PY
+
+      - name: Commit synchronized Standard data
+        run: |
+          git config user.name "travelpilot-round6-bot"
+          git config user.email "travelpilot-round6-bot@users.noreply.github.com"
+          git add trips/shirakawago-shinhotaka-2027
+          if git diff --cached --quiet; then
+            echo "No Standard data changes"
+          else
+            git commit -m "Round 6: sync Golden Reference Standard data"
+            git pull --rebase origin round6-standard-cutover-test
+            git push origin HEAD:round6-standard-cutover-test
+          fi
