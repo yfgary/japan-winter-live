@@ -7,7 +7,6 @@
   "startDate": "2028-01-01",
   "endDate": "2028-01-05",
   "timezone": "Asia/Tokyo",
-  "language": "zh-HK",
   "country": "日本",
   "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":true,"todayMode":true,"drivingMode":true,"weather":true,"weatherScore":true,"weatherActivityProfiles":true,"packingChecklist":true,"winterDriving":false},
   "modules": [],
