@@ -57,3 +57,73 @@
 @media(max-width:900px){.weather3d-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.site-version-badge{left:8px;bottom:8px;font-size:9px;padding:6px 8px}.multi-trip-update-prompt{left:10px;right:10px;bottom:58px;max-width:none;transform:translateY(18px)}.multi-trip-update-prompt.show{transform:translateY(0)}.back-to-top-btn{right:8px;bottom:50px;width:40px;height:40px}.weather3d-head{padding:12px 12px 9px}.weather3d-title{font-size:16px}.weather3d-regions{padding:0 11px 10px}.weather3d-body{padding:11px}.weather-live-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.weather-live-temp{font-size:23px}}
 @media(max-width:520px){.weather3d-grid{grid-template-columns:1fr}}
+
+
+/* Test branch: shared Small / Medium / Large text-size control */
+:root{--tp-font-scale:1}
+html[data-font-size="small"]{--tp-font-scale:.90}
+html[data-font-size="medium"]{--tp-font-scale:1}
+html[data-font-size="large"]{--tp-font-scale:1.15}
+
+.tp-font-switcher{
+  display:inline-flex;align-items:center;gap:3px;padding:3px;background:#edf5fa;
+  border:1px solid #d4e4ee;border-radius:999px;box-shadow:0 3px 12px rgba(20,71,111,.12)
+}
+.tp-font-switcher button{
+  min-width:34px;height:30px;border:0;border-radius:999px;background:transparent;
+  color:#35617f;font-size:12px;font-weight:900;cursor:pointer
+}
+.tp-font-switcher button.active{background:#1266ad;color:#fff;box-shadow:0 2px 7px rgba(18,102,173,.20)}
+.tp-font-switcher-floating{position:fixed;right:12px;bottom:104px;z-index:4680;background:rgba(255,255,255,.96)}
+
+html[data-font-size] header h1{font-size:calc(28px * var(--tp-font-scale))}
+html[data-font-size] header p{font-size:calc(14px * var(--tp-font-scale))}
+html[data-font-size] .page-switch a{font-size:calc(14px * var(--tp-font-scale))}
+html[data-font-size] .nav-btn,
+html[data-font-size] .day-nav a{font-size:calc(12px * var(--tp-font-scale))}
+html[data-font-size] .intro h2{font-size:calc(24px * var(--tp-font-scale))}
+html[data-font-size] .intro p{font-size:calc(16px * var(--tp-font-scale))}
+html[data-font-size] .intro-item{font-size:calc(13px * var(--tp-font-scale))}
+html[data-font-size] .day-number{font-size:calc(12px * var(--tp-font-scale))}
+html[data-font-size] .day-title{font-size:calc(21px * var(--tp-font-scale))}
+html[data-font-size] .day-date{font-size:calc(13px * var(--tp-font-scale))}
+html[data-font-size] .day-route{font-size:calc(12px * var(--tp-font-scale))}
+html[data-font-size] .highlights-title{font-size:calc(15px * var(--tp-font-scale))}
+html[data-font-size] .highlight-item{font-size:calc(12px * var(--tp-font-scale))}
+html[data-font-size] .quick-decision-title{font-size:calc(15px * var(--tp-font-scale))}
+html[data-font-size] .decision-option{font-size:calc(13px * var(--tp-font-scale))}
+html[data-font-size] .photo-caption{font-size:calc(14px * var(--tp-font-scale))}
+html[data-font-size] .photo-card .photo-caption{font-size:calc(12px * var(--tp-font-scale))}
+html[data-font-size] .time{font-size:calc(13px * var(--tp-font-scale))}
+html[data-font-size] .event-type{font-size:calc(11px * var(--tp-font-scale))}
+html[data-font-size] .timeline-card h3{font-size:calc(16px * var(--tp-font-scale))}
+html[data-font-size] .timeline-card p{font-size:calc(13px * var(--tp-font-scale))}
+html[data-font-size] .price{font-size:calc(11px * var(--tp-font-scale))}
+html[data-font-size] .special-box{font-size:calc(13px * var(--tp-font-scale))}
+html[data-font-size] .button{font-size:calc(12px * var(--tp-font-scale))}
+html[data-font-size] .weather3d-title{font-size:calc(18px * var(--tp-font-scale))}
+html[data-font-size] .weather3d-subtitle{font-size:calc(11px * var(--tp-font-scale))}
+html[data-font-size] .weather3d-refresh,
+html[data-font-size] .weather3d-region{font-size:calc(11px * var(--tp-font-scale))}
+html[data-font-size] .weather-live-label{font-size:calc(12px * var(--tp-font-scale))}
+html[data-font-size] .weather-live-time{font-size:calc(9px * var(--tp-font-scale))}
+html[data-font-size] .weather-live-temp{font-size:calc(26px * var(--tp-font-scale))}
+html[data-font-size] .weather-live-cond{font-size:calc(13px * var(--tp-font-scale))}
+html[data-font-size] .weather-live-metric{font-size:calc(10px * var(--tp-font-scale))}
+html[data-font-size] .weather-live-metric strong{font-size:calc(11px * var(--tp-font-scale))}
+html[data-font-size] .weather-forecast-label{font-size:calc(11px * var(--tp-font-scale))}
+html[data-font-size] .weather3d-date{font-size:calc(11px * var(--tp-font-scale))}
+html[data-font-size] .weather3d-condition{font-size:calc(12px * var(--tp-font-scale))}
+html[data-font-size] .weather3d-temp{font-size:calc(15px * var(--tp-font-scale))}
+html[data-font-size] .weather3d-temp span{font-size:calc(12px * var(--tp-font-scale))}
+html[data-font-size] .weather3d-metrics{font-size:calc(10px * var(--tp-font-scale))}
+html[data-font-size] .weather3d-note,
+html[data-font-size] .weather3d-warning{font-size:calc(10px * var(--tp-font-scale))}
+html[data-font-size] .site-version-badge{font-size:calc(10px * var(--tp-font-scale))}
+
+@media(max-width:720px){
+  .tp-font-switcher-floating{right:8px;bottom:98px}
+  html[data-font-size] header h1{font-size:calc(22px * var(--tp-font-scale))}
+  html[data-font-size] .day-title{font-size:calc(18px * var(--tp-font-scale))}
+  html[data-font-size] .weather3d-title{font-size:calc(16px * var(--tp-font-scale))}
+}
