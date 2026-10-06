@@ -20,7 +20,6 @@
     "weatherScore": true,
     "weatherActivityProfiles": true,
     "packingChecklist": true,
-    "bilingual": false,
     "winterDriving": false
   },
   "modules": [],
