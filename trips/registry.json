@@ -46,8 +46,8 @@
       "cover": "https://commons.wikimedia.org/wiki/Special:FilePath/Yaowarat%20Road%20at%20night.jpg?width=1400",
       "entry": "itinerary.html",
       "config": "trips/bangkok-2026/trip.json",
-      "status": "test",
-      "badge": "真實行程測試",
+      "status": "active",
+      "badge": "真實旅程",
       "features": {"itinerary":true,"tripInfo":true,"attractions":true,"liveCam":false}
     },
     {
