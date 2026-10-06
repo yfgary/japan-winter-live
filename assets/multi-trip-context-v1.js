@@ -5,6 +5,8 @@ if(window.MultiTrip&&window.MultiTrip.__v1)return;
 const APP_VERSION='v10.14.0';
 const DEFAULT_TRIP='shirakawago-shinhotaka-2027';
 const STORAGE_KEY='multiTrip.activeTrip';
+const FONT_KEY='travelPilot.fontSize';
+const FONT_SIZES=new Set(['small','medium','large']);
 const VERSION_CHECK_TTL=30*1000;
 const params=new URLSearchParams(location.search);
 const requested=(params.get('trip')||'').trim();
@@ -33,6 +35,35 @@ let latestVersion=null;
 let versionChecking=false;
 let lastVersionCheckAt=0;
 const ready=new Promise(resolve=>{resolveReady=resolve;});
+
+function applyFontSize(size){
+  const value=FONT_SIZES.has(size)?size:'medium';
+  document.documentElement.dataset.fontSize=value;
+  document.querySelectorAll('[data-font-size]').forEach(btn=>{
+    const on=btn.dataset.fontSize===value;
+    btn.classList.toggle('active',on);
+    btn.setAttribute('aria-pressed',on?'true':'false');
+  });
+  try{localStorage.setItem(FONT_KEY,value);}catch(e){}
+}
+function currentFontSize(){
+  try{return localStorage.getItem(FONT_KEY)||'medium';}catch(e){return'medium';}
+}
+function ensureFontSwitcher(){
+  if(currentPageType()==='home')return;
+  let box=document.getElementById('tpFontSwitcher');
+  if(!box){
+    box=document.createElement('div');
+    box.id='tpFontSwitcher';
+    box.className='tp-font-switcher tp-font-switcher-floating';
+    box.setAttribute('role','group');
+    box.setAttribute('aria-label','字體大小');
+    box.innerHTML='<button type="button" data-font-size="small">小</button><button type="button" data-font-size="medium">中</button><button type="button" data-font-size="large">大</button>';
+    document.body.appendChild(box);
+    box.querySelectorAll('[data-font-size]').forEach(btn=>btn.addEventListener('click',()=>applyFontSize(btn.dataset.fontSize)));
+  }
+  applyFontSize(currentFontSize());
+}
 
 function currentPageType(){
   const page=location.pathname.split('/').pop()||'index.html';
@@ -161,6 +192,7 @@ function ensureSharedUi(){
     document.head.appendChild(link);
   }
   ensureVersionBadge();
+  ensureFontSwitcher();
   cleanupLegacySharedUi();
   let top=document.getElementById('backToTopBtn');
   if(!top){
@@ -308,9 +340,12 @@ window.MultiTrip={
   refresh:syncBrand,
   checkVersion,
   beginUpdate,
+  applyFontSize,
+  get fontSize(){return currentFontSize();},
   defaultTrip:DEFAULT_TRIP
 };
 
+applyFontSize(currentFontSize());
 if(shouldPersistActive())setActive(tripId);
 
 fetch('trips/'+encodeURIComponent(tripId)+'/trip.json?t='+Date.now(),{cache:'no-store'})
