@@ -1,0 +1,76 @@
+name: Round 6 Standard Cutover QA
+
+on:
+  push:
+    branches:
+      - round6-standard-cutover-test
+  workflow_dispatch:
+
+jobs:
+  cutover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout cutover branch
+        uses: actions/checkout@v4
+
+      - name: Checkout production main baseline
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: production-main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Round 6 static architecture QA
+        run: python scripts/qa_round6_cutover.py
+
+      - name: Non-Japan trip data remains unchanged
+        run: |
+          set -euo pipefail
+          diff -qr production-main/trips/bangkok-2026 trips/bangkok-2026
+          diff -qr production-main/trips/hokkaido-2025 trips/hokkaido-2025
+          diff -qr production-main/trips/multi-trip-demo-okinawa trips/multi-trip-demo-okinawa
+          diff -u production-main/trips/registry.json trips/registry.json
+
+      - name: Standard JavaScript syntax
+        run: |
+          node --check assets/cutover-router-v1.js
+          for f in assets/standard-*-v1.js; do
+            node --check "$f"
+          done
+          node --check scripts/round6-cutover-smoke.mjs
+
+      - name: Standard JSON parse
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("trips/shirakawago-shinhotaka-2027")
+          for p in root.glob("*.json"):
+              json.loads(p.read_text(encoding="utf-8"))
+          print("Japan Standard JSON parse PASS")
+          PY
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Round 6 real browser cutover QA
+        run: |
+          python -m http.server 8000 --bind 127.0.0.1 >/tmp/travelpilot-round6-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/index.html >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          node scripts/round6-cutover-smoke.mjs
