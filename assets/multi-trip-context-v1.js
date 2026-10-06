@@ -21,7 +21,7 @@ const fallback={
   features:{
     itinerary:true,tripInfo:true,attractions:true,liveCam:true,
     todayMode:true,drivingMode:true,weather:true,weatherScore:true,
-    weatherActivityProfiles:true,packingChecklist:true,bilingual:true,
+    weatherActivityProfiles:true,packingChecklist:true,
     winterDriving:true,shinhotakaPlanner:true
   },
   pages:{itinerary:'itinerary.html',tripInfo:'trip-info.html',attractions:'attractions.html',liveCam:'live.html'}
@@ -63,23 +63,21 @@ function withTrip(url,id){
 }
 
 function versionText(state){
-  const en=document.documentElement.lang==='en';
-  if(state==='offline')return(en?'Version ':'版本 ')+APP_VERSION+(en?' · Offline':'・離線');
-  return(en?'Version ':'版本 ')+APP_VERSION;
+  if(state==='offline')return'版本 '+APP_VERSION+'・離線';
+  return'版本 '+APP_VERSION;
 }
 
 function paintVersion(state){
-  const en=document.documentElement.lang==='en';
   document.querySelectorAll('#siteVersionBadge,#catalogVersion').forEach(badge=>{
     badge.classList.remove('offline','outdated','current');
     badge.classList.add(state);
     badge.textContent=versionText(state);
     if(state==='outdated'&&latestVersion){
-      badge.title=(en?'New version available: ':'網站有新版：')+latestVersion+(en?'. Reload the page to update.':'。重新開頁即可更新。');
+      badge.title='網站有新版：'+latestVersion+'。重新開頁即可更新。';
     }else if(state==='offline'){
-      badge.title=(en?'Offline; local version ':'目前離線；本機版本 ')+APP_VERSION;
+      badge.title='目前離線；本機版本 '+APP_VERSION;
     }else{
-      badge.title=(en?'Current version ':'目前版本 ')+APP_VERSION;
+      badge.title='目前版本 '+APP_VERSION;
     }
   });
 }
@@ -269,7 +267,7 @@ function failedConfig(id){
     features:{
       itinerary:false,tripInfo:false,attractions:false,liveCam:false,
       todayMode:false,drivingMode:false,weather:false,weatherScore:false,
-      weatherActivityProfiles:false,packingChecklist:false,bilingual:false,
+      weatherActivityProfiles:false,packingChecklist:false,
       winterDriving:false,shinhotakaPlanner:false
     },
     pages:{itinerary:'itinerary.html',tripInfo:'trip-info.html',attractions:'attractions.html',liveCam:'live.html'},
