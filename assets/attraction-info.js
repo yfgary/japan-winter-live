@@ -42,7 +42,6 @@ const itineraryScripts=commonHead.concat([
   'assets/trip-deep-info-backups.js?v=913',
   'assets/trip-v8-data.js?v=913',
   'assets/trip-v8-1-overrides.js?v=913',
-  'assets/i18n-content-en-v1.js?v=1',
   'assets/trip-enhancements-v3.js?v=913',
   'assets/trip-v8-ui.js?v=913',
   'assets/trip-v8-7-user-plan.js?v=913',
@@ -62,9 +61,7 @@ const itineraryScripts=commonHead.concat([
   'assets/travel-mode-v1.js?v=2',
   'assets/travel-mode-nav-fix-v1.js?v=2',
   'assets/driving-mode-v1.js?v=1',
-  'assets/multi-trip-mode-weather-bridge-v1.js?v=1',
-  'assets/i18n-v1.js?v=3',
-  'assets/i18n-polish-en-v1.js?v=1'
+  'assets/multi-trip-mode-weather-bridge-v1.js?v=1'
 ]);
 
 const tripInfoScripts=commonHead.concat([
@@ -81,7 +78,6 @@ const tripInfoScripts=commonHead.concat([
   'assets/trip-deep-info-backups.js?v=913',
   'assets/trip-v8-data.js?v=913',
   'assets/trip-v8-1-overrides.js?v=913',
-  'assets/i18n-content-en-v1.js?v=1',
   'assets/trip-v8-7-user-plan.js?v=913',
   'assets/trip-v9-final-fixes.js?v=914',
   'assets/trip-v9-hotfix.js?v=4',
@@ -90,9 +86,7 @@ const tripInfoScripts=commonHead.concat([
   'assets/multi-trip-departure-checklist-v1.js?v=4',
   'assets/multi-trip-checklist-sync-v1.js?v=3',
   'assets/multi-trip-weather-v1.js?v=2',
-  'assets/weather-profile-standard-v1.js?v=1',
-  'assets/i18n-v1.js?v=3',
-  'assets/i18n-polish-en-v1.js?v=1'
+  'assets/weather-profile-standard-v1.js?v=1'
 ]);
 
 const genericItineraryScripts=commonHead.concat([
