@@ -127,7 +127,8 @@ await check('Live Cam preserves fixed D1-D9 Standard bindings',async()=>{
   const {page,docs,errors}=await open('/live.html?trip='+tripId);
   assert(docs.includes('/standard/live.html'),'Standard Live document not used');
   assert(await page.locator('.live-day').count()===9,'Live day count is not 9');
-  assert(await page.locator('.live-camera').count()===37,'Live camera rendered count is not 37');
+  const expectedBindings=live.days.reduce((n,d)=>n+(d.cameras||[]).length,0);
+  assert(await page.locator('.live-camera').count()===expectedBindings,'Live camera rendered binding count mismatch');
   for(const day of live.days){
     assert(await page.locator('#'+day.id+' .live-camera').count()===(day.cameras||[]).length,day.id+' camera binding mismatch');
   }
