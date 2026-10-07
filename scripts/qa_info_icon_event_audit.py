@@ -13,7 +13,6 @@ ERRORS: list[str] = []
 loader = (ASSETS / "attraction-info.js").read_text(encoding="utf-8")
 repair = (ASSETS / "info-icon-repair-v1.js").read_text(encoding="utf-8")
 renderer = (ASSETS / "multi-trip-itinerary-renderer-v1.js").read_text(encoding="utf-8")
-i18n = (ASSETS / "i18n-v1.js").read_text(encoding="utf-8")
 final = (ASSETS / "trip-v9-final-fixes.js").read_text(encoding="utf-8")
 itinerary = (ROOT / "itinerary.html").read_text(encoding="utf-8")
 
@@ -60,15 +59,10 @@ for marker in (
     if marker not in renderer:
         ERRORS.append(f"Itinerary renderer evidence changed: missing {marker}")
 
-# Current i18n changes language by reload, but the reserved languagechange repair hook stays future-compatible.
-for marker in (
-    "localStorage.setItem(KEY,lang==='en'?'zh':'en');location.reload();",
-    "setLang:n=>{localStorage.setItem(KEY,n==='en'?'en':'zh');location.reload();}",
-):
-    if marker not in i18n:
-        ERRORS.append(f"i18n reload contract changed: missing {marker}")
+# The language runtime was retired. This legacy Japan repair hook still exists
+# temporarily and will disappear when the legacy info-icon repair file is retired.
 if "japan2027:languagechange" not in repair:
-    ERRORS.append("Reserved japan2027:languagechange info-icon repair hook was removed")
+    ERRORS.append("Legacy reserved languagechange hook changed before legacy retirement")
 
 # .tripv2-choice is the D6-D8 Shinhotaka selector; final-fixes owns its state transition and reloads at 60 ms.
 for marker in (
@@ -98,17 +92,14 @@ else:
         "visit": block.find("trip-v9-1-visit-fix.js"),
         "repair": block.find("info-icon-repair-v1.js"),
         "renderer": block.find("multi-trip-itinerary-renderer-v1.js"),
-        "i18n": block.find("i18n-v1.js"),
-        "polish": block.find("i18n-polish-en-v1.js"),
     }
     if min(positions.values()) < 0:
         ERRORS.append(f"Stage 5U itinerary loader evidence incomplete: {positions}")
     elif not (
         positions["core"] < positions["visit"] < positions["repair"] < positions["renderer"]
-        < positions["i18n"] < positions["polish"]
     ):
         ERRORS.append(
-            "Expected core < visit-fix < info-icon-repair < renderer < i18n < polish loader order; "
+            "Expected core < visit-fix < info-icon-repair < renderer loader order; "
             f"found {positions}"
         )
 
@@ -132,7 +123,7 @@ print("Deterministic catch-up present:", "dataset.itineraryRenderer" in repair a
 print("Reserved languagechange repair hook retained:", "japan2027:languagechange" in repair)
 print("D6-D8 selection reloads at 60 ms:", "setTimeout(()=>location.reload(),60)" in final)
 print("Info-icon setTimeout surfaces:", repair.count("setTimeout"))
-print("Stage 5U conclusion: info-icon startup and choice fallbacks are removed; renderer lifecycle + catch-up own normal reconciliation, with language support reserved")
+print("Stage 5U conclusion: info-icon startup and choice fallbacks are removed; renderer lifecycle + catch-up own normal reconciliation")
 print(f"Errors: {len(ERRORS)}")
 for item in ERRORS:
     print("ERROR:", item)
